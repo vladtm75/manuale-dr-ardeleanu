@@ -314,10 +314,22 @@
     .infobox{ float:none; width:100%; margin:14px 0 20px; }
   }
 
+  /* ============ PLATFORM FRAME (unified) ============ */
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:2px; border-radius:4px; }
+  .readbar{ position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg,var(--amber),var(--primary)); z-index:120; pointer-events:none; }
+  .mh-search input{ padding-right:34px; }
+  .mh-search kbd{
+    position:absolute; right:9px; top:50%; transform:translateY(-50%); pointer-events:none;
+    font-family:'Poppins',sans-serif; font-size:10.5px; color:var(--faint);
+    border:1px solid var(--line-2); border-radius:4px; padding:1px 6px; background:var(--page);
+  }
+  .mh-search input:focus ~ kbd{ display:none; }
+  @media(max-width:840px){ .mh-search kbd{ display:none; } }
+
   /* print */
   @media print{
     @page{ size:A4; margin:14mm 12mm; }
-    .masthead, .sidebar, .totop, .menu-btn, .mh-search, .toc-box .toc-h button{ display:none !important; }
+    .masthead, .sidebar, .totop, .menu-btn, .mh-search, .readbar, .back-home, .toc-box .toc-h button{ display:none !important; }
     .shell{ grid-template-columns:1fr; max-width:none; display:block; }
     .main{ padding:0; }
     body{ background:#fff; font-size:10.5pt; }
@@ -345,6 +357,7 @@
     <div class="mh-search">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
       <input id="search" type="text" placeholder="Caută în manual…" autocomplete="off" />
+      <kbd>/</kbd>
     </div>
     <div class="mh-pills">
       <span class="mh-code">ADC-MED-01</span>
@@ -485,12 +498,13 @@
 
   // ---- search filter ----
   const search=document.getElementById('search');
+  const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
   search.addEventListener('input',()=>{
-    const q=search.value.trim().toLowerCase();
+    const q=norm(search.value.trim());
     document.querySelectorAll('.nav-ch').forEach(wrap=>{
       let vis=0;
       wrap.querySelectorAll('.nav-sub').forEach(a=>{
-        const m=!q||a.dataset.search.includes(q);
+        const m=!q||norm(a.dataset.search).includes(q);
         a.style.display=m?'':'none'; if(m)vis++;
       });
       wrap.style.display=vis>0?'':'none';
@@ -515,6 +529,27 @@
   const totop=document.getElementById('totop');
   window.addEventListener('scroll',()=>{ totop.classList.toggle('show', window.scrollY>600); });
   totop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // ---- platform frame: reading progress ----
+  const readbar=document.createElement('div');
+  readbar.className='readbar'; readbar.setAttribute('aria-hidden','true');
+  document.body.appendChild(readbar);
+  function upBar(){
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    readbar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  }
+  window.addEventListener('scroll',upBar,{passive:true}); upBar();
+
+  // ---- platform frame: keyboard shortcuts ----
+  document.addEventListener('keydown',e=>{
+    const tag=(document.activeElement&&document.activeElement.tagName)||'';
+    if((e.key==='/'||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'))&&tag!=='INPUT'&&tag!=='TEXTAREA'){
+      e.preventDefault(); search.focus();
+    } else if(e.key==='Escape'&&document.activeElement===search){
+      search.value=''; search.dispatchEvent(new Event('input')); search.blur();
+    }
+  });
 })();
 </script>
 
