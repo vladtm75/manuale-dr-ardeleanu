@@ -270,62 +270,6 @@ a:hover{border-bottom-color:var(--brand-primary)}
   .chapter-toc.even li:nth-last-child(2){ border-bottom:1px dotted var(--rule-soft); }
 }
 
-/* Infobox right-float (Wikipedia style) */
-.infobox{
-  float:right;
-  width:300px;
-  margin:0 0 24px 28px;
-  border:1px solid var(--rule);
-  background:var(--paper-pure);
-  font-size:13px;line-height:1.5;
-  border-radius:4px;overflow:hidden;
-  box-shadow:0 1px 2px rgba(123,28,22,.04);
-}
-.infobox .ibox-head{
-  background:var(--brand-primary);color:#fff;
-  padding:14px 16px;
-  text-align:center;
-}
-.infobox .ibox-head .label{
-  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--brand-yellow);font-weight:600;margin-bottom:4px;
-}
-.infobox .ibox-head h3{
-  margin:0;font-family:'Playfair Display',serif;
-  font-weight:700;font-size:19px;line-height:1.2;
-}
-.infobox .ibox-art{
-  padding:18px;background:var(--brand-cream);
-  text-align:center;border-bottom:1px solid var(--rule);
-}
-.infobox .ibox-art .glyph{
-  width:64px;height:64px;margin:0 auto 10px;
-  background:var(--brand-primary);color:var(--brand-yellow);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-family:'Playfair Display',serif;font-size:30px;font-weight:700;
-}
-.infobox .ibox-art .ibox-logo{
-  display:block;max-width:78%;height:auto;margin:0 auto 12px;
-}
-.infobox .ibox-art .caption{font-size:11px;color:var(--ink-mute);font-style:italic}
-.infobox dl{margin:0;padding:0}
-.infobox dl > div{
-  display:grid;grid-template-columns:110px 1fr;
-  gap:8px;padding:9px 16px;
-  border-bottom:1px solid var(--rule-soft);
-}
-.infobox dl > div:last-child{border-bottom:none}
-.infobox dt{color:var(--ink-mute);font-weight:500;font-size:12px}
-.infobox dd{margin:0;color:var(--ink);font-weight:500}
-.infobox dd .mono{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--brand-primary)}
-.infobox .ibox-section{
-  background:var(--brand-cream-warm);
-  padding:10px 16px;
-  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
-  font-weight:600;color:var(--brand-primary);
-  border-bottom:1px solid var(--rule-soft);
-}
-
 /* Lead section with dropcap */
 .lead{font-size:17.5px;line-height:1.65;color:var(--ink);font-weight:400}
 .lead::first-letter{
@@ -1019,7 +963,7 @@ html{scroll-behavior:smooth}
   body{background:#fff}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   h2,h3,h4{break-after:avoid}
-  table,figure,img,.callout,.infobox{break-inside:avoid}
+  table,figure,img,.callout{break-inside:avoid}
   p,li{orphans:3;widows:3}
 }
 </style>
@@ -1060,9 +1004,14 @@ html{scroll-behavior:smooth}
     <dl class="meta-row">
       <div><dt>Ediție</dt><dd>V3.0 — <span class="mono">Mai 2026</span></dd></div>
       <div><dt>Cod document</dt><dd><span class="mono">ADC-ASM-03</span></dd></div>
+      <div><dt>Înlocuiește</dt><dd><span class="mono">ADC-ASM-02</span> (V2, 2025)</dd></div>
+      <div><dt>Data publicării</dt><dd>21 mai 2026</dd></div>
+      <div><dt>Categorie</dt><dd>Operațional Medical</dd></div>
+      <div><dt>Capitole</dt><dd>22 · 80+ protocoale</dd></div>
       <div><dt>Limba</dt><dd>Română</dd></div>
-      <div><dt>Capitole</dt><dd>22</dd></div>
-      <div><dt>Aplicabilitate</dt><dd>8 clinici · 80+ medici</dd></div>
+      <div><dt>Aplicabilitate</dt><dd>Asistenți Medicali Generaliști</dd></div>
+      <div><dt>Rețea</dt><dd>8 clinici · 7 orașe · din 2017</dd></div>
+      <div><dt>Raportare</dt><dd>administrativ: Operațional &amp; Vânzări · funcțional: Medical</dd></div>
       <div><dt>Aprobat de</dt><dd>Direcția Medicală + Direcția Operațională</dd></div>
     </dl>
   </div>
@@ -1558,44 +1507,6 @@ html{scroll-behavior:smooth}
     </div>
 
     <!-- INFOBOX -->
-    <aside class="infobox" aria-label="Casetă informativă">
-      <div class="ibox-head">
-        <div class="label">Document Cadru</div>
-        <h3>Manualul Asistentului Medical</h3>
-      </div>
-      <div class="ibox-art">
-        <img src="assets/logo.png" alt="Clinicile Dr. Ardeleanu" class="ibox-logo">
-        <div class="caption">Ediția III · Mai 2026</div>
-      </div>
-      <dl>
-        <div><dt>Cod</dt><dd><span class="mono">ADC-ASM-03</span></dd></div>
-        <div><dt>Versiune</dt><dd>V3.0</dd></div>
-        <div><dt>Data publicării</dt><dd>21 mai 2026</dd></div>
-        <div><dt>Înlocuiește</dt><dd><span class="mono">ADC-ASM-02</span> (V2, 2025)</dd></div>
-        <div><dt>Limba</dt><dd>Română</dd></div>
-        <div><dt>Capitole</dt><dd>22</dd></div>
-        <div><dt>Categorie</dt><dd>Operațional Medical</dd></div>
-        <div><dt>Aplicabilitate</dt><dd>Asistenți Medicali Generaliști</dd></div>
-      </dl>
-      <div class="ibox-section">Linii de raportare</div>
-      <dl>
-        <div><dt>Administrativ</dt><dd>Departamentul Operațional &amp; Vânzări</dd></div>
-        <div><dt>Funcțional (medical)</dt><dd>Departamentul Medical</dd></div>
-      </dl>
-      <div class="ibox-section">Rețea</div>
-      <dl>
-        <div><dt>Clinici</dt><dd>8 unități</dd></div>
-        <div><dt>Orașe</dt><dd>București, Oltenița, Slobozia, Călărași, Giurgiu, Târgoviște, Focșani</dd></div>
-        <div><dt>Echipă</dt><dd>80+ medici · 30.000+ pacienți unici</dd></div>
-        <div><dt>Din</dt><dd>2017</dd></div>
-      </dl>
-      <div class="ibox-section">Acces</div>
-      <dl>
-        <div><dt>ERP</dt><dd>erp.clinicile-ardeleanu.ro</dd></div>
-        <div><dt>SPSS</dt><dd>sps.clinicile-ardeleanu.ro</dd></div>
-      </dl>
-    </aside>
-
     <!-- LEAD SECTION -->
     <p class="lead">Manualul Activităților de Asistență Medicală — Ghidul Asistentului Medical este documentul-cadru intern al rețelei <strong>Clinicile Dr. Ardeleanu</strong>, care reglementează activitatea zilnică a asistenților medicali generaliști în toate cele opt clinici ale rețelei. Documentul codifică, într-o singură referință unitară, fluxul pacientului, protocoalele clinice pentru cele șapte specialități stomatologice, procedurile operaționale de sterilizare, gestiune a deșeurilor, mentenanță și siguranță, precum și standardele de performanță și fișa de post.</p>
 
