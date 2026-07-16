@@ -47,6 +47,15 @@
     display:flex; align-items:center; gap:18px; padding:0 20px; height:64px;
   }
   .masthead .logo{ height:34px; width:auto; display:block; }
+  .back-home{
+    display:inline-flex; align-items:center; gap:7px; flex:none;
+    font-size:12.5px; font-weight:600; color:var(--primary); white-space:nowrap;
+    border:1.5px solid var(--line-2); border-radius:999px; padding:6px 15px;
+    transition:background .15s, border-color .15s;
+  }
+  .back-home:hover{ background:var(--cream); border-color:var(--primary); text-decoration:none; }
+  .back-home .bh-arrow{ font-size:15px; line-height:1; }
+  @media(max-width:840px){ .back-home .bh-txt{ display:none; } .back-home{ padding:6px 11px; } }
   .masthead .mh-sep{ width:1px; height:30px; background:var(--line-2); }
   .masthead .mh-title{ font-weight:600; font-size:15px; color:var(--ink); line-height:1.1; }
   .masthead .mh-title small{ display:block; font-weight:400; font-size:11px; color:var(--faint); letter-spacing:.04em; }
@@ -324,6 +333,7 @@
 
   <header class="masthead">
     <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
+    <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
     <a href="../index.html" title="Înapoi la Manuale Interne"><img class="logo" src="assets/letterhead_logo.png" alt="Dr. Ardeleanu Dental Clinics" /></a>
     <div class="mh-sep"></div>
     <nav class="mh-crumb" aria-label="Locație document">
