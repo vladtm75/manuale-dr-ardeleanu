@@ -324,6 +324,14 @@
   /* ============ MOBILE-LITE (telefon) ============ */
   #mobileNotice{ display:none; }
   @media(max-width:640px){
+    /* header compact: doar meniu + back + logo mic + cautare */
+    .masthead{ padding:0 14px; gap:10px; }
+    .masthead .logo{ height:26px; }
+    .masthead .mh-sep{ display:none; }
+    .mh-crumb{ display:none; }
+    .masthead .spacer{ display:none; }
+    .mh-pills{ display:none; }
+    .mh-search{ flex:1 1 auto; width:auto; min-width:0; max-width:none; }
     /* notice */
     #mobileNotice{
       display:flex; align-items:flex-start; gap:10px;
