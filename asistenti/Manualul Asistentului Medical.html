@@ -936,6 +936,27 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
   padding:2px 7px;border-radius:3px;letter-spacing:0;font-weight:500;
 }
 
+/* ============ ORG CHART (unified cu Manualul Medicului) ============ */
+.orgchart{margin:14px 0 22px}
+.org-tier{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.org-tier + .org-tier{margin-top:30px;position:relative}
+.org-tier + .org-tier::before{content:"";position:absolute;top:-17px;left:50%;transform:translateX(-50%);width:2px;height:17px;background:var(--rule)}
+.org-card{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--brand-primary);border-radius:8px;padding:10px 14px;min-width:150px;max-width:230px;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.org-card.top{border-top-color:var(--brand-amber);background:var(--brand-cream)}
+.org-card.you{border-top-color:var(--brand-amber);background:var(--brand-cream-warm)}
+.org-card .r{font-weight:600;color:var(--brand-primary);font-size:13.5px;line-height:1.25}
+.org-card .n{font-size:12px;color:var(--ink-mute);margin-top:3px}
+.org-card .d{font-size:11.5px;color:var(--ink-mute);margin-top:4px;line-height:1.3}
+.org-branches{display:flex;gap:22px;margin-top:30px;position:relative;align-items:flex-start}
+.org-branches::before{content:"";position:absolute;top:-17px;left:50%;transform:translateX(-50%);width:2px;height:17px;background:var(--rule)}
+.org-branch{flex:1;min-width:0;border:1px solid var(--rule-soft);background:#fbf9f5;border-radius:10px;padding:14px}
+.org-branch-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-primary);font-weight:700;text-align:center;margin-bottom:12px}
+.org-subtier{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.org-subtier + .org-subtier{margin-top:26px;position:relative}
+.org-subtier + .org-subtier::before{content:"";position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:2px;height:15px;background:var(--rule)}
+.org-card.sub{border-top-color:var(--brand-olive);min-width:120px}
+@media(max-width:680px){.org-branches{flex-direction:column}}
+
 /* ============ PLATFORM FRAME (unified) ============ */
 html{scroll-behavior:smooth}
 :focus-visible{outline:2px solid var(--brand-amber);outline-offset:2px;border-radius:4px}
@@ -1065,6 +1086,9 @@ html{scroll-behavior:smooth}
     <div class="group">
       <div class="group-label">Fundamente</div>
       <ol>
+        <li><a href="#istoric"><span class="num">§3</span>De unde am pornit și ce construim</a></li>
+        <li><a href="#misiune"><span class="num">§4</span>Misiune, valori și responsabilități</a></li>
+        <li><a href="#structura"><span class="num">§5</span>Structura rețelei &amp; escaladare</a></li>
         <li>
 
           <div class="row-with-sub">
@@ -1675,6 +1699,79 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL I  ============================== -->
     <!-- =================================================================== -->
     <div class="chap-divider">Partea I · Fundamente</div>
+
+    <!-- ============ §3 De unde am pornit ============ -->
+    <h2 id="istoric">De unde am pornit și ce construim</h2>
+    <p>Clinicile Dr. Ardeleanu au început în 2017 ca un singur cabinet în Oltenița, deschis de <strong>Dr. Virginia Ardeleanu</strong>. De acolo au crescut într-o rețea națională de stomatologie și un reper în domeniu în România, construită în jurul unei idei simple: <strong>excelență medicală la prețuri accesibile, pentru toată familia</strong>.</p>
+    <p>Rețeaua s-a extins rapid, cu 8 clinici în București (Cotroceni și Dorobanți), Giurgiu, Oltenița, Călărași, Slobozia, Târgoviște și Focșani, dotate cu tehnologie de ultimă generație — tomografe computerizate și lasere dentare — pentru tratamente precise și eficiente, cât mai aproape de pacient. Un element distinctiv este conceptul <strong>„Dental Safari"</strong>, dedicat copiilor, care transformă vizita la dentist într-o experiență plăcută și educativă prin gamificare.</p>
+    <p>Această creștere a fost posibilă prin munca unei echipe în care asistentul medical are un rol central: este prezent la fiecare pas al parcursului pacientului și dă tonul experienței pe care pacientul o trăiește în clinică.</p>
+    <div class="callout brand">
+      <div class="label">Astăzi</div>
+      8 clinici · 80+ medici supraspecializați · 30.000 pacienți unici și 70.000 vizite/an · 4.9★. În perioada 2021–2024, numărul de pacienți s-a dublat de la an la an.
+    </div>
+
+    <!-- ============ §4 Misiune, valori ============ -->
+    <h2 id="misiune">Misiune, valori și responsabilități</h2>
+    <h3>Misiune</h3>
+    <p>Să extindem accesul la stomatologie de calitate la prețuri accesibile prin dezvoltare la nivel național. Angajamentul nostru față de accesibilitate și îngrijire de calitate nu se limitează la clinicile existente — se extinde la toți românii, indiferent unde locuiesc.</p>
+    <h3>Valori</h3>
+    <p>Valorile Dr. Ardeleanu s-au conturat în jurul unui angajament etic, menit să ofere servicii de stomatologie excelente la prețuri accesibile pentru întreaga familie. Dr. Ardeleanu este înțeles ca un <strong>doctor al comunității</strong> în care suntem prezenți.</p>
+    <ul>
+      <li><strong>Accesibilitate</strong> — planuri etapizate, costuri explicate din start; eliminăm barierele în calea îngrijirii dentare de calitate.</li>
+      <li><strong>Excelență</strong> — protocoale și materiale standard, tehnologie de ultimă generație (tomografe computerizate, lasere dentare), documentare completă.</li>
+      <li><strong>Empatie</strong> — îngrijire personalizată; pacientul pleacă auzit, înțeles și cu un pas următor clar.</li>
+      <li><strong>Creștere continuă</strong> — pregătire constantă și supraspecializare; fiecare membru al echipei se angajează să crească pentru a oferi pacienților cele mai bune servicii.</li>
+    </ul>
+    <h3>Responsabilitățile asistentului medical</h3>
+    <p>Fiecare asistent medical din rețea este responsabil să întruchipeze aceste valori în activitatea de zi cu zi:</p>
+    <ul>
+      <li>să întâmpine și să însoțească fiecare pacient cu profesionalism și empatie, de la preluarea din recepție până la finalul vizitei;</li>
+      <li>să respecte protocoalele standard ale rețelei — pregătirea cabinetului, asistarea la patru mâini, sterilizarea și trasabilitatea instrumentarului — și să documenteze complet în SPSS;</li>
+      <li>să asigure siguranța pacientului și a echipei prin respectarea riguroasă a normelor de igienă și de control al infecțiilor;</li>
+      <li>să trateze cu aceeași grijă orice pacient, indiferent de complexitatea cazului;</li>
+      <li>să se pregătească continuu, inclusiv prin modulele de Educație Continuă din ERP, și să contribuie la ridicarea standardului echipei.</li>
+    </ul>
+
+    <!-- ============ §5 Structura & escaladare ============ -->
+    <h2 id="structura">Structura organizațională a rețelei și fluxuri de escaladare</h2>
+    <p>Conducerea se împarte pe două linii care se întâlnesc în fiecare clinică: o <strong>linie medicală</strong> (Director Medical) și o <strong>linie operațională</strong> (clustere de clinici). Asistenții medicali răspund <strong>administrativ</strong> pe linia operațională — prin Managerul de Clinică și Directorii Operaționali — și <strong>funcțional (medical)</strong> de medicul alături de care lucrează și de Departamentul Medical.</p>
+    <div class="orgchart">
+      <div class="org-tier">
+        <div class="org-card top"><div class="r">Dr. Virginia Ardeleanu</div><div class="n">Director Medical</div></div>
+        <div class="org-card top"><div class="r">Vlad Ardeleanu</div><div class="n">Director General</div></div>
+      </div>
+      <div class="org-branches">
+        <div class="org-branch">
+          <div class="org-branch-label">Linia medicală — sub Dr. Virginia Ardeleanu</div>
+          <div class="org-card"><div class="r">Echipa Medicală</div><div class="d">Medici specialiști și medici de Stomatologie Generală</div></div>
+        </div>
+        <div class="org-branch">
+          <div class="org-branch-label">Linia operațională — sub Vlad Ardeleanu</div>
+          <div class="org-subtier">
+            <div class="org-card"><div class="r">Directori Operaționali</div><div class="n">pe clustere de clinici</div></div>
+          </div>
+          <div class="org-subtier">
+            <div class="org-card sub"><div class="r">Manageri de Clinică</div></div>
+            <div class="org-card sub you"><div class="r">Asistente Medicale</div><div class="d">rolul tău în rețea</div></div>
+            <div class="org-card sub"><div class="r">Recepție</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3>Fluxuri de escaladare</h3>
+    <p>Când apare o situație care depășește nivelul tău de decizie, escaladezi pe linia potrivită:</p>
+    <ul>
+      <li><strong>Operațional</strong> (program, consumabile, incidente administrative) — Asistent Medical → Manager de Clinică → Director Operațional de cluster.</li>
+      <li><strong>Medical</strong> (situații clinice, protocoale, reacții adverse) — Asistent Medical → medicul curant → Director Medical.</li>
+      <li><strong>Urgențe medicale în clinică</strong> — se aplică imediat protocolul de prim ajutor (<a href="#cap-18">Capitolul XVIII</a>), cu anunțarea medicului și a Managerului de Clinică.</li>
+      <li><strong>Echipamente defecte</strong> — se semnalează conform procedurii de mentenanță (<a href="#cap-14">Capitolul XIV</a>).</li>
+    </ul>
+    <h3>Roluri transversale</h3>
+    <p>În fluxul pacientului vei colabora frecvent cu două roluri-cheie ale rețelei:</p>
+    <ul>
+      <li><strong>APT — Arhitectul Planului de Tratament:</strong> validează diagnosticul și coordonează cazurile complexe, multidisciplinare.</li>
+      <li><strong>KPG — Key Patient Guide:</strong> ghidează pacientul prin parcurs și menține legătura pentru retenție.</li>
+    </ul>
 
     <h2 id="cap-1"><span class="chapter-num">Capitolul I</span>Activitățile asistenței medicale și fluxul pacientului <span class="chapter-code">ASM</span></h2>
 
