@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<script>try{if(sessionStorage.getItem('adcManualeAuth')!=='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b'){location.replace('../index.html');}}catch(e){location.replace('../index.html');}</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manualul Medicului — Clinicile Dr. Ardeleanu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --primary:#7B1C16;        /* Falu Red */
+    --primary-deep:#5E140F;
+    --wheat:#F2DAB7;
+    --cream:#F5EDE3;
+    --olive:#B5BD5C;
+    --amber:#C9A227;
+    --yellow:#FBE483;
+    --terra:#dd7e6b;
+    --ink:#222222;
+    --muted:#6b5f59;
+    --faint:#917f76;
+    --page:#F4F1EC;
+    --surface:#FFFFFF;
+    --line:#e7ded2;
+    --line-2:#d8ccbb;
+    --link:#7B1C16;
+    --sidebar-w:300px;
+    --infobox-w:300px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--page); color:var(--ink);
+    font-family:"Poppins",system-ui,sans-serif; font-size:15px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--primary); color:#fff; }
+  a{ color:var(--link); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+
+  /* ============ TOP HEADER ============ */
+  .masthead{
+    position:sticky; top:0; z-index:60; background:var(--surface);
+    border-bottom:2px solid var(--primary);
+    display:flex; align-items:center; gap:18px; padding:0 20px; height:64px;
+  }
+  .masthead .logo{ height:34px; width:auto; display:block; }
+  .masthead .mh-sep{ width:1px; height:30px; background:var(--line-2); }
+  .masthead .mh-title{ font-weight:600; font-size:15px; color:var(--ink); line-height:1.1; }
+  .masthead .mh-title small{ display:block; font-weight:400; font-size:11px; color:var(--faint); letter-spacing:.04em; }
+  .mh-crumb{ display:flex; align-items:center; gap:11px; font-size:12.5px; min-width:0; overflow:hidden; }
+  .mh-crumb .cr-home{ font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--primary); font-size:11.5px; white-space:nowrap; }
+  .mh-crumb .cr{ color:var(--faint); white-space:nowrap; }
+  .mh-crumb .cr-arrow{ color:var(--line-2); }
+  @media(max-width:840px){ .mh-crumb .cr{ display:none; } .mh-crumb .cr-arrow{ display:none; } }
+  .mh-pills{ display:flex; align-items:center; gap:9px; }
+  .mh-code{ font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--primary); background:var(--cream); border:1px solid var(--wheat); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+  .masthead .spacer{ flex:1; }
+  .mh-search{ position:relative; width:280px; max-width:38vw; }
+  .mh-search input{
+    width:100%; font-family:inherit; font-size:13.5px; color:var(--ink);
+    padding:8px 12px 8px 32px; border:1px solid var(--line-2); border-radius:7px; background:#fdfcfa;
+  }
+  .mh-search input:focus{ outline:none; border-color:var(--primary); }
+  .mh-search svg{ position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--faint); }
+  .mh-ver{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#fff; background:var(--primary); padding:5px 10px; border-radius:999px; white-space:nowrap; }
+
+  /* ============ LAYOUT ============ */
+  .shell{ display:grid; grid-template-columns:var(--sidebar-w) minmax(0,1fr); align-items:start; max-width:1400px; margin:0 auto; }
+
+  /* sidebar */
+  .sidebar{
+    position:sticky; top:64px; align-self:start; height:calc(100vh - 64px); overflow-y:auto;
+    padding:22px 14px 60px 20px; border-right:1px solid var(--line);
+  }
+  .sidebar::-webkit-scrollbar{ width:8px; }
+  .sidebar::-webkit-scrollbar-thumb{ background:var(--line-2); border-radius:4px; }
+  .side-title{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--faint); font-weight:600; margin:0 0 10px 8px; }
+  .nav-ch{ margin-bottom:4px; }
+  .nav-ch-head{
+    display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+    background:none; border:none; font-family:inherit; cursor:pointer;
+    padding:7px 8px; border-radius:6px; color:var(--primary); font-weight:600; font-size:13.5px;
+  }
+  .nav-ch-head:hover{ background:var(--cream); }
+  .nav-ch-head .rn{ font-family:"Playfair Display",serif; font-size:13px; opacity:.7; min-width:18px; }
+  .nav-ch-head .cv{ margin-left:auto; transition:transform .2s; font-size:10px; color:var(--faint); }
+  .nav-ch[data-open="false"] .cv{ transform:rotate(-90deg); }
+  .nav-subs{ overflow:hidden; }
+  .nav-ch[data-open="false"] .nav-subs{ display:none; }
+  .nav-sub{
+    display:flex; gap:8px; padding:5px 8px 5px 30px; border-radius:6px;
+    font-size:12.5px; color:var(--muted); line-height:1.35; border-left:2px solid transparent;
+  }
+  .nav-sub:hover{ background:var(--cream); text-decoration:none; color:var(--ink); }
+  .nav-sub .nn{ color:var(--faint); font-variant-numeric:tabular-nums; flex:none; }
+  .nav-sub.active{ background:var(--cream); color:var(--primary); font-weight:600; border-left-color:var(--primary); }
+  .nav-sub.active .nn{ color:var(--primary); }
+
+  /* main */
+  .main{ padding:30px 46px 120px; min-width:0; }
+  .article{ max-width:880px; }
+
+  /* article header */
+  .hatnote{ font-size:12.5px; font-style:italic; color:var(--muted); background:var(--cream); border-left:3px solid var(--amber); padding:7px 12px; border-radius:0 5px 5px 0; margin-bottom:18px; }
+  .art-kicker{ display:flex; align-items:center; gap:14px; font-size:11.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:2px 0 0; }
+  .art-kicker::before{ content:""; width:44px; height:2px; background:var(--amber); flex:none; }
+  .art-title{ font-family:"Playfair Display",serif; font-weight:800; font-size:clamp(38px,5.6vw,68px); line-height:1.02; color:var(--ink); margin:14px 0 0; letter-spacing:-.01em; }
+  .art-title .t2{ display:block; font-style:italic; font-weight:800; color:var(--primary); }
+  .art-sub{ font-size:16px; color:var(--muted); margin:10px 0 0; }
+  .title-rule{ height:1px; background:var(--line-2); margin:18px 0 0; }
+
+  /* author credit block (per specialty) */
+  .authorcard{ display:flex; align-items:center; gap:14px; border-left:3px solid var(--primary); background:var(--cream,#faf6ef); border-radius:0 8px 8px 0; padding:12px 16px; margin:0 0 22px; }
+  .authorcard .ac-ic{ width:34px; height:34px; flex:none; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; }
+  .authorcard .ac-lbl{ font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:0 0 2px; }
+  .authorcard .ac-name{ font-size:14px; font-weight:600; color:var(--ink); margin:0; line-height:1.3; }
+
+  /* hero meta row (edition / version / language) */
+  .hero-note{ font-size:13px; font-style:italic; color:var(--muted); line-height:1.6; max-width:74ch; margin:16px 0 0; }
+  .hero-note b{ font-style:normal; font-weight:700; color:var(--ink); }
+  .hero-meta{ display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2); margin:24px 0 0; }
+  .hero-meta .cell{ padding:15px 18px 17px; border-left:1px solid var(--line); }
+  .hero-meta .cell:first-child{ border-left:none; padding-left:2px; }
+  .hero-meta .lbl{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:0 0 7px; }
+  .hero-meta .val{ font-size:13px; color:var(--ink); font-weight:500; line-height:1.35; margin:0; }
+  @media(max-width:900px){ .hero-meta{ grid-template-columns:repeat(3,1fr); } .hero-meta .cell:nth-child(3n+1){ border-left:none; padding-left:2px; } }
+  @media(max-width:520px){ .hero-meta{ grid-template-columns:repeat(2,1fr); } .hero-meta .cell:nth-child(2n+1){ border-left:none; padding-left:2px; } }
+
+  /* infobox */
+  .infobox{
+    float:right; width:var(--infobox-w); margin:6px 0 18px 26px; background:var(--cream);
+    border:1px solid var(--line-2); border-radius:8px; overflow:hidden; font-size:12.5px;
+  }
+  .ib-logo{ background:#fff; padding:18px; text-align:center; border-bottom:1px solid var(--line-2); }
+  .ib-logo img{ width:80%; max-width:200px; height:auto; }
+  .ib-title{ background:var(--primary); color:#fff; font-weight:600; text-align:center; padding:8px 12px; font-size:13px; letter-spacing:.02em; }
+  .ib-tag{ text-align:center; font-style:italic; color:var(--primary); padding:10px 14px; font-size:12.5px; border-bottom:1px solid var(--line-2); font-family:"Playfair Display",serif; }
+  .infobox table{ width:100%; border-collapse:collapse; }
+  .infobox th{ text-align:left; vertical-align:top; padding:7px 10px 7px 14px; color:var(--muted); font-weight:500; width:42%; border-bottom:1px solid #e8ddcd; }
+  .infobox td{ padding:7px 14px 7px 8px; font-weight:500; color:var(--ink); border-bottom:1px solid #e8ddcd; }
+  .infobox tr:last-child th, .infobox tr:last-child td{ border-bottom:none; }
+  .ib-section{ background:var(--wheat); color:var(--primary-deep); font-weight:600; text-align:center; font-size:11px; letter-spacing:.14em; text-transform:uppercase; padding:6px; }
+
+  /* lead */
+  .lead p{ font-size:15.5px; }
+  .lead p:first-child{ }
+
+  /* boxed cuprins (classic wiki TOC) */
+  .toc-box{ display:inline-block; min-width:300px; max-width:100%; background:#fbf9f5; border:1px solid var(--line-2); border-radius:8px; padding:14px 20px 16px; margin:22px 0; }
+  .toc-box .toc-h{ display:flex; align-items:center; gap:10px; font-weight:600; color:var(--primary); margin-bottom:8px; }
+  .toc-box .toc-h button{ font-family:inherit; font-size:12px; color:var(--muted); background:none; border:1px solid var(--line-2); border-radius:5px; padding:2px 8px; cursor:pointer; }
+  .toc-list{ list-style:none; margin:0; padding:0; columns:2; column-gap:36px; }
+  .toc-list .toc-c{ font-weight:600; color:var(--primary); margin-top:8px; break-inside:avoid; }
+  .toc-list .toc-c:first-child{ margin-top:0; }
+  .toc-list .toc-s{ padding-left:18px; color:var(--ink); break-inside:avoid; display:flex; gap:8px; font-size:13px; }
+  .toc-list .toc-s .tn{ color:var(--faint); font-variant-numeric:tabular-nums; }
+  @media(max-width:760px){ .toc-list{ columns:1; } }
+
+  /* sections */
+  h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:30px; color:var(--primary); margin:46px 0 4px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; display:flex; align-items:baseline; gap:12px; }
+  h2.ch .rn{ font-size:20px; color:var(--amber); }
+  .ch-desc{ color:var(--muted); font-size:14px; margin:0 0 6px; }
+  h3.sub{ font-family:"Poppins",sans-serif; font-weight:600; font-size:21px; color:var(--ink); margin:34px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line); scroll-margin-top:78px; display:flex; align-items:baseline; gap:10px; }
+  h3.sub .sn{ color:var(--primary); font-weight:700; font-size:18px; font-variant-numeric:tabular-nums; }
+  h3.sub .anchor{ opacity:0; font-size:14px; color:var(--faint); transition:opacity .15s; }
+  h3.sub:hover .anchor{ opacity:1; }
+
+  .content h4{ font-size:15px; font-weight:600; color:var(--primary-deep); margin:18px 0 4px; }
+  .content p{ margin:0 0 11px; }
+  .content p.byline{ font-size:12px; color:var(--faint); font-style:italic; margin:-2px 0 12px; }
+  .content ul, .content ol{ margin:0 0 12px; padding-left:22px; }
+  .content li{ margin:3px 0; }
+  .content ul li{ list-style:none; position:relative; }
+  .content ul li::before{ content:""; position:absolute; left:-15px; top:9px; width:5px; height:5px; border-radius:50%; background:var(--terra); }
+
+  .content .callout{ background:var(--cream); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:13px 17px 5px; margin:8px 0 18px; }
+  .content .callout .callout-label{ display:block; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--primary); margin-bottom:5px; }
+  .content .callout.secret{ background:#f0f4ef; border-left-color:#6f8f5f; }
+  .content .callout.secret .callout-label{ color:#4a6b3c; }
+  .content .callout.keep{ background:#f3f1e6; border-left-color:var(--olive); }
+  .content .callout.keep .callout-label{ color:#6e7726; }
+  .content .callout.avoid{ background:#f8efec; border-left-color:var(--terra); }
+  .content .callout.avoid .callout-label{ color:#b0503c; }
+  .spec-toc{ list-style:none; padding:0; margin:14px 0 26px; display:grid; grid-template-columns:1fr 1fr; gap:2px 30px; counter-reset:st; border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2); }
+  .spec-toc li{ counter-increment:st; position:relative; padding:9px 0 9px 30px; font-size:13.5px; border-bottom:1px dotted var(--line); }
+  .spec-toc li:last-child, .spec-toc li:nth-last-child(2){ border-bottom:none; }
+  .spec-toc li::before{ content:counter(st); position:absolute; left:0; top:9px; width:20px; height:20px; border-radius:50%; background:var(--primary); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .spec-toc a{ color:var(--ink); }
+  .content h4.proto{ display:flex; align-items:baseline; gap:11px; font-size:20px; font-weight:700; color:var(--primary); margin:36px 0 6px; padding-top:20px; border-top:2px solid var(--line-2); }
+  .content h4.proto .pn{ font-family:"Playfair Display",serif; font-size:26px; color:var(--amber); line-height:1; }
+  @media(max-width:640px){ .spec-toc{ grid-template-columns:1fr; } }
+
+  .content table.checktable{ font-size:12.5px; }
+  .content table.checktable th{ font-size:11px; padding:8px 8px; text-align:center; vertical-align:bottom; }
+  .content table.checktable th:first-child{ text-align:left; }
+  .content table.checktable td{ padding:6px 8px; }
+  .content table.checktable td.lab{ text-align:center; font-weight:700; color:var(--primary); }
+  .content table.checktable td:first-child{ font-style:italic; }
+  .content table.checktable tbody tr:nth-child(even){ background:#faf6ef; }
+
+  .platform-cta{ display:flex; align-items:center; gap:16px; background:var(--primary); border-radius:10px; padding:16px 20px; margin:18px 0 22px; text-decoration:none; }
+  .platform-cta:hover{ background:var(--primary-deep); text-decoration:none; }
+  .platform-cta .pc-ic{ width:40px; height:40px; flex:none; border-radius:8px; background:rgba(255,255,255,.16); display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .platform-cta .pc-txt{ flex:1; min-width:0; }
+  .platform-cta .pc-lbl{ display:block; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--wheat); font-weight:700; margin:0 0 2px; }
+  .platform-cta .pc-name{ display:block; font-size:15px; font-weight:600; color:#fff; margin:0; }
+  .platform-cta .pc-arrow{ color:#fff; font-size:20px; flex:none; }
+
+  /* SPSS interface mockups */
+  .spss{ border:1px solid var(--line-2); border-radius:10px; overflow:hidden; margin:18px 0; box-shadow:0 8px 24px rgba(40,30,20,.08); font-family:system-ui,-apple-system,sans-serif; font-size:12px; background:#fff; }
+  .spss-tabs{ display:flex; flex-wrap:wrap; gap:1px 4px; background:#f4f6f7; padding:9px 12px; border-bottom:1px solid var(--line-2); }
+  .spss-tab{ padding:5px 9px; color:#2c7f9e; white-space:nowrap; border-radius:4px 4px 0 0; }
+  .spss-tab.active{ color:#134b63; font-weight:700; box-shadow:inset 0 -2px 0 #17a2b8; }
+  .spss-body{ padding:16px 18px; }
+  .spss-h{ color:#8a6d3b; font-size:15px; font-weight:600; margin:0 0 12px; }
+  .spss-field{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 4px; }
+  .spss-field .lab{ font-weight:700; color:#333; }
+  .spss-input{ flex:1; min-width:140px; max-width:230px; height:30px; border:1px solid #ccc; border-radius:4px; background:#fff; }
+  .spss-btn{ display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:4px; color:#fff; font-weight:600; font-size:12px; }
+  .spss-btn.blue{ background:#2f8fc7; } .spss-btn.red{ background:#d64b47; } .spss-btn.orange{ background:#e6941e; } .spss-btn.ghost{ background:#fff; color:#444; border:1px solid #ccc; }
+  .spss-sep{ border:none; border-top:1px solid #e5e5e5; margin:14px 0; }
+  .spss-sub{ display:flex; gap:20px; border-bottom:1px solid #e5e5e5; padding-bottom:8px; margin:0 0 14px; }
+  .spss-sub span{ color:#2c7f9e; } .spss-sub span.active{ color:#134b63; font-weight:700; box-shadow:inset 0 -2px 0 #2e7d32; padding-bottom:8px; }
+  .spss-count{ color:#666; margin:0 0 10px; }
+  .spss-doc{ display:flex; align-items:center; justify-content:space-between; gap:12px; border-top:1px solid #eee; padding:11px 0; }
+  .spss-doc .name{ display:inline-flex; align-items:center; gap:9px; color:#2c7f9e; font-weight:600; }
+  .spss-doc .wicon{ width:22px; height:22px; border-radius:3px; background:#2b579a; color:#fff; font-weight:700; display:inline-flex; align-items:center; justify-content:center; font-size:12px; flex:none; }
+  .spss-tab.hl{ outline:2px solid #e23b2e; outline-offset:1px; border-radius:4px; }
+  .spss-doc .name.hl{ outline:2px solid #e23b2e; outline-offset:3px; border-radius:5px; }
+  .spss-tabs{ position:relative; }
+  .spss-arrow{ position:absolute; color:#e23b2e; font-size:26px; font-weight:700; line-height:1; }
+  .content table{ width:100%; border-collapse:collapse; margin:6px 0 18px; font-size:13.5px; border:1px solid var(--line-2); }
+  .content th{ background:var(--primary); color:#fff; text-align:left; font-weight:600; padding:9px 12px; vertical-align:top; }
+  .content td{ padding:9px 12px; vertical-align:top; border-top:1px solid var(--line); }
+  .content tbody tr:nth-child(even){ background:#fbf6ef; }
+  .content tbody tr:hover{ background:var(--cream); }
+
+  /* group dividers */
+  .nav-group{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:12px 0 4px 30px; }
+  .toc-g{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); font-weight:700; padding-left:18px; margin-top:6px; break-inside:avoid; }
+  .group-divider{ margin:38px 0 2px; display:flex; align-items:center; gap:14px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--primary); font-weight:700; }
+  .group-divider::after{ content:""; flex:1; height:1px; background:var(--wheat); }
+
+  /* org chart */
+  .orgchart{ margin:14px 0 22px; }
+  .org-tier{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+  .org-tier + .org-tier{ margin-top:30px; position:relative; }
+  .org-tier + .org-tier::before{ content:""; position:absolute; top:-17px; left:50%; transform:translateX(-50%); width:2px; height:17px; background:var(--line-2); }
+  .org-card{ background:#fff; border:1px solid var(--line-2); border-top:3px solid var(--primary); border-radius:8px; padding:10px 14px; min-width:150px; max-width:230px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+  .org-card.lead{ border-top-color:var(--amber); background:var(--cream); }
+  .org-card .r{ font-weight:600; color:var(--primary); font-size:13.5px; line-height:1.25; }
+  .org-card .n{ font-size:12px; color:var(--muted); margin-top:3px; }
+  .org-card .d{ font-size:11.5px; color:var(--faint); margin-top:4px; line-height:1.3; }
+  .org-branches{ display:flex; gap:22px; margin-top:30px; position:relative; align-items:flex-start; }
+  .org-branches::before{ content:""; position:absolute; top:-17px; left:50%; transform:translateX(-50%); width:2px; height:17px; background:var(--line-2); }
+  .org-branch{ flex:1; min-width:0; border:1px solid var(--line); background:#fbf9f5; border-radius:10px; padding:14px; }
+  .org-branch-label{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--primary); font-weight:700; text-align:center; margin-bottom:12px; }
+  .org-subtier{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+  .org-subtier + .org-subtier{ margin-top:26px; position:relative; }
+  .org-subtier + .org-subtier::before{ content:""; position:absolute; top:-15px; left:50%; transform:translateX(-50%); width:2px; height:15px; background:var(--line-2); }
+  .org-card.sub{ border-top-color:var(--olive); min-width:120px; }
+  @media(max-width:680px){ .org-branches{ flex-direction:column; } }
+
+  /* Dental Safari — signature feature block */
+  .safari{ margin:14px 0 22px; border:1px solid #d9c98a; border-radius:14px; overflow:hidden; background:linear-gradient(180deg,#fcf6e6,#fbf9f5); }
+  .safari-head{ background:var(--olive); color:#fff; padding:16px 20px; }
+  .safari-badge{ display:inline-block; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; background:rgba(255,255,255,.22); padding:3px 9px; border-radius:999px; }
+  .safari-head h4{ margin:8px 0 0 !important; color:#fff !important; font-family:"Playfair Display",serif; font-weight:800; font-size:23px; }
+  .safari-head p{ margin:6px 0 0; font-size:13.5px; color:#f4f7e6; max-width:62ch; }
+  .safari-body{ padding:18px 20px 6px; }
+  .safari-quote{ font-family:"Playfair Display",serif; font-style:italic; font-size:18px; color:var(--primary); border-left:3px solid var(--amber); padding-left:14px; margin:0 0 16px; }
+  .safari-chars{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 16px; }
+  .safari-char{ flex:1; min-width:180px; background:#fff; border:1px solid #e7ddc2; border-top:3px solid var(--amber); border-radius:9px; padding:11px 14px; }
+  .safari-imgwrap{ height:144px; display:flex; align-items:flex-end; justify-content:center; margin:-11px -14px 11px; padding:12px 10px 8px; background:linear-gradient(180deg,#f1f4e0,#fbf9f5); border-bottom:1px solid #ece4cf; border-radius:8px 8px 0 0; }
+  .safari-img{ max-height:124px; width:auto; filter:drop-shadow(0 6px 7px rgba(0,0,0,.14)); }
+  .safari-char .cn{ font-weight:700; color:var(--primary); font-size:14.5px; text-align:center; }
+  .safari-char .cspec{ font-weight:500; color:var(--muted); font-size:12px; }
+  .safari-char .crole{ font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:var(--olive); margin:4px 0 7px; text-align:center; }
+  .safari-char .cd{ font-size:12.5px; color:var(--muted); margin-top:2px; line-height:1.45; }
+  .safari-body h4{ margin-top:6px !important; }
+  @media(max-width:560px){ .safari-chars{ flex-direction:column; } }
+
+  /* back to top */
+  .totop{ position:fixed; right:22px; bottom:22px; z-index:50; background:var(--primary); color:#fff; border:none; width:42px; height:42px; border-radius:50%; cursor:pointer; box-shadow:0 6px 18px -6px rgba(123,28,22,.6); opacity:0; pointer-events:none; transition:opacity .2s; font-size:18px; }
+  .totop.show{ opacity:1; pointer-events:auto; }
+
+  /* footer */
+  .foot{ border-top:2px solid var(--primary); margin-top:40px; padding:26px 0 10px; color:var(--muted); font-size:12.5px; }
+  .foot .din{ font-family:"Playfair Display",serif; font-weight:700; color:var(--primary); font-size:15px; }
+  .foot .row{ display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; align-items:center; }
+  .foot .dot{ width:4px; height:4px; border-radius:50%; background:var(--line-2); }
+
+  /* hamburger for mobile */
+  .menu-btn{ display:none; background:none; border:1px solid var(--line-2); border-radius:6px; padding:6px 9px; cursor:pointer; color:var(--primary); }
+
+  @media(max-width:1040px){
+    .shell{ grid-template-columns:1fr; }
+    .sidebar{ position:fixed; left:0; top:64px; width:300px; background:var(--surface); z-index:55; box-shadow:6px 0 24px -10px rgba(0,0,0,.25); transform:translateX(-105%); transition:transform .25s; }
+    .sidebar.open{ transform:none; }
+    .menu-btn{ display:inline-block; }
+    .main{ padding:24px 22px 100px; }
+    .infobox{ float:none; width:100%; margin:14px 0 20px; }
+  }
+
+  /* print */
+  @media print{
+    @page{ size:A4; margin:14mm 12mm; }
+    .masthead, .sidebar, .totop, .menu-btn, .mh-search, .toc-box .toc-h button{ display:none !important; }
+    .shell{ grid-template-columns:1fr; max-width:none; display:block; }
+    .main{ padding:0; }
+    body{ background:#fff; font-size:10.5pt; }
+    *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    h2.ch{ break-before:page; }
+    h2.ch, h3.sub, h4{ break-after:avoid; }
+    .content table, .content .callout, .content figure, .content img, .orgchart, .stat-row, .platform-cta, .authorcard, .spec-toc, .hero-meta{ break-inside:avoid; }
+    .content p, .content li{ orphans:3; widows:3; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
+    <a href="../index.html" title="Înapoi la Manuale Interne"><img class="logo" src="assets/letterhead_logo.png" alt="Dr. Ardeleanu Dental Clinics" /></a>
+    <div class="mh-sep"></div>
+    <nav class="mh-crumb" aria-label="Locație document">
+      <a class="cr-home" href="../index.html">Manuale interne</a>
+      <span class="cr-arrow">›</span><span class="cr">Activitate medicală</span>
+      <span class="cr-arrow">›</span><span class="cr">Ediția V1.0</span>
+    </nav>
+    <span class="spacer"></span>
+    <div class="mh-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="search" type="text" placeholder="Caută în manual…" autocomplete="off" />
+    </div>
+    <div class="mh-pills">
+      <span class="mh-code">ADC-MED-01</span>
+      <span class="mh-ver">V1.0 · 2026</span>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="sidebar" id="sidebar">
+      <p class="side-title">Cuprins</p>
+      <div id="nav"></div>
+    </nav>
+
+    <main class="main">
+      <article class="article">
+        <p class="hatnote">Document intern confidențial · uz exclusiv pentru echipa medicală Dr. Ardeleanu. Acesta nu este un document de bifat — este harta după care lucrăm cu toții.</p>
+        <p class="art-kicker">Document cadru · Operațional medical</p>
+        <h1 class="art-title">Manualul Activităților Medicului —<span class="t2">Ghidul Medicului</span></h1>
+        <p class="art-sub">Documentul-cadru care guvernează activitatea medicilor în cele opt clinici ale rețelei Dr. Ardeleanu — un singur standard de îngrijire.</p>
+        <p class="hero-note"><b>Notă:</b> Acest manual este documentul oficial intern al rețelei <i>Clinicile Dr. Ardeleanu</i>, valabil pentru toți medicii aflați în relație de muncă cu organizația.</p>
+        <div class="hero-meta">
+          <div class="cell"><p class="lbl">Ediție</p><p class="val">V1.0 — 2026</p></div>
+          <div class="cell"><p class="lbl">Cod document</p><p class="val">ADC-MED-01</p></div>
+          <div class="cell"><p class="lbl">Limba</p><p class="val">Română</p></div>
+          <div class="cell"><p class="lbl">Capitole</p><p class="val">3 · <span id="ibSubs">—</span> subcapitole</p></div>
+          <div class="cell"><p class="lbl">Aplicabilitate</p><p class="val">8 clinici · medicii rețelei</p></div>
+          <div class="cell"><p class="lbl">Aprobat de</p><p class="val">Departamentul Medical</p></div>
+        </div>
+
+        <div class="lead">
+          <p>Acest <b>manual</b> este harta după care lucrăm cu toții în rețeaua <b>Dr. Ardeleanu</b>. Se citește integral la intrarea în rețea și se reia ori de câte ori întâlnești o situație pentru care nu ai un răspuns clar. El definește cum funcționează rețeaua, cum se poartă medicul cu pacientul și cum se aplică protocoalele clinice.</p>
+          <p>Manualul este împărțit în trei capitole mari: <a href="#cap-op"><b>Operațional</b></a> — cum e organizată rețeaua și cum parcurge pacientul drumul prin clinică; <a href="#cap-comp"><b>Comportamental</b></a> — cum transformă medicul diagnosticul în înțelegere și decizie; și <a href="#cap-med"><b>Partea medicală</b></a> — protocoalele clinice pe specialități, urgențele și formarea continuă.</p>
+        </div>
+
+        <div class="toc-box">
+          <div class="toc-h"><span>Cuprins</span><button id="tocToggle">[ascunde]</button></div>
+          <ol class="toc-list" id="tocList"></ol>
+        </div>
+
+        <div id="body"></div>
+
+        <footer class="foot">
+          <span class="din">Din 2017</span>
+          <div class="row">
+            <span>Clinicile Dr. Ardeleanu — Manualul Medicului V1.0 (2025–2026)</span><span class="dot"></span>
+            <span>Document intern confidențial</span><span class="dot"></span>
+            <span>clinicileardeleanu.ro · 031 99 63</span>
+          </div>
+          <div class="row"><span>Prima versiune integrată — 01.03.2026, Loredana Manoiu (aprobare conducere). Numerotarea paginilor este provizorie.</span></div>
+        </footer>
+      </article>
+    </main>
+  </div>
+
+  <button class="totop" id="totop" aria-label="Sus">↑</button>
+
+<script src="manual-data.js"></script>
+<script>
+(function(){
+  const M = window.MANUAL;
+  const chAnchors = {op:'cap-op', comp:'cap-comp', med:'cap-med'};
+  const chDesc = {
+    op:'Mersul în Dr. Ardeleanu: fundamentele rețelei, onboarding-ul medicului, parcursul pacientului (de la recepție la planul de tratament în P2) și partea operațională — sisteme, HR, financiar, laborator și KPI.',
+    comp:'Cum transformă medicul diagnosticul și planul în înțelegere, decizie și aderență — ce observi, ce faci, ce spui la fiecare moment.',
+    med:'Protocoalele clinice standard pe specialități, urgențele medicale și formarea continuă — referința tehnică a actului medical.'
+  };
+  let totalSubs=0; M.chapters.forEach(c=>totalSubs+=c.subs.length);
+  document.getElementById('ibSubs').textContent = totalSubs;
+
+  const slug = (chId,n)=> 's-'+chId+'-'+n.replace(/\./g,'_');
+
+  // page numbers (provizoriu)
+  const pageStart={op:6, comp:72, med:68}; let pmap={};
+  M.chapters.forEach(c=>{ let p=pageStart[c.id]; c.subs.forEach((s,idx)=>{ pmap[c.id+s.n]=p; p+=2; }); });
+
+  // ---- sidebar nav ----
+  const nav=document.getElementById('nav');
+  M.chapters.forEach((c,ci)=>{
+    const wrap=document.createElement('div'); wrap.className='nav-ch'; wrap.dataset.open = ci===0?'true':'true';
+    const subs=c.subs.map((s,si)=>{
+      const prev=si>0?c.subs[si-1].group:null;
+      const g=(s.group&&s.group!==prev)?`<div class="nav-group">${s.group}</div>`:'';
+      return g+`<a class="nav-sub" href="#${slug(c.id,s.n)}" data-target="${slug(c.id,s.n)}" data-search="${(s.n+' '+s.t).toLowerCase()}"><span class="nn">${s.n}</span><span>${s.t}</span></a>`;
+    }).join('');
+    wrap.innerHTML=`<button class="nav-ch-head"><span class="rn">${c.roman}</span><span>${c.title}</span><span class="cv">▼</span></button><div class="nav-subs">${subs}</div>`;
+    nav.appendChild(wrap);
+    wrap.querySelector('.nav-ch-head').addEventListener('click',()=>{ wrap.dataset.open = wrap.dataset.open==='true'?'false':'true'; });
+  });
+
+  // ---- boxed cuprins ----
+  const tl=document.getElementById('tocList');
+  M.chapters.forEach(c=>{
+    const li=document.createElement('li'); li.className='toc-c';
+    li.innerHTML=`<a href="#${chAnchors[c.id]}">${c.num}. ${c.title}</a>`;
+    tl.appendChild(li);
+    c.subs.forEach((s,si)=>{
+      const prev=si>0?c.subs[si-1].group:null;
+      if(s.group&&s.group!==prev){ const gli=document.createElement('li'); gli.className='toc-g'; gli.textContent=s.group; tl.appendChild(gli); }
+      const sub=document.createElement('li'); sub.className='toc-s';
+      sub.innerHTML=`<span class="tn">${s.n}</span><a href="#${slug(c.id,s.n)}">${s.t}</a>`;
+      tl.appendChild(sub);
+    });
+  });
+
+  // ---- body ----
+  const body=document.getElementById('body');
+  M.chapters.forEach(c=>{
+    const h2=document.createElement('h2'); h2.className='ch'; h2.id=chAnchors[c.id];
+    h2.innerHTML=`<span class="rn">${c.roman}</span><span>Capitolul ${c.num} — ${c.title}</span>`;
+    body.appendChild(h2);
+    const d=document.createElement('p'); d.className='ch-desc'; d.textContent=chDesc[c.id]; body.appendChild(d);
+    c.subs.forEach((s,si)=>{
+      const prev=si>0?c.subs[si-1].group:null;
+      if(s.group&&s.group!==prev){ const gd=document.createElement('div'); gd.className='group-divider'; gd.innerHTML=`<span>${s.group}</span>`; body.appendChild(gd); }
+      const h3=document.createElement('h3'); h3.className='sub'; h3.id=slug(c.id,s.n);
+      h3.innerHTML=`<span class="sn">${s.n}</span><span>${s.t}</span><a class="anchor" href="#${slug(c.id,s.n)}">§</a>`;
+      body.appendChild(h3);
+      const div=document.createElement('div'); div.className='content'; div.innerHTML=s.html; body.appendChild(div);
+    });
+  });
+
+  // ---- scroll spy ----
+  const navLinks=[...document.querySelectorAll('.nav-sub')];
+  const linkById={}; navLinks.forEach(a=>linkById[a.dataset.target]=a);
+  const heads=[...document.querySelectorAll('h3.sub')];
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        navLinks.forEach(a=>a.classList.remove('active'));
+        const a=linkById[e.target.id]; if(a){ a.classList.add('active');
+          const wrap=a.closest('.nav-ch'); if(wrap&&wrap.dataset.open==='false') wrap.dataset.open='true';
+          a.scrollIntoView({block:'nearest'});
+        }
+      }
+    });
+  },{rootMargin:'-78px 0px -70% 0px'});
+  heads.forEach(h=>obs.observe(h));
+
+  // ---- search filter ----
+  const search=document.getElementById('search');
+  search.addEventListener('input',()=>{
+    const q=search.value.trim().toLowerCase();
+    document.querySelectorAll('.nav-ch').forEach(wrap=>{
+      let vis=0;
+      wrap.querySelectorAll('.nav-sub').forEach(a=>{
+        const m=!q||a.dataset.search.includes(q);
+        a.style.display=m?'':'none'; if(m)vis++;
+      });
+      wrap.style.display=vis>0?'':'none';
+      if(q) wrap.dataset.open='true';
+    });
+  });
+
+  // ---- toc toggle ----
+  const tocToggle=document.getElementById('tocToggle');
+  tocToggle.addEventListener('click',()=>{
+    const hidden=tl.style.display==='none';
+    tl.style.display=hidden?'':'none';
+    tocToggle.textContent=hidden?'[ascunde]':'[arată]';
+  });
+
+  // ---- mobile menu ----
+  const sidebar=document.getElementById('sidebar');
+  document.getElementById('menuBtn').addEventListener('click',()=>sidebar.classList.toggle('open'));
+  navLinks.forEach(a=>a.addEventListener('click',()=>{ if(window.innerWidth<=1040) sidebar.classList.remove('open'); }));
+
+  // ---- back to top ----
+  const totop=document.getElementById('totop');
+  window.addEventListener('scroll',()=>{ totop.classList.toggle('show', window.scrollY>600); });
+  totop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+</script>
+
+</body>
+</html>
