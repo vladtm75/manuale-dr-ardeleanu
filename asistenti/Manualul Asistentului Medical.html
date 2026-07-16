@@ -959,6 +959,25 @@ html{scroll-behavior:smooth}
   .mh-search{width:150px}
 }
 
+/* ============ MOBILE-LITE (telefon) ============ */
+#mobileNotice{display:none}
+@media(max-width:640px){
+  #mobileNotice{
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--brand-cream); border:1px solid var(--rule); border-left:3px solid var(--brand-amber);
+    border-radius:8px; padding:11px 13px; margin:0 0 18px; font-size:12.5px; line-height:1.5; color:var(--ink-soft);
+  }
+  #mobileNotice strong{color:var(--brand-primary)}
+  #mobileNotice button{flex:none; background:none; border:none; color:var(--ink-mute); font-size:16px; line-height:1; cursor:pointer; padding:0 2px}
+  /* tabele: derulare orizontala in loc de spargere pagina */
+  .article table{display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  /* elemente vizuale grele — ascunse pentru o lectura curata pe telefon */
+  .orgchart, .article figure, .spss{display:none !important}
+  /* aerisire */
+  .layout{padding:20px 16px 90px}
+  .hero h1{font-size:30px}
+}
+
 @media print{
   @page{size:A4;margin:14mm 12mm}
   .topbar,.toc-side,.totop,.readbar,.menu-btn,.mh-search{display:none !important}
@@ -1504,6 +1523,11 @@ html{scroll-behavior:smooth}
 
   <!-- ============ ARTICLE ============ -->
   <article class="article" data-screen-label="article">
+
+    <div id="mobileNotice" role="note">
+      <span>📱 <strong>Vizualizare mobil.</strong> Pentru o lectură curată pe telefon, unele elemente vizuale (organigrame, machete de interfață, diagrame și fotografii) sunt ascunse. Deschide manualul pe desktop pentru versiunea completă.</span>
+      <button type="button" aria-label="Închide" onclick="try{sessionStorage.setItem('adcMobileNoticeDismissed','1')}catch(e){} this.parentNode.style.display='none'">✕</button>
+    </div>
 
     <div class="hatnote">
       <strong>Notă:</strong> Acest manual este documentul oficial intern al rețelei <em>Clinicile Dr. Ardeleanu</em>, valabil pentru toți asistenții medicali generaliști aflați în relație de muncă cu organizația. Pentru ediția anterioară, vezi <span class="codetag">ADC-ASM-02</span> (2025).
@@ -6113,6 +6137,9 @@ html{scroll-behavior:smooth}
       search.value=''; search.dispatchEvent(new Event('input')); search.blur();
     }
   });
+
+  // ---- mobile notice: keep dismissed within session ----
+  try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ var mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
 })();
 </script>
 </body>

@@ -321,6 +321,26 @@
   .mh-search input:focus ~ kbd{ display:none; }
   @media(max-width:840px){ .mh-search kbd{ display:none; } }
 
+  /* ============ MOBILE-LITE (telefon) ============ */
+  #mobileNotice{ display:none; }
+  @media(max-width:640px){
+    /* notice */
+    #mobileNotice{
+      display:flex; align-items:flex-start; gap:10px;
+      background:var(--cream); border:1px solid var(--line-2); border-left:3px solid var(--amber);
+      border-radius:8px; padding:11px 13px; margin:0 0 18px; font-size:12.5px; line-height:1.5; color:var(--ink-soft,#4a4541);
+    }
+    #mobileNotice strong{ color:var(--primary); }
+    #mobileNotice button{ flex:none; background:none; border:none; color:var(--faint); font-size:16px; line-height:1; cursor:pointer; padding:0 2px; }
+    /* tabele: derulare orizontala in loc de spargere pagina */
+    .content table{ display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    /* elemente vizuale grele — ascunse pentru o lectura curata pe telefon */
+    .orgchart, .spss, .content figure, .safari{ display:none !important; }
+    /* aerisire */
+    .main{ padding:20px 16px 90px; }
+    .article h1.art-title{ font-size:34px; }
+  }
+
   /* print */
   @media print{
     @page{ size:A4; margin:14mm 12mm; }
@@ -368,6 +388,10 @@
 
     <main class="main">
       <article class="article">
+        <div id="mobileNotice" role="note">
+          <span>📱 <strong>Vizualizare mobil.</strong> Pentru o lectură curată pe telefon, unele elemente vizuale (organigrame, machete de interfață, diagrame și fotografii) sunt ascunse. Deschide manualul pe desktop pentru versiunea completă.</span>
+          <button type="button" aria-label="Închide" onclick="try{sessionStorage.setItem('adcMobileNoticeDismissed','1')}catch(e){} this.parentNode.style.display='none'">✕</button>
+        </div>
         <p class="hatnote">Document intern confidențial · uz exclusiv pentru echipa medicală Dr. Ardeleanu. Acesta nu este un document de bifat — este harta după care lucrăm cu toții.</p>
         <p class="art-kicker">Document cadru · Operațional medical</p>
         <h1 class="art-title">Manualul Activităților Medicului —<span class="t2">Ghidul Medicului</span></h1>
@@ -517,6 +541,9 @@
       search.value=''; search.dispatchEvent(new Event('input')); search.blur();
     }
   });
+
+  // ---- mobile notice: keep dismissed within session ----
+  try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ const mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
 })();
 </script>
 
