@@ -157,16 +157,6 @@
   .lead p{ font-size:15.5px; }
   .lead p:first-child{ }
 
-  /* boxed cuprins (classic wiki TOC) */
-  .toc-box{ display:inline-block; min-width:300px; max-width:100%; background:#fbf9f5; border:1px solid var(--line-2); border-radius:8px; padding:14px 20px 16px; margin:22px 0; }
-  .toc-box .toc-h{ display:flex; align-items:center; gap:10px; font-weight:600; color:var(--primary); margin-bottom:8px; }
-  .toc-box .toc-h button{ font-family:inherit; font-size:12px; color:var(--muted); background:none; border:1px solid var(--line-2); border-radius:5px; padding:2px 8px; cursor:pointer; }
-  .toc-list{ list-style:none; margin:0; padding:0; columns:2; column-gap:36px; }
-  .toc-list .toc-c{ font-weight:600; color:var(--primary); margin-top:8px; break-inside:avoid; }
-  .toc-list .toc-c:first-child{ margin-top:0; }
-  .toc-list .toc-s{ padding-left:18px; color:var(--ink); break-inside:avoid; display:flex; gap:8px; font-size:13px; }
-  .toc-list .toc-s .tn{ color:var(--faint); font-variant-numeric:tabular-nums; }
-  @media(max-width:760px){ .toc-list{ columns:1; } }
 
   /* sections */
   h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:30px; color:var(--primary); margin:46px 0 4px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; display:flex; align-items:baseline; gap:12px; }
@@ -249,7 +239,6 @@
 
   /* group dividers */
   .nav-group{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:12px 0 4px 30px; }
-  .toc-g{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); font-weight:700; padding-left:18px; margin-top:6px; break-inside:avoid; }
   .group-divider{ margin:38px 0 2px; display:flex; align-items:center; gap:14px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--primary); font-weight:700; }
   .group-divider::after{ content:""; flex:1; height:1px; background:var(--wheat); }
 
@@ -329,7 +318,7 @@
   /* print */
   @media print{
     @page{ size:A4; margin:14mm 12mm; }
-    .masthead, .sidebar, .totop, .menu-btn, .mh-search, .readbar, .back-home, .toc-box .toc-h button{ display:none !important; }
+    .masthead, .sidebar, .totop, .menu-btn, .mh-search, .readbar, .back-home{ display:none !important; }
     .shell{ grid-template-columns:1fr; max-width:none; display:block; }
     .main{ padding:0; }
     body{ background:#fff; font-size:10.5pt; }
@@ -392,11 +381,6 @@
           <p>Manualul este împărțit în trei capitole mari: <a href="#cap-op"><b>Operațional</b></a> — cum e organizată rețeaua și cum parcurge pacientul drumul prin clinică; <a href="#cap-comp"><b>Comportamental</b></a> — cum transformă medicul diagnosticul în înțelegere și decizie; și <a href="#cap-med"><b>Partea medicală</b></a> — protocoalele clinice pe specialități, urgențele și formarea continuă.</p>
         </div>
 
-        <div class="toc-box">
-          <div class="toc-h"><span>Cuprins</span><button id="tocToggle">[ascunde]</button></div>
-          <ol class="toc-list" id="tocList"></ol>
-        </div>
-
         <div id="body"></div>
 
         <footer class="foot">
@@ -447,21 +431,6 @@
     wrap.querySelector('.nav-ch-head').addEventListener('click',()=>{ wrap.dataset.open = wrap.dataset.open==='true'?'false':'true'; });
   });
 
-  // ---- boxed cuprins ----
-  const tl=document.getElementById('tocList');
-  M.chapters.forEach(c=>{
-    const li=document.createElement('li'); li.className='toc-c';
-    li.innerHTML=`<a href="#${chAnchors[c.id]}">${c.num}. ${c.title}</a>`;
-    tl.appendChild(li);
-    c.subs.forEach((s,si)=>{
-      const prev=si>0?c.subs[si-1].group:null;
-      if(s.group&&s.group!==prev){ const gli=document.createElement('li'); gli.className='toc-g'; gli.textContent=s.group; tl.appendChild(gli); }
-      const sub=document.createElement('li'); sub.className='toc-s';
-      sub.innerHTML=`<span class="tn">${s.n}</span><a href="#${slug(c.id,s.n)}">${s.t}</a>`;
-      tl.appendChild(sub);
-    });
-  });
-
   // ---- body ----
   const body=document.getElementById('body');
   M.chapters.forEach(c=>{
@@ -510,14 +479,6 @@
       wrap.style.display=vis>0?'':'none';
       if(q) wrap.dataset.open='true';
     });
-  });
-
-  // ---- toc toggle ----
-  const tocToggle=document.getElementById('tocToggle');
-  tocToggle.addEventListener('click',()=>{
-    const hidden=tl.style.display==='none';
-    tl.style.display=hidden?'':'none';
-    tocToggle.textContent=hidden?'[ascunde]':'[arată]';
   });
 
   // ---- mobile menu ----
