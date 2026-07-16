@@ -137,7 +137,7 @@ a:hover{border-bottom-color:var(--brand-primary)}
   gap:46px;
   align-items:start;
 }
-@media(max-width:980px){.layout{grid-template-columns:1fr;gap:18px}}
+@media(max-width:980px){.layout{grid-template-columns:minmax(0,1fr);gap:18px}}
 
 /* TOC sidebar */
 .toc-side{
@@ -969,6 +969,10 @@ html{scroll-behavior:smooth}
   .topbar-inner .spacer{display:none}
   .topbar-inner .pill{display:none}
   .mh-search{flex:1 1 auto; width:auto; min-width:0; max-width:none}
+  .mh-search input{min-width:0}
+  /* plasa de siguranta pe telefoane inguste */
+  .article{overflow-wrap:break-word}
+  .csn-grid,.proto-grid,.spec-toc{grid-template-columns:1fr !important}
   #mobileNotice{
     display:flex; align-items:flex-start; gap:10px;
     background:var(--brand-cream); border:1px solid var(--rule); border-left:3px solid var(--brand-amber);
