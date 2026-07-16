@@ -440,6 +440,9 @@ a:hover{border-bottom-color:var(--brand-primary)}
 }
 .article table tr:nth-child(even) td{background:var(--brand-cream-warm)}
 .article table .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--brand-primary);font-weight:500}
+.article table.checktable td:first-child{font-style:italic}
+.article table.checktable th:nth-child(2),.article table.checktable th:nth-child(3){text-align:center;width:92px}
+.article table.checktable td.lab{text-align:center;font-weight:700;color:var(--brand-primary);font-size:15px}
 
 /* Stat strip */
 .stats{
@@ -2138,19 +2141,46 @@ html{scroll-behavior:smooth}
     </figure>
 
     <h4>4.6 Consimțăminte specifice după caz</h4>
-    <p>În funcție de procedură, pacientul poate semna consimțăminte specifice: tratamente chirurgicale, sedare conștientă, ortodonție, endodonție, parodontologie, protetică, toxină botulinică, acid hialuronic, mezoterapie cu PRF, fotografii, scanare facială, scanare intraorală, materiale video.</p>
+    <p>Pe lângă consimțământul informat de bază (semnat digital la fiecare manoperă), anumite proceduri necesită <strong>consimțăminte speciale</strong>, semnate cu medicul în cabinet. Fiecare document are un mod de semnare: <strong>olograf</strong> (pe hârtie) și/sau <strong>digital</strong> (pe tabletă). <strong>Nu toate</strong> consimțămintele speciale se mai semnează olograf — majoritatea se semnează exclusiv digital, iar doar procedurile cu risc clinic sau juridic suplimentar necesită și o copie olografă, arhivată fizic.</p>
+    <table class="checktable">
+      <thead><tr><th>Consimțământ special</th><th>Olograf</th><th>Digital</th></tr></thead>
+      <tbody>
+        <tr><td>Consimțământ informat privind realizarea tratamentelor chirurgicale</td><td class="lab">✓</td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat al pacientului pentru intervenții chirurgicale excepționale</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat privind procedura de sedare conștientă pentru intervențiile stomatologice și de chirurgie orală</td><td class="lab">✓</td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat privind realizarea tratamentelor ortodontice</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ medical — refuz extracții dentare în scop ortodontic</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat pentru tratamente și proceduri parodontale</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat pentru tratamente stomatologice cu toxină botulinică</td><td class="lab">✓</td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat pentru tratamente stomatologice cu acid hialuronic</td><td class="lab">✓</td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat privind realizarea de proceduri și tratamente de mezoterapie cu PRF</td><td class="lab">✓</td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat privind realizarea tratamentelor protetice</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat pentru tratament și proceduri endodontice</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat privind realizarea de proceduri medicale post-endodonție</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ medical — refuz grefă gingivală</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat referitor la sedarea prin protoxid de azot</td><td class="lab">✓</td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat privind realizarea de tratamente protetice</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ informat privind tratamentul protetic prin proteze dentare</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Acord informat pacient — disjuncție maxilară pe mini-implanturi</td><td></td><td class="lab">✓</td></tr>
+        <tr><td>Consimțământ de fotografie clinică</td><td></td><td class="lab">✓</td></tr>
+      </tbody>
+    </table>
+    <div class="callout note">
+      <div class="label">Notă — pacienți minori</div>
+      În cazul pacienților minori cu tratamente pentru dinții de lapte, <strong>NU</strong> se oferă și nu se semnează consimțământ suplimentar olograf. Consimțămintele suplimentare olografe la copii se semnează exclusiv când pacienții ajung la medicii cu specializări (endodonție, ortodonție, chirurgie mică).
+    </div>
 
-    <h4 id="cap-2-arhiva">4.7 Arhiva consimțămintelor speciale — semnate olograf</h4>
-    <p>Pentru anumite proceduri cu risc clinic sau juridic suplimentar, semnarea digitală a acordului informat <strong>nu este suficientă</strong>. În aceste cazuri, pacientul semnează un <em>consimțământ special olograf</em>, care se păstrează în arhiva fizică a clinicii. Este obligația comună a <strong>medicului</strong>, <strong>asistenței medicale</strong> și a <strong>registratorului medical</strong> să se asigure că semnarea olografă se realizează ori de câte ori se ajunge la una dintre aceste situații speciale. Aceste documente reprezintă un strat suplimentar de protecție medico-legală pentru clinică, atât în litigii de tip malpraxis, cât și în reclamații ANPC.</p>
+    <h4 id="cap-2-arhiva">4.7 Formularele oficiale de consimțământ</h4>
+    <p>Mai jos sunt formularele oficiale pentru toate consimțămintele speciale — poți descărca fiecare document direct de pe card. <strong>Modul de semnare</strong> (olograf și/sau digital) este cel din tabelul de la secțiunea 4.6: majoritatea se semnează exclusiv digital, iar doar procedurile cu risc clinic sau juridic suplimentar (chirurgie, sedare conștientă, protoxid de azot, toxină botulinică, acid hialuronic, mezoterapie cu PRF) necesită în plus o <em>copie olografă</em> păstrată în arhiva fizică a clinicii. Este obligația comună a <strong>medicului</strong>, <strong>asistenței medicale</strong> și a <strong>registratorului medical</strong> să se asigure că semnarea se realizează în modul corect ori de câte ori se ajunge la una dintre aceste situații speciale. Documentele olografe reprezintă un strat suplimentar de protecție medico-legală pentru clinică, atât în litigii de tip malpraxis, cât și în reclamații ANPC.</p>
 
     <div class="consents">
       <div class="csn-head">
         <div>
-          <div class="csn-eyebrow">Arhivă · Procedura de Onboarding</div>
-          <h4>Consimțăminte speciale semnate olograf</h4>
+          <div class="csn-eyebrow">Bibliotecă · Procedura de Onboarding</div>
+          <h4>Formulare oficiale de consimțământ</h4>
         </div>
         <div class="csn-sub">
-          <span class="badge">17 documente</span>
+          <span class="badge">17 formulare</span>
           <span>Click pe orice card pentru a descărca formularul oficial</span>
         </div>
       </div>
@@ -2269,7 +2299,7 @@ html{scroll-behavior:smooth}
       </div>
 
       <div class="csn-foot">
-        <strong>⚠ Protecție medico-legală.</strong> Toate aceste documente se semnează olograf și se arhivează în Biblioraftul de Consimțăminte al clinicii. Sunt verificate periodic în controlul intern de calitate.
+        <strong>⚠ Protecție medico-legală.</strong> Documentele marcate ca <strong>olograf</strong> în tabelul de la 4.6 se semnează pe hârtie și se arhivează în Biblioraftul de Consimțăminte al clinicii; restul se semnează digital. Toate sunt verificate periodic în controlul intern de calitate.
       </div>
     </div>
 
