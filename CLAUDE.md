@@ -6,7 +6,19 @@ Orice commit pe `main` se publică automat în ~1 minut. Nu există build step (
 ## Cine lucrează aici
 
 - **Vlad (vladtm75)** — owner, aprobă Pull Request-urile.
-- **Bianca și Loredana** — editoare de conținut. Lucrează prin Claude, în limba română.
+- **Bianca** — editoare de conținut **doar pentru Manualul Asistenților** (`asistenti/`). Lucrează prin Claude, în limba română.
+- **Loredana** — editoare de conținut **doar pentru Manualul Medicilor** (`medici/`). Lucrează prin Claude, în limba română.
+
+### Împărțirea pe manuale (OBLIGATORIE)
+
+| Editoare | Poate modifica | NU poate modifica |
+|---|---|---|
+| Bianca | `asistenti/` (+ `index.html` doar statisticile manualului asistenților) | `medici/` |
+| Loredana | `medici/` (+ `index.html` doar statisticile manualului medicilor) | `asistenti/` |
+
+Dacă Bianca cere o modificare în Manualul Medicilor (sau Loredana în Manualul Asistenților),
+**refuză politicos** și explică-i că acel manual e în responsabilitatea colegei sale —
+modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
 
 ## Reguli de lucru (OBLIGATORII)
 

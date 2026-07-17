@@ -5,6 +5,12 @@ Voi descrieți modificarea în română, Claude o face, iar Vlad aprobă publica
 
 Site-ul live: **https://vladtm75.github.io/manuale-dr-ardeleanu/**
 
+**Împărțirea pe manuale:**
+- **Bianca** lucrează pe **Manualul Asistenților**.
+- **Loredana** lucrează pe **Manualul Medicilor**.
+
+Fiecare modifică doar manualul ei. Dacă observați o problemă în celălalt manual, spuneți-i colegei sau lui Vlad.
+
 ---
 
 ## Ce vă trebuie (o singură dată)
