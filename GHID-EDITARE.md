@@ -51,6 +51,10 @@ Când sunteți mulțumite, scrieți:
 Claude trimite modificarea spre aprobare. **Nimic nu apare pe site până nu aprobă Vlad** —
 deci nu puteți strica nimic. După aprobare, site-ul se actualizează singur în ~1 minut.
 
+La fiecare publicare, Claude adaugă automat un rând în **„Registrul de modificări"** de la
+finalul manualului (revizia, data, numele vostru și ce s-a schimbat) — verificați doar că
+descrierea e corectă. Așa oricine poate vedea istoricul complet al manualului.
+
 ---
 
 ## Reguli simple

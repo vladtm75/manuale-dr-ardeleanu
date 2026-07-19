@@ -45,6 +45,15 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
    (aceleași clase: `callout`, `note`, tabele etc. — copiază modelul unui element vecin).
 5. După orice modificare de structură (capitol/subcapitol adăugat sau șters), actualizează **toate** locurile
    afectate (vezi „Versiuni și statistici" mai jos): cuprinsul/navigarea din manual, contoarele de pe homepage.
+6. **Registrul de modificări (OBLIGATORIU la orice PR de conținut).** Fiecare manual are o secțiune
+   `id="registru"` cu un tabel al reviziilor. În același PR cu modificarea de conținut:
+   adaugă un rând NOU **în capul tabelului** (numărul de revizie următor, data de azi, numele
+   editoarei, descriere scurtă în română a modificării) și actualizează „Revizia curentă: rev. N · data"
+   din paragraful de deasupra tabelului. Locația secțiunii:
+   - Asistenți: în `asistenti/Manualul Asistentului Medical.html`, înainte de `</article>`.
+   - Medici: în `medici/Manualul Medicului.html` (secțiunea statică de după `<div id="body">`) —
+     este **singura zonă de conținut care se editează direct în shell**, nu în `manual-data.js`.
+   Numerotarea reviziilor e per-manual și crește mereu cu 1; nu se rescriu rândurile vechi.
 
 ## Structura repo-ului
 
