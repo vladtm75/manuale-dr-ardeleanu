@@ -125,10 +125,36 @@
   .strip .dot{ width:4px; height:4px; border-radius:50%; background:var(--line-2); }
 
   .foot{
-    margin-top:auto; border-top:2px solid var(--primary); background:#fff;
-    padding:20px 28px 24px; text-align:center; color:var(--muted); font-size:12.5px;
+    margin-top:auto; background:linear-gradient(170deg,var(--primary) 0%,var(--primary-deep) 100%);
+    color:#fff; padding:46px 0 34px;
   }
-  .foot .din{ font-family:"Playfair Display",serif; font-weight:700; color:var(--primary); font-size:15px; display:block; margin-bottom:6px; }
+  .foot-inner{
+    max-width:1080px; margin:0 auto; padding:0 28px;
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px;
+    font-size:13px; line-height:1.6;
+  }
+  @media(min-width:1140px){ .foot-inner{ max-width:1400px; } }
+  @media(max-width:780px){ .foot-inner{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:480px){ .foot-inner{ grid-template-columns:1fr; gap:24px; } }
+  .foot h5{
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--yellow); font-weight:600; margin:0 0 12px;
+  }
+  .foot .tagline{
+    font-family:"Playfair Display",serif; font-style:italic;
+    font-size:22px; line-height:1.3; margin:6px 0 14px; color:#fff;
+  }
+  .foot p{ margin:0 0 7px; color:rgba(255,255,255,.86); }
+  .foot a{ color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.3); transition:color .15s, border-color .15s; }
+  .foot a:hover{ color:var(--yellow); border-bottom-color:var(--yellow); }
+  .foot .mcode{ display:inline-block; margin-left:7px; font-size:10px; letter-spacing:.1em; color:rgba(255,255,255,.55); }
+  .din-strip{
+    margin-top:34px; padding:18px 20px 0; border-top:1px solid rgba(255,255,255,.18);
+    font-size:11px; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--yellow); font-weight:600; text-align:center;
+  }
+  .din-strip span{ margin:0 18px; white-space:nowrap; }
+  @media(max-width:560px){ .din-strip{ letter-spacing:.2em; } .din-strip span{ margin:0 8px; } }
 
   /* ===== password gate ===== */
   #gate{
@@ -285,8 +311,35 @@
   </div>
 
   <footer class="foot">
-    <span class="din">Din 2017</span>
-    <span>Clinicile Dr. Ardeleanu — Manuale interne · clinicileardeleanu.ro · 031 99 63</span>
+    <div class="foot-inner">
+      <div>
+        <h5>Clinicile Dr. Ardeleanu</h5>
+        <div class="tagline">"Excelența accesibilă.<br>Clinica familiei tale."</div>
+        <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
+      </div>
+      <div>
+        <h5>Manuale interne</h5>
+        <p><a href="medici/Manualul%20Medicului.html">Manualul Medicului</a><span class="mcode">MED-01</span></p>
+        <p><a href="asistenti/Manualul%20Asistentului%20Medical.html">Manualul Asistentului</a><span class="mcode">ASM-03</span></p>
+        <p><a href="registratori/Manualul%20Registratorului%20Medical.html">Manualul Registratorului</a><span class="mcode">REC-01</span></p>
+      </div>
+      <div>
+        <h5>Acces</h5>
+        <p>Documente interne confidențiale</p>
+        <p>Acces pe bază de parolă</p>
+        <p>Fiecare manual se poate partaja separat, din butonul „Partajează"</p>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
+        <p>031 99 63</p>
+        <p><a href="mailto:clinici@ardeleanu.ro">clinici@ardeleanu.ro</a></p>
+        <p>ERP intern: erp.clinicile-ardeleanu.ro</p>
+      </div>
+    </div>
+    <div class="din-strip">
+      <span>Din 2017</span>·<span>Excelență</span>·<span>Accesibilitate</span>·<span>Familie</span>
+    </div>
   </footer>
 
   <script>
