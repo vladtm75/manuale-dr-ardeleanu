@@ -302,6 +302,7 @@
     .menu-btn{ display:inline-block; }
     .main{ padding:24px 22px 100px; }
     .infobox{ float:none; width:100%; margin:14px 0 20px; }
+    body.menu-open{ overflow:hidden; }
   }
 
   /* floated figure (text wraps around) */
@@ -328,6 +329,7 @@
     /* header compact: doar meniu + back + logo — fara cautare, prea complicata pe telefon */
     .masthead{ padding:0 14px; gap:12px; }
     .masthead .logo{ height:26px; }
+    .masthead .brand-home{ margin-left:auto; }
     .masthead .mh-sep{ display:none; }
     .mh-crumb{ display:none; }
     .masthead .spacer{ display:none; }
@@ -371,7 +373,7 @@
   <header class="masthead">
     <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
     <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
-    <a href="../index.html" title="Înapoi la Manuale Interne"><img class="logo" src="assets/letterhead_logo.png" alt="Dr. Ardeleanu Dental Clinics" /></a>
+    <a href="../index.html" title="Înapoi la Manuale Interne" class="brand-home"><img class="logo" src="assets/letterhead_logo.png" alt="Dr. Ardeleanu Dental Clinics" /></a>
     <div class="mh-sep"></div>
     <nav class="mh-crumb" aria-label="Locație document">
       <a class="cr-home" href="../index.html">Manuale interne</a>
@@ -523,8 +525,13 @@
 
   // ---- mobile menu ----
   const sidebar=document.getElementById('sidebar');
-  document.getElementById('menuBtn').addEventListener('click',()=>sidebar.classList.toggle('open'));
-  navLinks.forEach(a=>a.addEventListener('click',()=>{ if(window.innerWidth<=1040) sidebar.classList.remove('open'); }));
+  document.getElementById('menuBtn').addEventListener('click',()=>{
+    sidebar.classList.toggle('open');
+    document.body.classList.toggle('menu-open', sidebar.classList.contains('open'));
+  });
+  navLinks.forEach(a=>a.addEventListener('click',()=>{
+    if(window.innerWidth<=1040){ sidebar.classList.remove('open'); document.body.classList.remove('menu-open'); }
+  }));
 
   // ---- back to top ----
   const totop=document.getElementById('totop');

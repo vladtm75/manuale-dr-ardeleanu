@@ -972,6 +972,7 @@ html{scroll-behavior:smooth}
     padding:20px 18px 40px;transform:translateX(-105%);transition:transform .25s;
   }
   .toc-side.open{transform:none}
+  body.menu-open{overflow:hidden}
 }
 @media(max-width:840px){
   .crumbs span{display:none}
@@ -989,6 +990,7 @@ html{scroll-behavior:smooth}
   /* header compact: doar meniu + back + logo — fara cautare, prea complicata pe telefon */
   .topbar-inner{padding:10px 14px; gap:12px}
   .topbar img.logo{height:26px}
+  .topbar-inner .brand-home{margin-left:auto}
   .topbar-inner .crumbs{display:none}
   .topbar-inner .spacer{display:none}
   .topbar-inner .pill{display:none}
@@ -1030,7 +1032,7 @@ html{scroll-behavior:smooth}
   <div class="topbar-inner">
     <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
     <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
-    <a href="../index.html" style="border-bottom:none" title="Înapoi la Manuale Interne"><img src="assets/logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
+    <a href="../index.html" style="border-bottom:none" title="Înapoi la Manuale Interne" class="brand-home"><img src="assets/logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
     <div class="crumbs">
       <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
       <span>›</span>
@@ -6168,9 +6170,14 @@ html{scroll-behavior:smooth}
   var sidebar=document.querySelector('.toc-side');
   var menuBtn=document.getElementById('menuBtn');
   if(menuBtn&&sidebar){
-    menuBtn.addEventListener('click',function(){ sidebar.classList.toggle('open'); });
+    menuBtn.addEventListener('click',function(){
+      sidebar.classList.toggle('open');
+      document.body.classList.toggle('menu-open', sidebar.classList.contains('open'));
+    });
     sidebar.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click',function(){ if(window.innerWidth<=980) sidebar.classList.remove('open'); });
+      a.addEventListener('click',function(){
+        if(window.innerWidth<=980){ sidebar.classList.remove('open'); document.body.classList.remove('menu-open'); }
+      });
     });
   }
 
