@@ -180,8 +180,8 @@ a:hover{border-bottom-color:var(--brand-primary)}
 .toc-side a{
   color:var(--ink-soft);border-bottom:none;
   display:flex;gap:8px;align-items:baseline;
-  padding:3px 8px;border-radius:4px;
-  transition:background .12s,color .12s;
+  padding:3px 8px;border-radius:6px;border-left:2px solid transparent;
+  transition:background .12s,color .12s,border-color .12s;
 }
 .toc-side a:hover{background:var(--brand-cream);color:var(--brand-primary)}
 .toc-side .num{
@@ -189,7 +189,7 @@ a:hover{border-bottom-color:var(--brand-primary)}
   font-size:11px;color:var(--ink-mute);font-weight:500;
   min-width:24px;flex-shrink:0;
 }
-.toc-side a.active{background:var(--brand-cream);color:var(--brand-primary);font-weight:500}
+.toc-side a.active{background:var(--brand-cream);color:var(--brand-primary);font-weight:600;border-left-color:var(--brand-primary)}
 
 /* Collapsible parent row */
 .toc-side .row-with-sub{
