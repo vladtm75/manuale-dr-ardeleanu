@@ -298,6 +298,10 @@
   @media(max-width:1040px){
     .shell{ grid-template-columns:minmax(0,1fr); }
     .sidebar{
+      /* align-self:start (moștenit de la varianta desktop) face ca sertarul fixed
+         să se dimensioneze după conținut, nu între top/bottom — și atunci nu mai
+         are ce derula intern. stretch îl întinde pe înălțimea ecranului. */
+      align-self:stretch;
       position:fixed; left:0; top:64px; bottom:0; height:auto; width:300px; background:var(--surface);
       z-index:55; box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
       transform:translateX(-105%) translateZ(0); transition:transform .25s;
