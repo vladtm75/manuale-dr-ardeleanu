@@ -1,7 +1,33 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<script>try{if(sessionStorage.getItem('adcManualeAuth')!=='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b'){location.replace('../index.html');}}catch(e){location.replace('../index.html');}</script>
+<script>
+/* Gate: acces cu parola generală (sessionStorage, ca înainte) SAU cu cheia proprie
+   a manualului — memorată în localStorage sau primită printr-un link #k=... */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='9e7fe4f0c1d2a28833f9c099909f5fa184b20ff58ecfa318da072e80e92bf9c0';
+  var LK='adcAuthMedici';
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Manualul Medicului — Clinicile Dr. Ardeleanu</title>
@@ -75,6 +101,8 @@
   .mh-search input:focus{ outline:none; border-color:var(--primary); }
   .mh-search svg{ position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--faint); }
   .mh-ver{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#fff; background:var(--primary); padding:5px 10px; border-radius:999px; white-space:nowrap; }
+  .mh-share{ display:inline-flex; align-items:center; gap:7px; background:none; border:1.5px solid var(--line-2); border-radius:999px; padding:6px 13px; font-family:inherit; font-weight:600; font-size:12px; color:var(--primary); cursor:pointer; white-space:nowrap; transition:background .15s, border-color .15s; }
+  .mh-share:hover{ background:var(--cream); border-color:var(--primary); }
 
   /* ============ LAYOUT ============ */
   .shell{ display:grid; grid-template-columns:var(--sidebar-w) minmax(0,1fr); align-items:start; max-width:1400px; margin:0 auto; }
@@ -397,6 +425,7 @@
       <kbd>/</kbd>
     </div>
     <div class="mh-pills">
+      <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest manual"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
       <span class="mh-code">ADC-MED-01</span>
       <span class="mh-ver">V1.0 · 2026</span>
     </div>
@@ -588,6 +617,18 @@
 
   // ---- mobile notice: keep dismissed within session ----
   try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ const mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
+
+  // ---- partajare manual: butonul apare doar pentru accesul cu parola generală ----
+  const shareBtn=document.getElementById('shareBtn');
+  if(shareBtn){
+    try{ if(sessionStorage.getItem('adcManualeAuth')==='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b') shareBtn.hidden=false; }catch(e){}
+    shareBtn.addEventListener('click',()=>{
+      const link=location.origin+location.pathname+'#k='+encodeURIComponent('medic-d8df9b');
+      const done=()=>{ const t=shareBtn.innerHTML; shareBtn.innerHTML='✓ Link copiat'; setTimeout(()=>{ shareBtn.innerHTML=t; },2200); };
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,()=>window.prompt('Copiază linkul:',link));
+      else window.prompt('Copiază linkul:',link);
+    });
+  }
 })();
 </script>
 
