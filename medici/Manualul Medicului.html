@@ -325,6 +325,11 @@
   .totop.show{ opacity:1; pointer-events:auto; }
 
   /* footer */
+  /* registru de modificări (secțiune statică, după conținutul randat) */
+  .registru{ margin-top:64px; border-top:2px solid var(--line-2); padding-top:30px; }
+  .registru h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:26px; color:var(--primary); margin:0 0 8px; }
+  .side-registru{ display:block; margin-top:14px; border-top:1px solid var(--line); padding-top:12px; font-weight:600; }
+
   .foot{ border-top:2px solid var(--primary); margin-top:40px; padding:26px 0 10px; color:var(--muted); font-size:12.5px; }
   .foot .din{ font-family:"Playfair Display",serif; font-weight:700; color:var(--primary); font-size:15px; }
   .foot .row{ display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; align-items:center; }
@@ -445,6 +450,7 @@
     <nav class="sidebar" id="sidebar">
       <p class="side-title">Cuprins</p>
       <div id="nav"></div>
+      <a class="nav-sub side-registru" href="#registru">Registru de modificări</a>
     </nav>
 
     <main class="main">
@@ -473,6 +479,23 @@
         </div>
 
         <div id="body"></div>
+
+        <!-- ============ Registru de modificări ============ -->
+        <!-- EXCEPȚIE: singura zonă de CONȚINUT editabilă direct în acest fișier (restul
+             conținutului stă în manual-data.js). La fiecare PR de conținut: adaugă un rând
+             NOU în capul tabelului și actualizează „Revizia curentă" de mai jos. -->
+        <section class="content registru" id="registru">
+          <h2>Registru de modificări</h2>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 1</strong> · 1 martie 2026.</p>
+          <table>
+            <thead>
+              <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>1 martie 2026</td><td>Loredana Manoiu</td><td>Prima versiune integrată V1.0 (aprobare conducere) — punctul de pornire al acestui registru.</td></tr>
+            </tbody>
+          </table>
+        </section>
 
         <footer class="foot">
           <span class="din">Din 2017</span>
