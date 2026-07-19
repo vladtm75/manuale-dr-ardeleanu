@@ -1,0 +1,2169 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<script>
+/* Gate: acces cu parola generală (sessionStorage, ca înainte) SAU cu cheia proprie
+   a manualului — memorată în localStorage sau primită printr-un link #k=... */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='6e2e076f6360f81d03cf0d0f78e2cd51484a4628f5140030867cf0476012360e';
+  var LK='adcAuthRegistratori';
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manualul Registratorului Medical — Clinicile Dr. Ardeleanu (Ediția V4.1, Mai 2025)</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Manualul Registratorului Medical — Clinicile Dr. Ardeleanu" />
+<meta property="og:description" content="Ghidul Registratorului Medical — recepția, vânzări, onboarding digital și activitatea operațional-financiară. Document intern." />
+<meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/registratori/Manualul%20Registratorului%20Medical.html" />
+<meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/registratori/assets/og-registratori.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta property="og:locale" content="ro_RO" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/registratori/assets/og-registratori.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-primary:#7B1C16;
+  --brand-primary-deep:#5d140f;
+  --brand-primary-soft:#a14841;
+  --brand-wheat:#F2DAB7;
+  --brand-cream:#F5EDE3;
+  --brand-cream-warm:#FBF6EE;
+  --brand-olive:#B5BD5C;
+  --brand-amber:#C9A227;
+  --brand-yellow:#FBE483;
+  --brand-terracotta:#dd7e6b;
+  --brand-alert:#FF0300;
+  --ink:#222222;
+  --ink-soft:#4a4541;
+  --ink-mute:#7a736d;
+  --rule:#e6dccd;
+  --rule-soft:#efe7d7;
+  --paper:#fbf7f1;
+  --paper-pure:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Poppins',system-ui,sans-serif;
+  font-weight:400;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--brand-primary);text-decoration:none;border-bottom:1px solid rgba(123,28,22,.25)}
+a:hover{border-bottom-color:var(--brand-primary)}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper-pure);
+  border-bottom:1px solid var(--rule);
+  box-shadow:0 1px 0 rgba(123,28,22,.04);
+}
+.topbar-inner{
+  max-width:1380px;margin:0 auto;padding:10px 28px;
+  display:flex;align-items:center;gap:18px;
+}
+.topbar img.logo{height:34px;width:auto;display:block}
+.back-home{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  font-size:12.5px;font-weight:600;color:var(--brand-primary);white-space:nowrap;
+  border:1.5px solid var(--rule);border-radius:999px;padding:6px 15px;
+  transition:background .15s,border-color .15s;border-bottom:1.5px solid var(--rule);
+}
+.back-home:hover{background:var(--brand-cream);border-color:var(--brand-primary);}
+.back-home .bh-arrow{font-size:15px;line-height:1}
+@media(max-width:840px){ .back-home .bh-txt{display:none} .back-home{padding:6px 11px} }
+.topbar .crumbs{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:12px;letter-spacing:.04em;color:var(--ink-mute);
+  border-left:1px solid var(--rule);padding-left:14px;
+}
+.topbar .crumbs strong{color:var(--brand-primary);font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+.topbar .spacer{flex:1}
+.topbar .pill{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;
+  background:var(--brand-cream);color:var(--brand-primary);
+  font-weight:600;border:1px solid var(--brand-wheat);
+}
+.topbar .pill.dark{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.topbar .mh-share{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 13px;
+  font-family:inherit;font-weight:600;font-size:12px;color:var(--brand-primary);
+  cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
+}
+.topbar .mh-share:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
+.topbar .actions{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-mute)}
+.topbar .actions span{padding:0 8px}
+
+/* ============ HERO / TITLE ============ */
+.hero{
+  background:linear-gradient(180deg,var(--paper-pure) 0%, var(--paper) 100%);
+  border-bottom:1px solid var(--rule);
+  padding:42px 0 28px;
+}
+.hero-inner{max-width:1380px;margin:0 auto;padding:0 28px}
+.hero .kicker{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero .kicker:before{content:"";display:inline-block;width:28px;height:1px;background:var(--brand-amber)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  color:var(--ink);
+  font-size:clamp(38px,5.6vw,58px);line-height:1.04;
+  margin:0 0 14px;letter-spacing:-.01em;
+  max-width:980px;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:italic;color:var(--brand-primary);font-weight:500}
+.hero .subtitle{
+  font-size:19px;color:var(--ink-soft);font-weight:300;
+  max-width:780px;margin:0 0 26px;line-height:1.5;
+}
+.hero .meta-row{
+  display:flex;gap:0;flex-wrap:wrap;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-top:22px;
+}
+.hero .meta-row > div{
+  flex:1;min-width:140px;
+  padding:14px 22px 14px 0;
+  border-right:1px solid var(--rule);
+}
+.hero .meta-row > div:last-child{border-right:none}
+.hero .meta-row dt{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-bottom:4px;
+}
+.hero .meta-row dd{
+  margin:0;font-size:15px;color:var(--ink);font-weight:500;
+}
+.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--brand-primary)}
+
+/* ============ ARTICLE LAYOUT ============ */
+.layout{
+  max-width:1380px;margin:0 auto;padding:38px 28px 80px;
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  gap:46px;
+  align-items:start;
+}
+@media(max-width:980px){.layout{grid-template-columns:minmax(0,1fr);gap:18px}}
+
+/* TOC sidebar */
+.toc-side{
+  position:sticky;top:78px;
+  align-self:start;
+  max-height:calc(100vh - 96px);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  font-size:13px;
+  padding-right:8px;
+  scrollbar-width:thin;scrollbar-color:var(--rule) transparent;
+}
+.toc-side::-webkit-scrollbar{width:6px}
+.toc-side::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.toc-side h4{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+.toc-side .group{margin-bottom:18px}
+.toc-side .group-label{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:700;
+  margin:14px 0 6px;display:flex;align-items:center;gap:8px;
+}
+.toc-side .group-label:before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand-amber);display:inline-block}
+.toc-side .group-label.clinical:before{background:var(--brand-primary)}
+.toc-side .group-label.clinical{color:var(--brand-primary)}
+.toc-side .group-label.ops:before{background:var(--ink-soft)}
+.toc-side .group-label.ops{color:var(--ink-soft)}
+.toc-side .group-label.digital:before{background:var(--brand-olive)}
+.toc-side .group-label.digital{color:#7a8438}
+.toc-side .group-label.safety:before{background:var(--brand-terracotta)}
+.toc-side .group-label.safety{color:#a14b39}
+.toc-side .group-label.hr:before{background:var(--brand-amber)}
+
+.toc-side ol{list-style:none;margin:0;padding:0;counter-reset:none}
+.toc-side ol > li{
+  padding:3px 0;line-height:1.35;
+}
+.toc-side a{
+  color:var(--ink-soft);border-bottom:none;
+  display:flex;gap:8px;align-items:baseline;
+  padding:3px 8px;border-radius:6px;border-left:2px solid transparent;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.toc-side a:hover{background:var(--brand-cream);color:var(--brand-primary)}
+.toc-side .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--ink-mute);font-weight:500;
+  min-width:24px;flex-shrink:0;
+}
+.toc-side a.active{background:var(--brand-cream);color:var(--brand-primary);font-weight:600;border-left-color:var(--brand-primary)}
+
+/* Collapsible parent row */
+.toc-side .row-with-sub{
+  display:flex;align-items:center;gap:2px;
+}
+.toc-side .row-with-sub > a{flex:1}
+.toc-side .toc-toggle{
+  width:28px;height:26px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--brand-cream-warm);border:1px solid var(--rule);
+  cursor:pointer;
+  color:var(--brand-primary);border-radius:4px;
+  transition:background .12s,color .12s,border-color .12s;
+  padding:0;
+}
+.toc-side .toc-toggle:hover{background:var(--brand-primary);color:var(--brand-yellow);border-color:var(--brand-primary)}
+.toc-side .toc-toggle svg{width:13px;height:13px;transition:transform .18s ease}
+.toc-side .toc-toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
+.toc-side .toc-toggle[aria-expanded="true"]{background:var(--brand-primary);color:var(--brand-yellow);border-color:var(--brand-primary)}
+
+/* Nested TOC sub-items */
+.toc-side ol.sub{
+  margin:3px 0 6px 28px;
+  padding-left:10px;
+  border-left:1px solid var(--rule);
+  overflow:hidden;
+}
+.toc-side ol.sub[hidden]{display:none}
+.toc-side ol.sub > li{padding:1px 0}
+.toc-side ol.sub a{
+  font-size:11.5px;color:var(--ink-mute);
+  padding:2px 8px;line-height:1.35;
+}
+.toc-side ol.sub .num{
+  font-size:10px;color:var(--brand-amber);
+  min-width:auto;font-weight:600;
+}
+.toc-side ol.sub a:hover{background:var(--brand-cream);color:var(--brand-primary)}
+
+/* ============ ARTICLE BODY ============ */
+.article{
+  max-width:900px;
+  font-size:15.5px;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+.article p{margin:0 0 14px;text-wrap:pretty}
+.article strong{color:var(--ink);font-weight:600}
+.article em{color:var(--brand-primary);font-style:italic}
+
+/* Hatnote — Wikipedia top notice */
+.hatnote{
+  font-size:13px;color:var(--ink-mute);font-style:italic;
+  padding:10px 14px;background:var(--brand-cream-warm);
+  border-left:3px solid var(--brand-amber);
+  margin:0 0 28px;border-radius:0 3px 3px 0;
+}
+.hatnote strong{color:var(--brand-primary);font-style:normal}
+
+/* Chapter sub-TOC — canonical "Cuprins" list at the start of every chapter */
+.chapter-toc{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 28px; margin:12px 0 0; padding:0; list-style:none;
+  font-size:13px; line-height:1.55; font-style:normal;
+}
+.chapter-toc li{ padding:5px 0; border-bottom:1px dotted var(--rule-soft); margin:0; }
+.chapter-toc a{ border:0; color:var(--ink); display:flex; gap:10px; align-items:baseline; text-decoration:none; }
+.chapter-toc a:hover{ color:var(--brand-primary); }
+.chapter-toc .n{
+  font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--brand-amber);
+  font-weight:600; min-width:26px; flex:none;
+}
+/* drop the last row's bottom rules (handles both odd and even item counts) */
+.chapter-toc li:last-child{ border-bottom:0; }
+.chapter-toc.even li:nth-last-child(2){ border-bottom:0; }
+@media (max-width:640px){
+  .chapter-toc{ grid-template-columns:1fr; }
+  .chapter-toc.even li:nth-last-child(2){ border-bottom:1px dotted var(--rule-soft); }
+}
+
+/* Lead section with dropcap */
+.lead{font-size:17.5px;line-height:1.65;color:var(--ink);font-weight:400}
+.lead::first-letter{
+  font-family:'Playfair Display',serif;
+  font-weight:700;color:var(--brand-primary);
+  font-size:68px;line-height:.85;
+  float:left;padding:6px 12px 0 0;
+}
+
+/* Article headings */
+.article h2{
+  font-family:'Playfair Display',serif;
+  font-weight:800;color:var(--ink);
+  font-size:32px;line-height:1.2;
+  margin:48px 0 8px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--rule);
+  letter-spacing:-.005em;
+  scroll-margin-top:78px;
+}
+.article h2 .chapter-num{
+  display:block;
+  font-family:'Poppins',sans-serif;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+  margin-bottom:8px;
+}
+.article h2 .chapter-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;color:var(--brand-primary);
+  background:var(--brand-cream);
+  padding:2px 7px;border-radius:3px;
+  vertical-align:middle;margin-left:10px;font-weight:500;
+  letter-spacing:0;
+}
+.article h3{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);font-size:21px;
+  margin:34px 0 8px;padding-bottom:6px;
+  border-bottom:1px solid var(--rule);
+  line-height:1.3;scroll-margin-top:78px;
+}
+.article h3 .num{
+  font-family:'JetBrains Mono',monospace;font-size:14px;
+  color:var(--ink-mute);font-weight:500;margin-right:8px;
+}
+.article h4{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--ink);font-size:16px;margin:22px 0 8px;
+  letter-spacing:.005em;
+}
+
+/* Wikipedia-style "edit" indicator (purely visual ornament) */
+.h-edit{
+  float:right;
+  font-size:11px;color:var(--ink-mute);font-weight:400;
+  letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Poppins',sans-serif;
+  border:1px solid var(--rule);padding:3px 8px;border-radius:3px;
+  margin-top:6px;
+}
+
+/* Lists */
+.article ul, .article ol{margin:8px 0 18px;padding-left:24px}
+.article ul li, .article ol li{margin-bottom:6px;line-height:1.6}
+.article ul li::marker{color:var(--brand-primary)}
+.article ul.dash{list-style:none;padding-left:0}
+.article ul.dash li{position:relative;padding-left:18px}
+.article ul.dash li:before{content:"—";color:var(--brand-amber);position:absolute;left:0;font-weight:600}
+
+/* Numbered protocol steps */
+.steps{counter-reset:step;list-style:none;padding:0;margin:18px 0 24px;clear:both}
+.steps > li{
+  counter-increment:step;
+  position:relative;padding:12px 14px 12px 56px;
+  margin-bottom:8px;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-primary);
+  border-radius:0 4px 4px 0;
+  font-size:14.5px;line-height:1.55;
+}
+.steps > li:before{
+  content:counter(step,decimal-leading-zero);
+  position:absolute;left:14px;top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  color:var(--brand-primary);font-weight:600;
+  background:var(--brand-cream);padding:2px 8px;border-radius:3px;
+  letter-spacing:.05em;
+}
+.steps > li strong{color:var(--brand-primary);font-weight:600;display:block;margin-bottom:3px}
+
+/* Callouts */
+.callout{
+  margin:22px 0;padding:16px 18px;
+  border-radius:4px;font-size:14px;line-height:1.55;
+  border:1px solid var(--rule);
+}
+.callout .label{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.callout .label:before{
+  content:"";width:14px;height:14px;border-radius:50%;
+  display:inline-block;
+}
+.callout.warn{background:#fdf3f2;border-left:4px solid var(--brand-primary)}
+.callout.warn .label{color:var(--brand-primary)}
+.callout.warn .label:before{background:var(--brand-primary)}
+.callout.note{background:var(--brand-cream-warm);border-left:4px solid var(--brand-amber)}
+.callout.note .label{color:#8a6f17}
+.callout.note .label:before{background:var(--brand-amber)}
+.callout.tech{background:#f5f7ea;border-left:4px solid var(--brand-olive)}
+.callout.tech .label{color:#5e6624}
+.callout.tech .label:before{background:var(--brand-olive)}
+.callout.brand{background:var(--brand-primary);color:#fff;border:none}
+.callout.brand .label{color:var(--brand-yellow)}
+.callout.brand .label:before{background:var(--brand-yellow)}
+.callout.brand strong{color:#fff}
+.callout p:last-child{margin-bottom:0}
+.callout ul{margin:6px 0 0}
+
+/* Dental Safari card */
+.safari{ margin:14px 0 22px; border:1px solid #d9c98a; border-radius:14px; overflow:hidden; background:linear-gradient(180deg,#fcf6e6,#fbf9f5); }
+.safari-head{ background:var(--brand-olive); color:#fff; padding:16px 20px; }
+.safari-badge{ display:inline-block; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; background:rgba(255,255,255,.22); padding:3px 9px; border-radius:999px; }
+.safari-head h4{ margin:8px 0 0 !important; color:#fff !important; font-family:'Playfair Display',serif; font-weight:800; font-size:23px; }
+.safari-head p{ margin:6px 0 0; font-size:13.5px; color:#f4f7e6; max-width:62ch; }
+.safari-body{ padding:18px 20px 6px; }
+.safari-quote{ font-family:'Playfair Display',serif; font-style:italic; font-size:18px; color:var(--brand-primary); border-left:3px solid var(--brand-amber); padding-left:14px; margin:0 0 16px; }
+.safari-chars{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 16px; }
+.safari-char{ flex:1; min-width:180px; background:#fff; border:1px solid #e7ddc2; border-top:3px solid var(--brand-amber); border-radius:9px; padding:11px 14px; }
+.safari-imgwrap{ height:144px; display:flex; align-items:flex-end; justify-content:center; margin:-11px -14px 11px; padding:12px 10px 8px; background:linear-gradient(180deg,#f1f4e0,#fbf9f5); border-bottom:1px solid #ece4cf; border-radius:8px 8px 0 0; }
+.safari-img{ max-height:124px; width:auto; filter:drop-shadow(0 6px 7px rgba(0,0,0,.14)); }
+.safari-char .cn{ font-weight:700; color:var(--brand-primary); font-size:14.5px; text-align:center; }
+.safari-char .cspec{ font-weight:500; color:var(--ink-mute); font-size:12px; }
+.safari-char .crole{ font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:var(--brand-olive); margin:4px 0 7px; text-align:center; }
+.safari-char .cd{ font-size:12.5px; color:var(--ink-mute); margin-top:2px; line-height:1.45; }
+.safari-body h4{ margin-top:6px !important; }
+.safari-body ul.dash{ margin:0; }
+@media(max-width:560px){ .safari-chars{ flex-direction:column; } }
+
+/* Pull quote */
+.pullquote{
+  margin:28px 0;padding:24px 24px 24px 36px;
+  border-left:4px solid var(--brand-amber);
+  font-family:'Playfair Display',serif;
+  font-size:22px;line-height:1.4;font-style:italic;
+  color:var(--brand-primary);
+  background:linear-gradient(90deg,var(--brand-cream-warm),transparent);
+}
+.pullquote cite{
+  display:block;margin-top:10px;
+  font-family:'Poppins',sans-serif;font-style:normal;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+}
+
+/* Definition list (medical terms) */
+.deflist{
+  background:var(--paper-pure);border:1px solid var(--rule);border-radius:4px;
+  padding:6px 0;margin:18px 0;
+}
+.deflist dt{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);
+  padding:10px 18px 4px;font-size:14.5px;
+}
+.deflist dd{
+  margin:0;padding:0 18px 12px;
+  font-size:14px;color:var(--ink-soft);line-height:1.55;
+  border-bottom:1px solid var(--rule-soft);
+}
+.deflist > div:last-child dd{border-bottom:none}
+
+/* Tables */
+.article table{
+  width:100%;border-collapse:collapse;margin:18px 0 24px;
+  font-size:13.5px;background:var(--paper-pure);
+  border:1px solid var(--rule);border-radius:4px;overflow:hidden;
+}
+.article table th{
+  background:var(--brand-primary);color:#fff;
+  padding:10px 12px;text-align:left;font-weight:600;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+}
+.article table td{
+  padding:10px 12px;border-top:1px solid var(--rule-soft);
+  vertical-align:top;
+}
+.article table tr:nth-child(even) td{background:var(--brand-cream-warm)}
+.article table .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--brand-primary);font-weight:500}
+.article table.checktable td:first-child{font-style:italic}
+.article table.checktable th:nth-child(2),.article table.checktable th:nth-child(3){text-align:center;width:92px}
+.article table.checktable td.lab{text-align:center;font-weight:700;color:var(--brand-primary);font-size:15px}
+
+/* Stat strip */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:4px;
+  overflow:hidden;margin:24px 0;
+}
+.stats > div{
+  background:var(--paper-pure);padding:18px 16px;text-align:left;
+}
+.stats .num{
+  font-family:'Playfair Display',serif;font-weight:700;
+  color:var(--brand-primary);font-size:30px;line-height:1;
+  margin-bottom:4px;
+}
+.stats .label{
+  font-size:11px;color:var(--ink-mute);letter-spacing:.08em;
+  text-transform:uppercase;font-weight:500;
+}
+@media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* Chapter divider */
+.chap-divider{
+  display:flex;align-items:center;gap:14px;
+  margin:50px 0 24px;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+}
+.chap-divider:before, .chap-divider:after{
+  content:"";flex:1;height:1px;background:var(--rule);
+}
+
+/* References / footnotes */
+.refs{
+  font-size:13px;line-height:1.55;color:var(--ink-soft);
+  background:var(--paper-pure);padding:18px 22px;border:1px solid var(--rule);
+  border-radius:4px;margin:24px 0;
+}
+.refs ol{padding-left:22px;margin:0}
+.refs li{margin-bottom:6px}
+
+/* Placeholder figure (since we strip images) */
+.fig{
+  margin:20px 0;border:1px dashed var(--rule);
+  background:repeating-linear-gradient(45deg,var(--paper-pure),var(--paper-pure) 8px,var(--brand-cream-warm) 8px,var(--brand-cream-warm) 16px);
+  padding:38px 20px;border-radius:4px;text-align:center;
+}
+.fig .ftag{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--brand-primary);letter-spacing:.08em;
+  background:var(--paper-pure);padding:4px 9px;border:1px solid var(--rule);
+  border-radius:3px;display:inline-block;margin-bottom:6px;
+}
+.fig .fcap{font-size:13px;color:var(--ink-mute);font-style:italic}
+
+/* Real image figure */
+figure.dimg{
+  margin:24px 0;
+  padding:14px;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-radius:4px;
+}
+figure.dimg img{
+  display:block;width:100%;height:auto;
+  border-radius:3px;
+  background:#fff;
+}
+figure.dimg figcaption{
+  margin-top:10px;font-size:12.5px;color:var(--ink-mute);
+  line-height:1.5;
+}
+figure.dimg figcaption .fignum{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+  color:var(--brand-primary);background:var(--brand-cream);
+  padding:2px 7px;border-radius:3px;font-weight:600;
+  white-space:nowrap;
+  margin-right:10px;
+  vertical-align:baseline;
+  position:relative;top:-1px;
+}
+figure.dimg.tight{padding:8px;background:var(--brand-cream-warm)}
+figure.dimg.shadow img{box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+/* Floating small image with text wrap */
+figure.dimg.float-right{
+  float:right;width:240px;max-width:42%;
+  margin:6px 0 14px 22px;padding:10px;
+}
+figure.dimg.float-right figcaption{font-size:11.5px;overflow-wrap:anywhere;hyphens:auto}
+figure.dimg.float-left{
+  float:left;width:240px;max-width:42%;
+  margin:6px 22px 14px 0;padding:10px;
+}
+figure.dimg.float-left figcaption{font-size:11.5px;overflow-wrap:anywhere;hyphens:auto}
+@media(max-width:680px){
+  figure.dimg.float-right,figure.dimg.float-left{float:none;width:100%;max-width:100%;margin:18px 0}
+}
+
+/* Image grid (for uniforms, photo references) */
+.imggrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;
+  margin:24px 0;
+}
+.imggrid figure.dimg{margin:0}
+.imggrid figcaption{font-size:11.5px}
+
+/* Codes inline */
+code,.code{
+  font-family:'JetBrains Mono',monospace;font-size:.9em;
+  color:var(--brand-primary);background:var(--brand-cream);
+  padding:1px 6px;border-radius:3px;letter-spacing:0;
+}
+
+/* See also chip row */
+.seealso{
+  display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 30px;
+  padding:14px 16px;background:var(--brand-cream-warm);border-radius:4px;
+  font-size:13px;
+}
+.seealso .lbl{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-right:6px;
+  align-self:center;
+}
+.seealso a{
+  background:var(--paper-pure);border:1px solid var(--rule);
+  padding:4px 10px;border-radius:3px;font-size:12px;
+  color:var(--brand-primary);border-bottom:1px solid var(--rule);
+}
+.seealso a:hover{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+
+/* Two-column compact lists */
+.cols{column-count:2;column-gap:28px;column-rule:1px solid var(--rule-soft);font-size:14px}
+.cols ul{margin-top:0}
+@media(max-width:680px){.cols{column-count:1}}
+
+/* Footer */
+footer{
+  background:var(--brand-primary);color:#fff;
+  padding:48px 0 38px;margin-top:60px;
+}
+.footer-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;
+  font-size:13px;line-height:1.6;
+}
+@media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+footer h5{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
+}
+footer .tagline{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.3;margin:8px 0 14px;color:#fff;
+}
+footer a{color:#fff;border-bottom:1px solid rgba(255,255,255,.3)}
+footer a:hover{border-bottom-color:var(--brand-yellow);color:var(--brand-yellow)}
+footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
+.din-2017{
+  margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;text-align:center;
+}
+.din-2017 span{margin:0 22px}
+
+/* Changelog — V3 modifications list */
+.changelog{
+  margin:14px 0 22px;
+  display:flex;flex-direction:column;
+  border:1px solid var(--rule);border-radius:6px;
+  background:var(--paper-pure);overflow:hidden;
+}
+.changelog .cl-item{
+  display:grid;grid-template-columns:130px 1fr;
+  gap:14px;align-items:start;
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:13px;line-height:1.5;
+}
+.changelog .cl-item:last-child{border-bottom:none}
+.changelog .cl-item:nth-child(even){background:var(--brand-cream-warm)}
+.changelog .cl-chap{
+  display:flex;align-items:center;gap:6px;
+  text-decoration:none;color:var(--brand-primary);
+  border:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--brand-cream);
+  padding:3px 9px;border-radius:3px;
+  font-size:11.5px;font-weight:600;line-height:1.2;
+  align-self:start;
+  white-space:nowrap;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.changelog .cl-chap:hover{
+  background:var(--brand-primary);color:#fff;border-color:var(--brand-primary);
+}
+.changelog .cl-chap .cl-rom{font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+.changelog .cl-chap .cl-sep{opacity:.45;font-weight:400}
+.changelog .cl-chap .cl-code{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0}
+.changelog .cl-text{color:var(--ink-soft);font-size:13px}
+.changelog .cl-text .tag{
+  font-family:'JetBrains Mono',monospace;
+  display:inline-block;font-size:9.5px;letter-spacing:.06em;
+  padding:1px 5px;border-radius:2px;
+  margin-right:5px;vertical-align:1px;font-weight:600;
+}
+.changelog .cl-text .tag.add{background:#f5f7ea;color:#5e6624;border:1px solid #d6deb1}
+.changelog .cl-text .tag.upd{background:var(--brand-cream-warm);color:#8a6f17;border:1px solid #e6cf8e}
+.changelog .cl-text .tag.new{background:var(--brand-primary);color:var(--brand-yellow);border:1px solid var(--brand-primary)}
+@media(max-width:580px){
+  .changelog .cl-item{grid-template-columns:1fr;gap:6px}
+  .changelog .cl-chap{align-self:flex-start}
+}
+
+/* Protocol index — clickable card grid */
+.proto-index{
+  margin:28px 0 32px;
+  background:linear-gradient(180deg,var(--brand-primary) 0%,var(--brand-primary-deep) 100%);
+  border-radius:6px;
+  padding:22px 22px 6px;
+  color:#fff;
+}
+.proto-index .pi-head{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  margin-bottom:18px;padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.proto-index .pi-eyebrow{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:700;
+}
+.proto-index h4{
+  margin:0;font-family:'Playfair Display',serif;font-weight:700;
+  font-size:22px;color:#fff;line-height:1.2;
+}
+.proto-index .pi-sub{
+  font-size:13px;color:rgba(255,255,255,.7);margin-left:auto;
+}
+.proto-index .pi-section{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;
+  margin:14px 0 10px;display:flex;align-items:center;gap:8px;
+}
+.proto-index .pi-section:before{content:"";display:inline-block;width:18px;height:1px;background:var(--brand-yellow)}
+.proto-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));
+  gap:8px;margin-bottom:14px;
+}
+.proto-card{
+  display:flex;flex-direction:column;gap:3px;
+  padding:11px 13px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:4px;
+  color:#fff;
+  text-decoration:none;
+  transition:background .15s,border-color .15s,transform .12s;
+}
+.proto-card:hover{
+  background:rgba(251,228,131,.12);
+  border-color:var(--brand-yellow);
+  transform:translateY(-1px);
+  color:#fff;
+}
+.proto-card .pc-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.04em;
+  color:var(--brand-yellow);font-weight:600;
+}
+.proto-card .pc-name{
+  font-size:13px;font-weight:500;line-height:1.3;color:#fff;
+}
+.proto-card .pc-cap{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);font-weight:500;margin-top:2px;
+}
+
+/* Consimțăminte — downloadable consent cards */
+.consents{
+  margin:24px 0 30px;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-radius:6px;
+  padding:22px 24px 8px;
+}
+.consents .csn-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  padding-bottom:14px;margin-bottom:6px;
+  border-bottom:1px solid var(--rule);
+}
+.consents .csn-eyebrow{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:700;
+}
+.consents h4{
+  margin:0;font-family:'Playfair Display',serif;font-weight:700;
+  font-size:22px;color:var(--ink);line-height:1.2;
+}
+.consents .csn-sub{
+  font-size:12px;color:var(--ink-mute);
+  display:flex;align-items:center;gap:14px;
+}
+.consents .csn-sub .badge{
+  background:var(--brand-cream);color:var(--brand-primary);
+  font-weight:600;padding:3px 8px;border-radius:3px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+}
+.csn-cat{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  margin:18px 0 8px;display:flex;align-items:center;gap:10px;
+}
+.csn-cat:before{content:"";flex:0 0 18px;height:1px;background:var(--brand-amber)}
+.csn-cat .count{
+  font-family:'JetBrains Mono',monospace;color:var(--brand-primary);
+  background:var(--brand-cream);padding:1px 7px;border-radius:3px;
+  letter-spacing:0;font-weight:600;
+}
+.csn-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));
+  gap:10px;margin-bottom:6px;
+}
+.csn-card{
+  display:flex;flex-direction:column;gap:7px;
+  padding:13px 14px 12px;
+  background:var(--paper);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-primary);
+  border-radius:0 4px 4px 0;
+  text-decoration:none;color:var(--ink);
+  transition:background .14s,border-color .14s,transform .12s,box-shadow .14s;
+  position:relative;
+}
+.csn-card:hover{
+  background:var(--brand-cream-warm);
+  border-left-color:var(--brand-amber);
+  transform:translateY(-1px);
+  box-shadow:0 2px 8px rgba(123,28,22,.06);
+}
+.csn-card .csn-top{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.csn-card .csn-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;letter-spacing:.02em;
+  color:var(--brand-primary);font-weight:600;
+}
+.csn-card .csn-dl{
+  display:flex;align-items:center;gap:5px;
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+}
+.csn-card .csn-dl svg{
+  width:13px;height:13px;color:var(--brand-primary);
+}
+.csn-card:hover .csn-dl{color:var(--brand-primary)}
+.csn-card .csn-name{
+  font-size:13.5px;font-weight:600;line-height:1.3;
+  color:var(--ink);
+}
+.csn-card .csn-desc{
+  font-size:11.5px;line-height:1.45;color:var(--ink-mute);
+  margin-top:1px;
+}
+.csn-foot{
+  margin-top:18px;padding-top:14px;
+  border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink-mute);font-style:italic;
+  display:flex;align-items:center;gap:10px;
+}
+.csn-foot strong{color:var(--brand-primary);font-style:normal;font-weight:600}
+
+/* Inline document reference (single download row) */
+.docref{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;margin:14px 0;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-amber);
+  border-radius:0 4px 4px 0;
+  text-decoration:none;color:var(--ink);
+  transition:background .14s,border-left-color .14s,transform .12s;
+}
+.docref:hover{
+  background:var(--brand-cream-warm);
+  border-left-color:var(--brand-primary);
+  transform:translateY(-1px);
+}
+.docref .docref-icon{
+  width:38px;height:46px;flex-shrink:0;
+  background:var(--brand-cream);
+  border:1px solid var(--rule);
+  border-radius:3px;position:relative;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:6px;
+}
+.docref .docref-icon:before{
+  content:"";position:absolute;top:0;right:0;
+  width:10px;height:10px;
+  background:linear-gradient(225deg,var(--paper) 50%,var(--rule) 50%);
+}
+.docref .docref-icon .ext{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;font-weight:700;letter-spacing:.04em;
+  color:var(--brand-primary);
+}
+.docref .docref-meta{flex:1;min-width:0}
+.docref .docref-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;letter-spacing:.04em;
+  color:var(--brand-primary);font-weight:600;
+  margin-bottom:2px;display:block;
+}
+.docref .docref-name{
+  font-size:14.5px;font-weight:600;line-height:1.3;
+  color:var(--ink);
+}
+.docref .docref-desc{
+  font-size:12px;line-height:1.45;color:var(--ink-mute);
+  margin-top:3px;
+}
+.docref .docref-action{
+  flex-shrink:0;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  display:flex;align-items:center;gap:5px;
+}
+.docref .docref-action svg{
+  width:14px;height:14px;color:var(--brand-primary);
+}
+.docref:hover .docref-action{color:var(--brand-primary)}
+
+/* Mini badge */
+.codetag{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:11px;background:var(--brand-cream);color:var(--brand-primary);
+  padding:2px 7px;border-radius:3px;letter-spacing:0;font-weight:500;
+}
+
+/* ============ ORG CHART (unified cu Manualul Medicului) ============ */
+.orgchart{margin:14px 0 22px}
+.org-tier{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.org-tier + .org-tier{margin-top:30px;position:relative}
+.org-tier + .org-tier::before{content:"";position:absolute;top:-17px;left:50%;transform:translateX(-50%);width:2px;height:17px;background:var(--rule)}
+.org-card{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--brand-primary);border-radius:8px;padding:10px 14px;min-width:150px;max-width:230px;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.org-card.top{border-top-color:var(--brand-amber);background:var(--brand-cream)}
+.org-card.you{border-top-color:var(--brand-amber);background:var(--brand-cream-warm)}
+.org-card .r{font-weight:600;color:var(--brand-primary);font-size:13.5px;line-height:1.25}
+.org-card .n{font-size:12px;color:var(--ink-mute);margin-top:3px}
+.org-card .d{font-size:11.5px;color:var(--ink-mute);margin-top:4px;line-height:1.3}
+.org-branches{display:flex;gap:22px;margin-top:30px;position:relative;align-items:flex-start}
+.org-branches::before{content:"";position:absolute;top:-17px;left:50%;transform:translateX(-50%);width:2px;height:17px;background:var(--rule)}
+.org-branch{flex:1;min-width:0;border:1px solid var(--rule-soft);background:#fbf9f5;border-radius:10px;padding:14px}
+.org-branch-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-primary);font-weight:700;text-align:center;margin-bottom:12px}
+.org-subtier{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.org-subtier + .org-subtier{margin-top:26px;position:relative}
+.org-subtier + .org-subtier::before{content:"";position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:2px;height:15px;background:var(--rule)}
+.org-card.sub{border-top-color:var(--brand-olive);min-width:120px}
+@media(max-width:680px){.org-branches{flex-direction:column}}
+
+/* ============ PLATFORM FRAME (unified) ============ */
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--brand-amber);outline-offset:2px;border-radius:4px}
+
+/* reading progress */
+.readbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand-amber),var(--brand-primary));z-index:120;pointer-events:none}
+
+/* header search */
+.mh-search{position:relative;width:280px;max-width:34vw;flex:none}
+.mh-search input{
+  width:100%;font-family:inherit;font-size:13.5px;color:var(--ink);
+  padding:8px 34px 8px 32px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);
+}
+.mh-search input:focus{outline:none;border-color:var(--brand-primary)}
+.mh-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-mute)}
+.mh-search kbd{
+  position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;
+  font-family:'Poppins',sans-serif;font-size:10.5px;color:var(--ink-mute);
+  border:1px solid var(--rule);border-radius:4px;padding:1px 6px;background:var(--paper-pure);
+}
+.mh-search input:focus ~ kbd{display:none}
+.toc-search-hide{display:none !important}
+.toc-side ol.sub.search-open[hidden]{display:block}
+.toc-empty{font-size:12px;color:var(--ink-mute);font-style:italic;padding:6px 0;display:none}
+
+/* hamburger (mobile) */
+.menu-btn{display:none;background:none;border:1px solid var(--rule);border-radius:6px;padding:6px 9px;cursor:pointer;color:var(--brand-primary);font-size:14px;flex:none}
+
+/* back to top */
+.totop{
+  position:fixed;right:22px;bottom:22px;z-index:60;background:var(--brand-primary);color:#fff;border:none;
+  width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;
+  box-shadow:0 6px 18px -6px rgba(123,28,22,.6);opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.totop.show{opacity:1;pointer-events:auto}
+
+@media(max-width:980px){
+  .menu-btn{display:inline-flex}
+  .toc-side{
+    /* align-self:start (moștenit de la varianta desktop) face ca sertarul fixed
+       să se dimensioneze după conținut, nu între top/bottom — și atunci nu mai
+       are ce derula intern. stretch îl întinde pe înălțimea ecranului. */
+    align-self:stretch;
+    position:fixed;left:0;top:56px;bottom:0;width:300px;height:auto;max-height:none;margin:0;z-index:55;
+    background:var(--paper-pure);box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
+    padding:20px 18px 40px;transform:translateX(-105%) translateZ(0);transition:transform .25s;
+    -webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior:contain;
+    touch-action:pan-y;scroll-behavior:auto;
+  }
+  .toc-side.open{transform:translateZ(0)}
+  body.menu-open{overflow:hidden}
+}
+@media(max-width:840px){
+  .crumbs span{display:none}
+  .mh-search{max-width:30vw}
+  .mh-search kbd{display:none}
+}
+@media(max-width:560px){
+  .topbar-inner .pill:not(.dark){display:none}
+  .mh-search{width:150px}
+}
+
+/* ============ MOBILE-LITE (telefon) ============ */
+#mobileNotice{display:none}
+@media(max-width:640px){
+  /* header compact: doar meniu + back + logo — fara cautare, prea complicata pe telefon */
+  .topbar-inner{padding:10px 14px; gap:12px}
+  .topbar img.logo{height:26px}
+  .topbar-inner .brand-home{margin-left:auto}
+  .topbar-inner .crumbs{display:none}
+  .topbar-inner .spacer{display:none}
+  .topbar-inner .pill{display:none}
+  .topbar-inner .mh-share{display:none}
+  .mh-search{display:none}
+  /* plasa de siguranta pe telefoane inguste */
+  .article{overflow-wrap:break-word}
+  .csn-grid,.proto-grid,.spec-toc{grid-template-columns:1fr !important}
+  #mobileNotice{
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--brand-cream); border:1px solid var(--rule); border-left:3px solid var(--brand-amber);
+    border-radius:8px; padding:11px 13px; margin:0 0 18px; font-size:12.5px; line-height:1.5; color:var(--ink-soft);
+  }
+  #mobileNotice strong{color:var(--brand-primary)}
+  #mobileNotice button{flex:none; background:none; border:none; color:var(--ink-mute); font-size:16px; line-height:1; cursor:pointer; padding:0 2px}
+  /* tabele: derulare orizontala in loc de spargere pagina */
+  .article table{display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  /* elemente vizuale grele — ascunse pentru o lectura curata pe telefon */
+  .orgchart, .article figure, .spss, .safari{display:none !important}
+  /* aerisire */
+  .layout{padding:20px 16px 90px}
+}
+
+@media print{
+  @page{size:A4;margin:14mm 12mm}
+  .topbar,.toc-side,.totop,.readbar,.menu-btn,.mh-search{display:none !important}
+  .layout{display:block;max-width:none;padding:0}
+  body{background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,h4{break-after:avoid}
+  table,figure,img,.callout{break-inside:avoid}
+  p,li{orphans:3;widows:3}
+}
+</style>
+</head>
+<body>
+
+<!-- =========================== TOP BAR =========================== -->
+<header class="topbar" data-screen-label="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
+    <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
+    <a href="../index.html" style="border-bottom:none" title="Înapoi la Manuale Interne" class="brand-home"><img src="assets/logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
+    <div class="crumbs">
+      <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
+      <span>›</span>
+      <span>Recepție</span>
+      <span>›</span>
+      <span>Ediția V4.1</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="mh-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="search" type="text" placeholder="Caută în manual…" autocomplete="off" />
+      <kbd>/</kbd>
+    </div>
+    <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest manual"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
+    <span class="pill">ADC-REC-01</span>
+    <span class="pill dark">V4.1 · Mai 2025</span>
+  </div>
+</header>
+
+<!-- =========================== HERO =========================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Document Cadru · Operațional Recepție</div>
+    <h1>Manualul Activităților de Recepție <em>— Ghidul Registratorului Medical</em></h1>
+    <p class="subtitle">Documentul-cadru care guvernează activitatea registratorilor medicali în clinicile rețelei Dr. Ardeleanu — recepția este cartea de vizită a clinicii și primul punct de contact între pacient și instituție.</p>
+
+    <dl class="meta-row">
+      <div><dt>Ediție</dt><dd>V4.1 — <span class="mono">Mai 2025</span></dd></div>
+      <div><dt>Cod document</dt><dd><span class="mono">ADC-REC-01</span></dd></div>
+      <div><dt>Data publicării</dt><dd>30 mai 2025</dd></div>
+      <div><dt>Categorie</dt><dd>Operațional Recepție</dd></div>
+      <div><dt>Capitole</dt><dd>9</dd></div>
+      <div><dt>Limba</dt><dd>Română</dd></div>
+      <div><dt>Aplicabilitate</dt><dd>Registratori Medicali</dd></div>
+      <div><dt>Rețea</dt><dd>8 clinici · 7 orașe · din 2017</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- =========================== ARTICLE LAYOUT =========================== -->
+<div class="layout">
+
+  <!-- ============ TOC SIDEBAR ============ -->
+  <nav class="toc-side" aria-label="Cuprins">
+    <h4>Cuprins</h4>
+
+    <div class="group">
+      <div class="group-label">Fundamente</div>
+      <ol>
+        <li><a href="#cap-1"><span class="num">1</span>Despre Dr. Ardeleanu</a></li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-2"><span class="num">2</span>Importanța Funcției de Registrator Medical</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-2" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-2" hidden>
+            <li><a href="#cap-2-1"><span class="num">2.1</span>Relația cu Pacientul</a></li>
+            <li><a href="#cap-2-2"><span class="num">2.2</span>Concluzie</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-3"><span class="num">3</span>Calitățile și Abilitățile Necesare</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-3" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-3" hidden>
+            <li><a href="#cap-3-1"><span class="num">3.1</span>Empatie și Orientare către Pacient</a></li>
+            <li><a href="#cap-3-2"><span class="num">3.2</span>Abilități de Comunicare</a></li>
+            <li><a href="#cap-3-3"><span class="num">3.3</span>Atitudine Prietenoasă și Empatică</a></li>
+            <li><a href="#cap-3-4"><span class="num">3.4</span>Răbdare și Calm</a></li>
+            <li><a href="#cap-3-5"><span class="num">3.5</span>Aspect Profesional</a></li>
+            <li><a href="#cap-3-6"><span class="num">3.6</span>Managementul Timpului, Multitasking</a></li>
+            <li><a href="#cap-3-7"><span class="num">3.7</span>Lucrul în Echipă și Proactivitate</a></li>
+            <li><a href="#cap-3-8"><span class="num">3.8</span>Contabilitate Primară și Calculator</a></li>
+            <li><a href="#cap-3-9"><span class="num">3.9</span>Studii și Pregătire Profesională</a></li>
+            <li><a href="#cap-3-10"><span class="num">3.10</span>Concluzie</a></li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label ops">Organizare</div>
+      <ol>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-4"><span class="num">4</span>Programul de lucru și Relația cu Șeful Direct</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-4" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-4" hidden>
+            <li><a href="#cap-4-1"><span class="num">4.1</span>Programul de lucru și Pontaje</a></li>
+            <li><a href="#cap-4-2"><span class="num">4.2</span>Începerea programului</a></li>
+            <li><a href="#cap-4-3"><span class="num">4.3</span>Terminarea programului/turei</a></li>
+            <li><a href="#cap-4-4"><span class="num">4.4</span>Relația cu șeful direct</a></li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label clinical">Responsabilități</div>
+      <ol>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-5"><span class="num">5</span>Activitatea de vânzare</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-5" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-5" hidden>
+            <li><a href="#cap-5-1"><span class="num">5.1</span>Recomandări generale</a></li>
+            <li><a href="#cap-5-2"><span class="num">5.2</span>Confirmarea programărilor</a></li>
+            <li><a href="#cap-5-3"><span class="num">5.3</span>Gestionarea leadurilor [KPI 1]</a></li>
+            <li><a href="#cap-5-4"><span class="num">5.4</span>Reducerea Anulărilor/Neprezentărilor [KPI 2]</a></li>
+            <li><a href="#cap-5-5"><span class="num">5.5</span>Recall 180 [KPI 3]</a></li>
+            <li><a href="#cap-5-6"><span class="num">5.6</span>Recenzii de la pacienți [KPI 4]</a></li>
+            <li><a href="#cap-5-7"><span class="num">5.7</span>Alte obiective de vânzări</a></li>
+            <li><a href="#cap-5-8"><span class="num">5.8</span>Recall „La Mulți Ani” (voucher)</a></li>
+            <li><a href="#cap-5-9"><span class="num">5.9</span>Programări viitoare</a></li>
+            <li><a href="#cap-5-10"><span class="num">5.10</span>Vânzări pe credit</a></li>
+            <li><a href="#cap-5-11"><span class="num">5.11</span>Valoarea pe Termen Lung (LTV)</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-6"><span class="num">6</span>Activitatea operațională</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-6" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-6" hidden>
+            <li><a href="#cap-6-1"><span class="num">6.1</span>Întâmpinarea pacienților</a></li>
+            <li><a href="#cap-6-2"><span class="num">6.2</span>Apeluri și corespondență electronică</a></li>
+            <li><a href="#cap-6-3"><span class="num">6.3</span>Administrarea corespondenței</a></li>
+            <li><a href="#cap-6-4"><span class="num">6.4</span>Identificarea pacienților și CNP-ul</a></li>
+            <li><a href="#cap-6-5"><span class="num">6.5</span>Programări prin telefon (pre-onboarding)</a></li>
+            <li><a href="#cap-6-6"><span class="num">6.6</span>Onboarding digital în clinică</a></li>
+            <li><a href="#cap-6-7"><span class="num">6.7</span>Consimțămintele Medicale</a></li>
+            <li><a href="#cap-6-8"><span class="num">6.8</span>Instrucțiuni Post-Tratament</a></li>
+            <li><a href="#cap-6-9"><span class="num">6.9</span>Radiologie/Imagistică și PACS</a></li>
+            <li><a href="#cap-6-10"><span class="num">6.10</span>Încasarea Plăților</a></li>
+            <li><a href="#cap-6-11"><span class="num">6.11</span>Încasarea Avansurilor</a></li>
+            <li><a href="#cap-6-12"><span class="num">6.12</span>Documente de Creditare</a></li>
+            <li><a href="#cap-6-13"><span class="num">6.13</span>Încasarea în rate</a></li>
+            <li><a href="#cap-6-14"><span class="num">6.14</span>Emiterea Facturilor</a></li>
+            <li><a href="#cap-6-15"><span class="num">6.15</span>Alte Documente Medicale</a></li>
+            <li><a href="#cap-6-16"><span class="num">6.16</span>Reducerea Creanțelor</a></li>
+            <li><a href="#cap-6-17"><span class="num">6.17</span>Gestionarea Documentelor</a></li>
+            <li><a href="#cap-6-18"><span class="num">6.18</span>Laboratoarele de Tehnică Dentară</a></li>
+            <li><a href="#cap-6-19"><span class="num">6.19</span>Ambient plăcut</a></li>
+            <li><a href="#cap-6-20"><span class="num">6.20</span>Suport pentru colegi</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-7"><span class="num">7</span>Activitatea operațional-financiară</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-7" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-7" hidden>
+            <li><a href="#cap-7-1"><span class="num">7.1</span>Încasare pacient</a></li>
+            <li><a href="#cap-7-2"><span class="num">7.2</span>Registrul de Casă</a></li>
+            <li><a href="#cap-7-3"><span class="num">7.3</span>Operațiunile de Casierie</a></li>
+            <li><a href="#cap-7-4"><span class="num">7.4</span>Restituirea avansurilor</a></li>
+            <li><a href="#cap-7-5"><span class="num">7.5</span>Depunerea numerarului la bancă</a></li>
+            <li><a href="#cap-7-6"><span class="num">7.6</span>Dosarul de Contabilitate Primară</a></li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label hr">Performanță</div>
+      <ol>
+        <li><a href="#cap-8"><span class="num">8</span>Monitorizarea Indicatorilor cheie / KPI</a></li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-9"><span class="num">9</span>Evaluarea performanței</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-9" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-9" hidden>
+            <li><a href="#cap-9-1"><span class="num">9.1</span>Obiective cantitative</a></li>
+            <li><a href="#cap-9-2"><span class="num">9.2</span>Obiective calitative</a></li>
+            <li><a href="#cap-9-3"><span class="num">9.3</span>Fișa bonus lunar</a></li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label digital">Document</div>
+      <ol>
+        <li><a href="#registru"><span class="num">§</span>Registru de modificări</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ============ ARTICLE ============ -->
+  <article class="article">
+
+    <div id="mobileNotice" role="note">
+      <span>📱 <strong>Vizualizare mobil.</strong> Pentru o lectură curată pe telefon, unele elemente vizuale (capturi de ecran și figuri) sunt ascunse. Deschide manualul pe desktop pentru versiunea completă.</span>
+      <button type="button" aria-label="Închide" onclick="try{sessionStorage.setItem('adcMobileNoticeDismissed','1')}catch(e){} this.parentNode.style.display='none'">✕</button>
+    </div>
+
+    <!-- ============ 1 Despre Dr. Ardeleanu ============ -->
+    <h2 id="cap-1">Despre Dr. Ardeleanu</h2>
+    <p>Clinicile Dentare Dr. Ardeleanu <a href="https://clinicileardeleanu.ro/">https://clinicileardeleanu.ro/</a> reprezintă un reper important în domeniul stomatologic din România, oferind o gamă completă de servicii dentare de înaltă calitate la prețuri accesibile.</p>
+    <p>Fondată de Dr. Virginia Ardeleanu, rețeaua s-a extins rapid, având locații în orașe precum București, Giurgiu, Oltenița, Slobozia și Călărași. Clinicile sunt dotate cu tehnologie de ultimă generație, inclusiv tomografe computerizate și lasere dentare, asigurând astfel tratamente precise și eficiente. Un aspect inovator al clinicilor este conceptul "Dental Safari", <a href="https://clinicileardeleanu.ro/dental-safari/">https://clinicileardeleanu.ro/dental-safari/</a> destinat copiilor, care transformă vizitele la dentist într-o experiență plăcută și educativă prin gamificare. Rețeaua și-a extins amprenta teritorială, deschizând noi clinici continuând să ofere servicii stomatologice de calitate aproape de pacienți.</p>
+    <p>Dr. Ardeleanu se bazează și pe echipa sa medicală de elită. Profesionalismul, pregătirea constantă, experiența în spitale și practica privată sunt elemente esențiale care contribuie la calitatea serviciilor oferite. Fiecare medic se angajează să se îmbunătățească și să crească pentru a oferi cele mai bune servicii pacienților. Echipa medicală este compusă din peste 50 de medici supraspecializați, dedicați să ofere îngrijire personalizată și empatică fiecărui pacient.</p>
+    <p>În perioada 2021-2024, numărul de pacienți s-a dublat în fiecare an. Prețurile accesibile și serviciile rapide, contribuie la eliminarea barierelor în calea îngrijirii dentare de calitate. În 2024, clinicile Dr. Ardeleanu vor primi 12,000 de pacienți și vor efectua 50,000 de tratamente. Această combinație de inovație, accesibilitate și expertiză face din Clinicile Dr. Ardeleanu o alegere de încredere pentru îngrijirea dentară.</p>
+    <p>Valorile Dr.Ardeleanu s-au conturat în jurul unui angajament etic, menit să ofere servicii de stomatologie excelente la prețuri accesibile pentru întreaga familie. Dr. Ardeleanu este înțeles ca un doctor al comunității în care suntem prezenți.</p>
+    <p>Misiunea Dr. Ardeleanu este să extindă accesul la serviciile sale prin dezvoltarea la nivel național. Angajamentul nostru față de accesibilitate și îngrijire de calitate nu este limitat la locațiile existente, ci se extinde la toți românii, indiferent de locul în care locuiesc.</p>
+
+    <!-- ============ 2 Importanța Funcției ============ -->
+    <h2 id="cap-2">Importanța Funcției de Registrator Medical</h2>
+    <p>Recepția reprezintă cartea de vizită a clinicii, fiind primul punct de contact între pacient și instituție. Modul în care personalul din recepție interacționează cu pacienții reflectă direct calitatea serviciilor oferite de clinică. Atitudinea, limbajul verbal și non-verbal, comportamentul și vestimentația registratorilor contribuie în mod esențial la formarea primei impresii a pacienților.</p>
+    <p>Dincolo de simpla funcție de centru de informații, personalul de la recepție joacă un rol crucial în comunicarea imaginii și a valorilor brandului Dr. Ardeleanu. Printr-un protocol bine structurat de întâmpinare, recepția facilitează stabilirea unei relații solide între pacient și clinică, asigurându-se că fiecare interacțiune este pozitivă și memorabilă.</p>
+    <p>Un limbaj formal, dar plin de interes și recunoștință, utilizat de la primul contact, transmite pacientului respectul și importanța pe care i le acordăm. Un mediu ambiant cald și prietenos, combinat cu un comportament dedicat și atent, sugerează personalizarea experienței pentru fiecare pacient în parte, pacientul percepe astfel că personalul recepției este acolo exclusiv pentru el.</p>
+
+    <h3 id="cap-2-1">Relația cu Pacientul</h3>
+    <p>Relația de poziționare față de pacient trebuie să se bazeze pe înțelegere, confidențialitate, respect și empatie. Empatia nu înseamnă doar a asculta, ci și a manifesta căldură și a oferi soluții eficiente. Comunicarea cu pacientul trebuie să fie întotdeauna calmă, prietenoasă și orientată către rezolvarea nevoilor acestuia.</p>
+    <p>Indiferent de vârstă, gen, etnie sau situație financiară, fiecare pacient trebuie să fie tratat cu aceeași deschidere și acceptare. Confidențialitatea joacă un rol esențial în menținerea unei relații de încredere cu pacientul. Este absolut interzis să deschidem dialoguri despre patologiile unui pacient în prezența altor persoane, asigurându-le astfel că intimitatea și demnitatea fiecărui pacient sunt protejate.</p>
+    <p>Respectul trebuie să fie o valoare centrală atât în relația cu pacienții, cât și în relația cu colegii noștri. Expresiile precum "Te rog", "Mulțumesc" și "Iartă-mă" ar trebui să fie constant prezente în limbajul nostru, reflectând astfel o atitudine profesională și respectuoasă.</p>
+
+    <h3 id="cap-2-2">Concluzie</h3>
+    <p>Funcția de Registrator Medical în cadrul recepției unei clinici dentare este deosebit de importantă, având un impact direct asupra satisfacției pacienților și asupra imaginii generale a clinicii. Prin cultivarea unei relații bazate pe empatie, confidențialitate și respect, registratorii medicali contribuie la crearea unei atmosfere pozitive și la consolidarea încrederii pacientului în serviciile oferite de clinică. Această atitudine profesională și grijulie nu doar că îmbunătățește experiența pacientului, dar și consolidează loialitatea acestuia față de clinică.</p>
+
+    <!-- ============ 3 Calitățile și Abilitățile ============ -->
+    <h2 id="cap-3">Calitățile și Abilitățile Necesare pentru un Registrator Medical</h2>
+    <p>Funcția de Registrator Medical în cadrul unei clinici dentare implică un set divers de calități și abilități esențiale pentru asigurarea unei experiențe pozitive pentru pacienți și pentru susținerea eficienței operaționale a clinicii.</p>
+
+    <h3 id="cap-3-1">Empatie și Orientare către Pacient</h3>
+    <p>Una dintre cele mai importante calități ale unui registrator medical este dorința de a ajuta și de a fi util. Interacțiunea zilnică cu pacienții din diverse categorii sociale și aflate în diferite stadii ale bolii necesită o capacitate profundă de empatie. Aceasta se manifestă prin căldură, ascultare activă și orientare către soluții, asigurându-se că fiecare pacient se simte înțeles și respectat.</p>
+
+    <h3 id="cap-3-2">Abilități de Comunicare</h3>
+    <p>Registratorul Medical trebuie să posede abilități solide de comunicare, atât verbală, cât și scrisă. Ca prim punct de contact al pacienților cu clinica, este esențial ca acesta să ofere informații clare, concise și profesioniste. Nu este suficient să răspundă doar la întrebările de bază, ci trebuie să fie pregătit să ofere răspunsuri detaliate și corecte, într-o manieră accesibilă. Cunoașterea unei limbi străine reprezintă un avantaj semnificativ, facilitând comunicarea cu pacienții din diverse medii culturale.</p>
+
+    <h3 id="cap-3-3">Atitudine Prietenoasă și Empatică</h3>
+    <p>Un Registrator Medical trebuie să aibă o atitudine constant prietenoasă și empatică, indiferent de situație. Zâmbetul autentic și abordarea pozitivă sunt cruciale, mai ales în situațiile în care pacienții se confruntă cu disconfort sau anxietate. În ciuda eventualelor provocări personale sau ale unei zile dificile, atitudinea registratorului medical trebuie să rămână constant profesionistă și primitoare.</p>
+
+    <h3 id="cap-3-4">Răbdare și Calm</h3>
+    <p>Interacțiunea cu un public divers implică întâlnirea unor situații stresante sau provocatoare. Este crucial ca Registratorul Medical să își mențină calmul și să răspundă cu răbdare, indiferent de circumstanțe. Această atitudine contribuie semnificativ la menținerea unui mediu plăcut și profesionist în clinică.</p>
+
+    <h3 id="cap-3-5">Aspect Profesional</h3>
+    <p>Ținuta și aspectul general ale Registratorului Medical trebuie să fie impecabile, reflectând profesionalismul clinicii. Uniforma clinicii conform ADC-UNF-01, părul aranjat și unghiile îngrijite sunt obligatorii conform pct 4. din procedura de ordine, igienă și securitate la locul de munca ADC - OIM -02, iar mediul de lucru, inclusiv zona recepției, trebuie să fie mereu curat și ordonat, în concordanță cu standardele de excelență ale clinicii.</p>
+
+    <h3 id="cap-3-6">Managementul Timpului, Multitasking</h3>
+    <p>O zi obișnuită la recepție poate fi foarte aglomerată, implicând multiple sarcini ce necesită gestionare simultană, cum ar fi interacțiuni cu pacienți, apeluri telefonice, coordonarea programărilor, a corespondenței, etc.. În acest context, abilitățile de management al timpului și multitasking sunt esențiale. Registratorul Medical trebuie să-și prioritizeze eficient sarcinile și să își organizeze timpul astfel încât fiecare pacient să primească atenția necesară fără întârzieri.</p>
+
+    <h3 id="cap-3-7">Lucrul în Echipa și Proactivitate</h3>
+    <p>Registratorul Medical funcționează ca un liant între pacient și ceilalți membri ai echipei medicale, fie că este vorba despre medici, asistenți, personal administrativ sau cadre de conducere. Atitudinea proactivă, combinată cu empatie și pozitivism, contribuie la crearea unei atmosfere plăcute și profesioniste în clinică, asigurând eficiența operațională și satisfacția pacienților. Colaborarea eficientă cu toți colegii este vitală pentru a asigura o experiență integrată și satisfăcătoare pentru pacient.</p>
+
+    <h3 id="cap-3-8">Cunoștințe de Contabilitate Primara și Utilizare a Calculatorului</h3>
+    <p>Registratorul Medical trebuie să aibă cunoștințe generale de contabilitate, necesare pentru gestionarea corectă a plăților, utilizarea casei de marcat, gestiunea casieriei și menținerea evidențelor financiare primare din clinica. De asemenea, abilitățile de utilizare a calculatorului sunt indispensabile, incluzând competențe în utilizarea aplicațiilor interne specifice, cum ar fi SPSS și ERP.</p>
+
+    <h3 id="cap-3-9">Studii și Pregătire Profesională</h3>
+    <p>De preferat, Registratorul Medical ar trebui să aibă studii medii sau superioare și o bună pregătire în utilizarea tehnologiilor moderne de lucru. Cunoștințele în acest domeniu îi permit să își desfășoare activitatea eficient și să contribuie activ la succesul clinicii.</p>
+
+    <h3 id="cap-3-10">Concluzie</h3>
+    <p>Funcția de Registrator Medical într-o clinică dentară presupune un mix de abilități tehnice, interpersonale și de organizare. Dezvoltarea continuă a acestor competențe contribuie nu doar la eficiența operațională a clinicii, ci și la crearea unei experiențe pozitive și memorabile pentru fiecare pacient. Registratorul Medical este esențial pentru menținerea și îmbunătățirea reputației și succesului clinicii.</p>
+
+    <!-- ============ 4 Programul de lucru ============ -->
+    <h2 id="cap-4">Programul de lucru și Relația cu Șeful Direct</h2>
+
+    <h3 id="cap-4-1">Programul de lucru și Pontaje</h3>
+    <ul>
+      <li>Programul de lucru este de 8 h/zi în ture: 09:00-17:00, respectiv 12:00-20:00, de luni până vineri, plus două sâmbete pe lună.</li>
+      <li>Programul de lucru al zilelor de sâmbătă este 09:00-17:00 sau 10:00 -18:00, după caz.</li>
+      <li>Orele suplimentare NU vor fi plătite, ci vor fi transformate în ore/zile libere stabilite de comun acord cu Coordonatorul Clinicii, în măsura în care nu se depășește norma legala de lunara de munca.</li>
+      <li>Pontajul zilnic se efectuează în ERP.</li>
+      <li>Concediul de odihnă se va anunța prin cerere scrisă de concediu, cu cel puțin o lună înainte.</li>
+    </ul>
+
+    <h3 id="cap-4-2">Începerea programului:</h3>
+    <ul>
+      <li>Registratorul Medical ajunge în clinică cu 15 minute de a începe programul;</li>
+      <li>În cazul în care ajunge primul în Clinică, îndeplinește sarcinile de deschidere a Clinicii respectând regulile de securitate, conform procedurii ADC - OIM - 01.</li>
+      <li>Ținuta și aspectul general ale Registratorului Medical trebuie să fie impecabile, părul aranjat și unghiile îngrijite conform pct 4. din procedura de ordine, igienă și securitate la locul de munca ADC - OIM -02,</li>
+      <li>Va purta uniforma oferită de către companie in mod obligatoriu conform ADC-UNF-01.</li>
+      <li>Se logheaza în ERP <a href="https://erp.clinicile-ardeleanu.ro">https://erp.clinicile-ardeleanu.ro</a> și în SPSS <a href="https://sps.clinicile-ardeleanu.ro">https://sps.clinicile-ardeleanu.ro</a> cu userul propriu; Fiecare coleg trebuie să lucreze pe user-ul aferent;</li>
+      <li>Pornește echipamentului IT din cadrul recepției și se asigura de functionalitatea rețelei de internet, a echipamentelor IT, a casei de marcat și a POS-ului. În cazul unor defecțiuni, anunță coordonatorul clinicii;</li>
+      <li>Se pontează de începutul programului în ERP;</li>
+      <li>Menține zona recepției, ca pe un mediu mereu curat și ordonat, în concordanță cu standardele de excelență ale clinicii.</li>
+      <li>Verifică în permanență calendarul programarilor pe ziua în curs și fac toate demersurile necesare pentru umplerea golurilor din program.</li>
+      <li>Începe ziua cu confirmarea programarilor, responsabilitatea #1 din categoria vânzări.</li>
+      <li>Îndeplinește activitățile de vânzări, operaționale și financiare în mod prompt si corect, așa cum acestea sunt descrise în acest manual.</li>
+      <li>NU modifică programari la cererea personalului medical.</li>
+    </ul>
+
+    <h3 id="cap-4-3">Terminarea programului/turei:</h3>
+    <ul>
+      <li>La finalul programului, Registratorul Medical se va ponta de finalul programului în ERP.</li>
+      <li>Se va deloga din SPSS și din ERP;</li>
+      <li>Preda gestiunea casieriei. Verifica numerarul din casierie împreună cu colega ce schimbă tura; În cazurile în care lipsesc bani, aceștia vor fi puși de către registratorul medical în programul căruia se constată lipsa. Numerarul cash se depune în seif la închiderea programului.</li>
+      <li>Îndeplinește sarcinile de inchidere a Clinicii respectând regulile de securitate, în cazul în care ajunge primul în Clinică, conform procedurii ADC - OIM - 01.</li>
+    </ul>
+
+    <h3 id="cap-4-4">Relația cu șeful direct - Coordonatorul Clinicii:</h3>
+    <p>(i) Registratorul Medical rezolva problemele apărute pe parcursul zilei, informând coordonatorul clinicii de orice situație importantă apărută, chiar dacă aceasta este rezolvată.</p>
+    <p>(ii) Anunță coordonatorul clinicii de orice reclamație sau problemă internă: discuții de interes cu pacienții, asistenții, și/sau medicii</p>
+    <p>(iii) Pentru orice întârziere, situație neprevăzută sau urgență apărută în timpul programului va fi anunțat coordonatorul clinicii;</p>
+    <p>(iv) Asigură respectarea deciziilor luate de Coordonatorul Clinicii;</p>
+    <p>(v) Îndeplinește și alte sarcini solicitate de Coordonatorul Clinicii, chiar dacă acestea nu au fost expres definite în Fișa Postului, sau în acest Manual, în limita competențelor deținute;</p>
+    <p>(i) Coordonatorul Clinicii verifică ținuta, uniforma și aspectul profesional al Registratorului Medical, care trebuie sa fie impecabile și conform procedurii.</p>
+    <p>(ii) Aprobă concediile solicitate de către Registratorul Medical. Aprobarea concediilor ( medicale, de odihnă sau fără plată) se va face astfel incat sa nu fie în concediu, în același timp, ambii Registratori Medicali. Aprobarea concediilor se va face cu informarea și aprobarea verbală și scrisă a superiorului direct și a departamentului HR.</p>
+
+    <!-- ============ 5 Vânzări ============ -->
+    <h2 id="cap-5">Responsabilități și activități legate de activitatea de vanzare</h2>
+
+    <p><strong>Responsabilitate Generală de Vânzări:</strong> Oferă suport pacienților în vederea programării la diferite consultații și tratamente pentru satisfacția pacientului și creșterea vânzărilor clinicii. În cadrul procesului de comunicare și programare a pacienților Registratorul Medical este responsabil pentru contribuția la vânzările generale ale clinicii prin (i) contactarea leadurilor (pacienți potențiali/interesați de tratamentele clinicii)  si (ii) promovarea activă a tratamentelor mai avansate și mai complete către pacienți. Acest lucru include identificarea oportunităților de upselling pentru servicii precum pachetele de prevenție tip 3x1 sau 6x1, stomatologia estetică, aparatele dentare moderne sau tratamentele restaurative avansate.</p>
+    <p>De asemenea registratorul medical trebuie să se documenteze înainte de a aborda pacienții îi să-și îmbunătățească permanent abilitățile de comunicare:</p>
+
+    <h3 id="cap-5-1">Recomandări generale:</h3>
+    <p>Când  contactați pacienții, vă recomandăm să:</p>
+    <ul>
+      <li>Ascultați cu atenție motivele pentru care solicită programare.</li>
+      <li>Ascultați cu atenție motivele neprezentării sau anulării și să oferiți soluții flexibile pentru  reprogramare.</li>
+      <li>Concentrati-va pe o comunicare empatică și profesionistă.</li>
+      <li>Prezentați ofertele și reducerile actuale, subliniind cum acestea pot face vizita la stomatolog  mai accesibilă și avantajoasă pentru pacienți.</li>
+      <li>Menționați îmbunătățirile echipei medicale și noile tehnologii disponibile, asigurând pacienții  că oferim cele mai bune condiții pentru sănătatea lor dentară.</li>
+      <li>Contactați din nou  pe parcursul lunii, până la obținerea unei programări noi sau  a unei rezoluții finale toți pacienții marcați cu sintagma („Nu răspunde”) sau („Revine”).</li>
+    </ul>
+    <p>Prin aceste acțiuni, putem contribui împreună la creșterea gradului de retenție și satisfacție a  pacienților noștri.</p>
+
+    <h3 id="cap-5-2">1. Confirmarea programarilor</h3>
+    <p>Registratorul Medical inițiază apeluri către pacienți pentru confirmarea programarilor cu o zi înainte [24 ore înainte] pentru următoarele specializări: protetică, chirurgie - implantologie, endodonție și estetică.</p>
+
+    <h3 id="cap-5-3">2. Gestionarea leadurilor și conversia acestora în programari [KPI 1]</h3>
+    <p>Această procedură are ca scop optimizarea procesului de gestionare a leadurilor generate din campaniile de social media sau website, prin contactarea rapidă și eficientă a acestora, în vederea creșterii ratei de conversie în programări. Registratorul medical se asigură permanent că toate leadurile au fost contactate în termen de 24 de ore și că încercările de contact au fost documentate corespunzător.</p>
+
+    <h4>Definitia Leadurilor:</h4>
+    <p><strong>Ce sunt Leadurile?</strong> Leadurile reprezintă potențiali pacienți care și-au exprimat interesul față de serviciile noastre prin intermediul platformelor de social media, fie prin completarea unui formular de contact, fie prin trimiterea unui mesaj direct sau email,  sau prin interacțiuni relevante (cum ar fi comentarii sau solicitări de informații).</p>
+    <p>Leadurile sunt informații despre pacienți care conțin: (i) Nume, (ii) Prenume, (iii) Număr de telefon, și/sau (iv) Adresa de Email.</p>
+    <p>Leadurile sunt oportunități valoroase pentru a transforma interesul inițial în programări efective și, ulterior, în pacienți fideli.</p>
+    <p>Gestionarea promptă și profesională a acestor leaduri este esențială pentru a construi relații de încredere și pentru a asigura o experiență pozitivă încă de la primul contact.</p>
+
+    <h4>Obiective:</h4>
+    <p>(i) Asigurarea contactării leadurilor în maximum 24 de ore de la generare, pentru a crește șansele de conversie în programări.</p>
+    <p>(ii) Crearea unui proces continuu de urmărire a leadurilor care nu răspund sau solicită revenire, până la obținerea unei rezoluții finale.</p>
+    <p>(iii) Optimizarea programului medicilor prin obținerea unui flux constant de programări noi.</p>
+    <p>(iv) Îmbunătățirea permanentă a activității de contactare și conversie a leadurilor în programari.</p>
+
+    <h4>Procedura de Contactare a Leadurilor:</h4>
+    <p><strong>Preluarea leadurilor:</strong> Registratorii Medicali și sau coordonatorii de pacienți vor verifica zilnic fișierul „FB_adds_campaigns” pentru a identifica leadurile generate din campaniile de social media. Toate leadurile trebuie să fie contactate în termen de 24 de ore de la apariția lor în fișier.</p>
+    <p><strong>Contactarea leadurilor:</strong></p>
+    <p>(i) Se va iniția un apel telefonic către fiecare lead în cel mai scurt timp posibil, dar nu mai târziu de 24 de ore.</p>
+    <p>(ii) Leadurile care nu răspund sau care cer revenirea („Nu răspunde” sau „Revine”) vor fi contactate de mai multe ori, la intervale rezonabile și diferite până la obținerea unei programări sau a unei rezoluții finale (imposibilitatea de conversie).</p>
+    <p><strong>Documentarea încercărilor de contact:</strong> Fiecare apel va fi înregistrat în fișierul „FB_adds_campaigns”, specificând data, ora și rezoluția finală a apelului (programare realizată, nu răspunde, solicită revenire, neinteresat etc.).</p>
+
+    <h4>Exemple de abordări telefonice:</h4>
+    <p><strong>1. Apel inițial:</strong> „Bună ziua, numele meu este [nume] de la Clinica [nume clinică]. Vă sun în legătură cu solicitarea dumneavoastră de pe pagina noastră de Facebook/Instagram etc. pentru o consultație stomatologică. Vă pot ajuta acum să programăm o vizită la medicul nostru?”</p>
+    <p><strong>2. Lead care nu răspunde:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Am încercat să vă contactăm în legătură cu solicitarea dumneavoastră pentru o consultație stomatologică. Puteți să ne spuneți când ar fi convenabil să revenim sau dacă doriți să stabilim acum o programare?”</p>
+    <p><strong>3. Lead care solicită revenire:</strong> „Bună ziua, [nume pacient]. Revin cu un apel din partea Clinicii [nume clinică], așa cum ați solicitat, pentru a discuta despre stabilirea unei programări. Este acum un moment potrivit să vă ajutăm cu detalii și să facem programarea?”</p>
+    <p><strong>4. Lead indecis:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Înțeleg că sunteți interesat de o consultație, însă poate aveți unele întrebări. Vă pot oferi mai multe detalii despre opțiunile noastre de tratament și despre consultație.”</p>
+    <p><strong>5. Lead reticent:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Înțeleg că nu sunteți încă sigur dacă doriți să faceți o programare, dar suntem aici să vă ajutăm cu orice informații care vă pot ajuta să luați decizia corectă pentru sănătatea dumneavoastră dentară.”</p>
+    <p><strong>6. Follow-up pentru lead care a refuzat inițial:</strong> „Bună ziua, [nume pacient]. Revin cu un apel din partea Clinicii [nume clinică]. Chiar dacă nu ați dorit să faceți o programare inițial, ne-ar plăcea să vă oferim o oportunitate pentru o consultație gratuită sau un discount pentru o primă vizită sau să vă comunicăm promoțiile noastre actuale, în cazul în care v-ați răzgândit.”</p>
+
+    <p><strong>Raportare:</strong> Numărul efectiv de pacienți programați din procesul de contactare telefonica a leadurilor este monitorizat și raportat zilnic, saptamanal, dar și lunar, de către colegii din departamentul de controlling (business intelligence).</p>
+
+    <h3 id="cap-5-4">2. Reducerea Ratei Anulărilor/Neprezentarilor [KPI 2]</h3>
+    <p>Această procedură are ca scop optimizarea procesului de gestionare a solicitărilor de reprogramare sau anulare a vizitelor în clinici urmărind reducerea la minim a acestora.</p>
+
+    <h4>Obiective:</h4>
+    <p>(i) Gestionarea eficientă a pacienților care nu s-au prezentat la programare sau au anulat programarea.</p>
+    <p>(ii) Optimizarea programului medicilor și recuperarea pacienților pentru a asigura o  conversie maximă în programări ulterioare.</p>
+    <p>(iii) Îmbunătățirea continuă a comunicării active cu pacienții.</p>
+    <p>(iv) Actualizarea imediată a informațiilor în sistemul SPSS.</p>
+    <p>(v) Informarea corectă și la timp a medicilor cu privire la anularea programării sau a neprezentări pacienților la programare.</p>
+
+    <h4>Procedura de contactare a pacienților care au anulat sau nu s-au prezentat:</h4>
+    <p><strong>Preluarea neprezentărilor/anulărilor:</strong> Registratorii Medicali vor verifica zilnic fișierul „Neprezentări” pentru a identifica pacienții care nu s-au prezentat la programare sau au anulat.</p>
+    <p><strong>Contactarea neprezentărilor/anulărilor:</strong></p>
+    <p>(i) Se va iniția un apel telefonic către fiecare lead în 15 minute de la neprezentarea la programare.</p>
+    <p>(ii) Se vor iniția apeluri telefonice în cel mai scurt timp posibil de la înregistrarea lor în fișierul „Neprezentări” până la obținerea unei rezoluții finale.</p>
+    <p><strong>Documentarea încercărilor de contact:</strong> Fiecare apel trebuie înregistrat în fișierul „Neprezentări”, incluzând data, ora și rezultatul  apelului (programare efectuată, nu răspunde, solicită revenire etc.).</p>
+
+    <h4>Exemple de abordări telefonice:</h4>
+    <p><strong>1. Primul apel după neprezentare:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Am observat că nu ați reușit să  vă prezentați la programarea recentă. Putem stabili împreună un alt interval  convenabil pentru dumneavoastră?”</p>
+    <p><strong>2. Primul apel după anulare:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Îmi pare rău că ați fost nevoit să  anulați programarea. Vă pot ajuta să reprogramăm vizita dumneavoastră într-un  interval mai convenabil?”</p>
+    <p><strong>3. Follow-up pentru „Nu răspunde” după neprezentare:</strong> „Bună ziua, am încercat să vă contactăm în legătură cu programarea ratată. Vă rugăm  să ne contactați pentru a stabili un nou interval. Este important să nu amânați prea  mult vizita la medicul stomatolog.”</p>
+    <p><strong>4. Follow-up pentru „Revine” după anulare:</strong> „Bună ziua, revin cu un apel pentru a vă ajuta să reprogramăm vizita la clinica noastră.  Ați putea să-mi spuneți când ar fi cel mai potrivit moment pentru dumneavoastră?”</p>
+    <p><strong>5. Apel pentru pacient reticent:</strong> „Bună ziua, am observat că ați anulat recent programarea. Înțeleg că pot interveni  situații neprevăzute, dar este foarte important să reveniți pentru control. Pot să vă ofer detalii despre beneficiile menținerii sănătății dentare prin vizite regulate.”</p>
+    <p><strong>6. Apel final pentru pacient necontactabil:</strong> „Bună ziua, am încercat să vă contactăm de mai multe ori pentru a reprograma vizita  dumneavoastră. Vă rugăm să ne contactați la acest număr sau să ne lăsați un mesaj  pentru a găsi o soluție potrivită.”</p>
+
+    <p>Modul de înregistrare în SPSS a anulării unei programări se face diferit în funcție de situație:</p>
+    <p>Daca pacientul nu se prezinta (neprezentare) iar registratorul medical nu reușește să-l recupereze prin agrearea unei noi programari, atunci programarea se anulează în SPSS.</p>
+    <p>In cazul în care pacientul nu se prezinta (neprezentare) insa registratorul reuseste sa il recupereze prin intermediul unei noi programari viitoare, atunci programarea NU se anulează în SPSS ci se modifica data programării. Acest caz, nu se cuantifica la numărul de anulari din luna.</p>
+    <p>Mai multe detalii cu privire la anularea programarilor în SPSS, găsiți într-un tutorial video din secțiunea documente ERP.</p>
+
+    <p><strong>Raportare:</strong> Numărul efectiv de pacienți programați/recuperati din procesul de contactare telefonica a celor care au anulat o programare sau nu s-au prezenta la acesta, este monitorizat și raportat în fiecare saptamana dar și lunar, de către colegii din departamentul de controlling (business intelligence).</p>
+
+    <h3 id="cap-5-5">3. Creșterea Ratei de Succes a aducerii pacienților în clinică în procesul de Recall 180 [KPI 3]</h3>
+    <p>Această procedură are  scopul de a-i invita pe pacienți la un control gratuit, cu intenția de a-i readuce în clinică pentru upselling și creșterea Valorii pe Termen Lung (LTV) a pacientului. Registratorul Medical este responsabil pentru gestionarea procesului de recall al pacienților, care implică contactarea telefonică a tuturor pacienților existenți ai clinicii care nu au mai vizitat clinica în ultimele 180 zile.</p>
+
+    <h4>Obiective:</h4>
+    <p>(i) Contactarea pacienților la 6 luni de la ultima vizită în clinică, în vederea programării  pentru controlul periodic.</p>
+    <p>(ii) Optimizarea fluxului de pacienți și a programului medicilor.</p>
+    <p>(iii) Urmărirea pacientului până la obținerea unei programări sau până la concluzionarea că  pacientul nu dorește o nouă vizită.</p>
+
+    <h4>Procedura de contactare a Pacienților în Campania de Recall:</h4>
+    <p><strong>1. Preluarea pacienților din fișierul „Recall_2024”:</strong> Fișierul de lucru este completat de către specialiștii din departamentul de controlling în primele 2-3 zile ale  fiecărei luni. Coordonatorii și /sau registratorii medicali vor verifica acest fișier pentru a  identifica pacienții ce urmează să fie rechemați la control.</p>
+    <p><strong>2. Contactarea pacienților:</strong> Toți pacienții trebuie contactați în prima săptămână a lunii, în vederea rechemării la  control stomatologic. Dacă pacienții nu răspund („Nu răspunde”) sau solicită revenire („Revine”), aceștia  vor fi contactați din nou pe parcursul lunii, până la obținerea unei programări sau a  unei rezoluții finale.</p>
+    <p><strong>3. Documentarea încercărilor de contact:</strong> Fiecare apel va fi înregistrat în fișierul „Recall_2024”, specificând data, ora și rezultatul  apelului (programare realizată, nu răspunde, solicită revenire etc.).</p>
+
+    <h4>Exemple de Abordări Telefonice:</h4>
+    <p><strong>1. Primul apel:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Vă sun pentru a vă reaminti că a  trecut deja 6 luni de la ultima dumneavoastră vizită. Ar fi un moment potrivit să vă  programați pentru controlul periodic?”</p>
+    <p><strong>2. Apel în caz de „Nu răspunde”:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Am încercat să vă contactăm  pentru a stabili o nouă programare la medicul nostru, având în vedere că a trecut 6  luni de la ultima dumneavoastră vizită. Când ar fi convenabil să revenim cu un apel?”</p>
+    <p><strong>3. Apel după solicitare de revenire:</strong>  „Bună ziua, [nume pacient]. Revin cu un apel, așa cum am stabilit, pentru a discuta  despre programarea dumneavoastră pentru controlul stomatologic. Este acum un  moment potrivit să programăm vizita?”</p>
+    <p><strong>4. Lead indecis:</strong> „Bună ziua, sunt [nume] de la Clinica [nume clinică]. Vă reamintesc că este  recomandat să veniți la control la fiecare 6 luni pentru a preveni probleme dentare. Vă pot oferi mai multe detalii despre procedurile noastre de prevenție și beneficiile  unui control regulat.”</p>
+    <p><strong>5. Lead reticent:</strong> „Bună ziua, [nume pacient], înțeleg că poate nu ați avut timp până acum pentru o  vizită, dar este important să menținem sănătatea dentară. Vă putem oferi un interval  flexibil pentru programare, în funcție de disponibilitatea dumneavoastră.”</p>
+    <p><strong>6. Follow-up pentru pacient necontactabil:</strong> „Bună ziua, [nume pacient], am încercat să vă contactăm de câteva ori pentru a  discuta despre programarea pentru controlul periodic. Vă rugăm să ne contactați la  acest număr pentru a stabili o nouă vizită, sau ne puteți scrie un mesaj cu preferințele  dumneavoastră.”</p>
+
+    <p><strong>Raportare:</strong> Numărul efectiv de pacienți programați în clinică prin procesul de Recall 180 este monitorizat și raportat în fiecare saptamana dar și lunar, de către colegii din departamentul de controlling (business intelligence).</p>
+
+    <h3 id="cap-5-6">4. Creșterea numărului de Recenzii de la pacienți [KPI 4]</h3>
+    <p>Această procedură are scopul de a încuraja pacienții să ofere recenzii și feedback despre experiența lor prin răspunsul la SMS-ul trimis de Dr. Ardeleanu la momentul plății tratamentelor realizate în clinică.</p>
+
+    <h4>Obiective:</h4>
+    <p>(i) Creșterea numărului de recenzii pozitive din partea pacienților pe platformele dedicate de feedback prin SMS. Recenziile pozitive contribuie la consolidarea imaginii clinicii și atragerea de noi pacienți.</p>
+    <p>(ii) Îmbunătățirea continuă a calității serviciilor oferite pe baza feedback-ului primit.</p>
+    <p>(iii) Creșterea vizibilității și credibilității clinicii pe platformele de recenzii.</p>
+    <p>(iv) Fidelizarea pacienților și consolidarea unei relații de încredere cu aceștia.</p>
+    <p>(v) Încurajarea echipei medicale  să ofere servicii de înaltă calitate pentru a obține recenzii pozitive.</p>
+
+    <h4>Procedura de abordare a Pacienților în vederea Creșterii numărului de Recenzii de la Pacienți:</h4>
+    <p>Registratorii medicali trebuie să abordeze pacienții la finalul fiecărei vizite pentru a-i încuraja să lase o recenzie.</p>
+    <p>După fiecare vizită în clinică, pacienții vor primi un mesaj SMS de la clinica Dr. Ardeleanu cu un link direct către platformele de feedback și vor fi încurajați să ofere recenzii despre experiența lor.</p>
+    <p>În mod special vor fi încurajați pacienții mulțumiți să își împărtășească experiența pozitivă, pentru a putea valorifica permanent  feedback-ul constructiv.</p>
+
+    <h4>Exemple de abordări pentru creșterea numărului de recenzii:</h4>
+    <p><strong>Abordare prietenoasă și directă la finalul vizitei:</strong> „Doamnă/Domnule [Nume pacient], ne bucurăm că ați fost astăzi cu noi. Ne-ar ajuta foarte mult dacă ați putea să ne oferiți o recenzie pe Google despre experiența dvs. in clinica noastră. Este o modalitate prin care ne putem asigura că ne ridicăm mereu la nivelul așteptărilor dvs.!”</p>
+    <p><strong>Abordare personalizată:</strong> „Suntem foarte încântați că ați avut o experiență plăcută astăzi. Dacă aveți câteva momente libere, ne-ar bucura o recenzie din partea dvs. – ne-ar ajuta să îmbunătățim și mai mult serviciile oferite tuturor pacienților noștri!”</p>
+    <p><strong>Abordare prin SMS:</strong> „Vă mulțumim că ne-ați vizitat astăzi! Dacă ați fost mulțumit(ă) de serviciile noastre, v-am trimis un SMS prin care puteți lăsa o recenzie. Feedback-ul dvs. este foarte important pentru noi!”</p>
+    <p><strong>Abordare de fidelizare</strong> „Ne dorim să avem grijă de pacienții noștri fideli și apreciem mult opiniile dvs. Orice recenzie sau feedback pe care ni-l puteți oferi ne ajută să îmbunătățim continuu serviciile.”</p>
+    <p><strong>Abordare de recunoaștere:</strong> „Vă mulțumim pentru vizita dvs.! Dacă ați fost mulțumit(ă) de tratamentul și echipa noastră, v-am fi recunoscători dacă ați putea lăsa o recenzie pentru a-i ajuta și pe alți pacienți să ia decizii informate.”</p>
+    <p><strong>Abordare empatică:</strong> „Ne bucurăm că am putut să vă ajutăm astăzi. Dacă vă simțiți confortabil, ne-ar plăcea să auzim părerea dvs. printr-o recenzie. Opiniile dvs. ne ajută să ne îmbunătățim constant.”</p>
+
+    <p><strong>Raportare:</strong> Numărul efectiv de recenzii per clinică este raportat în fiecare saptamana dar și lunar, de către colegii din departamentul de controlling (business intelligence).</p>
+
+    <h3 id="cap-5-7">Alte Obiective și responsabilități de Vanzari:</h3>
+
+    <h3 id="cap-5-8">5. Creșterea Ratei de Succes a aducerii pacienților în clinică în procesul de  Recall „La Mulți Ani”, cu acordare voucher</h3>
+    <p>Această procedură are scopul de a crește loialitatea pacienților și de a consolida relația cu aceștia printr-o abordare personalizată, oferindu-le un gest de apreciere cu ocazia zilei de naștere. Registratorul Medical este responsabil pentru gestionarea procesului de contactare a pacienților aniversați, prin care le transmite urări de „La Mulți Ani” și le oferă un voucher pentru servicii stomatologice.</p>
+
+    <h4>Obiective:</h4>
+    <p>(i) Crearea unei experiențe pozitive pentru pacienți printr-o abordare personalizată.</p>
+    <p>(ii) Stimularea revenirii pacienților în clinică prin utilizarea voucherului oferit.</p>
+    <p>(iii) Creșterea loialității pacienților și a valorii pe termen lung (LTV).</p>
+
+    <h4>Procedura de Contactare a Pacienților pentru Recall „La Mulți Ani”:</h4>
+    <p><strong>Preluarea listei aniversaților:</strong> lista pacienților care urmează să fie aniversați, este primită de la Departamentul de Controlling/BI, la începutul fiecărei luni pentru luna în curs. Lista va include numele pacientului, numărul de telefon și data nașterii.</p>
+    <p><strong>Contactarea telefonică a pacienților:</strong> Pacienții vor fi contactați telefonic în ziua aniversării lor. Dacă ziua de naștere pica într-o zi nelucratoare, pacienții vor fi sunati inainte. Dacă pacientul nu răspunde („Nu răspunde”), se va încerca un al doilea apel în aceeași zi, la o distanța de 3-4 ore.</p>
+    <p><strong>Transmiterea urărilor și a informațiilor despre voucher:</strong> Registratorul Medical va transmite pacientului un mesaj personalizat, urându-i „La Mulți Ani” și informandu-l despre voucherul aniversar: Valoarea voucherului: 100 de lei. [valoarea este stabilita anual, de către echipa de management]. Utilizarea voucherului: poate fi folosit pentru orice tratament stomatologic în termen de 30 de zile de la emitere.</p>
+    <p><strong>Documentarea contactelor:</strong> Fiecare apel va fi înregistrat în fișierul „Recall_La_Mulți_Ani”, indicând data apelului, rezultatul acestuia (apel reușit, pacient necontactabil) și eventualele observații (ex. preferințe privind utilizarea voucherului).</p>
+
+    <h4>Exemple de Abordări Telefonice:</h4>
+    <p><strong>1.  Primul apel:</strong> „Bună ziua, domnule/doamnă [Nume Pacient], Sunt [Nume Registrator] de la Clinică [Nume Clinică]. Vă sun cu ocazia zilei dumneavoastră de naștere pentru a vă spune La Mulți Ani! și pentru a vă oferi un mic cadou din partea clinicii noastre – un voucher în valoare de 100 de lei, pe care îl puteți folosi la următoarea vizită. Cum vi se pare această surpriză?”</p>
+    <p><strong>2.  Apel în caz de „Nu răspunde”:</strong> „Bună ziua, sunt [Nume Registrator] de la Clinica [Nume Clinică]. V-am sunat pentru a vă ura La Mulți Ani cu ocazia zilei dumneavoastră de naștere și pentru a vă informa despre voucherul aniversar pe care vi-l oferim. Vă rog să ne contactați la acest număr când aveți disponibilitate, pentru mai multe detalii.”</p>
+    <p><strong>3. Pacient răspunde și confirmă primirea voucherului:</strong> „Mulțumim că ați răspuns! Voucherul dumneavoastră este valabil timp de 30 de zile și îl puteți folosi pentru orice tratament stomatologic. Dacă doriți, vă pot programa acum pentru următoarea vizită sau puteți reveni când aveți disponibilitate.,,</p>
+    <p><strong>4. Apel pentru pacient necontactabil după mai multe încercări:</strong> „Bună ziua, domnule/doamnă [Nume Pacient]. Am încercat să vă contactăm pentru a vă transmite urările noastre de ziua dumneavoastră și pentru a vă informa despre voucherul aniversar oferit din partea clinicii. Voucherul este valabil 30 de zile, iar pentru detalii sau programări vă rugăm să ne contactați la numărul [număr clinică].”</p>
+
+    <p>Voucherul va fi înregistrat în contul pacientului [avansuri] în softul clinicii pentru a putea fi utilizat. Registratorii Medicali vor raporta săptămânal coordonatorului progresul campaniei și feedback-ul primit de la pacienți. Această procedură ajută la menținerea unei relații apropiate cu pacienții, consolidand imaginea clinicii și promovând loialitatea.</p>
+    <p><strong>Raportare:</strong> Numărul efectiv de pacienți programați în clinică prin procesul de Recall “La Mulți Ani” este este monitorizat raportat în fiecare saptamana dar și lunar, de către colegii din departamentul de controlling (business intelligence).</p>
+
+    <h3 id="cap-5-9">5. Creșterea Ratei de Programări Viitoare</h3>
+    <p>Această procedură are scopul de a asigura creșterea ratei de retenție și optimizarea programului clinicii prin garantarea faptului că toți pacienții ar trebui sa aiba înregistrată o programare viitoare în SPSS, înainte de a părăsi clinica. Astfel, se optimizează programul de lucru al medicilor și se îmbunătățește satisfacția pacienților, contribuind la o gestionare eficientă a fluxului de pacienți.</p>
+
+    <h4>Obiective:</h4>
+    <p>(i)Asigurarea că fiecare pacient părăsește clinica cu o programare viitoare activă în calendarul SPSS.</p>
+    <p>(ii)Creșterea gradului de reținere a pacienților și a fidelizării acestora.</p>
+    <p>(iii)Optimizarea programului medicilor prin planificarea din timp a vizitelor viitoare.</p>
+    <p>(iv)Crearea unui flux eficient de comunicare între registratorii medicali, medici și coordonatorii de pacienți/clinică pentru gestionarea programărilor viitoare.</p>
+
+    <h4>Procedura de abordare  a Pacienților în Procesul de efectuare a programărilor viitoare:</h4>
+    <p>Registratorii medicali trebuie să se asigure că fiecare pacient, înainte de a părăsi clinica, are înregistrată o programare viitoare activă în sistemul SPSS.</p>
+    <p>În cazul în care constată că un pacient nu are o programare viitoare activă zn SPSS, registratorul va contacta medicul, coordonatorul de pacienți sau coordonatorul clinicii pentru a îi informa că pacientul nu are o programare viitoare în soft.</p>
+    <p>Registratorul medical va obține informații, recomandări de la echipa medicală și/sau coordonatorul de pacienți/clinică pentru a realiza  o programare viitoare pacienților care au părăsit cabinetul fără a avea înregistrată în soft o programare viitoare..</p>
+    <p>Pacienții care refuză o programare viitoare vor fi înregistrați în sistem cu o notă specifică și vor fi recontactați conform unui plan de urmărire.</p>
+
+    <h4>Exemple de abordări utilizate pentru efectuarea unei programări viitoare:</h4>
+    <p><strong>Abordare directă:</strong> „Doamna/ Domnule [Nume pacient], pentru a vă menține sănătatea orală la cel mai înalt nivel, vă recomandăm să programați următoarea vizită. Când considerați că ar fi oportun pentru dvs.  să reveniți?”</p>
+    <p><strong>Abordare preventivă:</strong> „Ca să evităm orice disconfort viitor, medicul nostru sugerează să reveniți pentru o verificare în [X] luni. Pot să vă fac acum o programare?”</p>
+    <p><strong>Abordare de fidelizare:</strong> „Pentru pacienții noștri fideli, ne dorim să oferim programări în cele mai convenabile intervale. Ce spuneți dacă stabilim împreună acum următoarea dvs. programare ?”</p>
+    <p><strong>Abordare promotoare:</strong> „Avem câteva locuri disponibile în luna/perioada/lunile următoare și vă putem asigura că veți beneficia de cel mai bun tratament. Vă pot programa acum?”</p>
+    <p><strong>Abordare de urmărire:</strong> „Pentru a vă asigura că tratamentul se desfășoară conform planului, este important să reveniți în [X] zile/luni/săptămâni. Pot să confirm programarea dvs. acum?”</p>
+    <p><strong>Abordare personalizată:</strong> „Medicul dvs. a sugerat să reveniți pentru o verificare preventivă. Să vedem împreună ce dată se potrivește cel mai bine pentru dvs.!”</p>
+
+    <p><strong>Raportare:</strong> Rata de programari viitoare se calculeaza in procent, ca fiind numărul de programari din luna viitoare per total programari din luna precedenta. Acest indicator este raportat în lunar, de către colegii din departamentul de controlling (business intelligence).</p>
+
+    <h3 id="cap-5-10">6. Vanzari pe credit</h3>
+    <p>Această procedură are scopul de a instrui registratorii medicali pentru a prezenta pacienților opțiunea de finanțare prin intermediul creditelor bancare pentru serviciile stomatologice, facilitând accesul la tratamente de calitate.</p>
+    <p>Registratorul medical se implică activ în vânzarea tuturor serviciilor medicale promovând vânzarea acestora prin accesarea creditelor bancare de către pacient. Promovează activ în rândul pacienților soluțiile financiare propuse de partenerii agreați din sistemul bancar.</p>
+
+    <h4>Obiective:</h4>
+    <p>(i) Creșterea accesibilității tratamentelor stomatologice prin oferirea unor soluții de plată flexibile.</p>
+    <p>(ii) Informarea eficientă a pacienților despre opțiunile de finanțare disponibile.</p>
+    <p>(iii) Convingerea pacienților să acceseze serviciile stomatologice prin credite pentru a beneficia de tratamentele necesare fără amânare.</p>
+    <p>(iv) Creșterea numărului de pacienți care optează pentru soluții de finanțare.</p>
+
+    <h4>Procedura:</h4>
+    <p><strong>Asistență informativă:</strong></p>
+    <p>(i) Registratorul medical informează toți pacienții că pot beneficia de servicii stomatologice prin accesarea creditelor bancare direct în clinică.</p>
+    <p>(ii) Registratorul medical se asigură că în urma discuțiilor de evaluare CT și a altor vizite la medicii specialiști care recomandă tratamente cu costuri ridicate pacientul a fost informat de către medic cu privire la opțiunile de tratament și costuri și că pot accesa aceste servicii prin credite bancare.</p>
+    <p>(iii) Registratorul prezintă pacienților detalii despre partenerii bancari agreați de clinică și avantajele fiecărei opțiuni de creditare.</p>
+    <p>(iv) Pune la dispoziția pacientului broșuri informative și contacte utile pentru fiecare partener financiar.</p>
+    <p><strong>Asistență Activă:</strong></p>
+    <p>(i) Registratorul medical explică pașii principali ai procesului de aplicare pentru un credit bancar, clarificând detalii despre documentele necesare și durata procesului.</p>
+    <p>(ii) În cazul în care pacientul este interesat, registratorul medical poate facilita legătura directă între pacient și reprezentantul bancar pentru mai multe informații.</p>
+    <p>(iii) În cazul în care pacientul este interesat realizează aplicația în vederea accesarii creditului bancar.</p>
+    <p>(iv) Dacă a fost aprobată creditarea informează pacientul, medicul curant și coordonatorul clinicii/de pacienți.</p>
+    <p>(v) Înregistrează valoarea creditului ca avans în SPSS.</p>
+    <p>Registratorii medicali se vor asigura că promovarea opțiunilor de finanțare este realizată într-o manieră etică și informativă, conform standardelor clinicii.</p>
+
+    <h4>Exemple de abordare a pacienților:</h4>
+    <p><strong>Abordare informativă:</strong> „Știm că tratamentele stomatologice pot fi o investiție importantă. Avem opțiuni de finanțare prin intermediul unui credit, astfel încât să puteți începe tratamentul imediat și să achitați treptat. Chiar acum vă pot oferi mai multe detalii.”</p>
+    <p><strong>Abordare empatică:</strong> „Înțelegem că unele tratamente pot avea un cost mai mare, însă avem soluții flexibile de finanțare prin bănci partenere, astfel încât să nu fie nevoie să amânați tratamentul. Aș putea să vă prezint chiar acum aceste opțiuni. Creditele se pot accesa direct în clinică în baza cărții de identitate.”</p>
+    <p><strong>Abordare axată pe beneficii:</strong> „Cu un credit bancar, puteți beneficia de tratamentul stomatologic complet acum și să plătiți ulterior în rate convenabile. Așa vă asigurați că sănătatea dentară nu mai este amânată.Chiar acum vă pot oferi mai multe detalii.,,</p>
+    <p><strong>Abordare pentru eliminarea îndoielilor:</strong> „Mulți dintre pacienții noștri aleg să acceseze credite pentru a beneficia imediat de tratamente. Este o soluție sigură și convenabilă. Ați dori să discutăm cum funcționează?”</p>
+    <p><strong>Abordare personalizată:</strong> „Pentru nevoile dvs. dentare specifice, opțiunile de finanțare prin credit sunt o modalitate excelentă de a accesa tratamentele fără stres financiar imediat. Vă pot oferi mai multe informații despre cum puteți aplica?”</p>
+    <p><strong>Abordare convingătoare:</strong> „Finanțarea prin credit este o soluție simplă și accesibilă, astfel încât să nu fie nevoie să faceți compromisuri pentru sănătatea dvs. dentară. Aș putea să vă arăt pașii pentru a accesa acest serviciu?”</p>
+
+    <h3 id="cap-5-11">7. Creșterea Valorii pe Termen Lung (LTV)</h3>
+    <p>Registratorul Medical va interacționa cu pacienții pentru a-i informa cu privire la beneficiile acestor tratamente, va oferi informații și îi va încuraja să ia în considerare aceste opțiuni pentru îngrijirea lor dentară. Eficacitatea acestor eforturi de vânzări și upselling va fi măsurată prin creșterea Valorii pe Termen Lung (LTV) a pacientului mediu al clinicii.</p>
+    <p>Acest indicator este raportat în lunar, per canal (și nu per pacient) de către colegii din departamentul de controlling (business intelligence).</p>
+
+    <!-- ============ 6 Operațional ============ -->
+    <h2 id="cap-6">Responsabilități și activități legate de activitatea operațională</h2>
+
+    <h3 id="cap-6-1">1. Întâmpinarea pacienților</h3>
+    <p>Registratorul Medical întâmpină pacienții cu o atitudine caldă și prietenoasă, îi îndrumă către sală de așteptare sau cabinetul medical corespunzător.</p>
+
+    <h3 id="cap-6-2">2. Gestionarea apelurilor telefonice și a corespondenței electronice</h3>
+    <p>Răspunde și inițiază (i) apeluri telefonice și (ii) mesaje electronice, oferind informații despre serviciile medicale ale clinicii oferind suport în vederea programării la diferite consultații și investigații pentru satisfacția pacientului și creșterea vânzărilor clinicii.</p>
+
+    <h3 id="cap-6-3">3. Administrarea corespondenței</h3>
+    <p>Menține relația cu furnizorii și verifică termenele de livrare pentru a asigura primirea / predarea în timp util a corespondenței. Realizează recepția livrărilor, pachetelor și a  corespondenței primite și le direcționează către destinatari în timp util;</p>
+
+    <h3 id="cap-6-4">4. Identificarea formală a pacienților și gestionarea CNP-ului</h3>
+    <p>Identificarea legală a pacientului prin verificarea actului de identitate și înregistrarea corectă a Codului Numeric Personal (CNP) este o condiție obligatorie pentru realizarea tuturor actelor medicale. Completarea CNP-ului în SPSS:</p>
+    <ul>
+      <li>validează profilul pacientului.</li>
+      <li>deblochează generarea documentelor de onboarding digital;</li>
+    </ul>
+    <p>Nerespectarea acestui flux expune clinică la risc medico-legal și blocaje operaționale.</p>
+
+    <h3 id="cap-6-5">5. Gestionarea programărilor prin telefon (pre-onboarding, programarea telefonică înaintea primei vizite în clinică)</h3>
+    <p>Realizează programările pentru consultații și tratamentele stomatologice prin telefon direct în sistemul SPSS, utilizând câmpurile obligatorii cerute de sistem pentru Profilul Pacientului</p>
+    <table>
+      <thead>
+        <tr><th>Responsabilitate</th><th>Modalitate</th><th>Rezultat așteptat</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Introducerea datelor preliminare obligatorii</td>
+          <td>
+            <ul>
+              <li>Nume;</li>
+              <li>Prenume;</li>
+              <li>Telefon;</li>
+              <li>Email.</li>
+              <li>Clinica Dr.Ardeleanu în care se face prima programare.</li>
+              <li>Localitate de Reședință;</li>
+              <li>Județ;</li>
+              <li>Canal de recomandare (de unde ați auzit de noi?)</li>
+            </ul>
+          </td>
+          <td>Informațiile sunt introduse corect în SPSS, acestea fiind necesare pentru realizarea primei programari. Completarea profilului complet al pacientului se va face în etapa II, de onboarding la vizita în clinică.</td>
+        </tr>
+        <tr>
+          <td>Reamintirea aducerii actului de identitate</td>
+          <td>În cadrul discuției telefonice pentru prima programare, se menționează explicit că fără act de identitate nu pot fi semnate documentele medicale și nu se pot efectua manopere medicale.</td>
+          <td>Pacientul se prezintă în clinică cu CI/pașaport/permis auto (sau certificat de naștere pentru minori) care conține CNP.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="cap-6-6">6. Gestionarea programărilor direct în clinica, - onboarding digital</h3>
+    <p>Asigură înregistrarea digitală a pacientului prin completarea și semnarea de către acesta  a “Dosarului Medical Complet” direct de pe tabletă.</p>
+    <p>In secțiunea SPSS „Formulare personalizate” regasiti urmatoarele formulare de Onboarding Digital, necesare pentru completarea Dosarului Medical Complet al Pacientului:</p>
+    <ul>
+      <li>Dosar medical complet (Include formularele 1, 2, 3, 4) [Adulți]</li>
+      <li>Dosar medical complet (Include formularele 1.1, 2, 3, 4) [Copii]</li>
+    </ul>
+
+    <figure class="dimg">
+      <img src="assets/spss-formulare-onboarding.png" alt="SPSS — secțiunea Formulare personalizate cu formularele de Dosar medical complet și butoanele Semnare tabletă" loading="lazy">
+      <figcaption><span class="fignum">FIG. 6·1</span>SPSS — <strong>Formulare personalizate:</strong> formularele de Dosar Medical Complet [Adulți/Copii] și trimiterea spre semnare pe tabletă.</figcaption>
+    </figure>
+
+    <ul>
+      <li>Formularele digitale de onboarding vor fi trimise spre completare și semnare pe tableta direct de către pacient.</li>
+      <li>Activitatea de trimitere pe tableta se efectuează de către registratorii medicali, numai după completarea CNP-ului.</li>
+      <li>Formularele se vor completa automat cu datele pacientului, care vor bifa opțiunile [DA/NU] și vor semna digital direct pe tabletă.</li>
+      <li>Pentru pacienții noi, după crearea profilului pacientului în SPSS [vezi punctul 4 de mai sus], pacienți vor completa pe tableta, formularul de Dosar Medical Complet [Adulți/Copii], versiunea Adulți sau Copii, care consolidează la un loc toate informațiile legate de: (i) Istoric medical, (ii) Acordul pacientului informat, (iii) Consimtamant pentru proceduri radiologice, și (iv) Nota GDPR.</li>
+      <li>Pacienții vor marca pe tableta doar acolo unde răspunsul este &lt;DA&gt;. Sistemul preia implicit răspunsul &lt;NU&gt; la fiecare întrebare. Aceasta automatizare scurtează timpul petrecut de pacient pentru completarea răspunsurilor pe tableta, și trebuie comunicat pacientului la începerea procesului de onboarding de către registratorul medical.</li>
+    </ul>
+    <p>Dosarul Medical Complet [Adulți/Copii] este obligatoriu sa fie completat la prima vizită a pacientului în clinica și, odată semnat, va fi arhivat digital în SPSS, la secțiunea "Documente" pentru fiecare pacient. Mai multe detalii cu privire la completarea Dosarul Medical Complet [Adulți/Copii] găsiți într-un tutorial video din secțiunea documente ERP.</p>
+
+    <p>Referitor la identificarea formală a pacienților și gestionarea CNP-ului în etapa de onboarding, registratorul medical va proceda în felul următor:</p>
+    <ul>
+      <li><strong>Solicitare și autentificare act de identitate:</strong> Registratorul primește documentul și compară datele deja existente în sistem.</li>
+      <li><strong>Introducerea CNP-ului în SPSS:</strong> Registratorul introduce cu grija cifrele CNP-ului, si face o verificare manuala pentru conformitate.</li>
+      <li><strong>Deblocarea documentelor de onboarding digital:</strong> Dacă CNP-ul lipsește, documentele de onboarding se genereaza cu CNP valoare zero. În acest caz, documentele de onboarding au valoarea nulă.</li>
+      <li><strong>Gestionarea excepțiilor</strong>
+        <ul>
+          <li>Pacient fără act – se accepta pacientul doar în următoarele condiții cumulative:
+            <ul>
+              <li>motive dovedite excepționale;</li>
+              <li>pacientul trimite o copie în clinica în maxim 24 de ore;</li>
+              <li>prezentarea documentului în original la următoarea vizita/programare.</li>
+              <li>consemnarea incidentului la Notițe în SPSS de către registrator.</li>
+            </ul>
+          </li>
+          <li>Minori – se folosește certificatul de naștere și/sau CNP-ul tutorelui se notează suplimentar la consimțământ.</li>
+          <li>Erori de CNP detectate ulterior – se corectează numai cu actul original prezent și se consemnează incidentul la Notițe în SPSS de către registrator.</li>
+        </ul>
+      </li>
+    </ul>
+    <p>CNP-ul este dată cu caracter special. Registratorul: (i) vizualizează CNP-ul doar în scop medical operațional; (ii) nu comunica CNP-ul niciunui terț; (iii) documentele se arhivează digital în secțiunea „Documente” din SPSS, cu acces controlat .</p>
+    <p>Coordonatorul de clinică realizeaza zilnic, un audit aleatoriu  pentru un număr de pacienți noi înregistrați în sistem, pentru corectitudine introducere CNP.</p>
+
+    <h3 id="cap-6-7">7. Gestionarea Consimțămintelor Medicale</h3>
+    <p>Obține semnătura pacienților pe “Consimțămintele Medicale” necesare conform planurilor de tratament, precum  și arhivarea acestora în mod fizic (în cazul chirurgiei și implantologiei).</p>
+    <p>După semnarea formularului de onboarding digital Dosar Medical Complet, pacientul va continua semnarea de Consimtamintele Medicale specifice, conform planului de tratament.</p>
+    <p>În secțiunea SPSS „Formulare personalizate” regasiti următoarele formulare tip Consimtaminte Medicale:</p>
+    <ol start="5">
+      <li value="5">Consimțământ informat privind realizarea tratamentelor chirurgicale</li>
+      <li value="6">Consimțământ informat privind procedura de sedare conștientă pentru intervențiile stomatologice și de chirurgie orală</li>
+      <li value="7">Consimțământ informat privind realizarea tratamentelor ortodontice</li>
+      <li value="8">Consimțământ informat pentru tratamente și proceduri endodontice</li>
+      <li value="9">Consimțământ informat pentru tratamente și proceduri parodontale</li>
+      <li value="10">Consimțământ informat privind realizarea tratamentelor cu toxină botulinică</li>
+      <li value="11">Consimțământ informat privind realizarea tratamentelor cu acid hialuronic</li>
+      <li value="12">Consimțământ informat referitor la sedarea prin protoxid de azot</li>
+      <li value="13">Consimțământ informat privind realizarea de proceduri medicale de Post Endodontie</li>
+      <li value="14">Consimțământ informat privind realizarea tratamentelor protetice</li>
+      <li value="15">Consimțământ informat privind realizarea de tratamente de Mezoterapie cu PRF</li>
+      <li value="16">Consimțământ pentru fotografii realizate în clinică</li>
+    </ol>
+    <p>De exemplu, pentru un tratament endodontic, se va completa documentul nr. 8, sau pentru un tratament la paradontologie se va completa documentul nr.9. Aceste consimtaminte sunt adiționale la Dosarului Medical Complet, al pacientului. Consimțămintele medicale vor fi semnate digital pe tabletă, la solicitarea registratorului medical, în recepție, înainte de intrarea în cabinetul medical.</p>
+    <p>Pentru tratamentele de chirurgie/implantologie, avem o excepție de flux. În cazul intervențiilor de chirurgie, pacientul va semna în mod normal, digital, pe tableta documentul nr. 5, adică “Consimțământ informat privind realizarea tratamentelor chirurgicale” în etapa de onboarding digital. Suplimentar, documentul se printeza după semnarea digitală, iar pacientul va intra în cabinetul medical cu consimțământul printat. În funcție de tratamentele aplicate în cabinet, doctorul va adăuga/completa, după caz, toate tratamentele efectuate pacientului la rubrica de observatii medicale. La finalul intervenției, pacientul semnează olograf documentul care conține inclusiv adnotările medicului.</p>
+    <p>În cazul în care interventia chirurgicala presupune și procedura/tehnica de sedare conștientă, se va semna, -atat digital cat si olograf-, documentul nr.6. adică, “Consimțământul informat privind procedura de sedare conștientă pentru intervențiile stomatologice și de chirurgie orală”.</p>
+    <p>“5.Consimțământul informat privind realizarea intervențiilor chirurgicale” cât și “6.Consimțământul informat privind procedura de sedare conștientă pentru intervențiile stomatologice și de chirurgie orală” se indosariaza fizic în biblioraftul de consimtaminte de chirurgie ale clinicii.</p>
+    <p>Consimtamantul 5. necesita completarile medicului chirurg cât și semnătura olografă a pacientului iar consimtamantul 6. necesita semnatura olografa a pacientului, pentru o protecție legală completa, așa cum este solicitat de către Colegiul Medicilor.</p>
+
+    <h3 id="cap-6-8">8. Gestionarea Instrucțiunilor Medicale Post-Tratament</h3>
+    <p>Comunică “Instrucțiunile Medicale Post-tratament” în funcție de  tratamentele realizate.</p>
+
+    <h3 id="cap-6-9">9. Responsabilitățile de informare a pacientului în cadrul procedurii Radiologie/Imagistica si PACS ADC-PAC-01</h3>
+    <p><strong>Definiții:</strong> PACS-ul este un server unde se stochează radiografiile și imaginile CT ale pacienților. Doctorii utilizează PACS-ul pentru a citi imaginile pacienților. Registratorii medicali joacă un rol esențial în funcționarea sistemului PACS.</p>
+    <p>Procedura pentru pregătirea pacientului în vederea realizarii unei radiografii RX sau CT implică următorii pași din partea Registratorului Medical:</p>
+    <ul>
+      <li>Să se asigure ca pacientul a bifat cu DA acceptul cu privire la efectuarea investigației imagistice [Rx/CT] în cadrul Dosarului Medical Complet.</li>
+      <li>Va anunța asistentul care va face investigația și pune în contact pacientul cu asta pentru realizarea RX/CT.</li>
+      <li>Va comunica asistentului, toate informațiile necesare/relevante despre pacient [ex. persoana însărcinată, persoana cu probleme/dizabilitati speciale, alte informații comunicate de pacient etc]</li>
+      <li>Va informa pacienții că radiografiile RX / CT sunt disponibile exclusiv în format electronic, ceea ce facilitează accesibilitatea și eficiența în gestionarea datelor medicale. Registratorii Medicali trebuie să se asigure pacientul are adresa de e-mail și CNP-ul introdus în sistemul SPSS.</li>
+      <li>Verifică și se asigură pentru toți pacienții că a fost introdus serviciul imagistic în SPSS. În urma discuției cu pacientul, dacă nu este sigur, va discuta atat cu asistenții cât și cu medicii.</li>
+      <li>Pentru pacienții din exteriorul clinicii care folosesc doar serviciul de imagistica al Clinicii, serviciul este înregistrat în SPSS direct de către Registratorul Medical, care încasează și plata serviciului.</li>
+      <li>În cazul în care pacientul nu face pe loc investigația și revine în clinică la o data ulterioara, NU se realizeaza o programare prealabilă în SPSS. Pacientul poate veni oricand în intervalul orar 8-20, iar Registratorul Medical este responsabil pentru introducerea serviciului în SPSS ulterior realizării acestuia și încasează plata.</li>
+    </ul>
+
+    <h3 id="cap-6-10">10. Încasarea Plăților de la Pacienți</h3>
+    <p>Înregistrează în SPSS plățile pacienților pentru serviciile realizate și emit bonurile fiscale în conformitate cu legislația în vigoare. Mai multe detalii cu privire încasarea plăților în SPSS găsiți într-un tutorial video din secțiunea documente ERP.</p>
+
+    <h3 id="cap-6-11">11. Încasarea Avansurilor de la Pacienți</h3>
+    <p>Înregistrează corect în SPSS avansurile încasate de la pacienți pentru planurile de tratament viitoare și descarcarcarea acestora pe măsura efectuării tratamentelor.</p>
+
+    <h3 id="cap-6-12">12. Suport pentru întocmirea Documentelor de Creditare:</h3>
+    <p>Registratorul medical  asigura:</p>
+    <ul>
+      <li>suport la întocmirea documentelor atât în format fizic, cât și electronic tuturor pacienților care solicită accesarea tratamentelor medicale în rate prin instrumente bancare de tip TBI Bank, BT Direct, etc.</li>
+      <li>Solicită departamentului financiar informații despre încasarea sumelor din credit cu ordin de plată.</li>
+      <li>înregistrează în SPSS încasările pacientului, în contul de avansuri al pacientului.</li>
+    </ul>
+
+    <h3 id="cap-6-13">13. Încasarea în rate de la Pacienți</h3>
+    <p>Pentru pacienții care rămân cu rest de plată, în urma tratamentelor efectuate în clinică, obligatoriu se întocmește factura. Exemplarul de factură care rămâne în clinică trebuie să conțină specificațiile plăților/ratelor asumate de pacient, inclusiv termenele de plata a ratelor, confirmate prin semnătura acestuia. Pentru a minimiza riscul de neîncasare, incasarile in rate reprezinta excepții, care sunt limitate la maximum 2-3 cazuri pe lună. Cazurile de pacienți care raman cu rest de plata în clinică se aprobă după cum urmează:</p>
+    <ul>
+      <li>Până la suma de 1.000 lei rămasă de încasat, decizia poate fi luată de către coordonatorul de clinică.</li>
+      <li>Între 1001 lei și 5.000 lei inclusiv, este necesar acordul superiorului direct, Roxana Ștefan, sau Alin Diaconu, după caz.</li>
+      <li>Pentru sumele care depășesc valoarea de 5.000 lei trebuie obținut acordul doamnei doctor Virginia Ardeleanu.</li>
+      <li>Registratorul Medical trebuie sa se asigure că există la dosarul pacientului aceste acorduri, care se pot emite electronic, pe email.</li>
+    </ul>
+
+    <h3 id="cap-6-14">14. Emiterea Facturilor către Pacienți:</h3>
+    <p>Registratorii medicali joacă un rol esențial în întocmirea facturilor: întocmesc și printeaza facturile către pacienți. Facturile se emit în următoarele cazuri:</p>
+    <p>(i) la cererea expresă a pacienților; Mai multe detalii cu privire la emiterea facturilor din SPSS pe persoana fizica, găsiți într-un tutorial video din secțiunea documente ERP.</p>
+    <p>(ii) în cazul în care se solicita de către pacient facturarea pe o societate comercială, registratorul medical va introduce in SPSS datele aceste societăți pentru a putea emite factura. Mai multe detalii cu privire la emiterea facturilor din SPSS către o societate comercială găsiți într-un tutorial video din secțiunea documente ERP.</p>
+    <p>(iii) în mod obligatoriu pentru pacienții care rămân cu rest de plată. În acest caz, pacientul va înscrie olograf restul rămas de plată, va specifica termenul pentru achitare și va semna pe factură., vezi punctul de mai sus.</p>
+    <p>(iv) în cazul în care pacienții sunt cu rest de plata, iar pacientul solicită emiterea facturii pe o persoana juridica, registratorul medical trebuie sa ceara certificatul constatator și sa verifica ca pacientul sa fie administratorul, asociatul sau reprezentantul legal al societății în cauză.</p>
+    <p>(v) facturile emise se printeaza în trei exemplare. Un exemplar ajunge la pacient, exemplarul doi se trimite la sediu cu dosarul de acte contabile lunare, iar exemplarul trei, cel cu detaliile olografe înscrise de pacient [cuantumul ratelor rămase de restituit, și termenele acestora] și semnătura acestuia rămâne în clinica și se indosariaza cronologic în biblioraftul de facturi, dosar care se pastreaza în recepția clinicii.</p>
+
+    <h3 id="cap-6-15">15. Emiterea Altor Documente Medicale în favoarea pacienților:</h3>
+    <ul>
+      <li>Rețete medicale; - emitere din SPSS. Mai multe detalii cu privire la emiterea retetelor din SPSS găsiți într-un tutorial video din secțiunea documente ERP.</li>
+      <li>Adeverințe care atestă faptul că nu lucrăm cu decontări CAS; - emitere din ERP.</li>
+      <li>Scrisori medicale; - emitere ERP.</li>
+      <li>Scutiri medicale; - emitere din ERP.</li>
+    </ul>
+
+    <h3 id="cap-6-16">16. Reducerea Creanțelor Rămase de Încasat de la Pacienți:</h3>
+    <p>Participă activ la colectarea creanțelor rămase neachitate de pacienți.  În ultima zi a lunii departamentul de controlling (business intelligence) actualizează raportul “de Rezolvat” cu sumele rămase de încasat per pacient cumulat de la începutul anului și luna în care s-a generat  creanța, per clinică. Registratorul Medical contactează pacienții pentru achitarea sumelor în rate la scadența convenită, inclusiv pacienții care au ratele neachitate la scadenta convenita. Dar, după cum bine știți, de multe ori, pacienții uită să efectueze plățile, ceea ce ne obligă să investim timp în reamintirea acestora.</p>
+
+    <h4>Exemple de abordare a pacienților:</h4>
+    <p><strong>1. Abordare prietenoasă și informativă pentru un pacient cu restanțe:</strong> ,,Bună ziua, domnule/doamnă [Nume Pacient], sunt [Nume Registrator] de la clinica [Nume Clinică]. Vă sun pentru a vă reaminti de tratamentul efectuat în data de [data tratamentului] și de faptul că mai există o sumă restantă de [sumă]. Dacă doriți, vă pot oferi detalii suplimentare sau putem stabili împreună o dată convenabilă pentru achitarea acesteia. Totodată, avem și opțiuni de plată în rate, dacă vă este mai ușor. Cum preferați să procedăm?,,</p>
+    <p><strong>2. Abordare empatică pentru pacienți cu dificultăți financiare:</strong> ,,Bună ziua, domnule/doamnă [Nume Pacient], Vă contactez din partea clinicii [Nume Clinică]. Am observat că mai există o sumă restantă de [sumă] pentru tratamentul realizat. Înțelegem că pot apărea uneori dificultăți financiare, așa că dorim să vă informăm că putem găsi împreună o soluție, inclusiv plata în rate. Ne-ar face plăcere să discutăm o variantă convenabilă pentru dumneavoastră. Cum vi s-ar părea o astfel de opțiune?,,</p>
+    <p><strong>3. Abordare pentru pacienți care accesează plata în rate:</strong> ,,Bună ziua, domnule/doamnă [Nume Pacient], Sunt [Nume Registrator] de la clinica [Nume Clinică]. Vă contactez pentru a confirma opțiunea de plată în rate pentru tratamentul stomatologic efectuat. Momentan, suma totală este de [sumă], iar prima rată este de [sumă], cu scadență pe data de [data]. Vă reamintesc că aveți la dispoziție detalii suplimentare oricând aveți nevoie. Cum vi se pare acest plan?,,</p>
+    <p><strong>4. Abordare directă pentru reamintirea unei rate restante:</strong> ,,Bună ziua, domnule/doamnă [Nume Pacient], Sunt [Nume Registrator] de la clinica [Nume Clinică]. Vă contactez pentru a vă reaminti că următoarea rată pentru tratamentul dumneavoastră este scadentă de câteva zile, în valoare de [sumă]. Aș dori să vă întreb dacă ați reușit să efectuați plata sau dacă putem discuta despre o eventuală prelungire a termenului. Suntem aici să găsim o soluție convenabilă pentru dumneavoastră!,,</p>
+    <p><strong>5. Abordare pentru reconfirmarea detaliilor planului de rate:</strong> ,,Bună ziua, domnule/doamnă [Nume Pacient], Sunt [Nume Registrator] de la clinica [Nume Clinică]. Vă mulțumim că ați ales să continuați tratamentul cu noi și pentru încrederea acordată! Vă contactez pentru a reconfirma detaliile planului dumneavoastră de plată în rate: suma totală este de [sumă], cu rate lunare de [sumă] până la [data finală]. Dacă aveți întrebări sau dificultăți, vă rog să nu ezitați să mă contactați!,,</p>
+    <p><strong>6. Abordare pentru un pacient care întârzie plata unei rate:</strong> ,,Bună ziua, domnule/doamnă [Nume Pacient], Sunt [Nume Registrator] de la clinica [Nume Clinică]. Am observat că rata pentru tratamentul dumneavoastră, scadentă pe [data], încă nu a fost achitată. Este posibil să fi intervenit o întârziere sau o problemă? Vă rog să mă informați dacă există ceva cu care vă putem ajuta, iar dacă aveți nevoie, putem discuta despre opțiuni flexibile pentru plată. Ne dorim să continuăm colaborarea cu dumneavoastră în cele mai bune condiții!.,,</p>
+
+    <p>Urmare a rezolutiei de achitare agreate cu pacientul, Registratorul Medical va completa informațiile în fișierul “de Rezolvat” cu privire la Status, Observații si Modalitatea de inchidere/a plății. Rezoluțiile de inchidere per pacient vor fi verificate de către superiorul ierarhic, adică de coordonatorul de clinică. Rezoluțiile și modul de închidere a creanțelor agreate cu pacienții sunt următoarele:</p>
+    <p><strong>“Rezolvat”</strong> – suma scadenta s-a încasat de la pacient, încasare care a rezultat din următoarele situații:</p>
+    <ul>
+      <li>tratamente dublate;</li>
+      <li>a fost sunat pacientul și acesta a achitat;</li>
+      <li>avea avansuri și plata a fost stinsa din avans;</li>
+      <li>plata în euro – în SPSS prețul tratamentelor se modifica cu zero!</li>
+    </ul>
+    <p><strong>“În lucru”</strong> - rămîn pacienții care:</p>
+    <ul>
+      <li>au fost sunați și au promis ca vin să achite,</li>
+      <li>pacienții cu programări ulterioare sau</li>
+      <li>rău platnicii (care rămân cu sumele neachitate în istoric)</li>
+    </ul>
+    <p><strong>“Pierderi”</strong> - aceasta rezolutie apare în situația când pacienții au fost sunați și refuză să plătească și există certitudinea că aceste sume nu vor fi recuperate – în SPSS prețul tratamentelor se modifica cu zero!</p>
+
+    <h3 id="cap-6-17">17. Gestionarea Documentelor</h3>
+    <p>Registratorul medical se asigura de indosarierea următoarelor documente esentiale la nivel de recepție:</p>
+    <ul>
+      <li><strong>Dosarul de Chirurgie [biblioraft 1]:</strong> în acest dosar se pastreaza cronologic, toate consimtamintele de chirurgie și sedare [document 5, 6] cu toate semnăturile olografe necesare.</li>
+      <li><strong>Dosarul de Facturi Pacient [biblioraft 2]:</strong> în acest dosar se pastreaza cronologic toate facturile emise către pacient asigurandu-se ca documentele sunt originale și au inscriese toate mențiunile și semnăturile olografe necesare.</li>
+      <li><strong>Dosarul de Planuri de Tratament [biblioraft 3]:</strong> de protetica, chirurgie și/sau planurile cu valoare de peste 5000 RON, asigurandu-se ca pacientul a semnat olograf planul de tratament.</li>
+    </ul>
+
+    <h3 id="cap-6-18">18. Relaționare cu Laboratoarele de Tehnică Dentară</h3>
+    <p>Asigură trimiterea și monitorizează primirea în timp util, a lucrărilor de tehnică dentară. Este o punte de legatura dintre firma de curierat și laboratoarele de tehnica dentara.</p>
+
+    <h3 id="cap-6-19">19. Menținerea unui ambient plăcut</h3>
+    <p>Participă activ la crearea unei atmosfere plăcute în recepția fiecărei clinici. Exemple:</p>
+    <ul>
+      <li>este cu zambetul pe buze.</li>
+      <li>menține muzica adecvata în surdina în recepția clinicii,</li>
+      <li>calmează pacienții irascibili, evita</li>
+      <li>calmează situațiile conflictuale de orice fel,</li>
+      <li>întreține dialogul cu pacienții care sunt în așteptare.</li>
+    </ul>
+
+    <h3 id="cap-6-20">20. Acordă suport colegilor din clinică</h3>
+    <p>la cererea acestora sau în perioada de integrare a noului angajat, astfel încât să contribuie la crearea unei relații de colegialitate și de suport reciproc;</p>
+
+    <!-- ============ 7 Operațional-financiar ============ -->
+    <h2 id="cap-7">Responsabilități și activități legate de activitatea operațional - financiară</h2>
+
+    <h3 id="cap-7-1">Încasare pacient:</h3>
+    <ul>
+      <li>Operează pe casa de marcat suma achitată de pacient conform modalității de plată (card/cash);</li>
+      <li>Generează “Z-ul” casei de marcat, o singură dată, la sfârșitul zilei. Acesta va cuprinde toate încasările din ziua respectivă (card/cash);</li>
+      <li>Generează “Settlement-ul” de pe terminalele POS, o singură dată, la sfârșitul zilei. Acesta va cuprinde toate încasările de tip card din ziua respectivă;</li>
+      <li>Generează raportul lunar de încasări al casei marcat, obligatoriu în ultima zi din luna respectivă;</li>
+    </ul>
+
+    <h3 id="cap-7-2">Întocmește Registrul de Casă:</h3>
+    <ul>
+      <li>Întocmește zilnic Registru de Casă, în format digital, în platforma ERP erp.clinicile-ardeleanu.ro.Registrul de casa se completeaza automat de ERP astfel: în coloana încasări se trece valoarea numerarului ce apare pe Z-ul zilnic iar în coloana plăti, (i) încasările cu cardul, (ii) bonurile fiscale, (iii) dispoziţiile de plată, (iv) chitanţe, etc.;</li>
+      <li>Printează registrul la sfârșitul fiecărei zile lucrătoare și îl arhivează fizic, fiecare într-un dosar dedicat, pentru a respecta reglementările legislative;</li>
+      <li>Atunci când plătește facturi cu numerar din recepţie, verifică factura respectivă şi chitanța/bonul fiscal aferent și le atașează în registrul de casă la ziua curentă;</li>
+    </ul>
+
+    <h3 id="cap-7-3">Realizează Operațiunile de Casierie:</h3>
+    <ul>
+      <li>Gestionează și menține în permanență acuratețea fondurilor înregistrate zilnic în casierie;</li>
+      <li>Dacă se constata erori cu privire la înregistrările contabile de casierie, Registratorul Medical anunța șeful ierarhic care face corecturile. Modificările retroactive [după mai mult de 24h] nu sunt permise în ERP.</li>
+    </ul>
+
+    <h3 id="cap-7-4">Modalitate de a restituire pentru avansurile plătite:</h3>
+    <p>În cazul în care pacientul dorește sa isi recupereze avansul Registratorul Medical urmează următorii pași:</p>
+    <p>1. Informează superiorul direct.</p>
+    <p>2. Avansul se restituie doar  cu acordul superiorului ierarhic.</p>
+    <p>3. Pentru restituire urmărește următorul algoritm: Apasă butonul "Adaugă Plata" cu "Adaugă restituire" în meniul Pacienți &gt; Pacient &gt; Plăti.</p>
+
+    <h3 id="cap-7-5">Depune numerarul la bancă:</h3>
+    <ul>
+      <li>Urmărește să nu rămână sold in casierie de pe o zi pe alta mai mare de 50,000 RON prin depunerea numerarului la bancă în baza împuternicirii,</li>
+      <li>Depunerea se face zilnic sau ori de câte ori este nevoie pentru incadrarea in plafonul reglementat conform legislației în vigoare.</li>
+    </ul>
+
+    <h3 id="cap-7-6">Întocmește și trimite Dosarul de Contabilitate Primara, la sediul central.</h3>
+    <ul>
+      <li>Transmite către sediu Dosarul de Contabilitate Primară care contine si Registrul de Casă, în primele 3 (trei) zile lucrătoare ale lunii următoare; Dosarul va conține: copii după (i) rapoartele zilnice de încasări din SPS Stoma, (ii) Z-urile zilnice, (iii) Settlement-urile zilnice, (iv) chitanțe, (v) facturi, (vi) bonuri fiscale și (vii) copie dupa Registrul de Casă zilnic printat din ERP.</li>
+      <li>În cursul anului 2025, Dosarul de Contabilitate Primara se va scana și încărca direct în ERP.</li>
+    </ul>
+
+    <!-- ============ 8 KPI ============ -->
+    <h2 id="cap-8">Monitorizarea Indicatorilor cheie de performanță/ KPI-urilor</h2>
+
+    <h3 id="cap-8-1">Indicatorii cheie de performanță:</h3>
+    <ul>
+      <li>Creșterea Ratei de Conversie din Leaduri;</li>
+      <li>Creșterea Ratei de Succes a Aducerii Pacienților în Clinică în Procesul de Recall 180.</li>
+      <li>Creșterea Numărului de Recenzii de la Pacienți;</li>
+      <li>Reducerea Ratei Anulărilor/Reprogramărilor;</li>
+    </ul>
+    <ul>
+      <li>Instrumentul de monitorizare a indicatorilor cheie de performanță se realizeaza prin Raportul de Performanta pregătit zilnic de către Departamentul de Business Intelligence, cât și prin analiza fișierelor interne specifice.</li>
+      <li>Monitorizarea indicatorilor cheie de performanță are loc zilnic/săptămânal/lunar.</li>
+      <li>Procesul de monitorizare este realizat de către Coordonatorii de pacienți/clinică.</li>
+      <li>Coordonatorii de Pacienți/Clinică vor oferi feedback continuu despre activitatea Registratorului Medical superiorului direct și vor iniția acțiuni pentru îmbunătățirea constantă a indicatorilor cheie de performanță împreună cu superiorul direct.</li>
+    </ul>
+
+    <!-- ============ 9 Evaluarea performanței ============ -->
+    <h2 id="cap-9">Evaluarea performanței Registratorului Medical</h2>
+    <p>Calitatea activităților realizate se măsoară prin următorii indicatori de performanță:</p>
+
+    <h3 id="cap-9-1">Obiective cantitative:</h3>
+    <ul>
+      <li>Creșterea Ratei de Conversie din Leaduri;</li>
+      <li>Creșterea Ratei de Succes a Aducerii Pacienților în Clinică în Procesul de Recall 180.</li>
+      <li>Reducerea Ratei Anulărilor/Reprogramărilor;</li>
+      <li>Creșterea Numărului de Recenzii de la Pacienți;</li>
+    </ul>
+
+    <h3 id="cap-9-2">Obiective calitative:</h3>
+    <ul>
+      <li>Obținerea unui calificativ mediu lunar (scoring) de 80% la testele grilă de perfecționare continuă a cunoștințelor din platforma erp.clinicile-ardeleanu.ro. Realizarea obiectivului lunar mediu de 80% la testele de perfecționare continuă este esențial.</li>
+    </ul>
+
+    <h3 id="cap-9-3">Fișa bonus lunar: [exemplu la nivel de clinică, echipa registratori medicali]</h3>
+    <table>
+      <thead>
+        <tr><th>KPI Performanta</th><th>Pondere</th><th>Performanta buna</th><th>Performanța foarte buna</th><th>Performanta Excelenta</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Conversie leaduri [Facebook]</td><td>30%</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td></tr>
+        <tr><td>Conversie Recall 180</td><td>30%</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td></tr>
+        <tr><td>Recuperari din anulari/neprezentari</td><td>30%</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td></tr>
+        <tr><td>Recenzii pacienți [feedback SMS]</td><td>10%</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td><td>obiectiv per clinică</td></tr>
+        <tr><td><strong>Bonus lunar net / registrator medical</strong></td><td><strong>100%</strong></td><td><strong>250 RON</strong></td><td><strong>350 RON</strong></td><td><strong>600 RON</strong></td></tr>
+      </tbody>
+    </table>
+    <p><strong>Condiție de eligibilitate:</strong> bugetul lunar al clinicii este atins, și atingerea obiectivului de minim 80% la testele grila de Perfecționare Continuă ERP.</p>
+    <ul>
+      <li>Indicatorii de performanță se actualizează anual/pe ciclu bugetar, sau ori de câte ori este nevoie.</li>
+      <li>Monitorizarea indicatorilor se face lunar.</li>
+      <li>Perioada de evaluare a performanțelor se realizează lunar sau ori de câte ori se consideră necesar de către superiorul ierarhic.</li>
+    </ul>
+
+    <!-- ============ § Registru de modificări ============ -->
+    <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
+         data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
+    <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 1</strong> · 30 mai 2025.</p>
+    <table>
+      <thead>
+        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>30 mai 2025</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V4.1 (ADC-REC-01) — punctul de pornire al acestui registru.</td></tr>
+      </tbody>
+    </table>
+
+  </article>
+</div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h5>Clinicile Dr. Ardeleanu</h5>
+      <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
+      <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
+    </div>
+    <div>
+      <h5>Document</h5>
+      <p>Cod: ADC-REC-01</p>
+      <p>Ediția V4.1</p>
+      <p>Mai 2025</p>
+      <p>9 capitole</p>
+    </div>
+    <div>
+      <h5>Rețea</h5>
+      <p>8 clinici în 7 orașe</p>
+      <p>80+ medici supraspecializați</p>
+      <p>30.000+ pacienți unici</p>
+      <p>4.9★ Google · 2.950 recenzii</p>
+    </div>
+    <div>
+      <h5>Contact &amp; Acces</h5>
+      <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
+      <p>031 99 63</p>
+      <p><a href="mailto:clinici@ardeleanu.ro">clinici@ardeleanu.ro</a></p>
+      <p>ERP intern: erp.clinicile-ardeleanu.ro</p>
+    </div>
+  </div>
+  <div class="din-2017">
+    <span>DIN 2017</span>·<span>EXCELENȚĂ</span>·<span>ACCESIBILITATE</span>·<span>FAMILIE</span>
+  </div>
+</footer>
+
+<script>
+// Highlight current section in TOC on scroll
+(function(){
+  const links = document.querySelectorAll('.toc-side a[href^="#"]');
+  const map = new Map();
+  links.forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el) map.set(el, a);
+  });
+  if(!map.size) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a = map.get(e.target);
+        if(a) a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-15% 0px -75% 0px'});
+  map.forEach((a,el)=>io.observe(el));
+})();
+
+// Collapsible TOC sub-sections
+(function(){
+  function openSub(btn, target){
+    btn.setAttribute('aria-expanded','true');
+    target.removeAttribute('hidden');
+  }
+  function toggleSub(btn, target){
+    const open = btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', open?'false':'true');
+    if(open){target.setAttribute('hidden','')} else {target.removeAttribute('hidden')}
+  }
+  document.querySelectorAll('.toc-toggle').forEach(btn=>{
+    const id = btn.getAttribute('aria-controls');
+    const target = id ? document.getElementById(id) : null;
+    if(!target) return;
+    // Chevron toggles (and stops propagation so parent link doesn't navigate)
+    btn.addEventListener('click',(e)=>{
+      e.preventDefault();e.stopPropagation();
+      toggleSub(btn, target);
+    });
+    // Parent link click: also open the sublist (still navigates)
+    const row = btn.closest('.row-with-sub');
+    const parentLink = row?.querySelector('a[href^="#"]');
+    if(parentLink){
+      parentLink.addEventListener('click',()=>{
+        openSub(btn, target);
+      });
+    }
+  });
+  // Auto-expand when a child section comes into view
+  document.querySelectorAll('.toc-side ol.sub').forEach(sub=>{
+    const id = sub.id;
+    const btn = document.querySelector('.toc-toggle[aria-controls="'+id+'"]');
+    if(!btn) return;
+    sub.querySelectorAll('a[href^="#"]').forEach(a=>{
+      const tid = a.getAttribute('href').slice(1);
+      const el = document.getElementById(tid);
+      if(!el) return;
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting && btn.getAttribute('aria-expanded')!=='true'){
+            openSub(btn, sub);
+          }
+        });
+      },{rootMargin:'-10% 0px -80% 0px'});
+      io.observe(el);
+    });
+  });
+})();
+</script>
+<div class="readbar" aria-hidden="true"></div>
+<button class="totop" id="totop" aria-label="Sus">↑</button>
+<script>
+// ============ PLATFORM FRAME (unified) ============
+(function(){
+  // ---- reading progress ----
+  var bar=document.querySelector('.readbar');
+  function upBar(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  }
+  window.addEventListener('scroll',upBar,{passive:true}); upBar();
+
+  // ---- back to top ----
+  var totop=document.getElementById('totop');
+  window.addEventListener('scroll',function(){ totop.classList.toggle('show', window.scrollY>600); },{passive:true});
+  totop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // ---- mobile drawer ----
+  var sidebar=document.querySelector('.toc-side');
+  var menuBtn=document.getElementById('menuBtn');
+  function openMenu(){
+    sidebar.classList.add('open');
+    document.body.classList.add('menu-open');
+  }
+  function closeMenu(){
+    if(!sidebar.classList.contains('open')) return;
+    sidebar.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  }
+  if(menuBtn&&sidebar){
+    menuBtn.addEventListener('click',function(){
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    sidebar.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(){ if(window.innerWidth<=980) closeMenu(); });
+    });
+    document.addEventListener('click',function(e){
+      if(!sidebar.classList.contains('open')) return;
+      if(sidebar.contains(e.target)||menuBtn.contains(e.target)) return;
+      closeMenu();
+    });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMenu(); });
+    // iOS Safari ignores overflow:hidden on body during touch drags — block the
+    // gesture by hand for touches that start outside the open drawer, so the
+    // page underneath can't steal the scroll.
+    document.addEventListener('touchmove',function(e){
+      if(sidebar.classList.contains('open') && !sidebar.contains(e.target)) e.preventDefault();
+    },{passive:false});
+  }
+
+  // ---- search (filter cuprins) ----
+  var search=document.getElementById('search');
+  if(search&&sidebar){
+    var norm=function(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); };
+    var groups=[].slice.call(sidebar.querySelectorAll('.group'));
+    search.addEventListener('input',function(){
+      var q=norm(search.value.trim());
+      groups.forEach(function(g){
+        var visible=0;
+        [].slice.call(g.children).forEach(function(child){
+          if(child.tagName!=='OL') return;
+          [].slice.call(child.children).forEach(function(li){
+            var sub=li.querySelector('ol.sub');
+            var mainLink=li.querySelector(':scope > a, :scope > .row-with-sub a');
+            var mainMatch=!q||(mainLink&&norm(mainLink.textContent).indexOf(q)!==-1);
+            var subMatch=false;
+            if(sub){
+              [].slice.call(sub.children).forEach(function(sli){
+                var m=!q||norm(sli.textContent).indexOf(q)!==-1;
+                sli.classList.toggle('toc-search-hide', q&&!m&&!mainMatch);
+                if(m) subMatch=true;
+              });
+              sub.classList.toggle('search-open', !!q&&subMatch);
+            }
+            var show=mainMatch||subMatch;
+            li.classList.toggle('toc-search-hide', !!q&&!show);
+            if(show) visible++;
+          });
+        });
+        g.classList.toggle('toc-search-hide', !!q&&visible===0);
+      });
+      if(q&&window.innerWidth<=980) sidebar.classList.add('open');
+    });
+  }
+
+  // ---- keyboard shortcuts ----
+  document.addEventListener('keydown',function(e){
+    var tag=(document.activeElement&&document.activeElement.tagName)||'';
+    if((e.key==='/'||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'))&&tag!=='INPUT'&&tag!=='TEXTAREA'){
+      if(search){ e.preventDefault(); search.focus(); }
+    } else if(e.key==='Escape'&&document.activeElement===search){
+      search.value=''; search.dispatchEvent(new Event('input')); search.blur();
+    }
+  });
+
+  // ---- mobile notice: keep dismissed within session ----
+  try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ var mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
+
+  // ---- partajare manual: butonul apare doar pentru accesul cu parola generală ----
+  var shareBtn=document.getElementById('shareBtn');
+  if(shareBtn){
+    try{ if(sessionStorage.getItem('adcManualeAuth')==='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b') shareBtn.hidden=false; }catch(e){}
+    shareBtn.addEventListener('click',function(){
+      var link=location.origin+location.pathname+'#k='+encodeURIComponent('recep-80fe66');
+      function done(){ var t=shareBtn.innerHTML; shareBtn.innerHTML='✓ Link copiat'; setTimeout(function(){ shareBtn.innerHTML=t; },2200); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:',link); });
+      else window.prompt('Copiază linkul:',link);
+    });
+  }
+})();
+</script>
+</body>
+</html>
