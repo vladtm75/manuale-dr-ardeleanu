@@ -3,6 +3,20 @@
 Site static publicat pe GitHub Pages: **https://vladtm75.github.io/manuale-dr-ardeleanu/**
 Orice commit pe `main` se publică automat în ~1 minut. Nu există build step (`.nojekyll` prezent).
 
+## Acces și partajare (nu strica aceste mecanisme)
+
+- **Parola generală** (echipa internă): gate pe `index.html`; hash-ul SHA-256 e comparat și în
+  scriptul de gate de pe **linia ~4** a fiecărui manual (`sessionStorage.adcManualeAuth`).
+- **Chei per-manual** (partajare externă, ex. un medic primește doar manualul lui): fiecare manual
+  acceptă și propria cheie — prin link `#k=<parola>` sau `localStorage` (`adcAuthMedici` /
+  `adcAuthAsistenti`). Butoanele „Partajează" (homepage + header manual, vizibile doar cu parola
+  generală) copiază linkul cu cheia. Cheile în clar și hash-urile stau în `index.html` și în
+  gate-ul fiecărui manual.
+- **Rotire cheie manual** (revocă linkurile vechi): alege parolă nouă → `printf '%s' 'parola' |
+  shasum -a 256` → înlocuiește hash-ul în gate-ul manualului + `index.html` (MED_HASH/ASM_HASH)
+  și cheia în clar din `SHARE` (index) + butonul din manual.
+- Editările de conținut nu ating aceste scripturi. Dacă un editor cere modificarea lor, doar Vlad aprobă.
+
 ## Cine lucrează aici
 
 - **Vlad (vladtm75)** — owner, aprobă Pull Request-urile.

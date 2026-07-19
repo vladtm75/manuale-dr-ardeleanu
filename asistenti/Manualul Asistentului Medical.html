@@ -1,10 +1,46 @@
 <!doctype html>
 <html lang="ro">
 <head>
-<script>try{if(sessionStorage.getItem('adcManualeAuth')!=='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b'){location.replace('../index.html');}}catch(e){location.replace('../index.html');}</script>
+<script>
+/* Gate: acces cu parola generală (sessionStorage, ca înainte) SAU cu cheia proprie
+   a manualului — memorată în localStorage sau primită printr-un link #k=... */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='c8744365a48398b752517a5e2a5d5cffb79fbdc8354cf17e6ba17b11c54c77e9';
+  var LK='adcAuthAsistenti';
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Manualul Asistentului Medical — Clinicile Dr. Ardeleanu (Ediția V3.0, Mai 2026)</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Manualul Asistentului Medical — Clinicile Dr. Ardeleanu" />
+<meta property="og:description" content="Ghidul Asistentului Medical — fluxul pacientului, protocoale clinice, sterilizare și standarde de performanță. Document intern." />
+<meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/asistenti/Manualul%20Asistentului%20Medical.html" />
+<meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/asistenti/assets/og-asistenti.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta property="og:locale" content="ro_RO" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/asistenti/assets/og-asistenti.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -79,6 +115,13 @@ a:hover{border-bottom-color:var(--brand-primary)}
   font-weight:600;border:1px solid var(--brand-wheat);
 }
 .topbar .pill.dark{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.topbar .mh-share{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 13px;
+  font-family:inherit;font-weight:600;font-size:12px;color:var(--brand-primary);
+  cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
+}
+.topbar .mh-share:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
 .topbar .actions{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-mute)}
 .topbar .actions span{padding:0 8px}
 
@@ -1000,6 +1043,7 @@ html{scroll-behavior:smooth}
   .topbar-inner .crumbs{display:none}
   .topbar-inner .spacer{display:none}
   .topbar-inner .pill{display:none}
+  .topbar-inner .mh-share{display:none}
   .mh-search{display:none}
   /* plasa de siguranta pe telefoane inguste */
   .article{overflow-wrap:break-word}
@@ -1052,6 +1096,7 @@ html{scroll-behavior:smooth}
       <input id="search" type="text" placeholder="Caută în manual…" autocomplete="off" />
       <kbd>/</kbd>
     </div>
+    <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest manual"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
     <span class="pill">ADC-ASM-03</span>
     <span class="pill dark">V3.0 · Mai 2026</span>
   </div>
@@ -6252,6 +6297,18 @@ html{scroll-behavior:smooth}
 
   // ---- mobile notice: keep dismissed within session ----
   try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ var mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
+
+  // ---- partajare manual: butonul apare doar pentru accesul cu parola generală ----
+  var shareBtn=document.getElementById('shareBtn');
+  if(shareBtn){
+    try{ if(sessionStorage.getItem('adcManualeAuth')==='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b') shareBtn.hidden=false; }catch(e){}
+    shareBtn.addEventListener('click',function(){
+      var link=location.origin+location.pathname+'#k='+encodeURIComponent('asist-58b121');
+      function done(){ var t=shareBtn.innerHTML; shareBtn.innerHTML='✓ Link copiat'; setTimeout(function(){ shareBtn.innerHTML=t; },2200); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:',link); });
+      else window.prompt('Copiază linkul:',link);
+    });
+  }
 })();
 </script>
 </body>
