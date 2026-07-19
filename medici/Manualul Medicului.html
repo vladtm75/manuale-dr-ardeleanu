@@ -7,7 +7,7 @@
 <title>Manualul Medicului — Clinicile Dr. Ardeleanu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
     --primary:#7B1C16;        /* Falu Red */
@@ -33,7 +33,7 @@
   html{scroll-behavior:smooth;}
   body{
     margin:0; background:var(--page); color:var(--ink);
-    font-family:"Poppins",system-ui,sans-serif; font-size:15px; line-height:1.62;
+    font-family:"Poppins",system-ui,sans-serif; font-size:15px; line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
   ::selection{ background:var(--primary); color:#fff; }
@@ -116,7 +116,7 @@
   .hatnote{ font-size:12.5px; font-style:italic; color:var(--muted); background:var(--cream); border-left:3px solid var(--amber); padding:7px 12px; border-radius:0 5px 5px 0; margin-bottom:18px; }
   .art-kicker{ display:flex; align-items:center; gap:14px; font-size:11.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:2px 0 0; }
   .art-kicker::before{ content:""; width:44px; height:2px; background:var(--amber); flex:none; }
-  .art-title{ font-family:"Playfair Display",serif; font-weight:800; font-size:clamp(38px,5.6vw,68px); line-height:1.02; color:var(--ink); margin:14px 0 0; letter-spacing:-.01em; }
+  .art-title{ font-family:"Playfair Display",serif; font-weight:800; font-size:clamp(38px,5.6vw,58px); line-height:1.02; color:var(--ink); margin:14px 0 0; letter-spacing:-.01em; }
   .art-title .t2{ display:block; font-style:italic; font-weight:800; color:var(--primary); }
   .art-sub{ font-size:16px; color:var(--muted); margin:10px 0 0; }
   .title-rule{ height:1px; background:var(--line-2); margin:18px 0 0; }
@@ -159,10 +159,10 @@
 
 
   /* sections */
-  h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:30px; color:var(--primary); margin:46px 0 4px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; display:flex; align-items:baseline; gap:12px; }
+  h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; color:var(--primary); margin:48px 0 8px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; display:flex; align-items:baseline; gap:12px; }
   h2.ch .rn{ font-size:20px; color:var(--amber); }
   .ch-desc{ color:var(--muted); font-size:14px; margin:0 0 6px; }
-  h3.sub{ font-family:"Poppins",sans-serif; font-weight:600; font-size:21px; color:var(--ink); margin:34px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line); scroll-margin-top:78px; display:flex; align-items:baseline; gap:10px; }
+  h3.sub{ font-family:"Poppins",sans-serif; font-weight:600; font-size:21px; color:var(--primary); margin:34px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line); scroll-margin-top:78px; display:flex; align-items:baseline; gap:10px; }
   h3.sub .sn{ color:var(--primary); font-weight:700; font-size:18px; font-variant-numeric:tabular-nums; }
   h3.sub .anchor{ opacity:0; font-size:14px; color:var(--faint); transition:opacity .15s; }
   h3.sub:hover .anchor{ opacity:1; }
