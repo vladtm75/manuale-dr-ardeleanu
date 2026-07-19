@@ -969,11 +969,12 @@ html{scroll-behavior:smooth}
   .toc-side{
     position:fixed;left:0;top:56px;bottom:0;width:300px;max-height:none;margin:0;z-index:55;
     background:var(--paper-pure);box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
-    padding:20px 18px 40px;transform:translateX(-105%);transition:transform .25s;
-    -webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;
+    padding:20px 18px 40px;transform:translateX(-105%) translateZ(0);transition:transform .25s;
+    -webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior:contain;
+    touch-action:pan-y;scroll-behavior:auto;
   }
-  .toc-side.open{transform:none}
-  body.menu-open{position:fixed;left:0;right:0;overflow:hidden}
+  .toc-side.open{transform:translateZ(0)}
+  body.menu-open{overflow:hidden}
 }
 @media(max-width:840px){
   .crumbs span{display:none}
@@ -6170,22 +6171,14 @@ html{scroll-behavior:smooth}
   // ---- mobile drawer ----
   var sidebar=document.querySelector('.toc-side');
   var menuBtn=document.getElementById('menuBtn');
-  var menuScrollY=0;
   function openMenu(){
-    menuScrollY=window.scrollY;
     sidebar.classList.add('open');
     document.body.classList.add('menu-open');
-    document.body.style.top=(-menuScrollY)+'px';
   }
   function closeMenu(){
     if(!sidebar.classList.contains('open')) return;
-    var y=menuScrollY;
     sidebar.classList.remove('open');
     document.body.classList.remove('menu-open');
-    document.body.style.top='';
-    void document.body.offsetHeight;
-    window.scrollTo({top:y,left:0,behavior:'instant'});
-    requestAnimationFrame(function(){ if(window.scrollY!==y) window.scrollTo({top:y,left:0,behavior:'instant'}); });
   }
   if(menuBtn&&sidebar){
     menuBtn.addEventListener('click',function(){
@@ -6200,6 +6193,12 @@ html{scroll-behavior:smooth}
       closeMenu();
     });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMenu(); });
+    // iOS Safari ignores overflow:hidden on body during touch drags — block the
+    // gesture by hand for touches that start outside the open drawer, so the
+    // page underneath can't steal the scroll.
+    document.addEventListener('touchmove',function(e){
+      if(sidebar.classList.contains('open') && !sidebar.contains(e.target)) e.preventDefault();
+    },{passive:false});
   }
 
   // ---- search (filter cuprins) ----

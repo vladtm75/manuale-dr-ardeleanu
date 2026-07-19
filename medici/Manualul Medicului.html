@@ -297,13 +297,18 @@
 
   @media(max-width:1040px){
     .shell{ grid-template-columns:minmax(0,1fr); }
-    .sidebar{ position:fixed; left:0; top:64px; bottom:0; height:auto; width:300px; background:var(--surface); z-index:55; box-shadow:6px 0 24px -10px rgba(0,0,0,.25); transform:translateX(-105%); transition:transform .25s; }
-    .sidebar.open{ transform:none; }
+    .sidebar{
+      position:fixed; left:0; top:64px; bottom:0; height:auto; width:300px; background:var(--surface);
+      z-index:55; box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
+      transform:translateX(-105%) translateZ(0); transition:transform .25s;
+      -webkit-overflow-scrolling:touch; overflow-y:scroll; overscroll-behavior:contain;
+      touch-action:pan-y; scroll-behavior:auto;
+    }
+    .sidebar.open{ transform:translateZ(0); }
     .menu-btn{ display:inline-block; }
     .main{ padding:24px 22px 100px; }
     .infobox{ float:none; width:100%; margin:14px 0 20px; }
-    body.menu-open{ position:fixed; left:0; right:0; overflow:hidden; }
-    .sidebar{ -webkit-overflow-scrolling:touch; overscroll-behavior:contain; touch-action:pan-y; }
+    body.menu-open{ overflow:hidden; }
   }
 
   /* floated figure (text wraps around) */
@@ -527,22 +532,14 @@
   // ---- mobile menu ----
   const sidebar=document.getElementById('sidebar');
   const menuBtn=document.getElementById('menuBtn');
-  let menuScrollY=0;
   function openMenu(){
-    menuScrollY=window.scrollY;
     sidebar.classList.add('open');
     document.body.classList.add('menu-open');
-    document.body.style.top=(-menuScrollY)+'px';
   }
   function closeMenu(){
     if(!sidebar.classList.contains('open')) return;
-    const y=menuScrollY;
     sidebar.classList.remove('open');
     document.body.classList.remove('menu-open');
-    document.body.style.top='';
-    void document.body.offsetHeight;
-    window.scrollTo({top:y,left:0,behavior:'instant'});
-    requestAnimationFrame(()=>{ if(window.scrollY!==y) window.scrollTo({top:y,left:0,behavior:'instant'}); });
   }
   menuBtn.addEventListener('click',()=>{ sidebar.classList.contains('open') ? closeMenu() : openMenu(); });
   navLinks.forEach(a=>a.addEventListener('click',()=>{ if(window.innerWidth<=1040) closeMenu(); }));
@@ -552,6 +549,12 @@
     closeMenu();
   });
   document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeMenu(); });
+  // iOS Safari ignores overflow:hidden on body during touch drags — block the
+  // gesture by hand for touches that start outside the open drawer, so the
+  // page underneath can't steal the scroll.
+  document.addEventListener('touchmove',(e)=>{
+    if(sidebar.classList.contains('open') && !sidebar.contains(e.target)) e.preventDefault();
+  },{passive:false});
 
   // ---- back to top ----
   const totop=document.getElementById('totop');
