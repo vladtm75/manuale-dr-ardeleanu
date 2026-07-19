@@ -302,7 +302,8 @@
     .menu-btn{ display:inline-block; }
     .main{ padding:24px 22px 100px; }
     .infobox{ float:none; width:100%; margin:14px 0 20px; }
-    body.menu-open{ overflow:hidden; }
+    body.menu-open{ position:fixed; left:0; right:0; overflow:hidden; }
+    .sidebar{ -webkit-overflow-scrolling:touch; overscroll-behavior:contain; touch-action:pan-y; }
   }
 
   /* floated figure (text wraps around) */
@@ -525,13 +526,32 @@
 
   // ---- mobile menu ----
   const sidebar=document.getElementById('sidebar');
-  document.getElementById('menuBtn').addEventListener('click',()=>{
-    sidebar.classList.toggle('open');
-    document.body.classList.toggle('menu-open', sidebar.classList.contains('open'));
+  const menuBtn=document.getElementById('menuBtn');
+  let menuScrollY=0;
+  function openMenu(){
+    menuScrollY=window.scrollY;
+    sidebar.classList.add('open');
+    document.body.classList.add('menu-open');
+    document.body.style.top=(-menuScrollY)+'px';
+  }
+  function closeMenu(){
+    if(!sidebar.classList.contains('open')) return;
+    const y=menuScrollY;
+    sidebar.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    document.body.style.top='';
+    void document.body.offsetHeight;
+    window.scrollTo({top:y,left:0,behavior:'instant'});
+    requestAnimationFrame(()=>{ if(window.scrollY!==y) window.scrollTo({top:y,left:0,behavior:'instant'}); });
+  }
+  menuBtn.addEventListener('click',()=>{ sidebar.classList.contains('open') ? closeMenu() : openMenu(); });
+  navLinks.forEach(a=>a.addEventListener('click',()=>{ if(window.innerWidth<=1040) closeMenu(); }));
+  document.addEventListener('click',(e)=>{
+    if(!sidebar.classList.contains('open')) return;
+    if(sidebar.contains(e.target)||menuBtn.contains(e.target)) return;
+    closeMenu();
   });
-  navLinks.forEach(a=>a.addEventListener('click',()=>{
-    if(window.innerWidth<=1040){ sidebar.classList.remove('open'); document.body.classList.remove('menu-open'); }
-  }));
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeMenu(); });
 
   // ---- back to top ----
   const totop=document.getElementById('totop');
