@@ -967,7 +967,11 @@ html{scroll-behavior:smooth}
 @media(max-width:980px){
   .menu-btn{display:inline-flex}
   .toc-side{
-    position:fixed;left:0;top:56px;bottom:0;width:300px;max-height:none;margin:0;z-index:55;
+    /* align-self:start (moștenit de la varianta desktop) face ca sertarul fixed
+       să se dimensioneze după conținut, nu între top/bottom — și atunci nu mai
+       are ce derula intern. stretch îl întinde pe înălțimea ecranului. */
+    align-self:stretch;
+    position:fixed;left:0;top:56px;bottom:0;width:300px;height:auto;max-height:none;margin:0;z-index:55;
     background:var(--paper-pure);box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
     padding:20px 18px 40px;transform:translateX(-105%) translateZ(0);transition:transform .25s;
     -webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior:contain;
