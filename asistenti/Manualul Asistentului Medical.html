@@ -145,6 +145,8 @@ a:hover{border-bottom-color:var(--brand-primary)}
   align-self:start;
   max-height:calc(100vh - 96px);
   overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
   font-size:13px;
   padding-right:8px;
   scrollbar-width:thin;scrollbar-color:var(--rule) transparent;
@@ -984,14 +986,13 @@ html{scroll-behavior:smooth}
 /* ============ MOBILE-LITE (telefon) ============ */
 #mobileNotice{display:none}
 @media(max-width:640px){
-  /* header compact: doar meniu + back + logo mic + cautare */
-  .topbar-inner{padding:8px 14px; gap:10px}
+  /* header compact: doar meniu + back + logo — fara cautare, prea complicata pe telefon */
+  .topbar-inner{padding:10px 14px; gap:12px}
   .topbar img.logo{height:26px}
   .topbar-inner .crumbs{display:none}
   .topbar-inner .spacer{display:none}
   .topbar-inner .pill{display:none}
-  .mh-search{flex:1 1 auto; width:auto; min-width:0; max-width:none}
-  .mh-search input{min-width:0}
+  .mh-search{display:none}
   /* plasa de siguranta pe telefoane inguste */
   .article{overflow-wrap:break-word}
   .csn-grid,.proto-grid,.spec-toc{grid-template-columns:1fr !important}

@@ -82,6 +82,7 @@
   /* sidebar */
   .sidebar{
     position:sticky; top:64px; align-self:start; height:calc(100vh - 64px); overflow-y:auto;
+    -webkit-overflow-scrolling:touch; overscroll-behavior:contain;
     padding:22px 14px 60px 20px; border-right:1px solid var(--line);
   }
   .sidebar::-webkit-scrollbar{ width:8px; }
@@ -296,7 +297,7 @@
 
   @media(max-width:1040px){
     .shell{ grid-template-columns:minmax(0,1fr); }
-    .sidebar{ position:fixed; left:0; top:64px; width:300px; background:var(--surface); z-index:55; box-shadow:6px 0 24px -10px rgba(0,0,0,.25); transform:translateX(-105%); transition:transform .25s; }
+    .sidebar{ position:fixed; left:0; top:64px; bottom:0; height:auto; width:300px; background:var(--surface); z-index:55; box-shadow:6px 0 24px -10px rgba(0,0,0,.25); transform:translateX(-105%); transition:transform .25s; }
     .sidebar.open{ transform:none; }
     .menu-btn{ display:inline-block; }
     .main{ padding:24px 22px 100px; }
@@ -324,15 +325,14 @@
   /* ============ MOBILE-LITE (telefon) ============ */
   #mobileNotice{ display:none; }
   @media(max-width:640px){
-    /* header compact: doar meniu + back + logo mic + cautare */
-    .masthead{ padding:0 14px; gap:10px; }
+    /* header compact: doar meniu + back + logo — fara cautare, prea complicata pe telefon */
+    .masthead{ padding:0 14px; gap:12px; }
     .masthead .logo{ height:26px; }
     .masthead .mh-sep{ display:none; }
     .mh-crumb{ display:none; }
     .masthead .spacer{ display:none; }
     .mh-pills{ display:none; }
-    .mh-search{ flex:1 1 auto; width:auto; min-width:0; max-width:none; }
-    .mh-search input{ min-width:0; }
+    .mh-search{ display:none; }
     .content{ overflow-wrap:break-word; }
     /* notice */
     #mobileNotice{
