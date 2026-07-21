@@ -1,4 +1,4 @@
-# Ghid de editare a manualelor — pentru Bianca și Loredana
+# Ghid de editare a manualelor — pentru Bianca, Loredana și Alexandra
 
 Bine ați venit! Acest ghid vă arată cum modificați manualele **fără să scrieți niciun rând de cod**.
 Voi descrieți modificarea în română, Claude o face, iar Vlad aprobă publicarea.
@@ -8,8 +8,19 @@ Site-ul live: **https://vladtm75.github.io/manuale-dr-ardeleanu/**
 **Împărțirea pe manuale:**
 - **Bianca** lucrează pe **Manualul Asistenților**.
 - **Loredana** lucrează pe **Manualul Medicilor**.
+- **Alexandra** lucrează pe **Manualul Registratorilor**.
 
-Fiecare modifică doar manualul ei. Dacă observați o problemă în celălalt manual, spuneți-i colegei sau lui Vlad.
+Fiecare modifică doar manualul ei. Dacă observați o problemă în alt manual, spuneți-i colegei sau lui Vlad.
+
+**Colaboratori și conturi GitHub:**
+
+| Nume | Cont GitHub | Manual |
+|------|-------------|--------|
+| Bianca Toma | biancatoma96 | Manualul Asistenților |
+| Loredana Manoiu | loredana96m | Manualul Medicilor |
+| Alexandra Sandru | alexandrasandru92 | Manualul Registratorilor |
+
+Toate trei aveți drepturi de colaborator pe proiect.
 
 ---
 
@@ -32,10 +43,12 @@ Exemple bune de mesaje:
 
 > „În Manualul Medicilor, la subcapitolul 2.4, corectează: în loc de «X» trebuie «Y»."
 
+> „În Manualul Registratorilor, la capitolul despre programări, adaugă pasul: ...textul aici..."
+
 > „Șterge din Manualul Asistenților fraza care spune «...» — nu mai e valabilă."
 
 **Sfaturi:**
-- Spuneți mereu **în care manual** lucrați (Asistenți sau Medici).
+- Spuneți mereu **în care manual** lucrați (Asistenți, Medici sau Registratori).
 - Dați textul exact pe care vreți să-l adăugați/corectați, sau descrieți clar schimbarea.
 - Puteți lipi text dintr-un Word/email — Claude îl formatează la fel ca restul manualului.
 
