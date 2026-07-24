@@ -70,9 +70,31 @@ descrierea e corectă. Așa oricine poate vedea istoricul complet al manualului.
 
 ---
 
+## Cum adăugați fotografii sau imagini
+
+Puteți adăuga fotografii în manualul vostru (echipamente, formulare, uniforme, pași dintr-un protocol etc.):
+
+1. În conversația de pe **claude.ai/code**, atașați direct fișierul imagine (butonul de atașare sau trageți poza în fereastră).
+2. Spuneți-i lui Claude **în ce manual, în ce capitol și unde anume** intră poza, plus o legendă scurtă:
+
+   > „În Manualul Medicilor, la subcapitolul 2.5, adaugă poza atașată după primul paragraf, cu legenda: «Poziționarea corectă a senzorului»."
+
+3. Claude salvează imaginea în folderul de imagini al manualului vostru și o inserează în pagină.
+4. Verificați cum arată și cereți publicarea, ca la orice modificare — poza apare pe site doar după aprobarea lui Vlad.
+
+**Reguli pentru fotografii:**
+
+- Format JPG, PNG sau WebP; ideal sub ~1,5 MB (Claude o redimensionează dacă e prea mare).
+- ❌ **Fără fețe identificabile de pacienți** și fără date personale vizibile în poze (nume, CNP-uri, fișe, ecrane cu date de pacienți) — site-ul e accesibil pe internet. Excepțiile (ex. acord scris semnat) le aprobă doar Vlad.
+- Pozele cu colegi/angajați se publică doar cu acordul persoanei din imagine.
+- Dacă poza nu poate fi preluată în sesiunea respectivă, Claude vă spune direct; în acest caz cereți-i pașii pentru urcarea pozei prin GitHub pe branch-ul modificării, sau trimiteți-i poza lui Vlad pe email.
+
+---
+
 ## Reguli simple
 
 - ✅ Puteți modifica oricând: texte, tabele, liste, capitole, protocoale.
+- ✅ Puteți adăuga fotografii și imagini în manualul vostru — vezi „Cum adăugați fotografii sau imagini" mai sus.
 - ✅ Greșelile se pot anula oricând — totul rămâne în istoric.
 - ❌ Nu cereți schimbări de design/culori/aspect fără să vorbiți întâi cu Vlad.
 - ❌ Nu publicați date personale ale pacienților sau angajaților în manuale — site-ul e public pe internet.

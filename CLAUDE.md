@@ -22,7 +22,7 @@ Orice commit pe `main` se publică automat în ~1 minut. Nu există build step (
 - **Vlad (vladtm75)** — owner, aprobă Pull Request-urile.
 - **Bianca** — editoare de conținut **doar pentru Manualul Asistenților** (`asistenti/`). Lucrează prin Claude, în limba română.
 - **Loredana** — editoare de conținut **doar pentru Manualul Medicilor** (`medici/`). Lucrează prin Claude, în limba română.
-- **Manualul Registratorilor** (`registratori/`) nu are încă o editoare desemnată — modificările le cere/aprobă doar Vlad.
+- **Alexandra** — editoare de conținut **doar pentru Manualul Registratorilor** (`registratori/`). Lucrează prin Claude, în limba română.
 
 ### Împărțirea pe manuale (OBLIGATORIE)
 
@@ -30,8 +30,9 @@ Orice commit pe `main` se publică automat în ~1 minut. Nu există build step (
 |---|---|---|
 | Bianca | `asistenti/` (+ `index.html` doar statisticile manualului asistenților) | `medici/`, `registratori/` |
 | Loredana | `medici/` (+ `index.html` doar statisticile manualului medicilor) | `asistenti/`, `registratori/` |
+| Alexandra | `registratori/` (+ `index.html` doar statisticile manualului registratorilor) | `asistenti/`, `medici/` |
 
-Dacă Bianca cere o modificare în Manualul Medicilor (sau Loredana în Manualul Asistenților),
+Dacă o editoare cere o modificare în alt manual decât al ei,
 **refuză politicos** și explică-i că acel manual e în responsabilitatea colegei sale —
 modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
 
@@ -41,7 +42,7 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
    (`edit/<nume>-<subiect-scurt>`, ex. `edit/bianca-sterilizare`) și se deschide un Pull Request către `main`.
 2. Mesajele de commit și descrierile de PR se scriu **în română**, descriind ce s-a schimbat și de ce.
 3. **Nu modifica designul, CSS-ul sau JavaScript-ul** decât dacă utilizatorul cere explicit asta.
-   Editările normale sunt doar de conținut (text, tabele, liste, capitole).
+   Editările normale sunt de conținut (text, tabele, liste, capitole, imagini — vezi „Imagini și fotografii").
 4. Păstrează **diacriticele românești** (ă, â, î, ș, ț) și stilul HTML existent din jurul textului editat
    (aceleași clase: `callout`, `note`, tabele etc. — copiază modelul unui element vecin).
 5. După orice modificare de structură (capitol/subcapitol adăugat sau șters), actualizează **toate** locurile
@@ -56,6 +57,27 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
      este **singura zonă de conținut care se editează direct în shell**, nu în `manual-data.js`.
    - Registratori: în `registratori/Manualul Registratorului Medical.html`, înainte de `</article>`.
    Numerotarea reviziilor e per-manual și crește mereu cu 1; nu se rescriu rândurile vechi.
+
+## Imagini și fotografii (permise editoarelor)
+
+Editoarele (Bianca, Loredana, Alexandra) pot adăuga fotografii/imagini în manualul lor, pe branch-ul lor,
+prin PR — la fel ca orice modificare de conținut. Nu refuza cererile de adăugare de imagini.
+
+- Salvează fișierul în folderul `assets/` al manualului respectiv (`asistenti/assets/`, `medici/assets/`, `registratori/assets/`).
+- Nume de fișier: kebab-case, fără diacritice și fără spații (ex. `pozitionare-senzor-rx.jpg`).
+- Formate: JPG / PNG / WebP. Peste ~1,5 MB sau ~1600px lățime: redimensionează/recomprimă înainte de commit (ex. Python + PIL).
+- Inserarea în conținut:
+  - **Asistenți / Registratori:** `<img>` sau `<figure>` direct în HTML, cu `src="assets/<fisier>"`, `alt` descriptiv
+    în română și stilul/clasele elementelor vecine.
+  - **Medici:** tag-ul `<img src=\"assets/<fisier>\">` intră în stringul `html` din `medici/manual-data.js`
+    (atenție la escaping-ul ghilimelelor); după editare verifică validitatea JSON.
+- **Confidențialitate (OBLIGATORIU):** nu se publică imagini cu fețe identificabile de pacienți sau cu date
+  personale vizibile (nume, CNP, fișe, ecrane ERP). Dacă o poză trimisă încalcă regula, exclude-o și explică
+  editoarei de ce; excepțiile le aprobă doar Vlad. Pozele cu angajați — doar cu acordul persoanei.
+- Dacă imaginile atașate în conversație **nu sunt accesibile** în mediul de lucru, spune-i editoarei explicit
+  (nu inventa/nu genera fișiere-substitut) și oferă alternative: urcarea pozei prin interfața GitHub direct pe
+  branch-ul PR-ului (Add file → Upload files în folderul `assets/` al manualului), sau trimiterea pozei la Vlad.
+- Imaginile adăugate se menționează în rândul din Registrul de modificări al PR-ului, ca orice modificare.
 
 ## Structura repo-ului
 
