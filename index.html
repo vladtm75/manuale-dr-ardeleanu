@@ -217,6 +217,7 @@
     var MED_HASH='9e7fe4f0c1d2a28833f9c099909f5fa184b20ff58ecfa318da072e80e92bf9c0';
     var ASM_HASH='c8744365a48398b752517a5e2a5d5cffb79fbdc8354cf17e6ba17b11c54c77e9';
     var REG_HASH='6e2e076f6360f81d03cf0d0f78e2cd51484a4628f5140030867cf0476012360e';
+    var ROI_HASH='06b9e853bdc0adf35ea51c0beaf55e8ff49a760ce16c0f110ec9a60cd2360757';
     document.getElementById('gform').addEventListener('submit', async function(e){
       e.preventDefault();
       var inp=document.getElementById('gpass'), err=document.getElementById('gerr');
@@ -225,6 +226,7 @@
       else if(h===MED_HASH){ try{localStorage.setItem('adcAuthMedici',MED_HASH);}catch(x){} location.href='medici/Manualul%20Medicului.html'; }
       else if(h===ASM_HASH){ try{localStorage.setItem('adcAuthAsistenti',ASM_HASH);}catch(x){} location.href='asistenti/Manualul%20Asistentului%20Medical.html'; }
       else if(h===REG_HASH){ try{localStorage.setItem('adcAuthRegistratori',REG_HASH);}catch(x){} location.href='registratori/Manualul%20Registratorului%20Medical.html'; }
+      else if(h===ROI_HASH){ try{localStorage.setItem('adcAuthROI',ROI_HASH);}catch(x){} location.href='roi/Regulamentul%20de%20Organizare%20Interna.html'; }
       else{
         err.textContent='Parolă incorectă. Încearcă din nou.';
         inp.value=''; inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake'); inp.focus();
@@ -317,6 +319,7 @@
           <div class="cell"><p class="lbl">Limba</p><p class="val">Română</p></div>
         </div>
         <span class="cta">Deschide documentul <span class="arrow">→</span></span>
+        <button class="share-btn" type="button" data-share="roi" title="Copiază un link de acces doar la acest document"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează doar acest document</button>
       </div>
     </a>
   </main>
@@ -369,7 +372,8 @@
     var SHARE={
       medici:{ url:'medici/Manualul%20Medicului.html', key:'medic-d8df9b' },
       asistenti:{ url:'asistenti/Manualul%20Asistentului%20Medical.html', key:'asist-58b121' },
-      registratori:{ url:'registratori/Manualul%20Registratorului%20Medical.html', key:'recep-80fe66' }
+      registratori:{ url:'registratori/Manualul%20Registratorului%20Medical.html', key:'recep-80fe66' },
+      roi:{ url:'roi/Regulamentul%20de%20Organizare%20Interna.html', key:'roi-112ae5' }
     };
     document.querySelectorAll('.share-btn').forEach(function(b){
       b.addEventListener('click',function(e){
