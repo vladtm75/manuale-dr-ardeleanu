@@ -101,10 +101,18 @@ roi/assets/                                  ← imagini/documente (gol momentan
 - Conținutul e direct în HTML, organizat în secțiuni cu `id="cap-N"` (capitol) și `id="cap-N-M"` (subcapitol).
 - Ca să găsești un subiect: caută textul în fișier sau caută ancora capitolului (ex. `id="cap-14"`).
 - Are versiune mobilă (<=640px) cu reguli CSS speciale — nu strica clasele existente.
+- **Toggle „versiune anterioară" în Registrul de modificări** (același mecanism ca la Medici, vezi mai
+  jos) — datele vin din `asistenti/revision-map.js`, generat de
+  `python3 scripts/gen-html-manual-revision-map.py asistenti` (NU edita fișierul manual). Rulează acest
+  script după orice PR care adaugă un rând nou în Registru și comite fișierul rezultat.
 
 ### Manualul Registratorilor (ADC-REC-01)
 - Aceeași structură ca manualul asistenților: conținut direct în HTML, secțiuni `id="cap-N"` (1–9).
 - Construit pe scheletul manualului asistenților — beneficiază de aceleași facilități (mobil, căutare, partajare).
+- **Nu are încă toggle „versiune anterioară"** — Registrul e la rev. 1 (originea), nu există nicio stare
+  „dinainte" cu care să compari. Când apare rev. 2, adaugă coloana „Versiune" în tabelul Registrului
+  (după modelul din `asistenti/...html`) și rulează
+  `python3 scripts/gen-html-manual-revision-map.py registratori`.
 
 ### Manualul Medicilor (ADC-MED-01)
 - **Nu edita conținut în `Manualul Medicului.html`** — conținutul e în `medici/manual-data.js`.
