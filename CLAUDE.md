@@ -112,6 +112,15 @@ roi/assets/                                  ← imagini/documente (gol momentan
   câmpul `html` al fiecărui subcapitol conține textul (HTML ca string JSON, cu ghilimele escapate `\"`).
 - Atenție la escaping: fișierul e un JSON valid pe un singur rând. După editare verifică validitatea
   (ex. `node -e "require('./medici/manual-data.js')"` nu merge direct — folosește un parse pe conținutul după `window.MANUAL = `).
+- **Toggle „versiune anterioară" în Registrul de modificări (prototip, doar la Manualul Medicului).**
+  Fiecare rând din Registru (cu excepția rev. 1 și a reorganizărilor structurale fără diff de text,
+  ex. rev. 28) are un switch care aduce live, de pe `raw.githubusercontent.com`, textul subcapitolului
+  așa cum era înainte de acea revizie — necesită internet, nu funcționează offline. Datele vin din
+  `medici/revision-map.js` (generat automat, NU se editează manual). **După orice PR care adaugă un
+  rând nou în Registrul de modificări al Manualului Medicului, rulează din rădăcina repo-ului:**
+  `python3 scripts/gen-medici-revision-map.py` — și comite `medici/revision-map.js` rezultat, alături
+  de restul modificării. Scriptul citește convenția „Adaugă rev. N (dată) în Registrul de modificări."
+  din mesajele de commit ca să identifice automat commit-ul fiecărei revizii.
 
 ### Regulamentul de Organizare Internă / ROI (ADC-ROI-01)
 - Aceeași structură ca manualul registratorilor: conținut direct în HTML, secțiuni `id="cap-N"` (1–17).
