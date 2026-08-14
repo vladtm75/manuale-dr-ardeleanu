@@ -377,6 +377,53 @@ a:hover{border-bottom-color:var(--brand-primary)}
   margin-top:6px;
 }
 
+/* toggle „versiune anterioară" din Registrul de modificări */
+td.rev-na{ text-align:center; color:var(--ink-mute); }
+.rev-toggle{ display:inline-flex; align-items:center; cursor:pointer; }
+.rev-toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
+.rev-toggle-track{
+  position:relative; display:inline-block; width:38px; height:22px; border-radius:999px;
+  background:var(--rule); transition:background .15s; flex:none;
+}
+.rev-toggle-thumb{
+  position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+  background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3); transition:transform .15s;
+}
+.rev-toggle input:checked + .rev-toggle-track{ background:var(--brand-primary); }
+.rev-toggle input:checked + .rev-toggle-track .rev-toggle-thumb{ transform:translateX(16px); }
+.rev-toggle input:focus-visible + .rev-toggle-track{ outline:2px solid var(--brand-amber); outline-offset:2px; }
+
+.rev-old td{ padding:0; border-top:none; }
+.rev-old-body{
+  background:var(--paper); border:1px dashed var(--rule); border-radius:8px;
+  margin:2px 0 12px;
+}
+.rev-old-sticky{
+  position:sticky; top:var(--topbar-h, 68px); z-index:40; background:var(--paper-pure);
+  border-bottom:1px solid var(--rule); border-radius:8px 8px 0 0;
+  padding:10px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.rev-old-sticky-title{ font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--brand-primary); }
+.rev-old-close{
+  flex:none; border:1px solid var(--rule); background:var(--paper); color:var(--ink-mute);
+  border-radius:999px; padding:5px 14px; font-size:12.5px; font-weight:600; cursor:pointer;
+  transition:background .15s, border-color .15s, color .15s;
+}
+.rev-old-close:hover{ background:var(--paper-pure); border-color:var(--brand-primary); color:var(--brand-primary); }
+.rev-old-content{ padding:14px 18px 18px; }
+.rev-old-content .rev-old-state{ font-size:13px; color:var(--ink-mute); font-style:italic; }
+.rev-old-content .rev-old-error{ font-size:13px; color:var(--brand-primary); font-weight:600; }
+.rev-old-content .rev-old-sub{ margin:0 0 18px; }
+.rev-old-content .rev-old-sub:last-child{ margin-bottom:0; }
+.rev-old-content .rev-old-sub h4.rev-old-label{
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--brand-primary);
+  margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.rev-old-content .rev-old-sub h4.rev-old-label .rev-old-badge{
+  font-family:'Poppins',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; color:#fff; background:var(--ink-mute); border-radius:999px; padding:2px 9px;
+}
+
 /* Lists */
 .article ul, .article ol{margin:8px 0 18px;padding-left:24px}
 .article ul li, .article ol li{margin-bottom:6px;line-height:1.6}
@@ -1137,7 +1184,6 @@ html{scroll-behavior:smooth}
       <ol>
         <li><a href="#despre"><span class="num">§1</span>Despre acest manual</a></li>
         <li><a href="#noutati"><span class="num">§2</span>Noutăți Ediția 2026</a></li>
-        <li><a href="#registru"><span class="num">§3</span>Registru de modificări</a></li>
       </ol>
     </div>
 
@@ -1605,6 +1651,7 @@ html{scroll-behavior:smooth}
       <div class="group-label">Anexe</div>
       <ol>
         <li><a href="#bibliografie"><span class="num">§</span>Documente de referință</a></li>
+        <li><a href="#registru"><span class="num">§</span>Registru de modificări</a></li>
       </ol>
     </div>
   </nav>
@@ -6095,11 +6142,12 @@ html{scroll-behavior:smooth}
     <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 2</strong> · 28 iulie 2026.</p>
     <table>
       <thead>
-        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
+        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
-        <tr><td>2</td><td>28 iulie 2026</td><td>Bianca</td><td>Capitolul „Procedura de utilizare a uniformei", subcap. 2 „Tipuri de uniformă", pct. 2.3 — reformulat textul pentru personalul de curățenie (halat polar de iarnă alb sau verde) și înlocuită imaginea de la figura X·a (uniforma medic stomatolog).</td></tr>
-        <tr><td>1</td><td>21 mai 2026</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V3.0 — punctul de pornire al acestui registru.</td></tr>
+        <tr data-rev="2"><td>2</td><td>28 iulie 2026</td><td>Bianca</td><td>Capitolul „Procedura de utilizare a uniformei", subcap. 2 „Tipuri de uniformă", pct. 2.3 — reformulat textul pentru personalul de curățenie (halat polar de iarnă alb sau verde) și înlocuită imaginea de la figura X·a (uniforma medic stomatolog).</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="2"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
+        <tr class="rev-old" data-rev-old="2" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 2</span><button type="button" class="rev-old-close" data-rev-close="2">✕ Închide</button></div><div class="rev-old-content" data-rev-body="2"></div></div></td></tr>
+        <tr data-rev="1"><td>1</td><td>21 mai 2026</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V3.0 — punctul de pornire al acestui registru.</td><td class="rev-na">—</td></tr>
       </tbody>
     </table>
 
@@ -6217,6 +6265,7 @@ html{scroll-behavior:smooth}
 </script>
 <div class="readbar" aria-hidden="true"></div>
 <button class="totop" id="totop" aria-label="Sus">↑</button>
+<script src="revision-map.js"></script>
 <script>
 // ============ PLATFORM FRAME (unified) ============
 (function(){
@@ -6326,6 +6375,79 @@ html{scroll-behavior:smooth}
       else window.prompt('Copiază linkul:',link);
     });
   }
+
+  // ---- registru: înălțimea reală a topbar-ului (variabilă, se poate rupe pe 2 rânduri) ----
+  const topbarEl = document.querySelector('.topbar');
+  function syncTopbarHeight(){ if(topbarEl) document.documentElement.style.setProperty('--topbar-h', topbarEl.offsetHeight+'px'); }
+  syncTopbarHeight();
+  window.addEventListener('resize', syncTopbarHeight);
+
+  // ---- registru: toggle "versiune anterioară" (aduce textul vechi live de pe GitHub) ----
+  const REV_MAP = window.ASISTENTI_REVISION_MAP || {};
+  const RAW_BASE = 'https://raw.githubusercontent.com/vladtm75/manuale-dr-ardeleanu/';
+  const MANUAL_PATH = 'asistenti/Manualul Asistentului Medical.html';
+  const fileAtCommitCache = new Map();
+
+  function fetchFileAt(commit){
+    if(fileAtCommitCache.has(commit)) return fileAtCommitCache.get(commit);
+    const p = fetch(RAW_BASE + commit + '/' + encodeURI(MANUAL_PATH))
+      .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); });
+    fileAtCommitCache.set(commit, p);
+    return p;
+  }
+
+  function extractSection(fullHtml, targetId){
+    const re = /<h[23][^>]*\sid="([a-zA-Z0-9\-]+)"[^>]*>([\s\S]*?)<\/h[23]>/g;
+    const matches = [];
+    let m;
+    while((m = re.exec(fullHtml))){ matches.push({id:m[1], start:m.index, contentStart: re.lastIndex}); }
+    for(let i=0;i<matches.length;i++){
+      if(matches[i].id === targetId){
+        const contentEnd = (i+1 < matches.length) ? matches[i+1].start : fullHtml.length;
+        return fullHtml.slice(matches[i].contentStart, contentEnd);
+      }
+    }
+    return null;
+  }
+
+  document.querySelectorAll('input[data-rev-toggle]').forEach(input=>{
+    const rev = input.getAttribute('data-rev-toggle');
+    const row = document.querySelector(`tr[data-rev-old="${rev}"]`);
+    const body = row && row.querySelector(`[data-rev-body="${rev}"]`);
+    if(!row || !body) return;
+    let loaded = false;
+    input.addEventListener('change', ()=>{
+      if(!input.checked){ row.hidden = true; return; }
+      row.hidden = false;
+      if(loaded) return;
+      const entry = REV_MAP[rev];
+      if(!entry){ body.innerHTML = '<p class="rev-old-error">Nu există o mapare pentru această revizie.</p>'; loaded = true; return; }
+      body.innerHTML = '<p class="rev-old-state">Se încarcă versiunea dinainte de rev. '+rev+'…</p>';
+      fetchFileAt(entry.before).then(fullHtml=>{
+        const blocks = entry.sections.map(s=>{
+          const html = extractSection(fullHtml, s.id);
+          if(html==null){
+            return `<div class="rev-old-sub"><h4 class="rev-old-label">${s.title}</h4><p class="rev-old-error">Conținutul nu a putut fi găsit la acest commit.</p></div>`;
+          }
+          return `<div class="rev-old-sub"><h4 class="rev-old-label">${s.title}</h4>${html}</div>`;
+        });
+        body.innerHTML = `<p class="rev-old-state">Așa arăta înainte de rev. ${rev}:</p>` + blocks.join('');
+        loaded = true;
+      }).catch(err=>{
+        body.innerHTML = '<p class="rev-old-error">Nu s-a putut încărca versiunea anterioară (necesită conexiune la internet). '+err.message+'</p>';
+      });
+    });
+  });
+
+  document.querySelectorAll('button[data-rev-close]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const rev = btn.getAttribute('data-rev-close');
+      const input = document.querySelector(`input[data-rev-toggle="${rev}"]`);
+      if(input){ input.checked = false; input.dispatchEvent(new Event('change')); }
+      const mainRow = document.querySelector(`tr[data-rev="${rev}"]`);
+      if(mainRow) mainRow.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
 })();
 </script>
 </body>
