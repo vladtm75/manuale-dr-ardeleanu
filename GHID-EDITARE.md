@@ -12,6 +12,8 @@ Site-ul live: **https://vladtm75.github.io/manuale-dr-ardeleanu/**
 
 Fiecare modifică doar manualul ei. Dacă observați o problemă în alt manual, spuneți-i colegei sau lui Vlad.
 
+(Regulamentul de Organizare Internă — ROI — nu face parte din acest ghid; îl administrează direct Vlad, nu are încă o editoare desemnată.)
+
 **Colaboratori și conturi GitHub:**
 
 | Nume | Cont GitHub | Manual |

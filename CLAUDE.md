@@ -24,6 +24,9 @@ Orice commit pe `main` se publică automat în ~1 minut. Nu există build step (
 - **Loredana** — editoare de conținut **doar pentru Manualul Medicilor** (`medici/`). Lucrează prin Claude, în limba română.
 - **Alexandra** — editoare de conținut **doar pentru Manualul Registratorilor** (`registratori/`). Lucrează prin Claude, în limba română.
 
+Manualul ROI (`roi/`) nu are încă o editoare desemnată — nu apare mai jos la Bianca, Loredana sau
+Alexandra. Vlad administrează direct conținutul lui, până când va desemna pe cineva.
+
 ### Împărțirea pe manuale (OBLIGATORIE)
 
 | Editoare | Poate modifica | NU poate modifica |
@@ -90,6 +93,8 @@ medici/manual-data.js                        ← TOT conținutul manualului medi
 medici/assets/                               ← imagini
 registratori/Manualul Registratorului Medical.html ← TOT manualul registratorilor, un singur fișier
 registratori/assets/                         ← imagini (+ .docx-ul sursă al manualului)
+roi/Regulamentul de Organizare Interna.html  ← Regulamentul de Organizare Internă (ROI), un singur fișier
+roi/assets/                                  ← imagini/documente (gol momentan)
 ```
 
 ### Manualul Asistenților (ADC-ASM-03)
@@ -108,6 +113,16 @@ registratori/assets/                         ← imagini (+ .docx-ul sursă al m
 - Atenție la escaping: fișierul e un JSON valid pe un singur rând. După editare verifică validitatea
   (ex. `node -e "require('./medici/manual-data.js')"` nu merge direct — folosește un parse pe conținutul după `window.MANUAL = `).
 
+### Regulamentul de Organizare Internă / ROI (ADC-ROI-01)
+- Aceeași structură ca manualul registratorilor: conținut direct în HTML, secțiuni `id="cap-N"` (1–17).
+- Document HR/legal, nu manual clinic — nu are încă o editoare desemnată; Vlad îl administrează direct
+  până va desemna pe cineva pentru acest manual.
+- **Nu are cheie de acces proprie** (nu există buton „Partajează" pentru el) — accesul se face doar
+  cu parola generală. Când Vlad desemnează un editor, se poate adăuga o cheie dedicată în gate-ul
+  fișierului (comentariul de la începutul scriptului explică exact ce trebuie completat) și în `index.html`.
+- Include o secțiune finală „Modificări față de Versiunea Iunie 2025" (`id="modificari"`), înainte de
+  Registrul de modificări — actualizeaz-o doar dacă apare o ediție nouă a regulamentului, nu la corecturi mici.
+
 ## Versiuni și statistici (de actualizat împreună)
 
 La orice ediție nouă sau schimbare de structură, sincronizează:
@@ -120,6 +135,8 @@ La orice ediție nouă sau schimbare de structură, sincronizează:
 | `medici/manual-data.js` + `medici/Manualul Medicului.html` | Caută `V1.` |
 | `index.html` (cardul registratori) | Ediția + capitole Manualul Registratorilor (`V4.1 · Mai 2025`, `9`) |
 | `registratori/...html` | Caută `V4.` (title, header, hero, footer) |
+| `index.html` (cardul ROI) | Ediția + capitole ROI (`Ediția 2026`, `17`) |
+| `roi/...html` | Caută `2026` (title, header, hero, footer) |
 
 Modificările mici de conținut (corecturi, paragrafe noi) **nu** cer schimbarea versiunii — versiunea
 se schimbă doar când Vlad anunță o ediție nouă.
