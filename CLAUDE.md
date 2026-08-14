@@ -130,14 +130,25 @@ roi/assets/                                  ← imagini/documente (gol momentan
   de restul modificării. Scriptul citește convenția „Adaugă rev. N (dată) în Registrul de modificări."
   din mesajele de commit ca să identifice automat commit-ul fiecărei revizii.
 
-### Regulamentul de Organizare Internă / ROI (ADC-ROI-01)
-- Aceeași structură ca manualul registratorilor: conținut direct în HTML, secțiuni `id="cap-N"` (1–17).
+### Regulament Intern / ROI (ADC-RI-02, ediția V2)
+- De la 15 august 2026: **document-șablon (model-cadru) multi-entitate**, nu regulament unic — a înlocuit
+  integral fostul ADC-ROI-01 (Ediția 2026). Fiecare societate care operează sub marca Dr. Ardeleanu
+  adoptă separat modelul, își completează datele în Anexa nr. 1 și îl comunică propriilor salariați.
+- Conținut direct în HTML: 17 capitole (`id="cap-N"`, N=1–17), **131 de articole numerotate continuu**
+  (`id="art-N"`, N=1–131, nu pe capitol) și **13 anexe** (`id="anexa-N"`, N=1–13, majoritatea formulare
+  operaționale complete — performanță, disciplină, hărțuire, avertizare de integritate etc.).
+- **Conține deliberat câmpuri necompletate** (denumirea legală a angajatorului, sediu, CUI, numărul
+  deciziei de adoptare, data intrării în vigoare) — la cererea lui Vlad, NU se înlocuiesc cu presupuneri
+  despre ce societate din grup s-ar aplica. Se completează doar când Vlad decide asta explicit.
 - Document HR/legal, nu manual clinic — nu are încă o editoare desemnată; Vlad îl administrează direct
   până va desemna pe cineva pentru acest manual.
 - Are cheie de acces proprie și buton „Partajează" (`adcAuthROI`, ca la celelalte manuale) —
   partajarea funcționează la fel ca pentru medici/asistenți/registratori.
-- Include o secțiune finală „Modificări față de Versiunea Iunie 2025" (`id="modificari"`), înainte de
+- Include o secțiune finală „Modificări față de Ediția 2026 (ADC-ROI-01)" (`id="modificari"`), înainte de
   Registrul de modificări — actualizeaz-o doar dacă apare o ediție nouă a regulamentului, nu la corecturi mici.
+- Sursa ediției V2: primită de la Vlad ca document Word (`.docx`), convertit programatic (paragrafe +
+  tabele extrase din XML, în lipsa pandoc/LibreOffice local) — nu presupune că fișierul `.docx` original
+  rămâne în repo; conversia e un instantaneu, nu o legătură vie.
 
 ## Versiuni și statistici (de actualizat împreună)
 
@@ -151,8 +162,8 @@ La orice ediție nouă sau schimbare de structură, sincronizează:
 | `medici/manual-data.js` + `medici/Manualul Medicului.html` | Caută `V1.` |
 | `index.html` (cardul registratori) | Ediția + capitole Manualul Registratorilor (`V4.1 · Mai 2025`, `9`) |
 | `registratori/...html` | Caută `V4.` (title, header, hero, footer) |
-| `index.html` (cardul ROI) | Ediția + capitole ROI (`Ediția 2026`, `17`) |
-| `roi/...html` | Caută `2026` (title, header, hero, footer) |
+| `index.html` (cardul ROI) | Ediția + capitole ROI (`V2`, `17 · 13 anexe`) |
+| `roi/...html` | Caută `V2` / `ADC-RI-02` (title, header, hero, footer) |
 
 Modificările mici de conținut (corecturi, paragrafe noi) **nu** cer schimbarea versiunii — versiunea
 se schimbă doar când Vlad anunță o ediție nouă.
