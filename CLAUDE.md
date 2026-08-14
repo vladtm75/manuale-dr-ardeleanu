@@ -117,9 +117,8 @@ roi/assets/                                  ← imagini/documente (gol momentan
 - Aceeași structură ca manualul registratorilor: conținut direct în HTML, secțiuni `id="cap-N"` (1–17).
 - Document HR/legal, nu manual clinic — nu are încă o editoare desemnată; Vlad îl administrează direct
   până va desemna pe cineva pentru acest manual.
-- **Nu are cheie de acces proprie** (nu există buton „Partajează" pentru el) — accesul se face doar
-  cu parola generală. Când Vlad desemnează un editor, se poate adăuga o cheie dedicată în gate-ul
-  fișierului (comentariul de la începutul scriptului explică exact ce trebuie completat) și în `index.html`.
+- Are cheie de acces proprie și buton „Partajează" (`adcAuthROI`, ca la celelalte manuale) —
+  partajarea funcționează la fel ca pentru medici/asistenți/registratori.
 - Include o secțiune finală „Modificări față de Versiunea Iunie 2025" (`id="modificari"`), înainte de
   Registrul de modificări — actualizeaz-o doar dacă apare o ediție nouă a regulamentului, nu la corecturi mici.
 
