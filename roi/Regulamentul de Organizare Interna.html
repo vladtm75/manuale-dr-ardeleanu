@@ -1087,6 +1087,23 @@ html{scroll-behavior:smooth}
   .layout{padding:20px 16px 90px}
 }
 
+/* buton „Printează formularul" — atașat dinamic, per formular, doar în anexe */
+.print-form-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:600;letter-spacing:.02em;
+  color:var(--brand-primary);background:var(--brand-cream);
+  border:1px solid var(--brand-wheat);border-radius:999px;
+  padding:4px 12px;margin-left:14px;cursor:pointer;
+  font-family:inherit;white-space:nowrap;vertical-align:middle;
+  transition:background .15s,border-color .15s;
+}
+.print-form-btn:hover{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.print-form-btn svg{width:12px;height:12px;flex:none}
+h2 .print-form-btn,h4 .print-form-btn{float:right}
+@media(max-width:760px){
+  h2 .print-form-btn,h4 .print-form-btn{float:none;display:inline-flex;margin:8px 0 0}
+}
+
 @media print{
   @page{size:A4;margin:14mm 12mm}
   .topbar,.toc-side,.totop,.readbar,.menu-btn,.mh-search{display:none !important}
@@ -1096,6 +1113,13 @@ html{scroll-behavior:smooth}
   h2,h3,h4{break-after:avoid}
   table,figure,img,.callout{break-inside:avoid}
   p,li{orphans:3;widows:3}
+  .print-form-btn{display:none !important}
+  body.printing-form [data-print-hidden]{display:none !important}
+  body.printing-form .hero{display:none !important}
+  body.printing-form{font-size:12.5px}
+  body.printing-form table{font-size:11.5px}
+  body.printing-form p{margin:5px 0}
+  body.printing-form h2{margin-top:0}
 }
 </style>
 </head>
@@ -2711,6 +2735,67 @@ html{scroll-behavior:smooth}
       if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:',link); });
       else window.prompt('Copiază linkul:',link);
     });
+  }
+})();
+</script>
+
+<!-- ============ Print PDF per formular (generat dinamic, doar în anexe) ============ -->
+<script>
+(function(){
+  var article = document.querySelector('.article');
+  if(!article) return;
+  var kids = Array.prototype.slice.call(article.children);
+  var n = kids.length;
+
+  function rangeHasTable(start, end){
+    for(var i = start; i < end; i++){ if(kids[i].tagName === 'TABLE') return true; }
+    return false;
+  }
+
+  function makeBtn(label){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'print-form-btn';
+    b.title = 'Printează „' + label + '” ca PDF';
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>PDF</span>';
+    return b;
+  }
+
+  var restoring = false;
+  function restore(){
+    if(restoring) return;
+    restoring = true;
+    kids.forEach(function(el){ el.removeAttribute('data-print-hidden'); });
+    document.body.classList.remove('printing-form');
+    restoring = false;
+  }
+  window.addEventListener('afterprint', restore);
+
+  function printRange(startIdx, endIdx){
+    kids.forEach(function(el, i){
+      if(i < startIdx || i >= endIdx) el.setAttribute('data-print-hidden', '1');
+    });
+    document.body.classList.add('printing-form');
+    window.print();
+    setTimeout(restore, 4000);
+  }
+
+  for(var i = 0; i < n; i++){
+    var el = kids[i];
+    var isAnexaH2 = el.tagName === 'H2' && el.id && el.id.indexOf('anexa-') === 0;
+    var isH4 = el.tagName === 'H4';
+    if(!isAnexaH2 && !isH4) continue;
+
+    var end = i + 1;
+    while(end < n && kids[end].tagName !== 'H2' && kids[end].tagName !== 'H4') end++;
+
+    if(!rangeHasTable(i + 1, end)) continue;
+
+    (function(startIdx, endIdx, headingEl){
+      var btn = makeBtn(headingEl.textContent.trim());
+      btn.addEventListener('click', function(e){ e.preventDefault(); printRange(startIdx, endIdx); });
+      headingEl.appendChild(btn);
+    })(i, end, el);
   }
 })();
 </script>
