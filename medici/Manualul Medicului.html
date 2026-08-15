@@ -368,8 +368,9 @@
   /* footer */
   /* registru de modificări (secțiune statică, după conținutul randat) */
   .registru{ margin-top:64px; border-top:2px solid var(--line-2); padding-top:30px; }
-  .registru h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:26px; color:var(--primary); margin:0 0 8px; }
+  .registru h2, #despre h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:26px; color:var(--primary); margin:0 0 8px; }
   .side-registru{ display:block; margin-top:14px; border-top:1px solid var(--line); padding-top:12px; font-weight:600; }
+  .side-despre{ display:block; margin-bottom:14px; border-bottom:1px solid var(--line); padding-bottom:12px; font-weight:600; }
 
   /* toggle „versiune anterioară" din Registrul de modificări */
   .registru td.rev-na{ text-align:center; color:var(--faint); }
@@ -555,6 +556,7 @@
   <div class="shell">
     <nav class="sidebar" id="sidebar">
       <p class="side-title">Cuprins</p>
+      <a class="nav-sub side-despre" href="#despre">§1 Despre acest manual</a>
       <div id="nav"></div>
       <a class="nav-sub side-registru" href="#registru">Registru de modificări</a>
     </nav>
@@ -565,10 +567,13 @@
           <span>📱 <strong>Vizualizare mobil.</strong> Pentru o lectură curată pe telefon, unele elemente vizuale (organigrame, machete de interfață, diagrame și fotografii) sunt ascunse. Deschide manualul pe desktop pentru versiunea completă.</span>
           <button type="button" aria-label="Închide" onclick="try{sessionStorage.setItem('adcMobileNoticeDismissed','1')}catch(e){} this.parentNode.style.display='none'">✕</button>
         </div>
-        <div class="lead">
-          <p>Acest <b>manual</b> este harta după care lucrăm cu toții în rețeaua <b>Dr. Ardeleanu</b>. Se citește integral la intrarea în rețea și se reia ori de câte ori întâlnești o situație pentru care nu ai un răspuns clar. El definește cum funcționează rețeaua, cum se poartă medicul cu pacientul și cum se aplică protocoalele clinice.</p>
-          <p>Manualul este împărțit în trei capitole mari: <a href="#cap-op"><b>Operațional</b></a> — cum e organizată rețeaua și cum parcurge pacientul drumul prin clinică; <a href="#cap-comp"><b>Comportamental</b></a> — cum transformă medicul diagnosticul în înțelegere și decizie; și <a href="#cap-med"><b>Partea medicală</b></a> — protocoalele clinice pe specialități, urgențele și formarea continuă.</p>
-        </div>
+        <section class="content" id="despre">
+          <h2>Despre acest manual</h2>
+          <div class="lead">
+            <p>Acest <b>manual</b> este harta după care lucrăm cu toții în rețeaua <b>Dr. Ardeleanu</b>. Se citește integral la intrarea în rețea și se reia ori de câte ori întâlnești o situație pentru care nu ai un răspuns clar. El definește cum funcționează rețeaua, cum se poartă medicul cu pacientul și cum se aplică protocoalele clinice.</p>
+            <p>Manualul este împărțit în trei capitole mari: <a href="#cap-op"><b>Operațional</b></a> — cum e organizată rețeaua și cum parcurge pacientul drumul prin clinică; <a href="#cap-comp"><b>Comportamental</b></a> — cum transformă medicul diagnosticul în înțelegere și decizie; și <a href="#cap-med"><b>Partea medicală</b></a> — protocoalele clinice pe specialități, urgențele și formarea continuă.</p>
+          </div>
+        </section>
 
         <div id="body"></div>
 
