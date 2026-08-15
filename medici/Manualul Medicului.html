@@ -144,12 +144,31 @@
   .hero .hero-note{ font-size:13px; font-style:italic; color:var(--muted); line-height:1.6; max-width:74ch; margin:0 0 8px; }
   .hero .hero-note b{ font-style:normal; font-weight:700; color:var(--ink); }
   .hero .meta-row{
-    display:flex; gap:0; flex-wrap:wrap;
-    border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2);
-    margin-top:22px;
+    display:grid; gap:0;
+    border-top:1px solid var(--line-2);
   }
-  .hero .meta-row > div{ flex:1 1 auto; min-width:140px; max-width:420px; padding:14px 22px; border-right:1px solid var(--line-2); text-align:center; }
+  .hero .meta-row.meta-compact{ grid-template-columns:repeat(6,1fr); margin-top:22px; }
+  .hero .meta-row.meta-wide{ grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--line-2); }
+  .hero .meta-row + .meta-row{ border-top:none; }
+  .hero .meta-row > div{ padding:14px 18px; border-right:1px solid var(--line-2); text-align:center; }
+  .hero .meta-row.meta-compact > div:nth-child(6n){ border-right:none; }
+  .hero .meta-row.meta-wide > div:nth-child(4n){ border-right:none; }
   .hero .meta-row > div:last-child{ border-right:none; }
+  @media(max-width:900px){
+    .hero .meta-row.meta-compact{ grid-template-columns:repeat(3,1fr); }
+    .hero .meta-row.meta-wide{ grid-template-columns:repeat(2,1fr); }
+    .hero .meta-row.meta-compact > div:nth-child(6n){ border-right:1px solid var(--line-2); }
+    .hero .meta-row.meta-compact > div:nth-child(3n){ border-right:none; }
+    .hero .meta-row.meta-wide > div:nth-child(4n){ border-right:1px solid var(--line-2); }
+    .hero .meta-row.meta-wide > div:nth-child(2n){ border-right:none; }
+  }
+  @media(max-width:560px){
+    .hero .meta-row.meta-compact{ grid-template-columns:repeat(2,1fr); }
+    .hero .meta-row.meta-wide{ grid-template-columns:repeat(1,1fr); }
+    .hero .meta-row.meta-compact > div:nth-child(3n){ border-right:1px solid var(--line-2); }
+    .hero .meta-row.meta-compact > div:nth-child(2n){ border-right:none; }
+    .hero .meta-row.meta-wide > div{ border-right:none; }
+  }
   .hero .meta-row dt{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint); font-weight:600; margin-bottom:4px; }
   .hero .meta-row dd{ margin:0; font-size:15px; color:var(--ink); font-weight:500; }
   .hero .meta-row dd .mono{ font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--primary); }
@@ -534,12 +553,14 @@
       <h1>Manualul Activităților Medicului —<span class="t2">Ghidul Medicului</span></h1>
       <p class="subtitle">Documentul-cadru care guvernează activitatea medicilor în cele opt clinici ale rețelei Dr. Ardeleanu — un singur standard de îngrijire.</p>
       <p class="hero-note"><b>Notă:</b> Acest manual este documentul oficial intern al rețelei <i>Clinicile Dr. Ardeleanu</i>, valabil pentru toți medicii, indiferent de specialitate, care prestează servicii medicale pentru rețea, aflați în relație de muncă cu organizația.</p>
-      <dl class="meta-row">
+      <dl class="meta-row meta-compact">
         <div><dt>Ediție</dt><dd>V1.0 — <span class="mono">2026</span></dd></div>
         <div><dt>Cod document</dt><dd><span class="mono">ADC-MED-01</span></dd></div>
         <div><dt>Data publicării</dt><dd>1 martie 2026</dd></div>
         <div><dt>Categorie</dt><dd>Operațional Medical</dd></div>
         <div><dt>Capitole</dt><dd>3 · <span id="ibSubs">—</span> subcapitole</dd></div>
+      </dl>
+      <dl class="meta-row meta-wide">
         <div><dt>Aplicabilitate</dt><dd>Toți medicii, indiferent de specialitate, care prestează servicii medicale pentru rețeaua Dr. Ardeleanu</dd></div>
         <div><dt>Rețea</dt><dd>8 clinici · 7 orașe · din 2017</dd></div>
         <div><dt>Aprobat de</dt><dd>Departamentul Medical</dd></div>

@@ -155,17 +155,35 @@ a:hover{border-bottom-color:var(--brand-primary)}
   margin:0 0 26px;line-height:1.5;
 }
 .hero .meta-row{
-  display:flex;gap:0;flex-wrap:wrap;
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  margin-top:22px;
+  display:grid;gap:0;
+  border-top:1px solid var(--rule);
 }
+.hero .meta-row.meta-compact{grid-template-columns:repeat(6,1fr);margin-top:22px}
+.hero .meta-row.meta-wide{grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--rule)}
+.hero .meta-row + .meta-row{border-top:none}
 .hero .meta-row > div{
-  flex:1 1 auto;min-width:140px;max-width:420px;
-  padding:14px 22px;
+  padding:14px 18px;
   border-right:1px solid var(--rule);
   text-align:center;
 }
+.hero .meta-row.meta-compact > div:nth-child(6n){border-right:none}
+.hero .meta-row.meta-wide > div:nth-child(4n){border-right:none}
 .hero .meta-row > div:last-child{border-right:none}
+@media(max-width:900px){
+  .hero .meta-row.meta-compact{grid-template-columns:repeat(3,1fr)}
+  .hero .meta-row.meta-wide{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row.meta-compact > div:nth-child(6n){border-right:1px solid var(--rule)}
+  .hero .meta-row.meta-compact > div:nth-child(3n){border-right:none}
+  .hero .meta-row.meta-wide > div:nth-child(4n){border-right:1px solid var(--rule)}
+  .hero .meta-row.meta-wide > div:nth-child(2n){border-right:none}
+}
+@media(max-width:560px){
+  .hero .meta-row.meta-compact{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row.meta-wide{grid-template-columns:repeat(1,1fr)}
+  .hero .meta-row.meta-compact > div:nth-child(3n){border-right:1px solid var(--rule)}
+  .hero .meta-row.meta-compact > div:nth-child(2n){border-right:none}
+  .hero .meta-row.meta-wide > div{border-right:none}
+}
 .hero .meta-row dt{
   font-size:10px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--ink-mute);font-weight:600;margin-bottom:4px;
@@ -1127,12 +1145,14 @@ html{scroll-behavior:smooth}
     <h1>Manualul Activităților de Recepție <em>— Ghidul Registratorului Medical</em></h1>
     <p class="subtitle">Documentul-cadru care guvernează activitatea registratorilor medicali în clinicile rețelei Dr. Ardeleanu — recepția este cartea de vizită a clinicii și primul punct de contact între pacient și instituție.</p>
 
-    <dl class="meta-row">
+    <dl class="meta-row meta-compact">
       <div><dt>Ediție</dt><dd>V4.1 — <span class="mono">Mai 2025</span></dd></div>
       <div><dt>Cod document</dt><dd><span class="mono">ADC-REC-01</span></dd></div>
       <div><dt>Data publicării</dt><dd>30 mai 2025</dd></div>
       <div><dt>Categorie</dt><dd>Operațional Recepție</dd></div>
       <div><dt>Capitole</dt><dd>9</dd></div>
+    </dl>
+    <dl class="meta-row meta-wide">
       <div><dt>Aplicabilitate</dt><dd>Registratori Medicali</dd></div>
       <div><dt>Rețea</dt><dd>8 clinici · 7 orașe · din 2017</dd></div>
       <div><dt>Aprobat de</dt><dd>Departamentul Operațional</dd></div>
