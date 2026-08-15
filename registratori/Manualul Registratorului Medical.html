@@ -147,13 +147,12 @@ a:hover{border-bottom-color:var(--brand-primary)}
   color:var(--ink);
   font-size:clamp(38px,5.6vw,58px);line-height:1.04;
   margin:0 0 14px;letter-spacing:-.01em;
-  max-width:980px;
   text-wrap:balance;
 }
 .hero h1 em{font-style:italic;color:var(--brand-primary);font-weight:500}
 .hero .subtitle{
   font-size:19px;color:var(--ink-soft);font-weight:300;
-  max-width:780px;margin:0 0 26px;line-height:1.5;
+  margin:0 0 26px;line-height:1.5;
 }
 .hero .meta-row{
   display:flex;gap:0;flex-wrap:wrap;
@@ -162,8 +161,9 @@ a:hover{border-bottom-color:var(--brand-primary)}
 }
 .hero .meta-row > div{
   flex:1;min-width:140px;
-  padding:14px 22px 14px 0;
+  padding:14px 22px;
   border-right:1px solid var(--rule);
+  text-align:center;
 }
 .hero .meta-row > div:last-child{border-right:none}
 .hero .meta-row dt{
