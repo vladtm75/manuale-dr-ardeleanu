@@ -155,43 +155,33 @@ a:hover{border-bottom-color:var(--brand-primary)}
   margin:0 0 26px;line-height:1.5;
 }
 .hero .meta-row{
-  display:grid;gap:0;
-  border-top:1px solid var(--rule);
+  display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-top:22px;
 }
-.hero .meta-row.meta-compact{grid-template-columns:repeat(6,1fr);margin-top:22px}
-.hero .meta-row.meta-wide{grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--rule)}
-.hero .meta-row + .meta-row{border-top:none}
 .hero .meta-row > div{
-  padding:14px 18px;
+  padding:11px 8px;
   border-right:1px solid var(--rule);
   text-align:center;
 }
-.hero .meta-row.meta-compact > div:nth-child(6n){border-right:none}
-.hero .meta-row.meta-wide > div:nth-child(4n){border-right:none}
 .hero .meta-row > div:last-child{border-right:none}
 @media(max-width:900px){
-  .hero .meta-row.meta-compact{grid-template-columns:repeat(3,1fr)}
-  .hero .meta-row.meta-wide{grid-template-columns:repeat(2,1fr)}
-  .hero .meta-row.meta-compact > div:nth-child(6n){border-right:1px solid var(--rule)}
-  .hero .meta-row.meta-compact > div:nth-child(3n){border-right:none}
-  .hero .meta-row.meta-wide > div:nth-child(4n){border-right:1px solid var(--rule)}
-  .hero .meta-row.meta-wide > div:nth-child(2n){border-right:none}
+  .hero .meta-row{grid-auto-flow:row;grid-template-columns:repeat(4,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:none}
 }
 @media(max-width:560px){
-  .hero .meta-row.meta-compact{grid-template-columns:repeat(2,1fr)}
-  .hero .meta-row.meta-wide{grid-template-columns:repeat(1,1fr)}
-  .hero .meta-row.meta-compact > div:nth-child(3n){border-right:1px solid var(--rule)}
-  .hero .meta-row.meta-compact > div:nth-child(2n){border-right:none}
-  .hero .meta-row.meta-wide > div{border-right:none}
+  .hero .meta-row{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:1px solid var(--rule)}
+  .hero .meta-row > div:nth-child(2n){border-right:none}
 }
 .hero .meta-row dt{
-  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-mute);font-weight:600;margin-bottom:4px;
+  font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-bottom:3px;
 }
 .hero .meta-row dd{
-  margin:0;font-size:15px;color:var(--ink);font-weight:500;
+  margin:0;font-size:12px;color:var(--ink);font-weight:500;line-height:1.3;
 }
-.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--brand-primary)}
+.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--brand-primary)}
 
 /* status badge: comunicare oficială / intrare în vigoare — setat manual per manual */
 .status-badge{
@@ -1146,14 +1136,12 @@ html{scroll-behavior:smooth}
     <h1>Regulament Intern <em>— Model-cadru V2, Dr. Ardeleanu</em></h1>
     <p class="subtitle">Model-cadru pentru entitățile angajatoare care operează sub marca Dr. Ardeleanu: raporturi de muncă, sănătate și securitate în muncă, managementul performanței, necorespunderea profesională, disciplina muncii, prevenirea hărțuirii, avertizarea de integritate și protecția datelor — cu 13 anexe operaționale complete.</p>
 
-    <dl class="meta-row meta-compact">
+    <dl class="meta-row">
       <div><dt>Ediție</dt><dd><span class="mono">V2</span></dd></div>
       <div><dt>Cod document</dt><dd><span class="mono">ADC-RI-02</span></dd></div>
       <div><dt>Data publicării</dt><dd>15 august 2026</dd></div>
       <div><dt>Categorie</dt><dd>Resurse Umane · Legal</dd></div>
       <div><dt>Capitole</dt><dd>17 · 13 anexe</dd></div>
-    </dl>
-    <dl class="meta-row meta-wide">
       <div><dt>Aplicabilitate</dt><dd>Toți angajații grupului de firme Dr. Ardeleanu</dd></div>
       <div><dt>Aprobat de</dt><dd>Departamentul HR</dd></div>
       <div><dt>Administrare</dt><dd>Vlad Ardeleanu</dd></div>
