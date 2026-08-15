@@ -1104,6 +1104,23 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
   h2 .print-form-btn,h4 .print-form-btn{float:none;display:inline-flex;margin:8px 0 0}
 }
 
+/* antet minimal, vizibil doar la printare (înlocuiește footer-ul + bara interactivă) */
+.print-header{ display:none; }
+@media print{
+  .print-header{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding-bottom:10px;margin-bottom:16px;
+    border-bottom:2px solid var(--brand-primary);
+  }
+  .print-header-logo{ height:28px;width:auto;flex:none; }
+  .print-header-text{ flex:1;min-width:0; }
+  .print-header-brand{ font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-primary);font-weight:700; }
+  .print-header-title{ font-size:13px;font-weight:600;color:var(--ink);margin-top:1px; }
+  .print-header-meta{ display:flex;gap:6px;flex:none; }
+  .print-header-pill{ font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--brand-cream);color:var(--brand-primary);border:1px solid var(--brand-wheat);font-weight:600; }
+  .print-header-pill.dark{ background:var(--brand-primary);color:#fff;border-color:var(--brand-primary); }
+}
+
 @media print{
   @page{size:A4;margin:14mm 12mm}
   .topbar,.toc-side,.totop,.readbar,.menu-btn,.mh-search{display:none !important}
@@ -1113,6 +1130,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
   h2,h3,h4{break-after:avoid}
   table,figure,img,.callout{break-inside:avoid}
   p,li{orphans:3;widows:3}
+  footer{display:none !important}
   .print-form-btn{display:none !important}
   body.printing-form [data-print-hidden]{display:none !important}
   body.printing-form .hero{display:none !important}
@@ -1124,6 +1142,19 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </style>
 </head>
 <body>
+
+<!-- Antet vizibil doar la printare — înlocuiește footer-ul și bara de navigare interactivă -->
+<div class="print-header" aria-hidden="true">
+  <img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="print-header-logo">
+  <div class="print-header-text">
+    <div class="print-header-brand">Dr. Ardeleanu Dental Clinics</div>
+    <div class="print-header-title">Regulament Intern — Model-cadru V2.5</div>
+  </div>
+  <div class="print-header-meta">
+    <span class="print-header-pill">ADC-RI-02</span>
+    <span class="print-header-pill dark">V2.5</span>
+  </div>
+</div>
 
 <!-- =========================== TOP BAR =========================== -->
 <header class="topbar" data-screen-label="topbar">
