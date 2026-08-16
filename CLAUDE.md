@@ -174,17 +174,26 @@ ar trebui să fie doar despre modificările de substanță ale textului, nu desp
    artificial ca să încapă pe un rând (bara laterală face wrap automat, nu are nevoie de trunchiere).
 3. **Coloana etichetă din formularele tip etichetă/valoare — lățime minimă, ca eticheta să nu se
    rupă în mijlocul cuvântului.** Regula CSS există deja și se aplică automat prin selector
-   (`.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br))`,
+   (`.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)):not(:has(.sig-field))`,
    `width:34%;min-width:150px`) — orice tabel nou din anexe cu acest tipar (2 coloane, fără
-   `<thead>`, prima celulă simplă `<td>` fără `<br>`) o primește automat, fără nimic de adăugat
-   manual. Excepție intenționată: celulele cu `<br>` (blocuri de semnătură — vezi punctul 4) și
-   tabelele cu `<thead>` (date de referință, nu formulare de completat).
-4. **Blocul de semnătură din formulare — câmpurile pe rânduri separate, nu înghesuite.** Formatul
-   canonic, într-o singură celulă de tabel:
+   `<thead>`, prima celulă simplă `<td>` fără `<br>`/`.sig-field`) o primește automat, fără nimic de
+   adăugat manual. Excepție intenționată: celulele cu `<br>` sau `.sig-field` (blocuri de semnătură
+   — vezi punctul 4) și tabelele cu `<thead>` (date de referință, nu formulare de completat). Dacă
+   adaugi vreodată un alt tipar de celulă cu conținut multi-linie care NU e etichetă/valoare
+   simplă, exclude-l explicit din selector (după modelul `:not(:has(...))`), altfel primește din
+   greșeală `width:34%` și strică lățimile coloanelor (verificat cu `getBoundingClientRect` — a fost
+   exact regresia produsă când am introdus `.sig-field`, până am adăugat excepția).
+4. **Blocul de semnătură din formulare — câmpurile pe rânduri separate, aliniate la marginea din
+   dreapta.** Fiecare câmp e o linie flex (`.sig-field`) cu eticheta la stânga și o linie de completat
+   (`.sig-line`, `border-bottom`, `flex:1`) care se întinde automat până la marginea din dreapta a
+   celulei — identic indiferent dacă blocul are 2 sau 3 coloane (verificat cu `getBoundingClientRect`:
+   toate liniile se termină la exact același pixel). Formatul canonic, într-o singură celulă de tabel:
    ```html
-   <strong>Rol</strong><br>Nume: __________________<br>Funcție: __________________<br>Data: __________<br>Semnătura: __________
+   <strong>Rol</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div>
    ```
-   (fiecare câmp pe rândul lui, separat prin `<br>` — nu toate pe un rând cu spații duble între ele).
+   NU folosi underscore-uri (`___`) pentru linia de completat — nu se pot alinia consistent la
+   marginea dreaptă în font proporțional și la lățimi de celulă diferite (2 vs 3 coloane); CSS-ul
+   de mai sus rezolvă asta corect, automat.
 
 ## Versiuni și statistici (de actualizat împreună)
 

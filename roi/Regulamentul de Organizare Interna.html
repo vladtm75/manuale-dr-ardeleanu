@@ -536,7 +536,7 @@ a:hover{border-bottom-color:var(--brand-primary)}
 .article table.checktable td.lab{text-align:center;font-weight:700;color:var(--brand-primary);font-size:15px}
 
 /* formulare cu perechi etichetă/valoare (fără thead) — coloana etichetei mai lată, ca eticheta să nu se rupă în mijlocul cuvântului */
-.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)){
+.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)):not(:has(.sig-field)){
   width:34%;min-width:150px;
   word-break:normal;overflow-wrap:break-word;
 }
