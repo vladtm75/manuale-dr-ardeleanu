@@ -62,7 +62,7 @@
     font-size:clamp(38px,6vw,64px); line-height:1.04; margin:16px 0 0;
   }
   h1 .t2{ display:block; font-style:italic; color:var(--primary); }
-  .hero p.sub{ font-size:16px; color:var(--muted); max-width:64ch; margin:14px 0 0; }
+  .hero p.sub{ font-size:16px; color:var(--muted); max-width:none; margin:14px 0 0; }
   .hero p.note{ font-size:12.5px; font-style:italic; color:var(--muted); background:var(--cream); border-left:3px solid var(--amber); padding:7px 12px; border-radius:0 5px 5px 0; margin:22px 0 0; display:inline-block; }
 
   .grid{
@@ -119,6 +119,15 @@
   }
   .share-btn:hover{ background:var(--cream); border-color:var(--primary); }
   .share-btn svg{ flex:none; }
+
+  .card.card-soon{ cursor:default; }
+  .card.card-soon:hover{ transform:none; box-shadow:0 1px 3px rgba(40,30,20,.06); }
+  .card.card-soon .card-head{ background:linear-gradient(135deg,#8a8580 0%,#5c5751 100%); }
+  .card.card-soon .card-pill.soon{ background:rgba(255,255,255,.12); border-style:dashed; }
+  .card.card-soon .cta.soon{
+    background:none; border:1.5px dashed var(--line-2); color:var(--muted); cursor:default;
+  }
+  .card.card-soon:hover .cta.soon{ background:none; }
 
   .strip{
     max-width:1080px; margin:8px auto 0; width:100%; padding:0 28px 30px;
@@ -307,6 +316,23 @@
       </div>
     </a>
 
+    <div class="card card-soon">
+      <div class="card-head">
+        <span class="card-pill soon">ADC-MCL-01 · ÎN CURÂND</span>
+        <h2>Manualul Managerului de Clinică</h2>
+        <p class="aud">Pentru managerii de clinică</p>
+      </div>
+      <div class="card-body">
+        <p class="desc">Document-cadru subordonat Regulamentului Intern (Anexa nr. 13) — ciclul lunar și evaluarea anuală ale managerilor de clinică, raportare consolidată. În elaborare.</p>
+        <div class="meta">
+          <div class="cell"><p class="lbl">Ediție</p><p class="val">—</p></div>
+          <div class="cell"><p class="lbl">Capitole</p><p class="val">—</p></div>
+          <div class="cell"><p class="lbl">Status</p><p class="val status-pending">Neaplicabil</p></div>
+        </div>
+        <span class="cta soon">Se publică în curând</span>
+      </div>
+    </div>
+
     <a class="card roi" href="roi/Regulamentul%20de%20Organizare%20Interna.html">
       <div class="card-head">
         <span class="card-pill">ADC-RI-02</span>
@@ -324,6 +350,23 @@
         <button class="share-btn" type="button" data-share="roi" title="Copiază un link de acces doar la acest document"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează doar acest document</button>
       </div>
     </a>
+
+    <div class="card card-soon">
+      <div class="card-head">
+        <span class="card-pill soon">ÎN CURÂND</span>
+        <h2>Proceduri de lucru</h2>
+        <p class="aud">Pentru rolurile vizate de fiecare procedură</p>
+      </div>
+      <div class="card-body">
+        <p class="desc">Procedurile operaționale subordonate Regulamentului Intern (beneficii, deplasări și decontări, flotă auto și GPS, uniforme) — administrate prin Registrul din Anexa nr. 13 a RI. Publicare treptată.</p>
+        <div class="meta">
+          <div class="cell"><p class="lbl">Ediție</p><p class="val">—</p></div>
+          <div class="cell"><p class="lbl">Proceduri</p><p class="val">—</p></div>
+          <div class="cell"><p class="lbl">Status</p><p class="val status-pending">Neaplicabil</p></div>
+        </div>
+        <span class="cta soon">Se publică treptat</span>
+      </div>
+    </div>
   </main>
 
   <div class="strip">
