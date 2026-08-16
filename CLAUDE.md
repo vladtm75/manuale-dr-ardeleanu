@@ -95,6 +95,16 @@ roi/Regulamentul de Organizare Interna.html  ← Regulamentul de Organizare Inte
 roi/assets/                                  ← imagini/documente (gol momentan)
 ```
 
+### Paritatea de design între manuale (OBLIGATORIE)
+Asistenți, Registratori, Medici și ROI împart același sistem vizual de TOC (`.toc-side`/`.group`/
+`.row-with-sub`/`.toc-toggle`) și aceeași tipografie de bază pentru corpul textului (`.article`:
+font-size 15.5px, line-height 1.7). „Aceleași clase CSS" NU înseamnă automat „identic vizual" —
+verifică explicit cu `getComputedStyle` (nu doar citind codul sursă) că valorile *rezolvate*
+(culori, dimensiuni, padding) sunt egale, nu doar că numele claselor/variabilelor se potrivesc.
+Variabilele CSS proprii fiecărui manual (`--primary` la medici vs `--brand-primary` la ROI etc.)
+pot rămâne cu nume diferite, dar valorile lor trebuie să corespundă exact echivalentului canonic
+(vezi tabelul de corespondență folosit la alinierea Manualului Medicului, dacă mai e nevoie de el).
+
 ### Manualul Asistenților (ADC-ASM-03)
 - Conținutul e direct în HTML, organizat în secțiuni cu `id="cap-N"` (capitol) și `id="cap-N-M"` (subcapitol).
 - Ca să găsești un subiect: caută textul în fișier sau caută ancora capitolului (ex. `id="cap-14"`).
@@ -130,9 +140,10 @@ schimbări structurale fără diff de text; prima cu toggle real va fi rev. 31+.
 - De la 15 august 2026: **document-șablon (model-cadru) multi-entitate**, nu regulament unic — a înlocuit
   integral fostul ADC-ROI-01 (Ediția 2026). Fiecare societate care operează sub marca Dr. Ardeleanu
   adoptă separat modelul, își completează datele în Anexa nr. 1 și îl comunică propriilor salariați.
-- Conținut direct în HTML: 17 capitole (`id="cap-N"`, N=1–17), **131 de articole numerotate continuu**
-  (`id="art-N"`, N=1–131, nu pe capitol) și **13 anexe** (`id="anexa-N"`, N=1–13, majoritatea formulare
-  operaționale complete — performanță, disciplină, hărțuire, avertizare de integritate etc.).
+- Conținut direct în HTML: capitole (`id="cap-N"`), articole numerotate continuu pe tot documentul
+  (`id="art-N"`, nu pe capitol) și anexe (`id="anexa-N"`, majoritatea formulare operaționale complete —
+  performanță, disciplină, hărțuire, avertizare de integritate etc.). Numărul exact de capitole/articole/anexe
+  se schimbă la fiecare ediție — vezi „Versiuni și statistici" mai jos pentru unde se actualizează contorul.
 - **Conține deliberat câmpuri necompletate** (denumirea legală a angajatorului, sediu, CUI, numărul
   deciziei de adoptare, data intrării în vigoare) — la cererea lui Vlad, NU se înlocuiesc cu presupuneri
   despre ce societate din grup s-ar aplica. Se completează doar când Vlad decide asta explicit.
@@ -145,6 +156,35 @@ schimbări structurale fără diff de text; prima cu toggle real va fi rev. 31+.
 - Sursa ediției V2: primită de la Vlad ca document Word (`.docx`), convertit programatic (paragrafe +
   tabele extrase din XML, în lipsa pandoc/LibreOffice local) — nu presupune că fișierul `.docx` original
   rămâne în repo; conversia e un instantaneu, nu o legătură vie.
+
+#### Reguli de design ale ROI (OBLIGATORII la orice ediție nouă — aplică-le automat, fără să ceri confirmare)
+
+Aceste reguli există ca să nu mai fie nevoie de o trecere de „polish" vizual de fiecare dată când
+Vlad încarcă o ediție nouă a ROI — la o migrare de conținut nouă (docx → HTML), aplică-le direct,
+în același PR cu conținutul, fără iterații separate de design. Discuția cu Vlad la o ediție nouă
+ar trebui să fie doar despre modificările de substanță ale textului, nu despre cum arată.
+
+1. **TOC — dropdown de articole la FIECARE capitol, nu doar la primele.** Fiecare capitol din Cuprins
+   trebuie să aibă `row-with-sub` + `button.toc-toggle` + `ol.sub id="sub-cap-N"` populat cu toate
+   articolele lui reale (generate din titlurile `<h3 id="art-N">` din corpul capitolului respectiv,
+   nu lăsate goale/placeholder). La o ediție nouă cu capitole/articole schimbate, regenerează
+   întregul bloc TOC din titlurile curente ale corpului — nu copia manual titluri vechi.
+2. **Niciun titlu trunchiat cu „…" în Cuprins.** Titlurile din TOC (capitole și anexe) trebuie să fie
+   identice cu titlul complet din `<h2>`/`<h3>` din corpul documentului — niciodată prescurtate
+   artificial ca să încapă pe un rând (bara laterală face wrap automat, nu are nevoie de trunchiere).
+3. **Coloana etichetă din formularele tip etichetă/valoare — lățime minimă, ca eticheta să nu se
+   rupă în mijlocul cuvântului.** Regula CSS există deja și se aplică automat prin selector
+   (`.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br))`,
+   `width:34%;min-width:150px`) — orice tabel nou din anexe cu acest tipar (2 coloane, fără
+   `<thead>`, prima celulă simplă `<td>` fără `<br>`) o primește automat, fără nimic de adăugat
+   manual. Excepție intenționată: celulele cu `<br>` (blocuri de semnătură — vezi punctul 4) și
+   tabelele cu `<thead>` (date de referință, nu formulare de completat).
+4. **Blocul de semnătură din formulare — câmpurile pe rânduri separate, nu înghesuite.** Formatul
+   canonic, într-o singură celulă de tabel:
+   ```html
+   <strong>Rol</strong><br>Nume: __________________<br>Funcție: __________________<br>Data: __________<br>Semnătura: __________
+   ```
+   (fiecare câmp pe rândul lui, separat prin `<br>` — nu toate pe un rând cu spații duble între ele).
 
 ## Versiuni și statistici (de actualizat împreună)
 
