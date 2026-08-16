@@ -271,5 +271,35 @@ window.MEDICI_REVISION_MAP = {
         "title": "1. 3Structura organizațională a rețelei și fluxuri de escaladare§"
       }
     ]
+  },
+  "36": {
+    "commit": "6ac19613aafcd5cd54440f0467363c1ed072a1d2",
+    "before": "02bfea7ac7f44d2c051ba12ef072fcf5d0590608",
+    "sections": [
+      {
+        "id": "cap-1-6",
+        "title": "1. 6Contract de prestări servicii și documente necesare§"
+      }
+    ]
+  },
+  "37": {
+    "commit": "5309d44a3c95a8fab8408b6650bcbeb52d0f405c",
+    "before": "5aee71ed29519ba07fc6144732a9b11aa6d4cc74",
+    "sections": [
+      {
+        "id": "cap-1",
+        "title": "ICapitolul 1 — Operațional"
+      }
+    ]
+  },
+  "38": {
+    "commit": "5309d44a3c95a8fab8408b6650bcbeb52d0f405c",
+    "before": "5aee71ed29519ba07fc6144732a9b11aa6d4cc74",
+    "sections": [
+      {
+        "id": "cap-1",
+        "title": "ICapitolul 1 — Operațional"
+      }
+    ]
   }
 };
