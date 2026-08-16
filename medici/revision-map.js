@@ -261,5 +261,15 @@ window.MEDICI_REVISION_MAP = {
         "title": "3. 12Formare medicală continuă — Dental Institute§"
       }
     ]
+  },
+  "34": {
+    "commit": "4d60bcb5b94c77a03f26dc78999a255a4bd18a10",
+    "before": "787abb2ff4fb528bfc4753d28c85df1c9123131d",
+    "sections": [
+      {
+        "id": "cap-1-3",
+        "title": "1. 3Structura organizațională a rețelei și fluxuri de escaladare§"
+      }
+    ]
   }
 };
