@@ -251,5 +251,15 @@ window.MEDICI_REVISION_MAP = {
         "title": "3. 9Estetică dentară§"
       }
     ]
+  },
+  "33": {
+    "commit": "e5d687821868b0a6c35c6695fb5316f70fbb3461",
+    "before": "395047a4bb0c892ce8a84644d27af9b1739427cc",
+    "sections": [
+      {
+        "id": "cap-3-12",
+        "title": "3. 12Formare medicală continuă — Dental Institute§"
+      }
+    ]
   }
 };
