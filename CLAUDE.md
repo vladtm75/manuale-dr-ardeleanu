@@ -194,6 +194,19 @@ ar trebui să fie doar despre modificările de substanță ale textului, nu desp
    NU folosi underscore-uri (`___`) pentru linia de completat — nu se pot alinia consistent la
    marginea dreaptă în font proporțional și la lățimi de celulă diferite (2 vs 3 coloane); CSS-ul
    de mai sus rezolvă asta corect, automat.
+5. **Valorile de completat din formulare (celula-valoare dintr-un rând etichetă/valoare) — linie
+   CSS, NU underscore-uri.** Un `<td>` a cărui valoare e „de completat de mână" (nu are text real)
+   nu se scrie ca `<td>__________</td>` — underscore-urile lungi trec pe mai multe rânduri urât la
+   lățimi de celulă mai mici, cu tăietura de wrapping în mijlocul liniei. În loc de asta:
+   - **O singură linie de completat:** `<td class="value-line"></td>` (clasa pune `border-bottom`
+     direct pe celulă — nicio altă marcă în interior).
+   - **Spațiu de scris pe mai multe rânduri** (câmpuri narative lungi — descrieri, motivări,
+     sinteze): `<td><div class="value-lines"><span class="vline"></span><span class="vline"></span>…</div></td>`,
+     cu câte un `<span class="vline">` pentru fiecare rând dorit (de obicei 2–4, după cât spațiu
+     de scris are nevoie câmpul respectiv — nu după numărul de caractere din vechiul underscore).
+   - **Blancurile scurte, inline, cu format fix** (zi/lună/an, numere de decizie, ex. „Nr. ___ din
+     ___ / ___ / ____") RĂMÂN underscore-uri simple în text — nu sunt „valoare de completat"
+     în sensul de mai sus, ci câmpuri de lățime fixă; nu li se aplică `.value-line`.
 
 ## Versiuni și statistici (de actualizat împreună)
 
