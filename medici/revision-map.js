@@ -207,6 +207,48 @@ window.MEDICI_REVISION_MAP = {
       {
         "id": "cap-1-9",
         "title": "1. 9Prima interacțiune — recepția și documentele§"
+      },
+      {
+        "id": "cap-3-11",
+        "title": "3. 11Formare medicală continuă — Dental Institute§"
+      }
+    ]
+  },
+  "32": {
+    "commit": "311fe0c7ea0e74f6bb9e49ae2a4d28894f82fbdb",
+    "before": "cd3beb3dd5cb0e6708161fea1768029e934ed0b2",
+    "sections": [
+      {
+        "id": "cap-3-10",
+        "title": "3. 10Urgențe medicale§"
+      },
+      {
+        "id": "cap-3-11",
+        "title": "3. 11Formare medicală continuă — Dental Institute§"
+      },
+      {
+        "id": "cap-3-12",
+        "title": "3. 12Formare medicală continuă — Dental Institute§"
+      },
+      {
+        "id": "cap-3-5",
+        "title": "3. 5Protetică fixă și mobilă§"
+      },
+      {
+        "id": "cap-3-6",
+        "title": "3. 6Ortodonție§"
+      },
+      {
+        "id": "cap-3-7",
+        "title": "3. 7Pedodonție§"
+      },
+      {
+        "id": "cap-3-8",
+        "title": "3. 8Dental Safari — pedodonție gamificată§"
+      },
+      {
+        "id": "cap-3-9",
+        "title": "3. 9Estetică dentară§"
       }
     ]
   }
