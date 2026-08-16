@@ -11,5 +11,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Despre acest manual cod: ASM-03"
       }
     ]
+  },
+  "4": {
+    "commit": "5f468d0a574897da4791a657c251c210b3415846",
+    "before": "4567871725986adbaabdf2e137446449633dafe5",
+    "sections": [
+      {
+        "id": "despre",
+        "title": "Despre acest manual cod: ASM-03"
+      }
+    ]
   }
 };
