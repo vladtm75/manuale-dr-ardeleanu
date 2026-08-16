@@ -56,8 +56,7 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
    editoarei, descriere scurtă în română a modificării) și actualizează „Revizia curentă: rev. N · data"
    din paragraful de deasupra tabelului. Locația secțiunii:
    - Asistenți: în `asistenti/Manualul Asistentului Medical.html`, înainte de `</article>`.
-   - Medici: în `medici/Manualul Medicului.html` (secțiunea statică de după `<div id="body">`) —
-     este **singura zonă de conținut care se editează direct în shell**, nu în `manual-data.js`.
+   - Medici: în `medici/Manualul Medicului.html`, secțiunea `id="registru"`.
    - Registratori: în `registratori/Manualul Registratorului Medical.html`, înainte de `</article>`.
    Numerotarea reviziilor e per-manual și crește mereu cu 1; nu se rescriu rândurile vechi.
 
@@ -72,8 +71,8 @@ prin PR — la fel ca orice modificare de conținut. Nu refuza cererile de adău
 - Inserarea în conținut:
   - **Asistenți / Registratori:** `<img>` sau `<figure>` direct în HTML, cu `src="assets/<fisier>"`, `alt` descriptiv
     în română și stilul/clasele elementelor vecine.
-  - **Medici:** tag-ul `<img src=\"assets/<fisier>\">` intră în stringul `html` din `medici/manual-data.js`
-    (atenție la escaping-ul ghilimelelor); după editare verifică validitatea JSON.
+  - **Medici:** `<img>` sau `<figure>` direct în HTML, cu `src="assets/<fisier>"`, `alt` descriptiv
+    în română și stilul/clasele elementelor vecine — la fel ca la Asistenți/Registratori.
 - **Confidențialitate (OBLIGATORIU):** nu se publică imagini cu fețe identificabile de pacienți sau cu date
   personale vizibile (nume, CNP, fișe, ecrane ERP). Dacă o poză trimisă încalcă regula, exclude-o și explică
   editoarei de ce; excepțiile le aprobă doar Vlad. Pozele cu angajați — doar cu acordul persoanei.
@@ -88,8 +87,7 @@ prin PR — la fel ca orice modificare de conținut. Nu refuza cererile de adău
 index.html                                  ← homepage (cardurile manualelor + statistici)
 asistenti/Manualul Asistentului Medical.html ← TOT manualul asistenților, un singur fișier (~10k linii)
 asistenti/assets/                            ← imagini, consimțăminte, documente onboarding
-medici/Manualul Medicului.html               ← doar „coaja" (layout + JS de randare)
-medici/manual-data.js                        ← TOT conținutul manualului medicilor (window.MANUAL, JSON)
+medici/Manualul Medicului.html               ← TOT manualul medicilor, un singur fișier
 medici/assets/                               ← imagini
 registratori/Manualul Registratorului Medical.html ← TOT manualul registratorilor, un singur fișier
 registratori/assets/                         ← imagini (+ .docx-ul sursă al manualului)
@@ -101,34 +99,32 @@ roi/assets/                                  ← imagini/documente (gol momentan
 - Conținutul e direct în HTML, organizat în secțiuni cu `id="cap-N"` (capitol) și `id="cap-N-M"` (subcapitol).
 - Ca să găsești un subiect: caută textul în fișier sau caută ancora capitolului (ex. `id="cap-14"`).
 - Are versiune mobilă (<=640px) cu reguli CSS speciale — nu strica clasele existente.
-- **Toggle „versiune anterioară" în Registrul de modificări** (același mecanism ca la Medici, vezi mai
-  jos) — datele vin din `asistenti/revision-map.js`, generat de
-  `python3 scripts/gen-html-manual-revision-map.py asistenti` (NU edita fișierul manual). Rulează acest
-  script după orice PR care adaugă un rând nou în Registru și comite fișierul rezultat.
 
 ### Manualul Registratorilor (ADC-REC-01)
 - Aceeași structură ca manualul asistenților: conținut direct în HTML, secțiuni `id="cap-N"` (1–9).
 - Construit pe scheletul manualului asistenților — beneficiază de aceleași facilități (mobil, căutare, partajare).
-- **Nu are încă toggle „versiune anterioară"** — Registrul e la rev. 1 (originea), nu există nicio stare
-  „dinainte" cu care să compari. Când apare rev. 2, adaugă coloana „Versiune" în tabelul Registrului
-  (după modelul din `asistenti/...html`) și rulează
-  `python3 scripts/gen-html-manual-revision-map.py registratori`.
 
 ### Manualul Medicilor (ADC-MED-01)
-- **Nu edita conținut în `Manualul Medicului.html`** — conținutul e în `medici/manual-data.js`.
-- Format: `window.MANUAL = {"chapters":[{id, num, roman, title, subs:[{n, id, group, t, html}]}]}` —
-  câmpul `html` al fiecărui subcapitol conține textul (HTML ca string JSON, cu ghilimele escapate `\"`).
-- Atenție la escaping: fișierul e un JSON valid pe un singur rând. După editare verifică validitatea
-  (ex. `node -e "require('./medici/manual-data.js')"` nu merge direct — folosește un parse pe conținutul după `window.MANUAL = `).
-- **Toggle „versiune anterioară" în Registrul de modificări (prototip, doar la Manualul Medicului).**
-  Fiecare rând din Registru (cu excepția rev. 1 și a reorganizărilor structurale fără diff de text,
-  ex. rev. 28) are un switch care aduce live, de pe `raw.githubusercontent.com`, textul subcapitolului
-  așa cum era înainte de acea revizie — necesită internet, nu funcționează offline. Datele vin din
-  `medici/revision-map.js` (generat automat, NU se editează manual). **După orice PR care adaugă un
-  rând nou în Registrul de modificări al Manualului Medicului, rulează din rădăcina repo-ului:**
-  `python3 scripts/gen-medici-revision-map.py` — și comite `medici/revision-map.js` rezultat, alături
-  de restul modificării. Scriptul citește convenția „Adaugă rev. N (dată) în Registrul de modificări."
-  din mesajele de commit ca să identifice automat commit-ul fiecărei revizii.
+- De la migrarea la HTML static (rev. 30, august 2026), aceeași structură ca celelalte manuale: conținutul
+  e direct în HTML, secțiuni cu `id="cap-N"` (capitol, N=1–3) și `id="cap-N-M"` (subcapitol) — nu mai
+  există un fișier de date separat (`manual-data.js` a fost eliminat).
+- Are un nivel suplimentar de grupare în Cuprins (grupuri de subcapitole în cadrul unui capitol, ex.
+  „Onboarding-ul medicului" în capitolul Operațional) — marcat cu `<li class="sub-group-label">` în TOC
+  și `<div class="group-divider">` în conținut, o extensie peste sistemul comun de TOC (`.toc-side`).
+
+### Toggle „versiune anterioară" în Registrul de modificări (asistenți, registratori, medici)
+Fiecare rând din Registru (cu excepția reviziei de origine și a reorganizărilor structurale fără diff
+de text) are un switch care aduce live, de pe `raw.githubusercontent.com`, textul secțiunii așa cum era
+înainte de acea revizie — necesită internet, nu funcționează offline. Datele vin din `<manual>/revision-map.js`
+(generat automat, NU se editează manual), pe baza `id`-urilor `<h2>`/`<h3>` din pagină. **După orice PR
+care adaugă un rând nou în Registrul de modificări al oricăruia dintre aceste trei manuale, rulează din
+rădăcina repo-ului:**
+`python3 scripts/gen-html-manual-revision-map.py <asistenti|registratori|medici>` — și comite fișierul
+`revision-map.js` rezultat, alături de restul modificării. Scriptul citește convenția „rev. N" din
+mesajele de commit ca să identifice automat commit-ul fiecărei revizii. Manualul Registratorilor e
+încă la rev. 1 (originea) — nu are coloana „Versiune"/toggle până la rev. 2. Manualul Medicului are
+reviziile 1–30 marcate fără toggle (`rev-na`) — ele precedă structura HTML actuală sau documentează
+schimbări structurale fără diff de text; prima cu toggle real va fi rev. 31+.
 
 ### Regulament Intern / ROI (ADC-RI-02, ediția V2)
 - De la 15 august 2026: **document-șablon (model-cadru) multi-entitate**, nu regulament unic — a înlocuit
@@ -159,7 +155,7 @@ La orice ediție nouă sau schimbare de structură, sincronizează:
 | `index.html` (~linia 217–218) | Ediția + capitole Manualul Medicului (`V1.0 · 2026`, `3 · 46 subcap.`) |
 | `index.html` (~linia 234–235) | Ediția + capitole Manualul Asistenților (`V3.0 · Mai 2026`, `22`) |
 | `asistenti/...html` | Stringul de versiune apare în MAI MULTE locuri (title, header, secțiunea Noutăți, footer) — caută `V3.` și actualizează-le pe toate |
-| `medici/manual-data.js` + `medici/Manualul Medicului.html` | Caută `V1.` |
+| `medici/Manualul Medicului.html` | Caută `V1.` (title, header, hero, footer) |
 | `index.html` (cardul registratori) | Ediția + capitole Manualul Registratorilor (`V4.1 · Mai 2025`, `9`) |
 | `registratori/...html` | Caută `V4.` (title, header, hero, footer) |
 | `index.html` (cardul ROI) | Ediția + capitole ROI (`V2`, `17 · 13 anexe`) |
@@ -171,8 +167,7 @@ se schimbă doar când Vlad anunță o ediție nouă.
 ## Verificare înainte de PR
 
 1. Deschide fișierul modificat local în browser (sau verifică vizual diff-ul) — fără tag-uri rupte.
-2. Pentru `manual-data.js`: confirmă că JSON-ul e valid.
-3. Confirmă că n-au apărut caractere stricate (diacritice corupte, `&amp;` dublat etc.).
+2. Confirmă că n-au apărut caractere stricate (diacritice corupte, `&amp;` dublat etc.).
 
 ## Ghid pentru editoare
 
