@@ -1096,6 +1096,53 @@ html{scroll-behavior:smooth}
   table,figure,img,.callout{break-inside:avoid}
   p,li{orphans:3;widows:3}
 }
+
+/* toggle „versiune anterioară" din Registrul de modificări */
+td.rev-na{ text-align:center; color:var(--ink-mute); }
+.rev-toggle{ display:inline-flex; align-items:center; cursor:pointer; }
+.rev-toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
+.rev-toggle-track{
+  position:relative; display:inline-block; width:38px; height:22px; border-radius:999px;
+  background:var(--rule); transition:background .15s; flex:none;
+}
+.rev-toggle-thumb{
+  position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+  background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3); transition:transform .15s;
+}
+.rev-toggle input:checked + .rev-toggle-track{ background:var(--brand-primary); }
+.rev-toggle input:checked + .rev-toggle-track .rev-toggle-thumb{ transform:translateX(16px); }
+.rev-toggle input:focus-visible + .rev-toggle-track{ outline:2px solid var(--brand-amber); outline-offset:2px; }
+
+.rev-old td{ padding:0; border-top:none; }
+.rev-old-body{
+  background:var(--paper); border:1px dashed var(--rule); border-radius:8px;
+  margin:2px 0 12px;
+}
+.rev-old-sticky{
+  position:sticky; top:var(--topbar-h, 68px); z-index:40; background:var(--paper-pure);
+  border-bottom:1px solid var(--rule); border-radius:8px 8px 0 0;
+  padding:10px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.rev-old-sticky-title{ font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--brand-primary); }
+.rev-old-close{
+  flex:none; border:1px solid var(--rule); background:var(--paper); color:var(--ink-mute);
+  border-radius:999px; padding:5px 14px; font-size:12.5px; font-weight:600; cursor:pointer;
+  transition:background .15s, border-color .15s, color .15s;
+}
+.rev-old-close:hover{ background:var(--paper-pure); border-color:var(--brand-primary); color:var(--brand-primary); }
+.rev-old-content{ padding:14px 18px 18px; }
+.rev-old-content .rev-old-state{ font-size:13px; color:var(--ink-mute); font-style:italic; }
+.rev-old-content .rev-old-error{ font-size:13px; color:var(--brand-primary); font-weight:600; }
+.rev-old-content .rev-old-sub{ margin:0 0 18px; }
+.rev-old-content .rev-old-sub:last-child{ margin-bottom:0; }
+.rev-old-content .rev-old-sub h4.rev-old-label{
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--brand-primary);
+  margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.rev-old-content .rev-old-sub h4.rev-old-label .rev-old-badge{
+  font-family:'Poppins',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; color:#fff; background:var(--ink-mute); border-radius:999px; padding:2px 9px;
+}
 </style>
 </head>
 <body>
@@ -1320,6 +1367,52 @@ html{scroll-behavior:smooth}
     <h2 id="despre">Despre acest manual <span class="h-edit">cod: REC-01</span></h2>
     <p>Recepția reprezintă primul punct de contact între pacient și Clinicile Dr. Ardeleanu — locul unde se formează prima impresie, se gestionează programările și se susține activitatea zilnică a clinicii. Rolul registratorului medical este esențial: îmbină comunicarea cu pacientul, activitatea de vânzare și gestionarea documentelor, asigurând o experiență fluidă de la primul contact până la finalizarea vizitei.</p>
     <p>Acest manual codifică toate activitățile care decurg din acest rol — de la preluarea apelurilor și gestionarea leadurilor, până la consimțămintele semnate și activitatea operațional-financiară din recepție. Documentul se aplică tuturor registratorilor medicali din clinicile rețelei și este obligatoriu pentru desfășurarea activității zilnice.</p>
+
+    <a class="docref" href="../roi/Regulamentul%20de%20Organizare%20Interna.html#art-20" target="_blank" rel="noopener">
+      <div class="docref-meta">
+        <span class="docref-code">ADC-RI-02 · art. 4, 5, 19, 20</span>
+        <div class="docref-name">Document părinte: Regulamentul Intern</div>
+        <div class="docref-desc">Regulamentul Intern este documentul cu cel mai înalt rang dintre actele interne unilaterale — Manualul Registratorului Medical îl completează și îl pune în aplicare, fără a-l putea modifica ori contrazice.</div>
+      </div>
+      <div class="docref-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Deschide RI</div>
+    </a>
+
+    <h4>Scopul și obiectivele manualului</h4>
+    <p>Manualul Registratorului Medical stabilește standardele comune potrivit cărora se desfășoară activitatea registratorilor medicali în rețeaua Dr. Ardeleanu.</p>
+    <p>Manualul urmărește ca registratorul medical să contribuie activ la achiziția și retenția pacienților și, în același timp, să asigure fiecărui pacient o experiență coerentă, empatică și bine organizată, de la primul contact cu clinica până la încheierea vizitei și continuarea parcursului medical.</p>
+    <p>Activitatea registratorului medical asigură legătura dintre pacient, echipa medicală și funcțiile administrative ale clinicii. Manualul integrează gestionarea leadurilor, programările, comunicarea cu pacientul, onboardingul, documentele și consimțămintele, evidențele din SPSS și ERP, operațiunile de casierie și contabilitate primară, precum și monitorizarea activității.</p>
+    <p><b>Obiective esențiale</b></p>
+    <ol>
+      <li><b>Contribuția la achiziția și retenția pacienților</b> — gestionarea promptă și consecventă a leadurilor, transformarea solicitărilor în programări, urmărirea pacienților, realizarea activităților de recall și susținerea continuității relației dintre pacient și clinică, printr-o comunicare corectă, empatică și lipsită de presiune comercială necorespunzătoare.</li>
+      <li><b>Un parcurs administrativ complet și trasabil</b> — asigurarea unei experiențe coerente pentru pacient, verificarea corectă a identității, realizarea programărilor, onboardingul, gestionarea consimțămintelor și documentelor și înregistrarea completă a operațiunilor în sistemele autorizate.</li>
+      <li><b>Rigoare operațională, financiară și colaborare internă</b> — gestionarea corectă a încasărilor, facturării, evidențelor și predărilor, colaborarea cu echipa medicală și utilizarea unor indicatori bazați pe informații verificabile și criterii comunicate în prealabil.</li>
+    </ol>
+
+    <h4>Statutul manualului și ierarhia documentelor interne</h4>
+    <p>Manualul Activităților de Recepție — Ghidul Registratorului Medical (ADC-REC-01) este un document controlat, inclus în Registrul online de manuale și proceduri Dr. Ardeleanu.</p>
+    <p>Manualul produce efecte ca document subsecvent Regulamentului Intern, în condițiile aprobării, înregistrării și comunicării sale individuale.</p>
+    <p>Ierarhia documentelor interne aplicabile registratorilor medicali este:</p>
+    <div class="callout note"><span class="label">Ierarhia documentelor</span><p><b>Regulamentul Intern → Manualul Registratorului Medical → Procedurile și instrucțiunile subsecvente.</b></p></div>
+    <p>Manualul detaliază și transpune în activitatea de recepție principiile, obligațiile și standardele generale stabilite prin Regulamentul Intern. Procedurile și instrucțiunile emise în aplicarea manualului trebuie să fie conforme atât cu Manualul Registratorului Medical, cât și cu Regulamentul Intern.</p>
+    <p>În cazul unei neconcordanțe între documentele interne, prevalează documentul superior în această ierarhie. În toate situațiile prevalează legea și drepturile recunoscute salariatului prin contractul individual de muncă și legislația aplicabilă.</p>
+    <p>Manualul și documentele sale subsecvente nu pot modifica prin ele însele salariul, programul, timpul de muncă, concediile, celelalte drepturi contractuale sau procedurile disciplinare stabilite prin lege și prin Regulamentul Intern.</p>
+
+    <h4>Legătura cu Regulamentul Intern</h4>
+    <p>Manualul Registratorului Medical transformă cerințele generale ale Regulamentului Intern în standarde concrete pentru activitatea de recepție.</p>
+    <p>Regulamentul Intern stabilește cadrul general privind organizarea activității, drepturile și obligațiile salariaților, timpul de muncă, evaluarea profesională, disciplina, comunicarea documentelor și administrarea Registrului online.</p>
+    <p>Manualul detaliază aceste principii în raport cu activitatea specifică a registratorului medical, fără să modifice sau să restrângă prevederile Regulamentului Intern.</p>
+    <p>Indicatorii de performanță profesională și regulile privind acordarea bonusurilor sunt instrumente distincte. Un indicator, un exemplu, un script de comunicare sau o recomandare nu constituie, prin el însuși, abatere disciplinară ori necorespundere profesională și nu produce automat consecințe asupra raportului de muncă.</p>
+
+    <h4>Luarea la cunoștință și accesul la manual</h4>
+    <p>Manualul Registratorului Medical este comunicat individual prin <b>ERP-ul Dr. Ardeleanu</b>, aplicația digitală de lucru utilizată în activitatea curentă.</p>
+    <p>Pentru fiecare luare la cunoștință, salariatul semnează electronic un document individual distinct, întocmit potrivit modelului prevăzut în Anexa nr. 2 la Regulamentul Intern. Documentul semnat identifică manualul și versiunea comunicate și se arhivează în dosarul electronic de personal al salariatului.</p>
+    <p>În ERP, Manualul Registratorului Medical poate fi:</p>
+    <ul>
+      <li>consultat online în format HTML/Wiki;</li>
+      <li>descărcat și păstrat în format PDF.</li>
+    </ul>
+    <p>Versiunea aplicabilă este identificată în Registrul online prin statutul „În vigoare". Versiunile noi sunt publicate în ERP și comunicate individual înainte de a produce efecte.</p>
+    <p>Formatul HTML/Wiki reprezintă forma de consultare online, iar documentul PDF aprobat și arhivat reprezintă forma oficială a manualului. În cazul unei neconcordanțe între cele două formate, prevalează documentul PDF aprobat.</p>
 
     <!-- ============ 1 Despre Dr. Ardeleanu ============ -->
     <h2 id="cap-1">Despre Dr. Ardeleanu</h2>
@@ -1968,14 +2061,18 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 2</strong> · 15 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 4</strong> · 16 august 2026.</p>
     <table>
       <thead>
-        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
+        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
-        <tr><td>2</td><td>15 august 2026</td><td>Vlad Ardeleanu</td><td>Adaugă secțiunea „Despre acest manual" (§1, cod: REC-01) — descrie rolul registratorului medical și aplicabilitatea manualului; adaugă grupul „Preambul" în Cuprins.</td></tr>
-        <tr><td>1</td><td>30 mai 2025</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V4.1 (ADC-REC-01) — punctul de pornire al acestui registru.</td></tr>
+        <tr data-rev="4"><td>4</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugat un preambul formal, cu patru secțiuni noi — scopul și obiectivele manualului, statutul manualului și ierarhia documentelor interne (Regulamentul Intern → Manualul Registratorului Medical → proceduri/instrucțiuni), legătura cu Regulamentul Intern și mecanismul de luare la cunoștință / acces prin ERP (Anexa nr. 2 la RI, format HTML/Wiki vs. PDF oficial).</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="4"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
+        <tr class="rev-old" data-rev-old="4" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 4</span><button type="button" class="rev-old-close" data-rev-close="4">✕ Închide</button></div><div class="rev-old-content" data-rev-body="4"></div></div></td></tr>
+        <tr data-rev="3"><td>3</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugată caseta „Document părinte", care indică Regulamentul Intern (ADC-RI-02, art. 4, 5, 19, 20) drept documentul de rang superior pe care manualul îl completează și îl pune în aplicare.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="3"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
+        <tr class="rev-old" data-rev-old="3" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 3</span><button type="button" class="rev-old-close" data-rev-close="3">✕ Închide</button></div><div class="rev-old-content" data-rev-body="3"></div></div></td></tr>
+        <tr><td>2</td><td>15 august 2026</td><td>Vlad Ardeleanu</td><td>Adaugă secțiunea „Despre acest manual" (§1, cod: REC-01) — descrie rolul registratorului medical și aplicabilitatea manualului; adaugă grupul „Preambul" în Cuprins.</td><td class="rev-na">—</td></tr>
+        <tr><td>1</td><td>30 mai 2025</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V4.1 (ADC-REC-01) — punctul de pornire al acestui registru.</td><td class="rev-na">—</td></tr>
       </tbody>
     </table>
 
@@ -2094,6 +2191,7 @@ html{scroll-behavior:smooth}
 </script>
 <div class="readbar" aria-hidden="true"></div>
 <button class="totop" id="totop" aria-label="Sus">↑</button>
+<script src="revision-map.js"></script>
 <script>
 // ============ PLATFORM FRAME (unified) ============
 (function(){
@@ -2216,6 +2314,79 @@ html{scroll-behavior:smooth}
       else window.prompt('Copiază linkul:',link);
     });
   }
+
+  // ---- registru: înălțimea reală a topbar-ului (variabilă, se poate rupe pe 2 rânduri) ----
+  const topbarEl = document.querySelector('.topbar');
+  function syncTopbarHeight(){ if(topbarEl) document.documentElement.style.setProperty('--topbar-h', topbarEl.offsetHeight+'px'); }
+  syncTopbarHeight();
+  window.addEventListener('resize', syncTopbarHeight);
+
+  // ---- registru: toggle "versiune anterioară" (aduce textul vechi live de pe GitHub) ----
+  const REV_MAP = window.REGISTRATORI_REVISION_MAP || {};
+  const RAW_BASE = 'https://raw.githubusercontent.com/vladtm75/manuale-dr-ardeleanu/';
+  const MANUAL_PATH = 'registratori/Manualul Registratorului Medical.html';
+  const fileAtCommitCache = new Map();
+
+  function fetchFileAt(commit){
+    if(fileAtCommitCache.has(commit)) return fileAtCommitCache.get(commit);
+    const p = fetch(RAW_BASE + commit + '/' + encodeURI(MANUAL_PATH))
+      .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); });
+    fileAtCommitCache.set(commit, p);
+    return p;
+  }
+
+  function extractSection(fullHtml, targetId){
+    const re = /<h[23][^>]*\sid="([a-zA-Z0-9\-]+)"[^>]*>([\s\S]*?)<\/h[23]>/g;
+    const matches = [];
+    let m;
+    while((m = re.exec(fullHtml))){ matches.push({id:m[1], start:m.index, contentStart: re.lastIndex}); }
+    for(let i=0;i<matches.length;i++){
+      if(matches[i].id === targetId){
+        const contentEnd = (i+1 < matches.length) ? matches[i+1].start : fullHtml.length;
+        return fullHtml.slice(matches[i].contentStart, contentEnd);
+      }
+    }
+    return null;
+  }
+
+  document.querySelectorAll('input[data-rev-toggle]').forEach(input=>{
+    const rev = input.getAttribute('data-rev-toggle');
+    const row = document.querySelector(`tr[data-rev-old="${rev}"]`);
+    const body = row && row.querySelector(`[data-rev-body="${rev}"]`);
+    if(!row || !body) return;
+    let loaded = false;
+    input.addEventListener('change', ()=>{
+      if(!input.checked){ row.hidden = true; return; }
+      row.hidden = false;
+      if(loaded) return;
+      const entry = REV_MAP[rev];
+      if(!entry){ body.innerHTML = '<p class="rev-old-error">Nu există o mapare pentru această revizie.</p>'; loaded = true; return; }
+      body.innerHTML = '<p class="rev-old-state">Se încarcă versiunea dinainte de rev. '+rev+'…</p>';
+      fetchFileAt(entry.before).then(fullHtml=>{
+        const blocks = entry.sections.map(s=>{
+          const html = extractSection(fullHtml, s.id);
+          if(html==null){
+            return `<div class="rev-old-sub"><h4 class="rev-old-label">${s.title}</h4><p class="rev-old-error">Conținutul nu a putut fi găsit la acest commit.</p></div>`;
+          }
+          return `<div class="rev-old-sub"><h4 class="rev-old-label">${s.title}</h4>${html}</div>`;
+        });
+        body.innerHTML = `<p class="rev-old-state">Așa arăta înainte de rev. ${rev}:</p>` + blocks.join('');
+        loaded = true;
+      }).catch(err=>{
+        body.innerHTML = '<p class="rev-old-error">Nu s-a putut încărca versiunea anterioară (necesită conexiune la internet). '+err.message+'</p>';
+      });
+    });
+  });
+
+  document.querySelectorAll('button[data-rev-close]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const rev = btn.getAttribute('data-rev-close');
+      const input = document.querySelector(`input[data-rev-toggle="${rev}"]`);
+      if(input){ input.checked = false; input.dispatchEvent(new Event('change')); }
+      const mainRow = document.querySelector(`tr[data-rev="${rev}"]`);
+      if(mainRow) mainRow.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
 })();
 </script>
 </body>
