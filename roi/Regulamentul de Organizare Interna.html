@@ -546,6 +546,11 @@ a:hover{border-bottom-color:var(--brand-primary)}
 .sig-field span:first-child{white-space:nowrap;flex:none}
 .sig-field .sig-line{flex:1;border-bottom:1px solid var(--ink-mute);min-width:20px;height:.9em}
 
+/* celule de completat (înlocuiesc underscore-urile din valorile de formular) */
+.article td.value-line{border-bottom:1px solid var(--ink-mute)}
+.article .value-lines{display:flex;flex-direction:column;gap:16px;padding:4px 0 2px}
+.article .value-lines .vline{height:18px;border-bottom:1px solid var(--ink-mute)}
+
 /* Stat strip */
 .stats{
   display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
@@ -2057,13 +2062,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>A. Identificarea entității și aprobarea</h4>
     <table>
 <tbody>
-<tr><td><strong>Denumirea legală</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Forma juridică / CUI / nr. ORC</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Sediu și puncte de lucru</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Reprezentant legal</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Denumirea legală</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Forma juridică / CUI / nr. ORC</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Sediu și puncte de lucru</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Reprezentant legal</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Decizia de adoptare</strong></td><td>Nr. __________ din ____ / ____ / ______</td></tr>
 <tr><td><strong>Data intrării în vigoare</strong></td><td>____ / ____ / ______</td></tr>
-<tr><td><strong>Versiunea înlocuită</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Versiunea înlocuită</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <h4>B. Consultarea și comunicarea</h4>
     <table>
@@ -2126,18 +2131,18 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Se păstrează la dosarul de personal sau în registrul electronic de comunicare.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Angajator</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Salariat</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Funcție / compartiment</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Angajator</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Salariat</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Funcție / compartiment</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Versiune comunicată</strong></td><td>ADC-RI-02 / V2.5, datată 15.08.2026, adoptată prin Decizia nr. ______</td></tr>
 <tr><td><strong>Modalitate</strong></td><td>☐ exemplar pe hârtie   ☐ ERP-RP   ☐ e-mail   ☐ altă modalitate: __________</td></tr>
-<tr><td><strong>Identificator jurnal / lot</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Identificator jurnal / lot</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Publicare / livrare e-mail</strong></td><td>Data ____ / ____ / ______ ora ______  Status ______________________</td></tr>
 <tr><td><strong>Acces / descărcare</strong></td><td>Data ____ / ____ / ______ ora ______  Dovadă ______________________</td></tr>
 <tr><td><strong>Confirmare electronică</strong></td><td>☐ Da, la data/ora __________________  ☐ Refuz / lipsă confirmare consemnată</td></tr>
 <tr><td><strong>Data comunicării</strong></td><td>____ / ____ / ______, ora ______</td></tr>
-<tr><td><strong>Subiect e-mail / link direct</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Sinteza comunicată</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Subiect e-mail / link direct</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Sinteza comunicată</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <p>Declar că am primit acces la Regulamentul intern indicat mai sus, într-o formă integrală pe care o pot descărca, păstra și tipări, și că mi-au fost indicate Registrul Digital Oficial și canalele electronice oficiale. În cazul comunicării electronice, notificarea a identificat documentul și versiunea, data aplicării, o scurtă descriere și linkul direct de acces. Înțeleg obligația de a consulta canalele în timpul programului, de a respecta prevederile aplicabile și dreptul de a solicita clarificări ori de a semnala o problemă tehnică. Confirmarea dovedește comunicarea și luarea la cunoștință; nu reprezintă renunțare la drepturi, acord cu o măsură individuală sau acceptarea unei modificări contractuale care ar necesita consimțământ separat.</p>
     <table>
@@ -2150,10 +2155,10 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Se validează de HR și salarizare înainte de adoptare și la fiecare modificare.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Angajator</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Angajator</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Perioada de valabilitate</strong></td><td>De la ____ / ____ / ______ până la modificare / ____ / ____ / ______</td></tr>
-<tr><td><strong>Canalul de publicare a graficelor</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Termen uzual de comunicare</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Canalul de publicare a graficelor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Termen uzual de comunicare</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <thead><tr><th>Punct / compartiment</th><th>Fereastră funcționare</th><th>Tip repartizare</th><th>Pauză</th><th>Repaus / spor</th><th>Observații</th></tr></thead>
@@ -2229,15 +2234,15 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 6A — Sesizarea unei posibile abateri</h4>
     <table>
 <tbody>
-<tr><td><strong>Emitent / contact</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana / rolul vizat</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Emitent / contact</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana / rolul vizat</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data sesizării</strong></td><td>____ / ____ / ______</td></tr>
-<tr><td><strong>Data / locul faptei</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Descriere factuală</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Obligația posibil încălcată</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoane care cunosc faptele</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Probe anexate / de conservat</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Măsură urgentă solicitată</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Data / locul faptei</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Descriere factuală</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Obligația posibil încălcată</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoane care cunosc faptele</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Probe anexate / de conservat</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Măsură urgentă solicitată</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <tbody>
@@ -2260,9 +2265,9 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Decizia nr. / data</strong></td><td>________________________ / ____ / ____ / ______</td></tr>
-<tr><td><strong>Persoană / comisie / consultant</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Obiectul exact</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Mandat / termen intern</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Persoană / comisie / consultant</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Obiectul exact</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Mandat / termen intern</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Conflict / confidențialitate</strong></td><td>☐ verificat  ☐ declarații anexate</td></tr>
 </tbody></table>
     <table>
@@ -2272,8 +2277,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 6C — Convocarea disciplinară</h4>
     <table>
 <tbody>
-<tr><td><strong>Către</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Obiectul cercetării</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Către</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Obiectul cercetării</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data / ora / locul</strong></td><td>____ / ____ / ______, ora ______, __________________________________________</td></tr>
 <tr><td><strong>Data comunicării</strong></td><td>____ / ____ / ______, prin _________________________________________________</td></tr>
 </tbody></table>
@@ -2285,10 +2290,10 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 6D — Proces-verbal al audierii</h4>
     <table>
 <tbody>
-<tr><td><strong>Dosar / data</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Participanți și calități</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Asistentul salariatului</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente prezentate</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Dosar / data</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Participanți și calități</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Asistentul salariatului</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Documente prezentate</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <thead><tr><th>Faptă / întrebare</th><th>Răspuns / apărare</th><th>Probă indicată</th><th>Clarificare / termen</th></tr></thead>
@@ -2303,8 +2308,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Obiecții / incidente</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Refuz de răspuns / semnare</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Obiecții / incidente</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Refuz de răspuns / semnare</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Probe suplimentare până la</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
     <table>
@@ -2314,7 +2319,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 6E — Raport final și checklistul deciziei</h4>
     <table>
 <tbody>
-<tr><td><strong>Dosar / salariat</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Dosar / salariat</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data înregistrării raportului</strong></td><td>____ / ____ / ______, nr. __________</td></tr>
 </tbody></table>
     <table>
@@ -2329,7 +2334,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <tbody>
 <tr><td><strong>Individualizare art. 250</strong></td><td>Împrejurări: __________________  Vinovăție: __________________  Consecințe: __________________Conduită generală: __________________  Sancțiuni neradiate: __________________</td></tr>
 <tr><td><strong>Recomandare</strong></td><td>☐ clasare  ☐ avertisment scris  ☐ retrogradare  ☐ reducere salarială  ☐ concediere disciplinară</td></tr>
-<tr><td><strong>Motivare</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Motivare</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 </tbody></table>
     <p>☐ Raportul a fost înregistrat; limita de 30 de zile calendaristice a fost calculată.</p>
     <p>☐ Limita de 6 luni de la faptă a fost verificată.</p>
@@ -2348,12 +2353,12 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Către</strong></td><td>☐ superior direct  ☐ HR  ☐ reprezentant legal  ☐ alt compartiment: __________________</td></tr>
-<tr><td><strong>Solicitant / post / contact</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Solicitant / post / contact</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Tip</strong></td><td>☐ program  ☐ concediu  ☐ salariu  ☐ document  ☐ condiții  ☐ relații  ☐ altul: __________</td></tr>
-<tr><td><strong>Obiectul cererii</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Fapte / perioadă</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Soluția solicitată</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente anexate</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Obiectul cererii</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Fapte / perioadă</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Soluția solicitată</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Documente anexate</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Confidențialitate justificată</strong></td><td>☐ Nu  ☐ Da, motiv: __________________________________________________</td></tr>
 </tbody></table>
     <table>
@@ -2373,7 +2378,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Soluție și motivare</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Soluție și motivare</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
 </tbody></table>
     <table>
 <tbody>
@@ -2387,14 +2392,14 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Persoană care sesizează</strong></td><td>__________________________________________________________________  ☐ doresc anonimat</td></tr>
-<tr><td><strong>Contact sigur / modalitate</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana/persoanele reclamate</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Relația profesională</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Descrierea faptelor</strong></td><td>________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Date / locuri / frecvență</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Martori / probe</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Demersuri anterioare</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Nevoi imediate de protecție</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Contact sigur / modalitate</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana/persoanele reclamate</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Relația profesională</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Descrierea faptelor</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Date / locuri / frecvență</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Martori / probe</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Demersuri anterioare</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Nevoi imediate de protecție</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Opțiune informală</strong></td><td>☐ nu doresc  ☐ pot discuta opțiunea; acordul separat este necesar</td></tr>
 </tbody></table>
     <table>
@@ -2418,7 +2423,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Măsuri temporare propuse</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Măsuri temporare propuse</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data raportului preliminar</strong></td><td>____ / ____ / ______</td></tr>
 <tr><td><strong>Termen raport final</strong></td><td>____ / ____ / ______ (maximum 45 zile calendaristice de la sesizare)</td></tr>
 </tbody></table>
@@ -2438,8 +2443,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Fapte stabilite</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Analiza contextului și probelor</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Fapte stabilite</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Analiza contextului și probelor</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Concluzie</strong></td><td>☐ se confirmă  ☐ se confirmă parțial  ☐ nu se confirmă  ☐ probe insuficiente</td></tr>
 <tr><td><strong>Măsuri recomandate</strong></td><td>☐ protecție  ☐ organizare  ☐ instruire  ☐ disciplinar separat  ☐ autorități  ☐ monitorizare</td></tr>
 <tr><td><strong>Informarea părților</strong></td><td>Data / modalitatea: ______________________________________________________</td></tr>
@@ -2456,14 +2461,14 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 9A — Raportare</h4>
     <table>
 <tbody>
-<tr><td><strong>Nume / calitate (opțional)</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Contact sigur (opțional)</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Context profesional</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana / structura vizată</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Descrierea încălcării</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Perioada / locul</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente / indicii / martori</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Risc imediat / represalii</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Nume / calitate (opțional)</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Contact sigur (opțional)</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Context profesional</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana / structura vizată</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Descrierea încălcării</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Perioada / locul</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Documente / indicii / martori</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Risc imediat / represalii</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Preferință</strong></td><td>☐ doresc confirmări  ☐ nu doresc confirmări  ☐ raportare anonimă</td></tr>
 </tbody></table>
     <table>
@@ -2474,8 +2479,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Număr unic / data</strong></td><td>________________________ / ____ / ____ / ______</td></tr>
-<tr><td><strong>Canal / anonim</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Responsabil / conflict verificat</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Canal / anonim</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Responsabil / conflict verificat</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Confirmare în 7 zile</strong></td><td>Data __________________  ☐ imposibilă / necerută</td></tr>
 <tr><td><strong>Termen feedback 3 luni</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
@@ -2491,9 +2496,9 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Măsuri anti-represalii</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Măsuri anti-represalii</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Feedback transmis</strong></td><td>Data / conținut permis: __________________________________________________</td></tr>
-<tr><td><strong>Închidere / motivare</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Închidere / motivare</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data distrugerii (5 ani)</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
     <table>
@@ -2506,12 +2511,12 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Declararea nu presupune existența unei abateri. Scopul este prevenirea și gestionarea proporțională.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Salariat / post</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Salariat / post</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data / tip declarație</strong></td><td>____ / ____ / ______   ☐ inițială  ☐ anuală  ☐ actualizare</td></tr>
-<tr><td><strong>Interes / activitate externă</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Entitate / persoană relevantă</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Relația cu atribuțiile</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Acces la informații / decizie</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Interes / activitate externă</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Entitate / persoană relevantă</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Relația cu atribuțiile</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Acces la informații / decizie</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Măsuri propuse de salariat</strong></td><td>☐ abținere  ☐ informare  ☐ separare atribuții  ☐ altă măsură: __________________</td></tr>
 </tbody></table>
     <p>Declar că informațiile sunt complete după cunoștința mea și mă oblig să actualizez declarația când situația se schimbă.</p>
@@ -2523,9 +2528,9 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Evaluarea materialității</strong></td><td>☐ fără conflict  ☐ potențial  ☐ aparent  ☐ actual</td></tr>
-<tr><td><strong>Măsuri stabilite</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Durata / reverificare</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana care supraveghează</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Măsuri stabilite</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Durata / reverificare</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana care supraveghează</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <tbody>
@@ -2537,10 +2542,10 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Se folosește la schimbarea rolului, suspendare relevantă ori încetare. Parolele nu se scriu în clar în formular.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Salariat / post</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Motiv / ultima zi</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Predare către</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Data / interval</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Salariat / post</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Motiv / ultima zi</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Predare către</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Data / interval</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <thead><tr><th>Categorie</th><th>Element / identificator</th><th>Stare / locație</th><th>Predat / acțiune</th><th>Observații</th></tr></thead>
@@ -2557,10 +2562,10 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 11B — Finalizarea predării</h4>
     <table>
 <tbody>
-<tr><td><strong>Sume / deconturi în curs</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Sume / deconturi în curs</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Documente HR de eliberat</strong></td><td>☐ adeverință  ☐ extras registru  ☐ fișă fiscală / alte: __________________</td></tr>
-<tr><td><strong>Concediu neefectuat / drepturi</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Incidente / neconcordanțe</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Concediu neefectuat / drepturi</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Incidente / neconcordanțe</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <tbody>
@@ -2576,23 +2581,23 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Pentru obligații de fidelitate și recuperarea costurilor se încheie act adițional separat.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Salariat / post</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Program / furnizor</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Perioada / program</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Salariat / post</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Program / furnizor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Perioada / program</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Inițiativa</strong></td><td>☐ Angajator  ☐ salariat  ☐ obligație profesională / legală</td></tr>
-<tr><td><strong>Legătura cu postul / obiectiv</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Legătura cu postul / obiectiv</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Costuri estimate</strong></td><td>Taxă ______  Transport ______  Cazare ______  Alte ______  Total ______</td></tr>
 <tr><td><strong>Timp de lucru / concediu</strong></td><td>☐ timp de muncă  ☐ concediu plătit legal  ☐ concediu fără plată  ☐ altul: ______</td></tr>
-<tr><td><strong>Documente anexate</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Documente anexate</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <h4>Formular 12B — Decizia Angajatorului</h4>
     <table>
 <tbody>
 <tr><td><strong>Soluție</strong></td><td>☐ aprobat integral  ☐ aprobat parțial  ☐ respins motivat</td></tr>
-<tr><td><strong>Costuri suportate</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Condiții / livrabil</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Costuri suportate</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Condiții / livrabil</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Act adițional necesar</strong></td><td>☐ Nu  ☐ Da — durată / costuri și recuperare proporțională</td></tr>
-<tr><td><strong>Motivarea soluției</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Motivarea soluției</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data soluționării</strong></td><td>____ / ____ / ______ (în termen de 15 zile de la cerere)</td></tr>
 </tbody></table>
     <table>
@@ -2608,13 +2613,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <tbody>
 <tr><td><strong>Portal manuale</strong></td><td>https://vladtm75.github.io/manuale-dr-ardeleanu/index.html</td></tr>
 <tr><td><strong>Organigramă</strong></td><td>https://vladtm75.github.io/dr-ardeleanu-org-chart/</td></tr>
-<tr><td><strong>Secțiunea «Documente» ERP-RP</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Locația PDF-urilor canonice</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Locația versiunilor HTML/Wiki</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Registrul modificărilor</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Jurnalul comunicărilor</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Secțiunea «Documente» ERP-RP</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Locația PDF-urilor canonice</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Locația versiunilor HTML/Wiki</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Registrul modificărilor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Jurnalul comunicărilor</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Proprietar registru</strong></td><td>HR, împreună cu proprietarul funcțional al fiecărui document</td></tr>
-<tr><td><strong>Locația arhivei imuabile</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Locația arhivei imuabile</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data ultimei reconcilieri</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
     <p>Pentru fiecare document, proprietarul funcțional redactează și validează conținutul tehnic, HR verifică destinatarii, legătura cu fișa postului, performanța și egalitatea de tratament, funcția financiar-contabilă validează efectele fiscale, salariale, bugetare, de avans și de decont, iar funcția juridică și responsabilul cu protecția datelor verifică efectele disciplinare, contractuale și de monitorizare. Aprobatorul autorizează versiunea, iar publicarea are loc numai după înregistrare. PDF-ul aprobat, identificatorul său, versiunea HTML/Wiki, sinteza modificărilor, istoricul și rapoartele de comunicare se păstrează astfel încât înlocuirea unei pagini să nu poată modifica retrospectiv standardul aplicabil.</p>
@@ -2673,18 +2678,18 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 13A — Fișa de înregistrare a unui document controlat</h4>
     <table>
 <tbody>
-<tr><td><strong>Cod unic / titlu</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Versiune / data efectivă</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Proprietar / aprobator</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Destinatari / roluri / nivel</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente înlocuite</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Cod unic / titlu</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Versiune / data efectivă</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Proprietar / aprobator</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Destinatari / roluri / nivel</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Documente înlocuite</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Etichete utilizate</strong></td><td>☐ OBL  ☐ CRIT  ☐ OPR  ☐ EVD  ☐ KPI-P  ☐ KPI-B  ☐ GHID</td></tr>
-<tr><td><strong>Legătura cu fișa postului</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Legătura cu fișa postului</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Instrumente corelate</strong></td><td>☐ performanță/bonus — Anexa 4 ☐ necorespundere — Anexa 5 ☐ disciplinar — 6A ☐ altele: ______</td></tr>
-<tr><td><strong>PDF canonic / hash</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>HTML/Wiki / link de lectură</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Arhivă versiuni anterioare</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Sinteza modificărilor</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>PDF canonic / hash</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>HTML/Wiki / link de lectură</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Arhivă versiuni anterioare</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Sinteza modificărilor</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Notificare / termen de parcurgere</strong></td><td>Data ______  Termen ______  Lot / roluri __________________________</td></tr>
 <tr><td><strong>Test alocat / prag / reexaminare</strong></td><td>☐ Nu  ☐ Da — ERP ID ______  Prag ______  Reexaminare ______________</td></tr>
 <tr><td><strong>Dovada comunicării</strong></td><td>ERP-RP __________________  E-mail __________________  Acces / confirmare __________________</td></tr>
@@ -2692,7 +2697,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 13B — Registrul versiunilor și aprobărilor</h4>
     <table>
 <tbody>
-<tr><td><strong>Retenție / acces</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Retenție / acces</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <thead><tr><th>Versiune</th><th>Data</th><th>Modificare</th><th>Aprobat</th><th>PDF / hash</th><th>Comunicare / destinatari</th></tr></thead>
@@ -2738,17 +2743,17 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 13D — Fișa de comunicare a unei versiuni și raportul de lot</h4>
     <table>
 <tbody>
-<tr><td><strong>Document / cod / versiune</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>PDF canonic / hash</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Destinatari / roluri / lot</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Document / cod / versiune</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>PDF canonic / hash</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Destinatari / roluri / lot</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>ERP-RP publicare</strong></td><td>ID __________________  Data ____ / ____ / ______  Ora ______</td></tr>
 <tr><td><strong>Raport livrare e-mail</strong></td><td>Fișier / ID __________________  Livrate ______  Eșuate ______</td></tr>
 <tr><td><strong>Acces / descărcare</strong></td><td>Accesări ______  Descărcări ______  Raport la data __________</td></tr>
 <tr><td><strong>Confirmare luare la cunoștință</strong></td><td>Confirmări ______  Refuzuri ______  Lipsă confirmare ______</td></tr>
 <tr><td><strong>Termen de parcurgere</strong></td><td>____ / ____ / ______  Extinderi pentru absențe / incidente __________________</td></tr>
 <tr><td><strong>Test ERP / prag</strong></td><td>☐ Neaplicabil  ☐ Alocat — ID ______  Prag ______  Termen ______</td></tr>
-<tr><td><strong>Reexaminare / remediere</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Incidente tehnice / canal alternativ</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Reexaminare / remediere</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Incidente tehnice / canal alternativ</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Export jurnal / retenție</strong></td><td>Locație __________________  Până la __________________</td></tr>
 </tbody></table>
     <table>
