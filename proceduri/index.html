@@ -10,7 +10,7 @@
   var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
   var O='59afd7263d9b30e6643869072bc6f1c028c670fb404893620531376eef2b87de';
   var LK='adcAuthPROC';
-  var PROC_KEYS=[{lk:'adcAuthBEN',hash:'9d3dffbb111f9a0bd5a70c325a5de235d65d1210b5528ecfdc9b0ad6d8d53236'}];
+  var PROC_KEYS=[{lk:'adcAuthBEN',hash:'9d3dffbb111f9a0bd5a70c325a5de235d65d1210b5528ecfdc9b0ad6d8d53236'},{lk:'adcAuthORG',hash:'02cf11d5c34df37190b983d7bb9dbb1b3f5133c7ef39db2a076b208f11f370cb'}];
   function deny(){ location.replace('../index.html'); }
   try{
     if(sessionStorage.getItem('adcManualeAuth')===M) return;
@@ -375,6 +375,12 @@ html{scroll-behavior:smooth}
         <span class="pc-desc">Logistica uniformelor și a echipamentului individual.</span>
         <span class="pc-status">În pregătire</span>
       </span>
+      <a class="proto-card" href="organigrama.html">
+        <span class="pc-code">LIVE · DOAR CITIRE</span>
+        <span class="pc-name">Organigramă</span>
+        <span class="pc-desc">Structura organizațională a rețelei — vizualizare live, întreținută separat.</span>
+        <span class="pc-status">Actualizată live</span>
+      </a>
     </div>
   </div>
 
