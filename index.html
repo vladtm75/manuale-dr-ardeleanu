@@ -97,7 +97,31 @@
   .card-head .aud{ font-size:13px; color:rgba(255,255,255,.85); margin:7px 0 0; }
   .card-body{ padding:20px 28px 24px; display:flex; flex-direction:column; flex:1; }
   .card-body p.desc{ font-size:13.5px; color:var(--muted); margin:0 0 18px; }
-  .card-body p.card-note{ font-size:11.5px; font-style:italic; color:var(--muted); background:var(--cream); border-left:3px solid var(--amber); padding:6px 10px; border-radius:0 5px 5px 0; margin:-6px 0 16px; }
+
+  .aud-row{ display:flex; align-items:center; gap:7px; margin:7px 0 0; }
+  .aud-row .aud{ margin:0; }
+  .info-trigger{
+    position:relative; display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; flex:none; padding:0; margin:0;
+    border-radius:50%; border:1px solid rgba(255,255,255,.55); background:rgba(255,255,255,.14);
+    color:#fff; cursor:help; -webkit-tap-highlight-color:transparent;
+  }
+  .info-trigger .info-icon{
+    font-family:Georgia,serif; font-style:italic; font-weight:700; font-size:10.5px; line-height:1;
+  }
+  .info-trigger .info-tooltip{
+    position:absolute; left:0; top:calc(100% + 9px); z-index:30;
+    width:250px; max-width:min(70vw,250px); text-align:left;
+    background:#fff; color:var(--muted); font-size:11.5px; font-style:italic; font-weight:400; line-height:1.5;
+    padding:10px 12px; border-radius:0 8px 8px 8px; border-left:3px solid var(--amber);
+    box-shadow:0 12px 28px -10px rgba(0,0,0,.4);
+    opacity:0; visibility:hidden; transform:translateY(-4px);
+    transition:opacity .15s ease, transform .15s ease, visibility .15s;
+    pointer-events:none;
+  }
+  .info-trigger:hover .info-tooltip, .info-trigger:focus-visible .info-tooltip, .info-trigger.open .info-tooltip{
+    opacity:1; visibility:visible; transform:translateY(0);
+  }
   .meta{ display:grid; grid-template-columns:1fr 1fr 1fr; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:0 0 20px; }
   .meta .cell{ padding:11px 6px 12px 0; border-left:1px solid var(--line); padding-left:14px; }
   .meta .cell:first-child{ border-left:none; padding-left:0; }
@@ -269,11 +293,16 @@
       <div class="card-head">
         <span class="card-pill">ADC-MED-01</span>
         <h2>Manualul Medicului</h2>
-        <p class="aud">Pentru medicii rețelei</p>
+        <div class="aud-row">
+          <p class="aud">Pentru medicii rețelei</p>
+          <button class="info-trigger" type="button" aria-label="De ce nu se subordonează Regulamentului Intern">
+            <span class="info-icon">i</span>
+            <span class="info-tooltip">Notă: spre deosebire de celelalte manuale, nu se subordonează Regulamentului Intern — relația cu medicii e guvernată de contractul de prestări servicii medicale, nu de raportul de muncă.</span>
+          </button>
+        </div>
       </div>
       <div class="card-body">
-        <p class="desc">Ghidul Medicului — operațional, comportamental și partea medicală: parcursul pacientului, comunicarea cu pacientul și protocoalele clinice pe specialități.</p>
-        <p class="card-note">Notă: spre deosebire de celelalte manuale, nu se subordonează Regulamentului Intern — relația cu medicii e guvernată de contractul de prestări servicii medicale, nu de raportul de muncă.</p>
+        <p class="desc">Ghidul Medicului, cu QA medical de excelență drept obiectiv central — operațional, comportamental și partea medicală: parcursul pacientului, comunicarea cu pacientul și protocoalele clinice pe specialități.</p>
         <div class="meta">
           <div class="cell"><p class="lbl">Ediție</p><p class="val">V1.0 · 2026</p></div>
           <div class="cell"><p class="lbl">Capitole</p><p class="val">3 · 46 subcap.</p></div>
@@ -436,6 +465,26 @@
         if(navigator.clipboard&&navigator.clipboard.writeText){
           navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:', link); });
         } else { window.prompt('Copiază linkul:', link); }
+      });
+    });
+  })();
+  </script>
+
+  <script>
+  /* Tooltip-ul "de ce nu se subordonează RI" de pe cardul Medici — click/tap îl comută
+     (pe lângă hover), fără să declanșeze navigarea cardului-link din jur. */
+  (function(){
+    document.querySelectorAll('.info-trigger').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        var wasOpen = btn.classList.contains('open');
+        document.querySelectorAll('.info-trigger.open').forEach(function(b){ b.classList.remove('open'); });
+        if(!wasOpen) btn.classList.add('open');
+      });
+    });
+    document.addEventListener('click', function(e){
+      document.querySelectorAll('.info-trigger.open').forEach(function(btn){
+        if(!btn.contains(e.target)) btn.classList.remove('open');
       });
     });
   })();
