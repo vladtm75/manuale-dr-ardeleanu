@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<script>
+/* Gate: acces cu parola generală SAU cu cheia proprie a hub-ului SAU cu cheia
+   oricăreia dintre procedurile publicate (cine a primit un link direct la o
+   procedură vede și lista completă). La fiecare procedură nouă cu cheie proprie,
+   adaugă intrarea corespunzătoare în lista PROC_KEYS de mai jos. */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='59afd7263d9b30e6643869072bc6f1c028c670fb404893620531376eef2b87de';
+  var LK='adcAuthPROC';
+  var PROC_KEYS=[{lk:'adcAuthBEN',hash:'9d3dffbb111f9a0bd5a70c325a5de235d65d1210b5528ecfdc9b0ad6d8d53236'}];
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    for(var i=0;i<PROC_KEYS.length;i++){ if(localStorage.getItem(PROC_KEYS[i].lk)===PROC_KEYS[i].hash) return; }
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proceduri de lucru, Dr. Ardeleanu</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Proceduri de lucru, Dr. Ardeleanu" />
+<meta property="og:description" content="Procedurile operaționale ale rețelei Dr. Ardeleanu — beneficii, deconturi, flotă auto și uniforme. Documente subordonate Regulamentului Intern, administrate prin Registrul online." />
+<meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/index.html" />
+<meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/og-proceduri.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta property="og:locale" content="ro_RO" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/og-proceduri.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-primary:#7B1C16;
+  --brand-primary-deep:#5d140f;
+  --brand-primary-soft:#a14841;
+  --brand-wheat:#F2DAB7;
+  --brand-cream:#F5EDE3;
+  --brand-cream-warm:#FBF6EE;
+  --brand-olive:#B5BD5C;
+  --brand-amber:#C9A227;
+  --brand-yellow:#FBE483;
+  --brand-terracotta:#dd7e6b;
+  --brand-alert:#FF0300;
+  --ink:#222222;
+  --ink-soft:#4a4541;
+  --ink-mute:#7a736d;
+  --rule:#e6dccd;
+  --rule-soft:#efe7d7;
+  --paper:#fbf7f1;
+  --paper-pure:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Poppins',system-ui,sans-serif;
+  font-weight:400;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--brand-primary);text-decoration:none;border-bottom:1px solid rgba(123,28,22,.25)}
+a:hover{border-bottom-color:var(--brand-primary)}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper-pure);
+  border-bottom:1px solid var(--rule);
+  box-shadow:0 1px 0 rgba(123,28,22,.04);
+}
+.topbar-inner{
+  max-width:1380px;margin:0 auto;padding:10px 28px;
+  display:flex;align-items:center;gap:18px;
+}
+.topbar img.logo{height:34px;width:auto;display:block}
+.back-home{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  font-size:12.5px;font-weight:600;color:var(--brand-primary);white-space:nowrap;
+  border:1.5px solid var(--rule);border-radius:999px;padding:6px 15px;
+  transition:background .15s,border-color .15s;border-bottom:1.5px solid var(--rule);
+}
+.back-home:hover{background:var(--brand-cream);border-color:var(--brand-primary);}
+.back-home .bh-arrow{font-size:15px;line-height:1}
+@media(max-width:840px){ .back-home .bh-txt{display:none} .back-home{padding:6px 11px} }
+.topbar .crumbs{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:12px;letter-spacing:.04em;color:var(--ink-mute);
+  border-left:1px solid var(--rule);padding-left:14px;
+}
+.topbar .crumbs strong{color:var(--brand-primary);font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+.topbar .spacer{flex:1}
+.topbar .pill{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;
+  background:var(--brand-cream);color:var(--brand-primary);
+  font-weight:600;border:1px solid var(--brand-wheat);
+}
+.topbar .mh-share{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 13px;
+  font-family:inherit;font-weight:600;font-size:12px;color:var(--brand-primary);
+  cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
+}
+.topbar .mh-share:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
+
+/* ============ HERO / TITLE ============ */
+.hero{
+  background:linear-gradient(180deg,var(--paper-pure) 0%, var(--paper) 100%);
+  border-bottom:1px solid var(--rule);
+  padding:42px 0 28px;
+}
+.hero-inner{max-width:1380px;margin:0 auto;padding:0 28px}
+.hero .kicker{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero .kicker:before{content:"";display:inline-block;width:28px;height:1px;background:var(--brand-amber)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  color:var(--ink);
+  font-size:clamp(38px,5.6vw,58px);line-height:1.04;
+  margin:0 0 14px;letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:italic;color:#75604A;font-weight:500}
+.hero .subtitle{
+  font-size:19px;color:var(--ink-soft);font-weight:300;
+  margin:0 0 26px;line-height:1.5;
+  max-width:76ch;
+}
+.hero .meta-row{
+  display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-top:22px;
+}
+.hero .meta-row > div{
+  padding:11px 8px;
+  border-right:1px solid var(--rule);
+  text-align:center;
+}
+.hero .meta-row > div:last-child{border-right:none}
+@media(max-width:900px){
+  .hero .meta-row{grid-auto-flow:row;grid-template-columns:repeat(4,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:none}
+}
+@media(max-width:560px){
+  .hero .meta-row{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:1px solid var(--rule)}
+  .hero .meta-row > div:nth-child(2n){border-right:none}
+}
+.hero .meta-row dt{
+  font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-bottom:3px;
+}
+.hero .meta-row dd{
+  margin:0;font-size:12px;color:var(--ink);font-weight:500;line-height:1.3;
+}
+.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:#75604A}
+
+/* ============ HUB CONTENT ============ */
+.hub-wrap{max-width:1100px;margin:0 auto;padding:38px 28px 90px}
+
+/* Protocol index — clickable card grid (reused ca hub de proceduri) */
+.proto-index{
+  margin:0 0 32px;
+  background:linear-gradient(180deg,#C9AD8C 0%,#8A6F52 100%);
+  border-radius:8px;
+  padding:24px 24px 8px;
+  color:#fff;
+}
+.proto-index .pi-head{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  margin-bottom:18px;padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+.proto-index .pi-eyebrow{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:#F2E4CE;font-weight:700;
+}
+.proto-index h2{
+  margin:0;font-family:'Playfair Display',serif;font-weight:700;
+  font-size:24px;color:#fff;line-height:1.2;
+}
+.proto-index .pi-sub{
+  font-size:13px;color:rgba(255,255,255,.85);margin-left:auto;
+}
+.proto-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:10px;margin-bottom:16px;
+}
+.proto-card{
+  display:flex;flex-direction:column;gap:5px;
+  padding:15px 16px;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:6px;
+  color:#fff;
+  text-decoration:none;
+  transition:background .15s,border-color .15s,transform .12s;
+}
+.proto-card:hover{
+  background:rgba(255,255,255,.24);
+  border-color:#fff;
+  transform:translateY(-2px);
+  color:#fff;
+}
+.proto-card .pc-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.04em;
+  color:#F2E4CE;font-weight:700;
+}
+.proto-card .pc-name{
+  font-size:15px;font-weight:600;line-height:1.3;color:#fff;
+  font-family:'Playfair Display',serif;
+}
+.proto-card .pc-desc{
+  font-size:12px;line-height:1.4;color:rgba(255,255,255,.85);margin-top:2px;
+}
+.proto-card .pc-status{
+  margin-top:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#fff;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.proto-card .pc-status:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.proto-card.soon{
+  background:rgba(0,0,0,.08);border-style:dashed;cursor:default;color:rgba(255,255,255,.65);
+}
+.proto-card.soon:hover{transform:none;background:rgba(0,0,0,.08);border-color:rgba(255,255,255,.28)}
+.proto-card.soon .pc-name{color:rgba(255,255,255,.75)}
+.proto-card.soon .pc-code{color:rgba(255,255,255,.55)}
+
+.hub-note{
+  font-size:13.5px;line-height:1.6;color:var(--ink-soft);
+  background:var(--paper-pure);border:1px solid var(--rule);border-left:3px solid var(--brand-amber);
+  border-radius:0 6px 6px 0;padding:16px 20px;margin:0 0 24px;
+}
+.hub-note strong{color:var(--brand-primary)}
+
+/* Footer */
+footer{
+  background:var(--brand-primary);color:#fff;
+  padding:48px 0 38px;margin-top:20px;
+}
+.footer-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;
+  font-size:13px;line-height:1.6;
+}
+@media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+footer h5{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
+}
+footer .tagline{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.3;margin:8px 0 14px;color:#fff;
+}
+footer a{color:#fff;border-bottom:1px solid rgba(255,255,255,.3)}
+footer a:hover{border-bottom-color:var(--brand-yellow);color:var(--brand-yellow)}
+footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
+.din-2017{
+  margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;text-align:center;
+}
+.din-2017 span{margin:0 22px}
+
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--brand-amber);outline-offset:2px;border-radius:4px}
+.menu-btn{display:none}
+@media(max-width:640px){
+  .topbar-inner{padding:10px 14px; gap:12px}
+  .topbar img.logo{height:26px}
+  .topbar-inner .brand-home{margin-left:auto}
+  .topbar-inner .crumbs{display:none}
+  .topbar-inner .spacer{display:none}
+  .topbar-inner .pill{display:none}
+  .topbar-inner .mh-share{display:none}
+  .hub-wrap{padding:24px 16px 70px}
+}
+</style>
+</head>
+<body>
+
+<!-- =========================== TOP BAR =========================== -->
+<header class="topbar" data-screen-label="topbar">
+  <div class="topbar-inner">
+    <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
+    <a href="../index.html" style="border-bottom:none" title="Înapoi la Manuale Interne" class="brand-home"><img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
+    <div class="crumbs">
+      <span class="crumb-path">
+        <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
+        <span>›</span>
+        <span>Proceduri de lucru</span>
+      </span>
+    </div>
+    <div class="spacer"></div>
+    <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la această listă"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
+    <span class="pill">Anexa nr. 13 la RI</span>
+  </div>
+</header>
+
+<!-- =========================== HERO =========================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Registrul online · Resurse Umane</div>
+    <h1>Proceduri <em>de lucru</em></h1>
+    <p class="subtitle">Procedurile operaționale ale rețelei — beneficii pentru personal, deplasări și decontări, flotă auto și GPS, uniforme. Toate sunt documente subordonate Regulamentului Intern, administrate prin Registrul din Anexa nr. 13, cu publicare treptată pe măsură ce sunt validate și adoptate.</p>
+
+    <dl class="meta-row">
+      <div><dt>Publicate</dt><dd><span class="mono">1</span></dd></div>
+      <div><dt>În pregătire</dt><dd>3</dd></div>
+      <div><dt>Document părinte</dt><dd>RI · Anexa nr. 13</dd></div>
+      <div><dt>Aplicabilitate</dt><dd>Rolurile vizate de fiecare procedură</dd></div>
+      <div><dt>Administrare</dt><dd>Vlad Ardeleanu</dd></div>
+    </dl>
+  </div>
+</section>
+
+<div class="hub-wrap">
+
+  <div class="hub-note"><strong>Cum funcționează.</strong> Fiecare procedură e un document controlat propriu, cu versiune, aprobare și registru de modificări proprii — nu o secțiune dintr-un singur fișier. Odată deschisă o procedură, taburile din partea de sus a paginii permit trecerea directă la celelalte, fără să te întorci aici.</div>
+
+  <div class="proto-index">
+    <div class="pi-head">
+      <span class="pi-eyebrow">Proceduri operaționale</span>
+      <h2>Anexa nr. 13 — Registrul procedurilor de lucru</h2>
+      <span class="pi-sub">1 publicată · 3 în pregătire</span>
+    </div>
+    <div class="proto-grid">
+      <a class="proto-card" href="ADC-BEN-01_Procedura_Beneficii.html">
+        <span class="pc-code">ADC-BEN-01 · V3.0</span>
+        <span class="pc-name">Beneficii Stomatologice</span>
+        <span class="pc-desc">Eligibilitate, matricea aprobată, fluxul ERP și protecția datelor.</span>
+        <span class="pc-status">Proiect — în validare</span>
+      </a>
+      <span class="proto-card soon">
+        <span class="pc-code">ADC-DEC-01</span>
+        <span class="pc-name">Deplasări și decontări</span>
+        <span class="pc-desc">Decontarea cheltuielilor de deplasare și a diurnelor.</span>
+        <span class="pc-status">În pregătire</span>
+      </span>
+      <span class="proto-card soon">
+        <span class="pc-code">ADC-FLO-01</span>
+        <span class="pc-name">Flotă auto și GPS</span>
+        <span class="pc-desc">Utilizarea autovehiculelor de serviciu și monitorizarea GPS.</span>
+        <span class="pc-status">În pregătire</span>
+      </span>
+      <span class="proto-card soon">
+        <span class="pc-code">ADC-UNI-01</span>
+        <span class="pc-name">Uniforme și echipament</span>
+        <span class="pc-desc">Logistica uniformelor și a echipamentului individual.</span>
+        <span class="pc-status">În pregătire</span>
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h5>Clinicile Dr. Ardeleanu</h5>
+      <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
+      <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
+    </div>
+    <div>
+      <h5>Document</h5>
+      <p>Anexa nr. 13 la RI</p>
+      <p>Publicare treptată</p>
+      <p>16 august 2026</p>
+      <p>1 procedură · 3 în pregătire</p>
+    </div>
+    <div>
+      <h5>Rețea</h5>
+      <p>8 clinici în 7 orașe</p>
+      <p>80+ medici supraspecializați</p>
+      <p>30.000+ pacienți unici</p>
+      <p>4.9★ Google · 2.950 recenzii</p>
+    </div>
+    <div>
+      <h5>Contact &amp; Acces</h5>
+      <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
+      <p>031 99 63</p>
+      <p><a href="mailto:clinici@ardeleanu.ro">clinici@ardeleanu.ro</a></p>
+      <p>ERP intern: erp.clinicile-ardeleanu.ro</p>
+    </div>
+  </div>
+  <div class="din-2017">
+    <span>DIN 2017</span>·<span>EXCELENȚĂ</span>·<span>ACCESIBILITATE</span>·<span>FAMILIE</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var shareBtn=document.getElementById('shareBtn');
+  if(shareBtn){
+    try{ if(sessionStorage.getItem('adcManualeAuth')==='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b') shareBtn.hidden=false; }catch(e){}
+    shareBtn.addEventListener('click',function(){
+      var link=location.origin+location.pathname+'#k='+encodeURIComponent('proceduri-3c9b7e');
+      function done(){ var t=shareBtn.innerHTML; shareBtn.innerHTML='✓ Link copiat'; setTimeout(function(){ shareBtn.innerHTML=t; },2200); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:',link); });
+      else window.prompt('Copiază linkul:',link);
+    });
+  }
+})();
+</script>
+</body>
+</html>

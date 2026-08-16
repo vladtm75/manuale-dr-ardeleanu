@@ -93,7 +93,19 @@ registratori/Manualul Registratorului Medical.html ← TOT manualul registratori
 registratori/assets/                         ← imagini (+ .docx-ul sursă al manualului)
 roi/Regulamentul de Organizare Interna.html  ← Regulamentul de Organizare Internă (ROI), un singur fișier
 roi/assets/                                  ← imagini/documente (gol momentan)
+proceduri/                                   ← Proceduri de lucru, subordonate RI (Anexa nr. 13) — un fișier HTML per procedură
+proceduri/assets/                            ← imagini/documente per procedură
 ```
+
+### Paritatea de design între manuale (OBLIGATORIE)
+Asistenți, Registratori, Medici și ROI împart același sistem vizual de TOC (`.toc-side`/`.group`/
+`.row-with-sub`/`.toc-toggle`) și aceeași tipografie de bază pentru corpul textului (`.article`:
+font-size 15.5px, line-height 1.7). „Aceleași clase CSS" NU înseamnă automat „identic vizual" —
+verifică explicit cu `getComputedStyle` (nu doar citind codul sursă) că valorile *rezolvate*
+(culori, dimensiuni, padding) sunt egale, nu doar că numele claselor/variabilelor se potrivesc.
+Variabilele CSS proprii fiecărui manual (`--primary` la medici vs `--brand-primary` la ROI etc.)
+pot rămâne cu nume diferite, dar valorile lor trebuie să corespundă exact echivalentului canonic
+(vezi tabelul de corespondență folosit la alinierea Manualului Medicului, dacă mai e nevoie de el).
 
 ### Manualul Asistenților (ADC-ASM-03)
 - Conținutul e direct în HTML, organizat în secțiuni cu `id="cap-N"` (capitol) și `id="cap-N-M"` (subcapitol).
@@ -130,9 +142,10 @@ schimbări structurale fără diff de text; prima cu toggle real va fi rev. 31+.
 - De la 15 august 2026: **document-șablon (model-cadru) multi-entitate**, nu regulament unic — a înlocuit
   integral fostul ADC-ROI-01 (Ediția 2026). Fiecare societate care operează sub marca Dr. Ardeleanu
   adoptă separat modelul, își completează datele în Anexa nr. 1 și îl comunică propriilor salariați.
-- Conținut direct în HTML: 17 capitole (`id="cap-N"`, N=1–17), **131 de articole numerotate continuu**
-  (`id="art-N"`, N=1–131, nu pe capitol) și **13 anexe** (`id="anexa-N"`, N=1–13, majoritatea formulare
-  operaționale complete — performanță, disciplină, hărțuire, avertizare de integritate etc.).
+- Conținut direct în HTML: capitole (`id="cap-N"`), articole numerotate continuu pe tot documentul
+  (`id="art-N"`, nu pe capitol) și anexe (`id="anexa-N"`, majoritatea formulare operaționale complete —
+  performanță, disciplină, hărțuire, avertizare de integritate etc.). Numărul exact de capitole/articole/anexe
+  se schimbă la fiecare ediție — vezi „Versiuni și statistici" mai jos pentru unde se actualizează contorul.
 - **Conține deliberat câmpuri necompletate** (denumirea legală a angajatorului, sediu, CUI, numărul
   deciziei de adoptare, data intrării în vigoare) — la cererea lui Vlad, NU se înlocuiesc cu presupuneri
   despre ce societate din grup s-ar aplica. Se completează doar când Vlad decide asta explicit.
@@ -145,6 +158,84 @@ schimbări structurale fără diff de text; prima cu toggle real va fi rev. 31+.
 - Sursa ediției V2: primită de la Vlad ca document Word (`.docx`), convertit programatic (paragrafe +
   tabele extrase din XML, în lipsa pandoc/LibreOffice local) — nu presupune că fișierul `.docx` original
   rămâne în repo; conversia e un instantaneu, nu o legătură vie.
+
+#### Reguli de design ale ROI (OBLIGATORII la orice ediție nouă — aplică-le automat, fără să ceri confirmare)
+
+Aceste reguli există ca să nu mai fie nevoie de o trecere de „polish" vizual de fiecare dată când
+Vlad încarcă o ediție nouă a ROI — la o migrare de conținut nouă (docx → HTML), aplică-le direct,
+în același PR cu conținutul, fără iterații separate de design. Discuția cu Vlad la o ediție nouă
+ar trebui să fie doar despre modificările de substanță ale textului, nu despre cum arată.
+
+1. **TOC — dropdown de articole la FIECARE capitol, nu doar la primele.** Fiecare capitol din Cuprins
+   trebuie să aibă `row-with-sub` + `button.toc-toggle` + `ol.sub id="sub-cap-N"` populat cu toate
+   articolele lui reale (generate din titlurile `<h3 id="art-N">` din corpul capitolului respectiv,
+   nu lăsate goale/placeholder). La o ediție nouă cu capitole/articole schimbate, regenerează
+   întregul bloc TOC din titlurile curente ale corpului — nu copia manual titluri vechi.
+2. **Niciun titlu trunchiat cu „…" în Cuprins.** Titlurile din TOC (capitole și anexe) trebuie să fie
+   identice cu titlul complet din `<h2>`/`<h3>` din corpul documentului — niciodată prescurtate
+   artificial ca să încapă pe un rând (bara laterală face wrap automat, nu are nevoie de trunchiere).
+3. **Coloana etichetă din formularele tip etichetă/valoare — lățime minimă, ca eticheta să nu se
+   rupă în mijlocul cuvântului.** Regula CSS există deja și se aplică automat prin selector
+   (`.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)):not(:has(.sig-field))`,
+   `width:34%;min-width:150px`) — orice tabel nou din anexe cu acest tipar (2 coloane, fără
+   `<thead>`, prima celulă simplă `<td>` fără `<br>`/`.sig-field`) o primește automat, fără nimic de
+   adăugat manual. Excepție intenționată: celulele cu `<br>` sau `.sig-field` (blocuri de semnătură
+   — vezi punctul 4) și tabelele cu `<thead>` (date de referință, nu formulare de completat). Dacă
+   adaugi vreodată un alt tipar de celulă cu conținut multi-linie care NU e etichetă/valoare
+   simplă, exclude-l explicit din selector (după modelul `:not(:has(...))`), altfel primește din
+   greșeală `width:34%` și strică lățimile coloanelor (verificat cu `getBoundingClientRect` — a fost
+   exact regresia produsă când am introdus `.sig-field`, până am adăugat excepția).
+4. **Blocul de semnătură din formulare — câmpurile pe rânduri separate, aliniate la marginea din
+   dreapta.** Fiecare câmp e o linie flex (`.sig-field`) cu eticheta la stânga și o linie de completat
+   (`.sig-line`, `border-bottom`, `flex:1`) care se întinde automat până la marginea din dreapta a
+   celulei — identic indiferent dacă blocul are 2 sau 3 coloane (verificat cu `getBoundingClientRect`:
+   toate liniile se termină la exact același pixel). Formatul canonic, într-o singură celulă de tabel:
+   ```html
+   <strong>Rol</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div>
+   ```
+   NU folosi underscore-uri (`___`) pentru linia de completat — nu se pot alinia consistent la
+   marginea dreaptă în font proporțional și la lățimi de celulă diferite (2 vs 3 coloane); CSS-ul
+   de mai sus rezolvă asta corect, automat.
+5. **Valorile de completat din formulare (celula-valoare dintr-un rând etichetă/valoare) — linie
+   CSS, NU underscore-uri.** Un `<td>` a cărui valoare e „de completat de mână" (nu are text real)
+   nu se scrie ca `<td>__________</td>` — underscore-urile lungi trec pe mai multe rânduri urât la
+   lățimi de celulă mai mici, cu tăietura de wrapping în mijlocul liniei. În loc de asta:
+   - **O singură linie de completat:** `<td class="value-line"></td>` (clasa pune `border-bottom`
+     direct pe celulă — nicio altă marcă în interior).
+   - **Spațiu de scris pe mai multe rânduri** (câmpuri narative lungi — descrieri, motivări,
+     sinteze): `<td><div class="value-lines"><span class="vline"></span><span class="vline"></span>…</div></td>`,
+     cu câte un `<span class="vline">` pentru fiecare rând dorit (de obicei 2–4, după cât spațiu
+     de scris are nevoie câmpul respectiv — nu după numărul de caractere din vechiul underscore).
+   - **Blancurile scurte, inline, cu format fix** (zi/lună/an, numere de decizie, ex. „Nr. ___ din
+     ___ / ___ / ____") RĂMÂN underscore-uri simple în text — nu sunt „valoare de completat"
+     în sensul de mai sus, ci câmpuri de lățime fixă; nu li se aplică `.value-line`.
+
+### Proceduri de lucru (`proceduri/`)
+- Documente subordonate RI, câte unul per procedură (ex. `proceduri/ADC-BEN-01_Procedura_Beneficii.html`),
+  administrate prin Registrul din Anexa nr. 13 a RI. Folosesc **exact același template** (CSS, topbar,
+  hero, TOC, gate script, footer, script-urile de platformă) ca ROI — la o procedură nouă, copiază
+  structura unei proceduri existente în loc să reinventezi.
+- **Hub central:** `proceduri/index.html` listează toate procedurile (publicate + „în pregătire") într-un
+  card grid (`.proto-index`/`.proto-grid`/`.proto-card`). Cardul „Proceduri de lucru" de pe homepage
+  indică mereu spre acest hub, **nu** spre o procedură anume — așa nu trebuie schimbat la fiecare
+  procedură nouă, doar hub-ul se actualizează.
+- **Bară de taburi între proceduri:** fiecare pagină de procedură are, sub topbar și deasupra hero-ului,
+  un `<nav class="proc-tabs">` cu un tab per procedură (publicate = link `.proc-tab`, în pregătire =
+  `.proc-tab.soon` fără link) plus un tab final spre hub (`.proc-tab.hub`). **La orice procedură nouă
+  adăugată sau publicată, actualizează acest bloc identic în TOATE paginile din `proceduri/`** (inclusiv
+  hub-ul, care nu are tab-bar propriu dar trebuie să reflecte aceeași listă în `.proto-grid`) — altfel
+  taburile ies desincronizate între pagini.
+- Adăugarea tab-bar-ului împinge conținutul sub el cu ~44px (~36px pe mobil) — la o pagină de procedură
+  nouă, pornește de la CSS-ul unei proceduri existente (nu de la ROI direct), ca să moștenești automat
+  offset-urile corecte (`.toc-side{top:122px}`, `scroll-margin-top:122px` pe `h2`/`h3`, sertarul mobil
+  la `top:96px`) — altfel linkurile de ancoră aterizează sub taburi.
+- Fiecare procedură are cheie de acces proprie (`localStorage` `adcAuthBEN` etc.) și buton „Partajează",
+  la fel ca manualele — adaugă intrarea corespunzătoare în obiectul `SHARE` din `index.html`. Hub-ul are
+  și el propria cheie (`adcAuthPROC`) **și** acceptă cheia oricărei proceduri publicate (lista `PROC_KEYS`
+  din gate-ul hub-ului) — la o procedură nouă cu cheie proprie, adaugă intrarea și acolo.
+- Nu are încă o editoare desemnată; Vlad administrează direct conținutul până va desemna pe cineva.
+- Sursa fiecărei proceduri: primită de la Vlad ca PDF, convertit direct în HTML (extragere de text +
+  tabele) — nu presupune că fișierul PDF original rămâne în repo.
 
 ## Versiuni și statistici (de actualizat împreună)
 

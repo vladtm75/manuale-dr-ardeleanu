@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Manuale Interne — Clinicile Dr. Ardeleanu</title>
+<title>Registrul online al documentelor interne — Clinicile Dr. Ardeleanu</title>
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Manualele echipei — Clinicile Dr. Ardeleanu" />
-<meta property="og:description" content="Manualul Medicului, Manualul Asistentului Medical, Manualul Registratorului Medical și Regulamentul Intern (Model-cadru V2.5) — documentele cadru ale rețelei. Uz intern." />
+<meta property="og:title" content="Registrul online al documentelor interne — Clinicile Dr. Ardeleanu" />
+<meta property="og:description" content="Sursa internă oficială pentru Regulamentul Intern (Model-cadru) și documentele subordonate — Manualul Medicului, Manualul Asistentului Medical, Manualul Registratorului Medical. Uz intern." />
 <meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/" />
 <meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/og-image.jpg" />
 <meta property="og:image:width" content="1080" />
@@ -62,7 +62,7 @@
     font-size:clamp(38px,6vw,64px); line-height:1.04; margin:16px 0 0;
   }
   h1 .t2{ display:block; font-style:italic; color:var(--primary); }
-  .hero p.sub{ font-size:16px; color:var(--muted); max-width:64ch; margin:14px 0 0; }
+  .hero p.sub{ font-size:16px; color:var(--muted); max-width:none; margin:14px 0 0; }
   .hero p.note{ font-size:12.5px; font-style:italic; color:var(--muted); background:var(--cream); border-left:3px solid var(--amber); padding:7px 12px; border-radius:0 5px 5px 0; margin:22px 0 0; display:inline-block; }
 
   .grid{
@@ -93,10 +93,35 @@
   .card.registratori .card-head{ background:linear-gradient(135deg,#5d6625 0%,var(--olive) 140%); }
   .card.roi .card-head{ background:linear-gradient(135deg,#4a4340 0%,#2a2624 100%); }
   .card-pill{ display:inline-block; font-size:10px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); color:#fff; padding:4px 11px; border-radius:999px; }
-  .card-head h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:29px; line-height:1.12; margin:13px 0 0; }
+  .card-head h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:29px; line-height:1.12; margin:13px 0 0; min-height:calc(1.12em * 2); }
   .card-head .aud{ font-size:13px; color:rgba(255,255,255,.85); margin:7px 0 0; }
   .card-body{ padding:20px 28px 24px; display:flex; flex-direction:column; flex:1; }
   .card-body p.desc{ font-size:13.5px; color:var(--muted); margin:0 0 18px; }
+
+  .aud-row{ display:flex; align-items:center; gap:7px; margin:7px 0 0; }
+  .aud-row .aud{ margin:0; }
+  .info-trigger{
+    position:relative; display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; flex:none; padding:0; margin:0;
+    border-radius:50%; border:1px solid rgba(255,255,255,.55); background:rgba(255,255,255,.14);
+    color:#fff; cursor:help; -webkit-tap-highlight-color:transparent;
+  }
+  .info-trigger .info-icon{
+    font-family:Georgia,serif; font-style:italic; font-weight:700; font-size:10.5px; line-height:1;
+  }
+  .info-trigger .info-tooltip{
+    position:absolute; left:0; top:calc(100% + 9px); z-index:30;
+    width:250px; max-width:min(70vw,250px); text-align:left;
+    background:#fff; color:var(--muted); font-size:11.5px; font-style:italic; font-weight:400; line-height:1.5;
+    padding:10px 12px; border-radius:0 8px 8px 8px; border-left:3px solid var(--amber);
+    box-shadow:0 12px 28px -10px rgba(0,0,0,.4);
+    opacity:0; visibility:hidden; transform:translateY(-4px);
+    transition:opacity .15s ease, transform .15s ease, visibility .15s;
+    pointer-events:none;
+  }
+  .info-trigger:hover .info-tooltip, .info-trigger:focus-visible .info-tooltip, .info-trigger.open .info-tooltip{
+    opacity:1; visibility:visible; transform:translateY(0);
+  }
   .meta{ display:grid; grid-template-columns:1fr 1fr 1fr; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:0 0 20px; }
   .meta .cell{ padding:11px 6px 12px 0; border-left:1px solid var(--line); padding-left:14px; }
   .meta .cell:first-child{ border-left:none; padding-left:0; }
@@ -119,6 +144,17 @@
   }
   .share-btn:hover{ background:var(--cream); border-color:var(--primary); }
   .share-btn svg{ flex:none; }
+
+  .card.card-soon{ cursor:default; }
+  .card.card-soon:hover{ transform:none; box-shadow:0 1px 3px rgba(40,30,20,.06); }
+  /* culori din brand book Dr. Ardeleanu / Dental Safari — Jungle Green și Safari Gold, mai vii decât gri */
+  .card.manager .card-head{ background:linear-gradient(135deg,#168247 0%,#0d5c33 100%); }
+  .card.proceduri .card-head{ background:linear-gradient(135deg,#C9AD8C 0%,#8A6F52 100%); }
+  .card.card-soon .card-pill.soon{ background:rgba(255,255,255,.16); border-style:dashed; }
+  .card.card-soon .cta.soon{
+    background:none; border:1.5px dashed var(--line-2); color:var(--muted); cursor:default;
+  }
+  .card.card-soon:hover .cta.soon{ background:none; }
 
   .strip{
     max-width:1080px; margin:8px auto 0; width:100%; padding:0 28px 30px;
@@ -240,15 +276,15 @@
   <header class="masthead">
     <img src="logo.png" alt="Dr. Ardeleanu Dental Clinics" />
     <div class="sep"></div>
-    <span class="crumb">Manuale interne</span>
+    <span class="crumb">Registrul online</span>
     <span class="spacer"></span>
     <span class="badge">Uz intern</span>
   </header>
 
   <section class="hero">
-    <p class="kicker">Documente cadru · Operațional medical</p>
-    <h1>Manualele echipei<span class="t2">Clinicile Dr. Ardeleanu</span></h1>
-    <p class="sub">Un singur standard de îngrijire în toate cele opt clinici ale rețelei. Alege manualul corespunzător rolului tău.</p>
+    <p class="kicker">Sursă oficială · Regulamentul Intern, Art. 20</p>
+    <h1>Registrul online al documentelor interne<span class="t2">Clinicile Dr. Ardeleanu</span></h1>
+    <p class="sub">Sursa internă oficială pentru Regulamentul Intern și documentele subordonate — manuale, proceduri, protocoale și politici. Regulamentul Intern este documentul cu cel mai înalt rang dintre actele interne unilaterale; niciun document subordonat nu îl poate modifica, restrânge ori contrazice. Sunt aplicabile numai versiunile aprobate, înscrise aici și comunicate destinatarilor. Alege documentul corespunzător rolului tău.</p>
     <p class="note">Documente interne confidențiale · uz exclusiv pentru echipa medicală Dr. Ardeleanu.</p>
   </section>
 
@@ -257,10 +293,16 @@
       <div class="card-head">
         <span class="card-pill">ADC-MED-01</span>
         <h2>Manualul Medicului</h2>
-        <p class="aud">Pentru medicii rețelei</p>
+        <div class="aud-row">
+          <p class="aud">Pentru medicii rețelei</p>
+          <button class="info-trigger" type="button" aria-label="De ce nu se subordonează Regulamentului Intern">
+            <span class="info-icon">i</span>
+            <span class="info-tooltip">Notă: spre deosebire de celelalte manuale, nu se subordonează Regulamentului Intern — relația cu medicii e guvernată de contractul de prestări servicii medicale, nu de raportul de muncă.</span>
+          </button>
+        </div>
       </div>
       <div class="card-body">
-        <p class="desc">Ghidul Medicului — operațional, comportamental și partea medicală: parcursul pacientului, comunicarea cu pacientul și protocoalele clinice pe specialități.</p>
+        <p class="desc">Ghidul Medicului, cu QA medical de excelență drept obiectiv central — operațional, comportamental și partea medicală: parcursul pacientului, comunicarea cu pacientul și protocoalele clinice pe specialități.</p>
         <div class="meta">
           <div class="cell"><p class="lbl">Ediție</p><p class="val">V1.0 · 2026</p></div>
           <div class="cell"><p class="lbl">Capitole</p><p class="val">3 · 46 subcap.</p></div>
@@ -307,21 +349,56 @@
       </div>
     </a>
 
+    <div class="card card-soon manager">
+      <div class="card-head">
+        <span class="card-pill soon">ADC-MCL-01 · ÎN CURÂND</span>
+        <h2>Manualul Managerului de Clinică</h2>
+        <p class="aud">Pentru managerii de clinică</p>
+      </div>
+      <div class="card-body">
+        <p class="desc">Ciclul lunar și evaluarea anuală ale managerilor de clinică, coordonarea echipei și raportarea consolidată către rețea. În elaborare — document subordonat Regulamentului Intern (Anexa nr. 13).</p>
+        <div class="meta">
+          <div class="cell"><p class="lbl">Ediție</p><p class="val">—</p></div>
+          <div class="cell"><p class="lbl">Capitole</p><p class="val">—</p></div>
+          <div class="cell"><p class="lbl">Status</p><p class="val status-pending">Neaplicabil</p></div>
+        </div>
+        <span class="cta soon">Se publică în curând</span>
+      </div>
+    </div>
+
     <a class="card roi" href="roi/Regulamentul%20de%20Organizare%20Interna.html">
       <div class="card-head">
         <span class="card-pill">ADC-RI-02</span>
-        <h2>Regulament Intern — Model-cadru V2.5</h2>
+        <h2>Regulament Intern</h2>
         <p class="aud">Pentru toți salariații rețelei</p>
       </div>
       <div class="card-body">
-        <p class="desc">Model-cadru pentru entitățile angajatoare Dr. Ardeleanu — managementul performanței, disciplina muncii, prevenirea hărțuirii, avertizarea de integritate, plus 13 anexe operaționale.</p>
+        <p class="desc">Managementul performanței, disciplina muncii, prevenirea hărțuirii, avertizarea de integritate și protecția datelor — cu 13 anexe operaționale complete. Model-cadru pentru entitățile angajatoare Dr. Ardeleanu.</p>
         <div class="meta">
-          <div class="cell"><p class="lbl">Ediție</p><p class="val">V2.5</p></div>
+          <div class="cell"><p class="lbl">Ediție</p><p class="val">V2.6</p></div>
           <div class="cell"><p class="lbl">Capitole</p><p class="val">18 · 13 anexe</p></div>
           <div class="cell"><p class="lbl">Status</p><p class="val status-pending">Necomunicat</p></div>
         </div>
         <span class="cta">Deschide documentul <span class="arrow">→</span></span>
         <button class="share-btn" type="button" data-share="roi" title="Copiază un link de acces doar la acest document"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează doar acest document</button>
+      </div>
+    </a>
+
+    <a class="card proceduri" href="proceduri/index.html">
+      <div class="card-head">
+        <span class="card-pill">1 publicată</span>
+        <h2>Proceduri de lucru</h2>
+        <p class="aud">Pentru rolurile vizate de fiecare procedură</p>
+      </div>
+      <div class="card-body">
+        <p class="desc">Beneficii pentru personal, deplasări și decontări, flotă auto și GPS, uniforme — procedurile operaționale ale rețelei. Publicare treptată, administrate prin Registrul din Anexa nr. 13 a RI.</p>
+        <div class="meta">
+          <div class="cell"><p class="lbl">Publicate</p><p class="val">1</p></div>
+          <div class="cell"><p class="lbl">În pregătire</p><p class="val">3</p></div>
+          <div class="cell"><p class="lbl">Status</p><p class="val status-pending">Publicare treptată</p></div>
+        </div>
+        <span class="cta">Deschide procedurile <span class="arrow">→</span></span>
+        <button class="share-btn" type="button" data-share="proceduri" title="Copiază un link de acces doar la această listă"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează doar această listă</button>
       </div>
     </a>
   </main>
@@ -345,7 +422,7 @@
         <p><a href="medici/Manualul%20Medicului.html">Manualul Medicului</a><span class="mcode">MED-01</span></p>
         <p><a href="asistenti/Manualul%20Asistentului%20Medical.html">Manualul Asistentului</a><span class="mcode">ASM-03</span></p>
         <p><a href="registratori/Manualul%20Registratorului%20Medical.html">Manualul Registratorului</a><span class="mcode">REC-01</span></p>
-        <p><a href="roi/Regulamentul%20de%20Organizare%20Interna.html">Regulament Intern — Model-cadru V2.5</a><span class="mcode">RI-02</span></p>
+        <p><a href="roi/Regulamentul%20de%20Organizare%20Interna.html">Regulament Intern</a><span class="mcode">RI-02</span></p>
       </div>
       <div>
         <h5>Acces</h5>
@@ -375,7 +452,8 @@
       medici:{ url:'medici/Manualul%20Medicului.html', key:'medic-d8df9b' },
       asistenti:{ url:'asistenti/Manualul%20Asistentului%20Medical.html', key:'asist-58b121' },
       registratori:{ url:'registratori/Manualul%20Registratorului%20Medical.html', key:'recep-80fe66' },
-      roi:{ url:'roi/Regulamentul%20de%20Organizare%20Interna.html', key:'roi-112ae5' }
+      roi:{ url:'roi/Regulamentul%20de%20Organizare%20Interna.html', key:'roi-112ae5' },
+      proceduri:{ url:'proceduri/index.html', key:'proceduri-3c9b7e' }
     };
     document.querySelectorAll('.share-btn').forEach(function(b){
       b.addEventListener('click',function(e){
@@ -389,6 +467,26 @@
         if(navigator.clipboard&&navigator.clipboard.writeText){
           navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:', link); });
         } else { window.prompt('Copiază linkul:', link); }
+      });
+    });
+  })();
+  </script>
+
+  <script>
+  /* Tooltip-ul "de ce nu se subordonează RI" de pe cardul Medici — click/tap îl comută
+     (pe lângă hover), fără să declanșeze navigarea cardului-link din jur. */
+  (function(){
+    document.querySelectorAll('.info-trigger').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        var wasOpen = btn.classList.contains('open');
+        document.querySelectorAll('.info-trigger.open').forEach(function(b){ b.classList.remove('open'); });
+        if(!wasOpen) btn.classList.add('open');
+      });
+    });
+    document.addEventListener('click', function(e){
+      document.querySelectorAll('.info-trigger.open').forEach(function(btn){
+        if(!btn.contains(e.target)) btn.classList.remove('open');
       });
     });
   })();

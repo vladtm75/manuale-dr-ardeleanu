@@ -30,10 +30,10 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Regulament Intern — Model-cadru V2.5, Dr. Ardeleanu (ADC-RI-02)</title>
+<title>Regulament Intern, Dr. Ardeleanu (ADC-RI-02)</title>
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Regulament Intern — Model-cadru V2.5, Dr. Ardeleanu" />
-<meta property="og:description" content="Regulament Intern — model-cadru V2.5 pentru entitățile angajatoare Dr. Ardeleanu: 18 capitole, 140 de articole și 13 anexe operaționale (performanță, disciplină, hărțuire, avertizare de integritate). Document intern." />
+<meta property="og:title" content="Regulament Intern, Dr. Ardeleanu" />
+<meta property="og:description" content="Regulament Intern — model-cadru pentru entitățile angajatoare Dr. Ardeleanu: 18 capitole, 140 de articole și 13 anexe operaționale (performanță, disciplină, hărțuire, avertizare de integritate). Document intern." />
 <meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/roi/Regulamentul%20de%20Organizare%20Interna.html" />
 <meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/roi/assets/og-roi.jpg" />
 <meta property="og:image:width" content="1080" />
@@ -534,6 +534,25 @@ a:hover{border-bottom-color:var(--brand-primary)}
 .article table.checktable td:first-child{font-style:italic}
 .article table.checktable th:nth-child(2),.article table.checktable th:nth-child(3){text-align:center;width:92px}
 .article table.checktable td.lab{text-align:center;font-weight:700;color:var(--brand-primary);font-size:15px}
+
+/* formulare cu perechi etichetă/valoare (fără thead) — coloana etichetei mai lată, ca eticheta să nu se rupă în mijlocul cuvântului */
+.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)):not(:has(.sig-field)){
+  width:34%;min-width:150px;
+  word-break:normal;overflow-wrap:break-word;
+}
+
+/* bloc de semnătură — fiecare câmp pe rândul lui, cu linia de completat întinsă până la marginea dreaptă a celulei */
+.sig-field{display:flex;align-items:baseline;gap:6px;margin-top:5px}
+.sig-field span:first-child{white-space:nowrap;flex:none}
+.sig-field .sig-line{flex:1;border-bottom:1px solid var(--ink-mute);min-width:20px;height:.9em}
+
+/* celule de completat (înlocuiesc underscore-urile din valorile de formular) */
+.article td.value-line{border-bottom:1px solid var(--ink-mute)}
+.article .value-lines{display:flex;flex-direction:column;gap:16px;padding:4px 0 2px}
+.article .value-lines .vline{height:18px;border-bottom:1px solid var(--ink-mute)}
+
+/* indiciu de câmp completat automat (ex. de ERP) — nu e un blanc de completat de mână */
+.article .ph{color:var(--ink-mute);font-style:italic}
 
 /* Stat strip */
 .stats{
@@ -1148,11 +1167,11 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
   <img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="print-header-logo">
   <div class="print-header-text">
     <div class="print-header-brand">Dr. Ardeleanu Dental Clinics</div>
-    <div class="print-header-title">Regulament Intern — Model-cadru V2.5</div>
+    <div class="print-header-title">Regulament Intern</div>
   </div>
   <div class="print-header-meta">
     <span class="print-header-pill">ADC-RI-02</span>
-    <span class="print-header-pill dark">V2.5</span>
+    <span class="print-header-pill dark">V2.6</span>
   </div>
 </div>
 
@@ -1167,10 +1186,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
         <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
         <span>›</span>
         <span>Resurse Umane</span>
-        <span>›</span>
-        <span>Model-cadru V2.5</span>
       </span>
-      <span class="crumb-title">Regulament Intern — Model-cadru V2.5, Dr. Ardeleanu</span>
+      <span class="crumb-title">Regulament Intern, Dr. Ardeleanu</span>
     </div>
     <div class="spacer"></div>
     <div class="mh-search">
@@ -1180,7 +1197,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     </div>
     <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest document"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
     <span class="pill">ADC-RI-02</span>
-    <span class="pill dark">V2.5</span>
+    <span class="pill dark">V2.6</span>
   </div>
 </header>
 
@@ -1188,13 +1205,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <section class="hero">
   <div class="hero-inner">
     <div class="kicker">Document Cadru · Resurse Umane &amp; Legal <span class="status-badge status-badge--pending">Nu a fost comunicat încă</span></div>
-    <h1>Regulament Intern <em>— Model-cadru V2.5, Dr. Ardeleanu</em></h1>
+    <h1>Regulament Intern <em>— Dr. Ardeleanu</em></h1>
     <p class="subtitle">Model-cadru pentru entitățile angajatoare care operează sub marca Dr. Ardeleanu: raporturi de muncă, sănătate și securitate în muncă, managementul performanței, necorespunderea profesională, disciplina muncii, prevenirea hărțuirii, avertizarea de integritate și protecția datelor — cu 13 anexe operaționale complete.</p>
 
     <dl class="meta-row">
-      <div><dt>Ediție</dt><dd><span class="mono">V2.5</span></dd></div>
+      <div><dt>Ediție</dt><dd><span class="mono">V2.6</span></dd></div>
       <div><dt>Cod document</dt><dd><span class="mono">ADC-RI-02</span></dd></div>
-      <div><dt>Data publicării</dt><dd>15 august 2026</dd></div>
+      <div><dt>Data publicării</dt><dd>16 august 2026</dd></div>
       <div><dt>Categorie</dt><dd>Resurse Umane · Legal</dd></div>
       <div><dt>Capitole</dt><dd>18 · 13 anexe</dd></div>
       <div><dt>Aplicabilitate</dt><dd>Toți angajații grupului de firme Dr. Ardeleanu</dd></div>
@@ -1238,56 +1255,296 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
         <li>
           <div class="row-with-sub">
             <a href="#cap-2"><span class="num">2</span>PRINCIPII, EGALITATE ȘI DEMNITATE</a>
-            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-2" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-2" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
           </div>
-          <ol class="sub" id="sub-cap-2" hidden></ol>
+          <ol class="sub" id="sub-cap-2" hidden>
+            <li><a href="#art-7"><span class="num">Art. 7</span>Principiile culturii meritocratice</a></li>
+            <li><a href="#art-8"><span class="num">Art. 8</span>Egalitatea de șanse și interdicția discriminării</a></li>
+            <li><a href="#art-9"><span class="num">Art. 9</span>Demnitatea, respectul și libertatea profesională</a></li>
+            <li><a href="#art-10"><span class="num">Art. 10</span>Protecția maternității și a responsabilităților familiale</a></li>
+            <li><a href="#art-11"><span class="num">Art. 11</span>Buna-credință și interdicția represaliilor</a></li>
+          </ol>
         </li>
         <li>
           <div class="row-with-sub">
             <a href="#cap-3"><span class="num">3</span>DREPTURILE ȘI OBLIGAȚIILE PĂRȚILOR</a>
-            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-3" aria-label="Comută subcapitole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-3" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
           </div>
-          <ol class="sub" id="sub-cap-3" hidden></ol>
+          <ol class="sub" id="sub-cap-3" hidden>
+            <li><a href="#art-12"><span class="num">Art. 12</span>Drepturile Angajatorului</a></li>
+            <li><a href="#art-13"><span class="num">Art. 13</span>Obligațiile Angajatorului</a></li>
+            <li><a href="#art-14"><span class="num">Art. 14</span>Drepturile salariaților</a></li>
+            <li><a href="#art-15"><span class="num">Art. 15</span>Obligațiile generale ale salariaților</a></li>
+            <li><a href="#art-16"><span class="num">Art. 16</span>Siguranța pacientului și limitele competenței profesionale</a></li>
+            <li><a href="#art-17"><span class="num">Art. 17</span>Conduita față de pacienți, colegi și parteneri</a></li>
+            <li><a href="#art-18"><span class="num">Art. 18</span>Conflictul de interese</a></li>
+            <li><a href="#art-19"><span class="num">Art. 19</span>Comunicarea electronică oficială și obligația de consultare</a></li>
+            <li><a href="#art-20"><span class="num">Art. 20</span>Registrul Digital Oficial al Manualelor și Procedurilor. Actualizarea profesională internă</a></li>
+          </ol>
         </li>
-        <li><a href="#cap-4"><span class="num">4</span>CODUL VESTIMENTAR, IGIENA ȘI IDENTIFICAREA PROFES…</a></li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-4"><span class="num">4</span>CODUL VESTIMENTAR, IGIENA ȘI IDENTIFICAREA PROFESIONALĂ</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-4" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-4" hidden>
+            <li><a href="#art-21"><span class="num">Art. 21</span>Scopul și principiile codului vestimentar</a></li>
+            <li><a href="#art-22"><span class="num">Art. 22</span>Ținuta stabilită pentru fiecare categorie de personal</a></li>
+            <li><a href="#art-23"><span class="num">Art. 23</span>Igiena personală și prezentarea profesională</a></li>
+            <li><a href="#art-24"><span class="num">Art. 24</span>Starea, folosirea și păstrarea uniformei</a></li>
+            <li><a href="#art-25"><span class="num">Art. 25</span>Ecusonul și identificarea profesională</a></li>
+            <li><a href="#art-26"><span class="num">Art. 26</span>Echipamentul individual de protecție</a></li>
+            <li><a href="#art-27"><span class="num">Art. 27</span>Adaptări, excepții și protecția demnității</a></li>
+            <li><a href="#art-28"><span class="num">Art. 28</span>Instrucțiunea operațională, controlul și consecințele încălcării</a></li>
+          </ol>
+        </li>
       </ol>
     </div>
 
     <div class="group">
       <div class="group-label ops">Muncă & Program</div>
       <ol>
-        <li><a href="#cap-5"><span class="num">5</span>SECURITATEA ȘI SĂNĂTATEA ÎN MUNCĂ. SITUAȚII DE…</a></li>
-        <li><a href="#cap-6"><span class="num">6</span>TIMPUL DE MUNCĂ, PROGRAMUL ȘI EVIDENȚA</a></li>
-        <li><a href="#cap-7"><span class="num">7</span>REPAUS, CONCEDII, SALARIZARE ȘI BENEFICII</a></li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-5"><span class="num">5</span>SECURITATEA ȘI SĂNĂTATEA ÎN MUNCĂ. SITUAȚII DE URGENȚĂ</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-5" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-5" hidden>
+            <li><a href="#art-29"><span class="num">Art. 29</span>Principiul prevenției</a></li>
+            <li><a href="#art-30"><span class="num">Art. 30</span>Obligațiile salariaților în materie SSM și PSI</a></li>
+            <li><a href="#art-31"><span class="num">Art. 31</span>Pericolul grav și iminent</a></li>
+            <li><a href="#art-32"><span class="num">Art. 32</span>Accidente, expuneri și prim ajutor</a></li>
+            <li><a href="#art-33"><span class="num">Art. 33</span>Supravegherea sănătății și situațiile speciale</a></li>
+            <li><a href="#art-34"><span class="num">Art. 34</span>Organizarea SSM</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-6"><span class="num">6</span>TIMPUL DE MUNCĂ, PROGRAMUL ȘI EVIDENȚA</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-6" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-6" hidden>
+            <li><a href="#art-35"><span class="num">Art. 35</span>Durata normală și maximă</a></li>
+            <li><a href="#art-36"><span class="num">Art. 36</span>Programele de lucru</a></li>
+            <li><a href="#art-37"><span class="num">Art. 37</span>Prezența și pontajul</a></li>
+            <li><a href="#art-38"><span class="num">Art. 38</span>Pauza și repausul zilnic</a></li>
+            <li><a href="#art-39"><span class="num">Art. 39</span>Munca suplimentară</a></li>
+            <li><a href="#art-40"><span class="num">Art. 40</span>Munca de noapte</a></li>
+            <li><a href="#art-41"><span class="num">Art. 41</span>Repausul săptămânal și sărbătorile legale</a></li>
+            <li><a href="#art-42"><span class="num">Art. 42</span>Întârzierile, absențele și urgențele personale</a></li>
+            <li><a href="#art-43"><span class="num">Art. 43</span>Telemunca și programul flexibil</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-7"><span class="num">7</span>REPAUS, CONCEDII, SALARIZARE ȘI BENEFICII</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-7" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-7" hidden>
+            <li><a href="#art-44"><span class="num">Art. 44</span>Concediul de odihnă</a></li>
+            <li><a href="#art-45"><span class="num">Art. 45</span>Zile libere plătite pentru evenimente familiale</a></li>
+            <li><a href="#art-46"><span class="num">Art. 46</span>Concedii și absențe familiale prevăzute de lege</a></li>
+            <li><a href="#art-47"><span class="num">Art. 47</span>Concediul medical</a></li>
+            <li><a href="#art-48"><span class="num">Art. 48</span>Concediul fără plată și formarea la inițiativa salariatului</a></li>
+            <li><a href="#art-49"><span class="num">Art. 49</span>Salariul</a></li>
+            <li><a href="#art-50"><span class="num">Art. 50</span>Beneficiile, sănătatea și sprijinul acordat personalului</a></li>
+          </ol>
+        </li>
       </ol>
     </div>
 
     <div class="group">
       <div class="group-label clinical">Performanță & Disciplină</div>
       <ol>
-        <li><a href="#cap-8"><span class="num">8</span>MANAGEMENTUL ȘI EVALUAREA PERFORMANȚEI</a></li>
-        <li><a href="#cap-9"><span class="num">9</span>PROCEDURA PRIVIND CONSTATAREA NECORESPUNDERII P…</a></li>
-        <li><a href="#cap-10"><span class="num">10</span>DISCIPLINA MUNCII ȘI CERCETAREA DISCIPLINARĂ</a></li>
-        <li><a href="#cap-11"><span class="num">11</span>CERERI, PETIȚII ȘI RECLAMAȚII INDIVIDUALE</a></li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-8"><span class="num">8</span>MANAGEMENTUL ȘI EVALUAREA PERFORMANȚEI</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-8" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-8" hidden>
+            <li><a href="#art-51"><span class="num">Art. 51</span>Scopul evaluării</a></li>
+            <li><a href="#art-52"><span class="num">Art. 52</span>Arhitectura criteriilor</a></li>
+            <li><a href="#art-53"><span class="num">Art. 53</span>Comunicarea și modificarea obiectivelor</a></li>
+            <li><a href="#art-54"><span class="num">Art. 54</span>Nivelurile, ciclurile și sursele de evaluare</a></li>
+            <li><a href="#art-55"><span class="num">Art. 55</span>Feedbackul și corectarea timpurie</a></li>
+            <li><a href="#art-56"><span class="num">Art. 56</span>Factorii externi și perioadele protejate</a></li>
+            <li><a href="#art-57"><span class="num">Art. 57</span>Evaluarea sintetică și calibrarea</a></li>
+            <li><a href="#art-58"><span class="num">Art. 58</span>Performanța în perioada de probă</a></li>
+            <li><a href="#art-59"><span class="num">Art. 59</span>Dosarul curent de performanță</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-9"><span class="num">9</span>PROCEDURA PRIVIND CONSTATAREA NECORESPUNDERII PROFESIONALE</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-9" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-9" hidden>
+            <li><a href="#art-60"><span class="num">Art. 60</span>Natura și temeiul procedurii</a></li>
+            <li><a href="#art-61"><span class="num">Art. 61</span>Condițiile de declanșare</a></li>
+            <li><a href="#art-62"><span class="num">Art. 62</span>Nota de sesizare și trierea juridică</a></li>
+            <li><a href="#art-63"><span class="num">Art. 63</span>Desemnarea evaluatorului sau comisiei</a></li>
+            <li><a href="#art-64"><span class="num">Art. 64</span>Convocarea</a></li>
+            <li><a href="#art-65"><span class="num">Art. 65</span>Metodele și desfășurarea evaluării</a></li>
+            <li><a href="#art-66"><span class="num">Art. 66</span>Planul de îmbunătățire a performanței</a></li>
+            <li><a href="#art-67"><span class="num">Art. 67</span>Raportul final</a></li>
+            <li><a href="#art-68"><span class="num">Art. 68</span>Controlul de legalitate și măsurile ulterioare</a></li>
+            <li><a href="#art-69"><span class="num">Art. 69</span>Posturile vacante și agenția de ocupare</a></li>
+            <li><a href="#art-70"><span class="num">Art. 70</span>Preavizul și decizia de concediere profesională</a></li>
+            <li><a href="#art-71"><span class="num">Art. 71</span>Aplicarea în timp și dosarul standard</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-10"><span class="num">10</span>DISCIPLINA MUNCII ȘI CERCETAREA DISCIPLINARĂ</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-10" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-10" hidden>
+            <li><a href="#art-72"><span class="num">Art. 72</span>Abaterea disciplinară</a></li>
+            <li><a href="#art-73"><span class="num">Art. 73</span>Reguli de disciplină</a></li>
+            <li><a href="#art-74"><span class="num">Art. 74</span>Exemple de abateri relevante</a></li>
+            <li><a href="#art-75"><span class="num">Art. 75</span>Individualizarea și proporționalitatea</a></li>
+            <li><a href="#art-76"><span class="num">Art. 76</span>Sancțiunile disciplinare</a></li>
+            <li><a href="#art-77"><span class="num">Art. 77</span>Sesizarea și conservarea probelor</a></li>
+            <li><a href="#art-78"><span class="num">Art. 78</span>Desemnarea cercetării</a></li>
+            <li><a href="#art-79"><span class="num">Art. 79</span>Convocarea disciplinară</a></li>
+            <li><a href="#art-80"><span class="num">Art. 80</span>Drepturile salariatului cercetat</a></li>
+            <li><a href="#art-81"><span class="num">Art. 81</span>Audierea și administrarea probelor</a></li>
+            <li><a href="#art-82"><span class="num">Art. 82</span>Raportul final al cercetării</a></li>
+            <li><a href="#art-83"><span class="num">Art. 83</span>Decizia de sancționare</a></li>
+            <li><a href="#art-84"><span class="num">Art. 84</span>Radierea și evidența sancțiunilor</a></li>
+            <li><a href="#art-85"><span class="num">Art. 85</span>Legătura cu procedurile speciale</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-11"><span class="num">11</span>CERERI, PETIȚII ȘI RECLAMAȚII INDIVIDUALE</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-11" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-11" hidden>
+            <li><a href="#art-86"><span class="num">Art. 86</span>Canalul general</a></li>
+            <li><a href="#art-87"><span class="num">Art. 87</span>Înregistrarea și soluționarea</a></li>
+            <li><a href="#art-88"><span class="num">Art. 88</span>Confidențialitatea și limitele răspunsului</a></li>
+          </ol>
+        </li>
       </ol>
     </div>
 
     <div class="group">
       <div class="group-label safety">Integritate & Conformitate</div>
       <ol>
-        <li><a href="#cap-12"><span class="num">12</span>PREVENIREA ȘI COMBATEREA HĂRȚUIRII</a></li>
-        <li><a href="#cap-13"><span class="num">13</span>RAPORTĂRILE PRIVIND ÎNCĂLCĂRI ALE LEGII</a></li>
-        <li><a href="#cap-14"><span class="num">14</span>DATE PERSONALE, CONFIDENȚIALITATE, IT ȘI INTELI…</a></li>
-        <li><a href="#cap-15"><span class="num">15</span>RĂSPUNDEREA PATRIMONIALĂ ȘI BUNURILE ANGAJATORU…</a></li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-12"><span class="num">12</span>PREVENIREA ȘI COMBATEREA HĂRȚUIRII</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-12" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-12" hidden>
+            <li><a href="#art-89"><span class="num">Art. 89</span>Politica de toleranță zero</a></li>
+            <li><a href="#art-90"><span class="num">Art. 90</span>Conduite relevante și delimitări</a></li>
+            <li><a href="#art-91"><span class="num">Art. 91</span>Responsabilul și comisia</a></li>
+            <li><a href="#art-92"><span class="num">Art. 92</span>Modalitatea de sesizare</a></li>
+            <li><a href="#art-93"><span class="num">Art. 93</span>Procedura informală</a></li>
+            <li><a href="#art-94"><span class="num">Art. 94</span>Analiza preliminară și măsurile de protecție</a></li>
+            <li><a href="#art-95"><span class="num">Art. 95</span>Investigația formală</a></li>
+            <li><a href="#art-96"><span class="num">Art. 96</span>Măsuri și procedura disciplinară</a></li>
+            <li><a href="#art-97"><span class="num">Art. 97</span>Confidențialitate, date și sprijin</a></li>
+            <li><a href="#art-98"><span class="num">Art. 98</span>Represalii și monitorizare</a></li>
+            <li><a href="#art-99"><span class="num">Art. 99</span>Căile externe și prevenția</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-13"><span class="num">13</span>RAPORTĂRILE PRIVIND ÎNCĂLCĂRI ALE LEGII</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-13" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-13" hidden>
+            <li><a href="#art-100"><span class="num">Art. 100</span>Domeniul procedurii de avertizare</a></li>
+            <li><a href="#art-101"><span class="num">Art. 101</span>Persoana desemnată și canalul intern</a></li>
+            <li><a href="#art-102"><span class="num">Art. 102</span>Raportarea și anonimatul</a></li>
+            <li><a href="#art-103"><span class="num">Art. 103</span>Înregistrarea și termenele</a></li>
+            <li><a href="#art-104"><span class="num">Art. 104</span>Acțiunile subsecvente</a></li>
+            <li><a href="#art-105"><span class="num">Art. 105</span>Confidențialitatea și drepturile persoanei vizate</a></li>
+            <li><a href="#art-106"><span class="num">Art. 106</span>Protecția împotriva represaliilor</a></li>
+            <li><a href="#art-107"><span class="num">Art. 107</span>Raportarea externă și divulgarea publică</a></li>
+            <li><a href="#art-108"><span class="num">Art. 108</span>Buna-credință și raportările neconfirmate</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-14"><span class="num">14</span>DATE PERSONALE, CONFIDENȚIALITATE, IT ȘI INTELIGENȚĂ ARTIFICIALĂ</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-14" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-14" hidden>
+            <li><a href="#art-109"><span class="num">Art. 109</span>Principiile prelucrării datelor</a></li>
+            <li><a href="#art-110"><span class="num">Art. 110</span>Informarea și drepturile persoanelor vizate</a></li>
+            <li><a href="#art-111"><span class="num">Art. 111</span>Datele medicale și ale pacienților</a></li>
+            <li><a href="#art-112"><span class="num">Art. 112</span>Confidențialitatea profesională și comercială</a></li>
+            <li><a href="#art-113"><span class="num">Art. 113</span>Securitatea sistemelor și a dispozitivelor</a></li>
+            <li><a href="#art-114"><span class="num">Art. 114</span>Utilizarea inteligenței artificiale</a></li>
+            <li><a href="#art-115"><span class="num">Art. 115</span>Monitorizarea la locul de muncă</a></li>
+            <li><a href="#art-116"><span class="num">Art. 116</span>Comunicarea publică și rețelele sociale</a></li>
+            <li><a href="#art-117"><span class="num">Art. 117</span>Incidentele de date</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-15"><span class="num">15</span>RĂSPUNDEREA PATRIMONIALĂ ȘI BUNURILE ANGAJATORULUI</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-15" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-15" hidden>
+            <li><a href="#art-118"><span class="num">Art. 118</span>Principiile răspunderii patrimoniale</a></li>
+            <li><a href="#art-119"><span class="num">Art. 119</span>Constatarea și recuperarea prejudiciului</a></li>
+            <li><a href="#art-120"><span class="num">Art. 120</span>Paguba produsă de mai multe persoane și sumele nedatorate</a></li>
+            <li><a href="#art-121"><span class="num">Art. 121</span>Utilizarea și predarea bunurilor</a></li>
+            <li><a href="#art-122"><span class="num">Art. 122</span>Autovehiculele de serviciu</a></li>
+          </ol>
+        </li>
       </ol>
     </div>
 
     <div class="group">
       <div class="group-label digital">Final</div>
       <ol>
-        <li><a href="#cap-16"><span class="num">16</span>FORMAREA PROFESIONALĂ ȘI DEZVOLTAREA</a></li>
-        <li><a href="#cap-17"><span class="num">17</span>PREAVIZ, ÎNCETAREA RAPORTULUI DE MUNCĂ ȘI PREDA…</a></li>
-        <li><a href="#cap-18"><span class="num">18</span>DISPOZIȚII FINALE</a></li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-16"><span class="num">16</span>FORMAREA PROFESIONALĂ ȘI DEZVOLTAREA</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-16" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-16" hidden>
+            <li><a href="#art-123"><span class="num">Art. 123</span>Politica generală de formare</a></li>
+            <li><a href="#art-124"><span class="num">Art. 124</span>Frecvența și costurile</a></li>
+            <li><a href="#art-125"><span class="num">Art. 125</span>Participarea și evaluarea instruirii</a></li>
+            <li><a href="#art-126"><span class="num">Art. 126</span>Formarea la inițiativa salariatului</a></li>
+            <li><a href="#art-127"><span class="num">Art. 127</span>Dezvoltarea și promovarea</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-17"><span class="num">17</span>PREAVIZ, ÎNCETAREA RAPORTULUI DE MUNCĂ ȘI PREDAREA</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-17" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-17" hidden>
+            <li><a href="#art-128"><span class="num">Art. 128</span>Reguli generale de preaviz</a></li>
+            <li><a href="#art-129"><span class="num">Art. 129</span>Interdicțiile și verificarea temeiului</a></li>
+            <li><a href="#art-130"><span class="num">Art. 130</span>Comunicarea actelor de încetare</a></li>
+            <li><a href="#art-131"><span class="num">Art. 131</span>Predarea și continuitatea</a></li>
+            <li><a href="#art-132"><span class="num">Art. 132</span>Documentele și drepturile finale</a></li>
+          </ol>
+        </li>
+        <li>
+          <div class="row-with-sub">
+            <a href="#cap-18"><span class="num">18</span>DISPOZIȚII FINALE</a>
+            <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="sub-cap-18" aria-label="Comută articole"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg></button>
+          </div>
+          <ol class="sub" id="sub-cap-18" hidden>
+            <li><a href="#art-133"><span class="num">Art. 133</span>Adoptarea și consultarea</a></li>
+            <li><a href="#art-134"><span class="num">Art. 134</span>Comunicarea și opozabilitatea</a></li>
+            <li><a href="#art-135"><span class="num">Art. 135</span>Modificarea și controlul versiunii</a></li>
+            <li><a href="#art-136"><span class="num">Art. 136</span>Sesizarea privind legalitatea Regulamentului</a></li>
+            <li><a href="#art-137"><span class="num">Art. 137</span>Anexele și politicile separate</a></li>
+            <li><a href="#art-138"><span class="num">Art. 138</span>Intrarea în vigoare și abrogarea versiunii anterioare</a></li>
+            <li><a href="#art-139"><span class="num">Art. 139</span>Baza juridică și revizuirea</a></li>
+          </ol>
+        </li>
       </ol>
     </div>
 
@@ -1297,16 +1554,16 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
         <li><a href="#anexa-1"><span class="num">1</span>FIȘA DE ADOPTARE, CONTROL ȘI PUNERE ÎN APLICARE</a></li>
         <li><a href="#anexa-2"><span class="num">2</span>DECLARAȚIE DE LUARE LA CUNOȘTINȚĂ</a></li>
         <li><a href="#anexa-3"><span class="num">3</span>FIȘA PROGRAMELOR DE LUCRU ȘI A LOCAȚIILOR</a></li>
-        <li><a href="#anexa-4"><span class="num">4</span>STANDARDUL MINIM PENTRU MANAGEMENTUL PERFORMANȚ…</a></li>
-        <li><a href="#anexa-5"><span class="num">5</span>STANDARDUL MINIM AL DOSARULUI DE NECORESPUNDERE…</a></li>
+        <li><a href="#anexa-4"><span class="num">4</span>STANDARDUL MINIM PENTRU INSTRUMENTELE DE MANAGEMENT AL PERFORMANȚEI ȘI BONUS</a></li>
+        <li><a href="#anexa-5"><span class="num">5</span>STANDARDUL MINIM AL DOSARULUI DE EVALUARE PREALABILĂ PENTRU NECORESPUNDERE PROFESIONALĂ</a></li>
         <li><a href="#anexa-6"><span class="num">6</span>DOSARUL STANDARD DE CERCETARE DISCIPLINARĂ</a></li>
         <li><a href="#anexa-7"><span class="num">7</span>FORMULAR 7A — CERERE / PETIȚIE INDIVIDUALĂ</a></li>
         <li><a href="#anexa-8"><span class="num">8</span>DOSARUL SESIZĂRII DE HĂRȚUIRE</a></li>
-        <li><a href="#anexa-9"><span class="num">9</span>RAPORTAREA ÎNCĂLCĂRILOR LEGII ȘI FIȘA DE URMĂRI…</a></li>
+        <li><a href="#anexa-9"><span class="num">9</span>RAPORTAREA ÎNCĂLCĂRILOR LEGII ȘI FIȘA DE URMĂRIRE</a></li>
         <li><a href="#anexa-10"><span class="num">10</span>FORMULAR 10A — DECLARAȚIE DE INTERESE</a></li>
-        <li><a href="#anexa-11"><span class="num">11</span>FORMULAR 11A — PREDARE–PRIMIRE ȘI OFFBOARDING</a></li>
-        <li><a href="#anexa-12"><span class="num">12</span>FORMULAR 12A — CERERE PRIVIND FORMAREA PROFESIO…</a></li>
-        <li><a href="#anexa-13"><span class="num">13</span>REGISTRUL DIGITAL OFICIAL AL MANUALELOR ȘI PROC…</a></li>
+        <li><a href="#anexa-11"><span class="num">11</span>FORMULAR 11A — PROCES-VERBAL DE PREDARE–PRIMIRE ȘI OFFBOARDING</a></li>
+        <li><a href="#anexa-12"><span class="num">12</span>FORMULAR 12A — CERERE PRIVIND FORMAREA PROFESIONALĂ</a></li>
+        <li><a href="#anexa-13"><span class="num">13</span>REGISTRUL DIGITAL OFICIAL AL MANUALELOR ȘI PROCEDURILOR CONTROLATE</a></li>
       </ol>
     </div>
 
@@ -1333,7 +1590,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>Prezentul Regulament intern este adoptat de entitatea juridică identificată pe copertă, în calitate de angajator, cu consultarea sindicatului ori a reprezentanților salariaților, după caz. El stabilește reguli unitare, previzibile și verificabile pentru organizarea muncii, protejarea pacienților și a personalului, evaluarea performanței și exercitarea legală a prerogativei disciplinare.</p>
     <p>Modelul urmărește o cultură meritocratică: standardele se stabilesc înainte de evaluare, rezultatele sunt măsurate prin date relevante pentru post, performanța bună este recunoscută, iar performanța insuficientă este tratată prompt și documentat. Meritocrația nu înseamnă sancțiune automată și nici concediere la discreție; orice măsură se întemeiază pe fapte, criterii comunicate, proporționalitate și procedura prevăzută de lege. Exigența profesională este însoțită de investiția reciprocă a Angajatorului în resurse, dezvoltare, sănătate, beneficii și sprijin, în condițiile documentelor aplicabile.</p>
     <p>Prezentul document înlocuiește integral versiunea anterioară la data intrării sale în vigoare pentru salariații angajatorului care îl adoptă. Procedurile și standardele minime din anexe sunt parte integrantă. Modelele operaționale privind performanța, bonusul și documentarea necorespunderii pot fi administrate separat și actualizate potrivit Anexelor nr. 4 și 5, fără a deveni formulare exclusive. Instrucțiunile pur operaționale — clinice, SSM, PSI, IT, utilizare a autovehiculelor, deplasări și decontări, carduri profesionale, beneficii sau logistica uniformelor — se aprobă separat și se aplică numai după comunicare, în măsura în care nu contravin legii, contractelor aplicabile ori prezentului Regulament. Obligațiile vestimentare, de igienă și identificare cu efect disciplinar sunt stabilite direct în Capitolul IV.</p>
-    <p>Manualul Medicului, Manualul Asistentului Medical și Manualul Registratorului Medical completează Regulamentul numai prin versiunile înscrise în Registrul Digital Oficial din Anexa nr. 13 și comunicate destinatarilor. Eticheta fiecărei reguli arată dacă aceasta este obligație, standard critic, procedură operațională, probă, criteriu de performanță, criteriu de bonus ori simplă recomandare. Această clasificare evită confundarea instruirii cu disciplina și a bonusului cu aptitudinea profesională.</p>
+    <p>În ierarhia documentelor interne unilaterale, prezentul Regulament intern este documentul principal. Manualul Medicului, Manualul Asistentului Medical, Manualul Registratorului Medical și celelalte manuale, proceduri, protocoale, politici, instrucțiuni, ghiduri și formulare îl completează și îl pun în aplicare, fără a-l putea modifica ori contrazice. Sunt aplicabile numai versiunile aprobate și înscrise în Registrul online al documentelor interne, comunicate destinatarilor. Registrul păstrează trimiteri în ambele sensuri: de la articolul din Regulament către documentele de aplicare și de la fiecare document subordonat către articolele pe care le detaliază. Eticheta fiecărei reguli delimitează obligația, standardul critic, procedura, proba, criteriul de performanță, criteriul de bonus și recomandarea.</p>
     
     <!-- ============ Capitolul I ============ -->
     <h2 id="cap-1"><span class="chapter-num">Capitolul I</span>DISPOZIȚII GENERALE</h2>
@@ -1350,17 +1607,21 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>(2) Regulile privind securitatea, confidențialitatea, protecția datelor, conduita, prevenirea hărțuirii și siguranța pacientului se aduc la cunoștință, în limitele relevante, și stagiarilor, voluntarilor, colaboratorilor, furnizorilor și vizitatorilor. Aplicarea lor acestor persoane se întemeiază pe lege ori contract și nu creează un raport de muncă.</p>
     <p>(3) Regulamentul se aplică în toate sediile, clinicile, punctele de lucru, deplasările, evenimentele profesionale, activitățile online și orice alt context în care conduita are legătură cu munca ori poate afecta pacienții, colegii, Angajatorul sau reputația profesională.</p>
     <h3 id="art-4"><span class="num">Art. 4</span>Ierarhia normelor și regula favorabilă</h3>
-    <p>(1) Regulamentul se interpretează împreună cu legea, contractul colectiv de muncă aplicabil, contractul individual de muncă, fișa postului și politicile interne comunicate. Norma legală imperativă și clauza contractuală mai favorabilă salariatului prevalează, după caz.</p>
-    <p>(2) Dacă o dispoziție devine contrară unei norme imperative, aceasta nu se aplică în limita conflictului, fără a afecta restul Regulamentului. Angajatorul inițiază fără întârziere procedura de actualizare, consultare și comunicare; modificarea legislativă nu justifică aplicarea retroactivă a unor criterii ori sancțiuni.</p>
-    <p>(3) Instrucțiunile manageriale sunt obligatorii numai dacă sunt legale, clare, emise de o persoană competentă și compatibile cu atribuțiile salariatului, cu regulile profesionale și cu siguranța pacientului.</p>
-    <h3 id="art-5"><span class="num">Art. 5</span>Definiții operaționale</h3>
-    <p>(1) În sensul Regulamentului, «superior direct» este persoana desemnată să coordoneze activitatea salariatului; «HR» reprezintă funcția internă sau furnizorul desemnat să administreze resursele umane; «zi lucrătoare» este o zi în care compartimentul responsabil lucrează potrivit programului său; «dovadă de comunicare» este orice mijloc legal care permite accesarea, stocarea, tipărirea și confirmarea transmiterii documentului.</p>
+    <p>(1) Regulamentul se interpretează împreună cu legea, contractul colectiv de muncă aplicabil, contractul individual de muncă, fișa postului și normele profesionale obligatorii. Norma legală imperativă și dreptul contractual mai favorabil salariatului prevalează, după caz.</p>
+    <p>(2) În cadrul actelor interne unilaterale ale Angajatorului, Regulamentul intern are autoritate superioară manualelor, procedurilor, protocoalelor, politicilor, instrucțiunilor, ghidurilor, formularelor și materialelor de lucru.</p>
+    <p>(3) Documentele interne subordonate detaliază și pun în aplicare Regulamentul, fără să îl poată modifica, restrânge ori înlătura. În caz de neconcordanță, se aplică Regulamentul, iar prevederea subordonată este suspendată în limita conflictului și transmisă spre corectare.</p>
+    <p>(4) Dacă o dispoziție a Regulamentului devine contrară unei norme imperative, aceasta nu se aplică în limita conflictului, fără a afecta restul documentului. Angajatorul inițiază fără întârziere actualizarea, consultarea și comunicarea; modificarea legislativă nu justifică aplicarea retroactivă a unor criterii ori sancțiuni.</p>
+    <p>(5) Instrucțiunile manageriale sunt obligatorii numai dacă sunt legale, clare, emise de o persoană competentă și compatibile cu atribuțiile salariatului, cu Regulamentul, cu regulile profesionale și cu siguranța pacientului.</p>
+<h3 id="art-5"><span class="num">Art. 5</span>Definiții operaționale</h3>
+    <p>(1) În sensul Regulamentului, «superior direct» este persoana desemnată să coordoneze activitatea salariatului; «HR» reprezintă funcția internă sau furnizorul desemnat să administreze resursele umane; «zi lucrătoare» este o zi în care compartimentul responsabil lucrează potrivit programului său; «dovadă de comunicare» este orice mijloc legal care permite identificarea destinatarului, a documentului și versiunii, precum și verificarea transmiterii și accesului.</p>
     <p>(2) «Date profesionale» înseamnă date verificabile despre rezultate, calitate, termene, competențe și conduită; «criteriu esențial» este standardul a cărui neîndeplinire poate afecta siguranța pacientului, legalitatea actului profesional ori însăși aptitudinea de a exercita rolul; «incident de siguranță» include și situația evitată în ultimul moment, denumită near-miss.</p>
-    <p>(3) «Document controlat» este regulamentul, manualul, procedura, protocolul, formularul ori instrucțiunea care are cod unic, titlu, versiune, proprietar, aprobator, dată de intrare în vigoare, destinatari, etichetă de aplicare, locație oficială și istoric arhivat. «Manual aplicabil» înseamnă exclusiv versiunea aprobată, înscrisă în Anexa nr. 13 și comunicată salariatului înaintea faptelor evaluate.</p>
-    <p>(4) «Nivel N-1» și «nivel N-2 sau inferior» sunt clasificări organizaționale stabilite prin organigrama aprobată și prin matricea operațională a nivelurilor de performanță, administrată de HR conform Anexei nr. 4, nu calificări deduse exclusiv din denumirea funcției. Matricea este un document controlat distinct, versionat și comunicat prospectiv. La data adoptării, Managerul de clinică, Asistentul șef și Șeful recepției/Registratorul medical intră în ciclul lunar operațional și de bonus aplicabil nivelului N-2 și mai jos, fără a fi excluși din evaluarea profesională anuală.</p>
-    <p>(5) «Scor de performanță» este rezultatul evaluării aptitudinii și realizării cerințelor postului. «Scor de bonus» este rezultatul formulei de remunerație variabilă pentru un ciclu. Cele două pot utiliza unele date comune, dar au efecte juridice distincte și nu se substituie reciproc. «Scrisoarea de bonus» este documentul separat care comunică prospectiv condițiile schemei variabile pentru ciclul indicat.</p>
-    <p>(6) Termenii care au definiție legală, inclusiv hărțuire, avertizor în interes public, timp de muncă, muncă suplimentară și date cu caracter personal, au sensul prevăzut de legea în vigoare.</p>
-    <h3 id="art-6"><span class="num">Art. 6</span>Responsabilitatea managerilor</h3>
+    <p>(3) «Document controlat» este Regulamentul, manualul, procedura, protocolul, politica, formularul ori instrucțiunea care are cod unic, titlu, versiune, proprietar, aprobator, dată de intrare în vigoare, destinatari, etichetă de aplicare, locație oficială și istoric arhivat. «Manual aplicabil» înseamnă exclusiv versiunea aprobată, înscrisă în Registrul online și comunicată salariatului înaintea faptelor evaluate.</p>
+    <p>(4) «Registrul online al documentelor interne» sau «Registrul online» este sursa internă oficială pentru identificarea documentelor și versiunilor în vigoare. El este accesibil online și prin ERP și păstrează istoricul, statutul, documentul oficial, precum și relațiile dintre Regulament și documentele subordonate.</p>
+    <p>(5) «Confirmare individuală» este Anexa nr. 2 generată în ERP pentru un anumit salariat, document și versiune. Pentru fiecare luare la cunoștință se generează un formular nou, cu număr unic și semnătură electronică proprie.</p>
+    <p>(6) «Nivel N-1» și «nivel N-2 sau inferior» sunt clasificări organizaționale stabilite prin organigrama aprobată și prin matricea operațională a nivelurilor de performanță, administrată de HR conform Anexei nr. 4, nu calificări deduse exclusiv din denumirea funcției. Matricea este un document controlat distinct, versionat și comunicat prospectiv. La data adoptării, Managerul de clinică, Asistentul șef și Șeful recepției/Registratorul medical intră în ciclul lunar operațional și de bonus aplicabil nivelului N-2 și mai jos, fără a fi excluși din evaluarea profesională anuală.</p>
+    <p>(7) «Scor de performanță» este rezultatul evaluării aptitudinii și realizării cerințelor postului. «Scor de bonus» este rezultatul formulei de remunerație variabilă pentru un ciclu. Cele două pot utiliza unele date comune, dar au efecte juridice distincte și nu se substituie reciproc. «Scrisoarea de bonus» este documentul separat care comunică prospectiv condițiile schemei variabile pentru ciclul indicat.</p>
+    <p>(8) Termenii care au definiție legală, inclusiv hărțuire, avertizor în interes public, timp de muncă, muncă suplimentară, semnătură electronică și date cu caracter personal, au sensul prevăzut de legea în vigoare.</p>
+<h3 id="art-6"><span class="num">Art. 6</span>Responsabilitatea managerilor</h3>
     <p>Managerii aplică Regulamentul consecvent și documentat, stabilesc priorități și resurse realiste, oferă feedback la timp, nu promit rezultate procedurale și nu emit decizii pentru care nu au competență. Ei sesizează HR sau funcția competentă atunci când o situație poate implica performanță, disciplină, discriminare, hărțuire, avertizare de integritate, inaptitudine medicală, conflict de interese ori risc pentru pacient.</p>
 
     <!-- ============ Capitolul II ============ -->
@@ -1395,8 +1656,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>(1) Salariații își îndeplinesc atribuțiile cu competență, diligență, loialitate și bună-credință; respectă programul, documentele controlate aplicabile postului, protocoalele, circuitele, instrucțiunile legale, regulile SSM/PSI, confidențialitatea și drepturile pacienților; folosesc eficient resursele și raportează fără întârziere riscurile și incidentele relevante.</p>
     <p>(2) Salariatul își menține valabile autorizațiile, avizele, asigurările și competențele cerute de profesie, comunică imediat orice suspendare, restricție sau incompatibilitate și nu desfășoară activități pentru care nu este autorizat ori instruit.</p>
     <p>(3) Salariatul furnizează date corecte pentru dosarul de personal și comunică, în termen rezonabil, modificările necesare administrării raportului de muncă. Datele medicale se comunică numai prin canalele și în limitele prevăzute de lege.</p>
-    <p>(4) O regulă dintr-un manual separat este opozabilă numai pentru perioada în care versiunea sa a fost aprobată, înscrisă în registru, accesibilă și comunicată. Salariatul solicită clarificări când versiunile ori codurile se contrazic și urmează prioritar regula de siguranță și dispoziția legală; semnalarea unei neconcordanțe nu constituie abatere.</p>
-    <h3 id="art-16"><span class="num">Art. 16</span>Siguranța pacientului și limitele competenței profesionale</h3>
+    <p>(4) O regulă dintr-un document subordonat este opozabilă numai pentru perioada în care versiunea sa a fost aprobată, înscrisă în Registrul online, accesibilă și comunicată. Salariatul solicită clarificări când versiunile, codurile ori trimiterile se contrazic și urmează prioritar legea, norma de siguranță și Regulamentul; semnalarea de bună-credință a unei neconcordanțe nu constituie abatere.</p>
+<h3 id="art-16"><span class="num">Art. 16</span>Siguranța pacientului și limitele competenței profesionale</h3>
     <p>(1) Personalul clinic respectă competențele profesionale, protocoalele aprobate, consimțământul informat, regulile de documentare medicală, igienă, sterilizare, trasabilitate, gestionare a medicamentelor și dispozitivelor, precum și obligațiile de raportare profesională. Nicio țintă comercială sau dispoziție managerială nu justifică abaterea de la standardul legal și profesional de îngrijire.</p>
     <p>(2) Orice incident ori near-miss care poate afecta pacientul se raportează imediat prin canalul clinic desemnat și se gestionează prioritar pentru limitarea efectelor. Raportarea de bună-credință a unui risc de siguranță nu atrage represalii; eventualele fapte culpabile distincte se analizează prin procedura corespunzătoare.</p>
     <p>(3) Datele pacientului se introduc numai în sistemele autorizate. Documentarea trebuie să fie contemporană actului, exactă, completă și trasabilă; modificările ulterioare se fac numai prin mecanismele care păstrează istoricul.</p>
@@ -1407,28 +1668,27 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>(2) Activitățile externe și participațiile la competitori, furnizori ori parteneri se analizează individual după relevanță, acces la informații, risc de concurență neloială, incompatibilități profesionale și efect asupra programului. Rudenia, în sine, nu interzice raportul profesional, dar relația se declară când poate afecta selecția, evaluarea, achiziția, plata sau controlul.</p>
     <p>(3) Declarația se completează la angajare, anual și ori de câte ori apare o schimbare, folosind Anexa nr. 10. Refuzul de a dezvălui un conflict material ori încălcarea deliberată a măsurilor de gestionare poate atrage răspundere după procedura legală.</p>
     <h3 id="art-19"><span class="num">Art. 19</span>Comunicarea electronică oficială și obligația de consultare</h3>
-    <p>(1) Platforma ERP — modulul RP/Resurse Umane, prin contul individual al salariatului, și adresa de e-mail profesională atribuită acestuia sunt canalele electronice oficiale de comunicare în raporturile de muncă. Dacă nu există adresă profesională, poate fi utilizată adresa indicată expres de salariat pentru acest scop, cu asigurarea unei modalități alternative de acces pentru persoana care nu poate utiliza în mod rezonabil canalul electronic.</p>
-    <p>(2) Regulamentul și modificările sale, documentele controlate, planificările, solicitările, informările, notificările și celelalte comunicări legate de muncă se transmit, de regulă, prin punerea documentului integral la dispoziție în contul individual ERP-RP și printr-o notificare individuală simultană la adresa de e-mail desemnată. E-mailul identifică destinatarul, titlul, codul și versiunea exactă a documentului, data intrării în vigoare, o scurtă descriere a conținutului ori a modificărilor relevante, termenul de parcurgere și linkul direct către PDF-ul canonic sau documentul integral. Documentul trebuie să poată fi accesat integral, descărcat, stocat și imprimat. Actele supuse unei forme ori proceduri speciale urmează alineatul (9).</p>
-    <p>(3) Angajatorul asigură gratuit contul individual, echipamentul ori o stație de acces adecvată, instruirea, suportul tehnic și timpul rezonabil necesar consultării în cadrul programului de lucru. Salariatul consultă canalele oficiale cel puțin o dată în fiecare zi în care prestează activitate, în timpul programului, păstrează confidențialitatea datelor de acces, actualizează datele de contact necesare și semnalează imediat imposibilitatea tehnică de acces. Pe durata suspendării contractului, a concediului ori a altei absențe aprobate nu există obligația de consultare zilnică.</p>
-    <p>(4) Pentru comunicările curente care nu sunt supuse unei reguli legale speciale, dovada se formează din copia exactă a documentului și versiunea sau identificatorul său, identificarea destinatarului, data și ora publicării în contul individual, conținutul e-mailului și jurnalul livrării, linkul transmis și, după caz, accesarea, descărcarea ori confirmarea electronică. Un e-mail generic care anunță numai existența unor documente în ERP nu este suficient, prin el însuși, dacă nu permite identificarea versiunii comunicate și nu se poate dovedi accesul efectiv la documentul integral. Dacă transmiterea are loc în afara programului, într-o zi nelucrătoare sau în cursul unei absențe aprobate, termenul intern de conformare începe la debutul primei zile de activitate ulterioare, dacă documentul ori legea nu prevăd o regulă mai favorabilă.</p>
-    <p>(5) Regulamentul, modificările sale și documentele care introduc ori modifică obligații aplicabile salariatului produc efecte numai după aprobarea de către Angajator și informarea individuală dovedită. Simpla publicare pe portal, în secțiunea «Documente» sau într-un registru accesibil general nu înlocuiește notificarea individuală. Confirmarea «Am luat la cunoștință», accesarea ori descărcarea înregistrată, raportul de livrare și orice alt mijloc legal pot susține dovada informării, apreciată împreună cu accesibilitatea documentului și împrejurările concrete.</p>
-    <p>(6) Confirmarea electronică «Am luat la cunoștință» dovedește primirea și accesul, dar nu reprezintă acordul salariatului cu măsura și nu înlocuiește consimțământul, semnătura ori actul adițional atunci când legea sau contractul le impune. Refuzul confirmării se consemnează și nu poate fi tratat automat ca refuz de executare.</p>
-    <p>(7) Neaccesarea ori neconfirmarea nu neutralizează o comunicare curentă atunci când Angajatorul dovedește că documentul integral a fost transmis și a rămas efectiv accesibil, iar salariatul nu indică o cauză obiectivă. Livrările eșuate, mesajele returnate, persoanele absente, conturile inactive și lipsa accesului se reconciliază de HR, care reia comunicarea printr-un canal adecvat. Imposibilitatea tehnică neimputabilă, o neconcordanță de versiune ori absența legală nu produc efecte disciplinare și determină reluarea comunicării.</p>
-    <p>(8) Nerespectarea culpabilă a obligației de consultare, actualizare a datelor de contact sau raportare a problemelor tehnice poate fi analizată disciplinar numai după dovedirea accesului, instruirii, timpului acordat, regulii aplicabile și vinovăției, prin procedura din Capitolul X. Comunicarea urgentă privind pacientul, un incident de siguranță ori continuitatea serviciului se face și prin canalul operațional desemnat; e-mailul ori publicarea în Registru nu sunt suficiente pentru o urgență.</p>
-    <p>(9) Prezentul articol nu înlocuiește cerințele speciale de formă, semnare sau comunicare. Decizia de sancționare disciplinară se comunică prin modalitățile prevăzute de art. 252 alin. (4) din Codul muncii. Celelalte acte individuale pot fi comunicate electronic numai în condițiile permise de lege și jurisprudența obligatorie, inclusiv, când este cazul, printr-o adresă declarată și o practică de comunicare între părți. Comunicarea electronică rămâne complementară dacă norma specială impune o altă modalitate.</p>
-    <h3 id="art-20"><span class="num">Art. 20</span>Registrul Digital Oficial al Manualelor și Procedurilor. Actualizarea profesională internă</h3>
-    <p>(1) Registrul Digital Oficial al Manualelor și Procedurilor, denumit în continuare «Registrul», este sursa internă oficială în care sunt publicate manualele, procedurile, protocoalele și instrucțiunile aprobate ori adoptate ca aplicabile de Angajator. Registrul este accesibil direct online și prin secțiunea «Documente» a ERP-RP. Pentru un salariat sunt obligatorii numai documentele marcate «În vigoare», declarate aplicabile rolului, profesiei, activității ori unității sale și comunicate potrivit articolului precedent.</p>
-    <p>(2) Pentru fiecare document, Registrul publică versiunea canonică în format PDF, identificată prin cod, număr de versiune, aprobator, data aprobării și data intrării în vigoare; versiunea HTML/Wiki pentru lectură și navigare; precum și registrul modificărilor și istoricul versiunilor. În caz de neconcordanță prevalează PDF-ul aprobat. Versiunile anterioare se păstrează într-o arhivă controlată pentru audit, dar nu se aplică faptelor produse după intrarea în vigoare a versiunii noi.</p>
-    <p>(3) Publicarea unei versiuni noi ori a unei modificări care afectează obligațiile, activitatea, siguranța, criteriile sau testarea este însoțită de notificare individuală în ERP-RP și prin e-mail. Notificarea indică destinatarul sau lotul nominal, titlul și codul documentului, versiunea, sinteza modificărilor relevante, data intrării în vigoare, termenul rezonabil de parcurgere, eventualul test și linkul direct către PDF-ul canonic, precum și linkul HTML/Wiki pentru lectură. Accesul direct la Registru în afara ERP nu înlocuiește notificarea individuală.</p>
-    <p>(4) Salariatul parcurge în termen documentele și modificările aplicabile, confirmă electronic luarea la cunoștință, utilizează exclusiv versiunea în vigoare, completează testele alocate și semnalează imediat o neconcordanță între versiuni ori o imposibilitate de acces. Angajatorul acordă în programul de lucru timpul rezonabil, accesul, echipamentul și suportul necesare. Termenele se prelungesc sau se reprogramează pentru absențe legale și incidente tehnice neimputabile.</p>
-    <p>(5) Modificarea devine aplicabilă prospectiv la data indicată în notificare, după acordarea unui interval rezonabil pentru parcurgere și, când este necesar, instruire. O regulă critică pentru siguranță poate intra în vigoare mai rapid numai dacă urgența este motivată, comunicarea este efectivă, iar Angajatorul asigură îndrumarea și mijloacele necesare înaintea executării activității afectate.</p>
-    <p>(6) Verificarea cunoștințelor se poate realiza lunar prin ERP-RP pentru rolurile și documentele prevăzute în matricea aplicabilă, exclusiv pe baza versiunilor în vigoare comunicate anterior. Pragul de promovare este de 80%. În caz de nepromovare, salariatul primește rezultatul, acces la materialele de remediere și posibilitatea reexaminării în termenul procedurii aplicabile; întrebările eronate ori ambigue se anulează sau se corectează trasabil.</p>
-    <p>(7) Punctajul lunar de minimum 80% poate constitui o condiție de eligibilitate pentru bonusul variabil numai dacă a fost prevăzut prospectiv în politica și scrisoarea sau fișa schemei aplicabile, cu respectarea contractului individual și a condițiilor legale. Neatingerea pragului nu afectează salariul de bază ori drepturile garantate, nu constituie sancțiune disciplinară și nu dovedește singură necorespunderea profesională.</p>
-    <p>(8) Refuzul culpabil de a parcurge un document comunicat, de a participa la testare sau de a utiliza versiunea în vigoare poate fi analizat disciplinar potrivit Capitolului X. Lacunele de cunoștințe constatate obiectiv determină, după natura lor, clarificare, reinstruire, reexaminare ori sesizarea separată a procedurii profesionale din Capitolul IX; nicio consecință nu este automată și același fapt nu este urmărit simultan pe temeiuri incompatibile.</p>
-    <p>(9) Registrul și testele constituie un sistem de actualizare profesională internă continuă. Ele completează, dar nu înlocuiesc educația medicală continuă acreditată, creditele profesionale, obligațiile organismelor profesionale, legea, normele deontologice și regulile de siguranță a pacientului. Manualul intern nu prevalează asupra unei norme superioare și nu autorizează o activitate în afara competenței profesionale.</p>
-    <p>(10) Pentru medicii și ceilalți profesioniști care prestează exclusiv în baza unui contract de servicii, accesul la Registru, obligațiile de actualizare și testarea se stabilesc prin contractul de colaborare și regulile profesionale aplicabile; prezentul articol nu le creează statut de salariat.</p>
-
-    <!-- ============ Capitolul IV ============ -->
+    <p>(1) Platforma ERP — modulul RP/Resurse Umane, prin contul individual al salariatului, și adresa de e-mail profesională atribuită acestuia sunt canalele electronice oficiale complementare de comunicare în raporturile de muncă. Dacă nu există adresă profesională, poate fi utilizată adresa indicată expres de salariat, cu asigurarea unei modalități alternative pentru persoana care nu poate utiliza în mod rezonabil canalul electronic.</p>
+    <p>(2) Pentru fiecare document ori versiune pentru care Angajatorul solicită luarea la cunoștință, ERP creează o sarcină individuală și pune la dispoziție documentul integral prin link către versiunea oficială din ERP și din Registrul online. Documentul nu se atașează formularului de confirmare; el rămâne disponibil pentru vizualizare, descărcare și tipărire.</p>
+    <p>(3) Sarcina este semnalată printr-o notificare individuală vizibilă în ERP și, suplimentar, prin e-mail. E-mailul identifică titlul, codul și versiunea documentului, data intrării în vigoare și conține un link și/sau un cod QR către aceeași sarcină ERP. Codul QR este numai o cale de acces; semnarea are loc în ERP.</p>
+    <p>(4) Notificarea ERP rămâne afișată până la finalizarea confirmării sau până la închiderea justificată a fluxului de către HR. Simpla afișare, deschidere, închidere, accesare ori descărcare a documentului nu echivalează cu semnarea Anexei nr. 2.</p>
+    <p>(5) Angajatorul asigură gratuit contul individual, echipamentul ori o stație de acces adecvată, instruirea, suportul tehnic și timpul rezonabil necesar consultării în cadrul programului de lucru. Salariatul consultă canalele oficiale în fiecare zi în care prestează activitate, în timpul programului, păstrează confidențialitatea datelor de acces și semnalează imediat imposibilitatea tehnică.</p>
+    <p>(6) Pentru fiecare luare la cunoștință, ERP generează o nouă Anexă nr. 2, individualizată prin salariat, document, cod și versiune. Înainte de semnare, salariatul are acces la documentul integral. Formularul poartă număr unic, data și ora, identificatorul tranzacției și semnătura electronică aplicată în ERP.</p>
+    <p>(7) Semnarea Anexei nr. 2 confirmă primirea și luarea la cunoștință. Ea nu reprezintă acordul cu o prevedere nelegală, renunțarea la drepturi, acceptarea unei măsuri individuale ori modificarea contractului individual de muncă atunci când legea impune o formalitate distinctă.</p>
+    <p>(8) Dovada procesului este alcătuită din formularul semnat, identificarea exactă a documentului și versiunii, jurnalul tehnic ERP și, complementar, dovada notificării prin e-mail. Formularul semnat și dovada tehnică se arhivează digital în dosarul de personal al salariatului, cu legătura către documentul oficial. Un e-mail generic sau simpla publicare în Registrul online nu înlocuiește fluxul individual atunci când este solicitată confirmarea.</p>
+    <p>(9) Refuzul, lipsa confirmării, livrarea eșuată și imposibilitatea tehnică se înregistrează și se analizează individual. Lipsa răspunsului nu este transformată automat în semnătură sau abatere. Dacă fluxul electronic nu poate fi utilizat, comunicarea și confirmarea se realizează printr-o modalitate alternativă care permite păstrarea dovezii. Prezentul articol nu înlocuiește cerințele speciale de formă, semnare, instruire ori comunicare prevăzute de lege.</p>
+<h3 id="art-20"><span class="num">Art. 20</span>Registrul online al documentelor interne. Actualizarea profesională internă</h3>
+    <p>(1) Registrul online al documentelor interne, denumit în continuare «Registrul online», este sursa internă oficială în care sunt publicate Regulamentul, manualele, procedurile, protocoalele, politicile, instrucțiunile și formularele aprobate ori adoptate ca aplicabile de Angajator. Registrul este accesibil direct online și prin secțiunea «Documente» a ERP-RP.</p>
+    <p>(2) În ierarhia internă, Regulamentul este documentul principal, iar manualele și celelalte documente controlate îi sunt subordonate. Niciun document subordonat nu poate institui o regulă contrară Regulamentului, nu poate extinde o sancțiune și nu poate restrânge un drept în afara cadrului legal și regulamentar.</p>
+    <p>(3) Pentru fiecare document, Registrul publică cel puțin codul, titlul, proprietarul, aprobatorul, versiunea, statutul, destinatarii, data aprobării, data intrării în vigoare, documentul înlocuit, istoricul și documentul oficial într-o formă nemodificabilă care poate fi vizualizată, descărcată și tipărită. Interfața HTML/Wiki poate facilita lectura; în caz de neconcordanță prevalează documentul oficial aprobat și arhivat.</p>
+    <p>(4) Registrul păstrează trimiteri în ambele sensuri. Fiecare articol al Regulamentului indică, prin fișa sa de registru, manualele și procedurile care îl aplică; fiecare manual sau procedură indică pe prima pagină codul și articolele Regulamentului pe care le detaliază. Trimiterea se face prin cod și versiune, nu numai printr-un link tehnic.</p>
+    <p>(5) Pentru un salariat sunt obligatorii numai documentele marcate «În vigoare», declarate aplicabile rolului, profesiei, activității ori unității sale și comunicate potrivit Art. 19. Publicarea unei versiuni noi care necesită luare la cunoștință declanșează notificarea individuală și generarea unei noi Anexe nr. 2 pentru fiecare destinatar.</p>
+    <p>(6) Modificarea devine aplicabilă numai pentru viitor, de la data indicată după aprobarea și comunicarea efectivă. Versiunile retrase se păstrează într-o arhivă controlată pentru audit și nu pot fi confundate cu versiunea în vigoare. Modificarea unui articol din Regulament declanșează revizuirea documentelor subordonate legate de acel articol.</p>
+    <p>(7) Verificarea cunoștințelor se poate realiza prin ERP-RP pentru rolurile și documentele prevăzute în matricea aplicabilă, exclusiv pe baza versiunilor în vigoare comunicate anterior. Pragul de promovare este de 80%. În caz de nepromovare, salariatul primește rezultatul, acces la materialele de remediere și posibilitatea reexaminării conform procedurii aplicabile; întrebările eronate ori ambigue se anulează sau se corectează trasabil.</p>
+    <p>(8) Punctajul de minimum 80% poate constitui o condiție de eligibilitate pentru bonusul variabil numai dacă a fost prevăzut prospectiv în politica și scrisoarea sau fișa schemei aplicabile, cu respectarea contractului individual și a condițiilor legale. Neatingerea pragului nu afectează salariul de bază ori drepturile garantate, nu constituie sancțiune disciplinară și nu dovedește singură necorespunderea profesională.</p>
+    <p>(9) Refuzul culpabil de a parcurge un document comunicat, de a participa la o testare obligatorie legal stabilită sau de a utiliza versiunea în vigoare poate fi analizat disciplinar potrivit Capitolului X, numai după verificarea accesului, instruirii, regulii și vinovăției. Nicio consecință nu este automată.</p>
+    <p>(10) Registrul și testele completează, dar nu înlocuiesc educația medicală continuă acreditată, creditele profesionale, instruirile obligatorii, legea, normele deontologice și regulile de siguranță a pacientului. Pentru colaboratorii care nu sunt salariați, accesul și obligațiile se stabilesc prin contractul de servicii și regulile profesionale aplicabile.</p>
+<!-- ============ Capitolul IV ============ -->
     <h2 id="cap-4"><span class="chapter-num">Capitolul IV</span>CODUL VESTIMENTAR, IGIENA ȘI IDENTIFICAREA PROFESIONALĂ</h2>
     <h3 id="art-21"><span class="num">Art. 21</span>Scopul și principiile codului vestimentar</h3>
     <p>(1) Ținuta profesională susține siguranța pacientului, prevenirea contaminării, identificarea corectă a personalului și încrederea legitimă în serviciile Angajatorului. Standardele se aplică proporțional cu rolul, riscurile postului și contactul cu pacienții, fără criterii arbitrare ori discriminatorii.</p>
@@ -1787,32 +2047,37 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h3 id="art-133"><span class="num">Art. 133</span>Adoptarea și consultarea</h3>
     <p>Regulamentul se adoptă prin decizia reprezentantului legal al fiecărei entități angajatoare, după consultarea sindicatului ori a reprezentanților salariaților, conform Fișei din Anexa nr. 1. Consultarea nu înseamnă drept de veto, dar observațiile sunt analizate real și consemnate.</p>
     <h3 id="art-134"><span class="num">Art. 134</span>Comunicarea și opozabilitatea</h3>
-    <p>Regulamentul produce efecte față de fiecare salariat din momentul luării la cunoștință. Noilor salariați li se comunică în prima zi de lucru. Comunicarea electronică se realizează potrivit regulilor din Capitolul III numai într-o formă integral accesibilă, care poate fi stocată și imprimată, iar Angajatorul păstrează dovada informării individuale în Anexa nr. 2 și în jurnalul electronic. Simpla afișare în Registrul Digital Oficial nu este suficientă. Un exemplar actual rămâne afișat la sediul Angajatorului.</p>
-    <h3 id="art-135"><span class="num">Art. 135</span>Modificarea și controlul versiunii</h3>
-    <p>Orice modificare se redactează controlat, se consultă și se comunică individual înainte de aplicare, în aceleași condiții. Nu se aplică automat la o altă societate afiliată și nu produce efecte retroactive. PDF-ul aprobat, versiunea HTML/Wiki, sinteza modificărilor, decizia, procesul-verbal de consultare, lotul de destinatari și dovezile de transmitere și luare la cunoștință se păstrează în Anexele nr. 1, 2 și 13 și în dosarul de guvernanță.</p>
-    <h3 id="art-136"><span class="num">Art. 136</span>Sesizarea privind legalitatea Regulamentului</h3>
+    <p>(1) Regulamentul produce efecte față de fiecare salariat din momentul luării la cunoștință, în condițiile legii. Noilor salariați li se comunică în prima zi de lucru. Un exemplar actual rămâne afișat la sediul Angajatorului și este disponibil în Registrul online.</p>
+    <p>(2) Comunicarea electronică se realizează potrivit Art. 19, prin sarcină și notificare individuală în ERP, completate prin e-mail cu link și/sau cod QR către aceeași sarcină. Pentru fiecare document și versiune care necesită confirmare se generează și se semnează o nouă Anexă nr. 2.</p>
+    <p>(3) Formularul semnat și dovada tehnică se arhivează digital în dosarul de personal. Simpla publicare în Registrul online, simpla notificare ERP ori simplul e-mail nu sunt tratate ca semnătură; valoarea comunicării se apreciază potrivit legii și probelor disponibile.</p>
+<h3 id="art-135"><span class="num">Art. 135</span>Modificarea și controlul versiunii</h3>
+    <p>(1) Orice modificare se redactează controlat, se consultă și se comunică individual înainte de aplicare, în aceleași condiții. Nu se aplică automat la o altă societate afiliată și nu produce efecte retroactive.</p>
+    <p>(2) Modificarea Regulamentului declanșează o verificare de impact asupra manualelor, procedurilor și formularelor legate în Registrul online. Modificarea unui document subordonat este verificată pentru compatibilitate cu Regulamentul înainte de aprobare.</p>
+    <p>(3) Documentul oficial aprobat, interfața de lectură, sinteza modificărilor, decizia, procesul-verbal de consultare, lotul de destinatari, Anexele nr. 2 semnate și jurnalele tehnice se păstrează în dosarul de guvernanță, în Registrul online și, după caz, în dosarele de personal.</p>
+<h3 id="art-136"><span class="num">Art. 136</span>Sesizarea privind legalitatea Regulamentului</h3>
     <p>Salariatul interesat poate sesiza Angajatorul cu privire la o dispoziție care îi încalcă un drept și poate folosi căile judiciare în termenul prevăzut de Codul muncii. Sesizarea nu suspendă de drept dispoziția, dar Angajatorul poate dispune temporar neaplicarea ei pentru evitarea unui prejudiciu și răspunde motivat.</p>
     <h3 id="art-137"><span class="num">Art. 137</span>Anexele și politicile separate</h3>
-    <p>(1) Anexele nr. 1–13 fac parte integrantă. Acolo unde o anexă conține un formular expres, acesta poate fi transpus într-o platformă dacă păstrează câmpurile obligatorii, data, autorul, versiunea, istoricul și posibilitatea exportului. Pentru performanță, bonus și necorespundere profesională se aplică standardele de conținut din Anexele nr. 4 și 5: modelele operaționale nu sunt exclusive, iar informația obligatorie poate rezulta dintr-unul sau mai multe documente ori înregistrări legate și trasabile.</p>
-    <p>(2) Manualele și procedurile clinice, operaționale, SSM, PSI, IT, beneficii, uniforme, deplasări, decontări, carduri profesionale și flotă sunt documente separate guvernate prin Anexa nr. 13. Ele nu modifică raportul de muncă ori schema salarială și nu creează sancțiuni automate. Încălcarea lor poate fi analizată numai dacă regula era legală, clar etichetată, compatibilă cu Regulamentul, aplicabilă rolului și comunicată înaintea faptei.</p>
-    <p>(3) Linkul către portal indică locul de acces, nu versiunea juridic aplicabilă. PDF-ul aprobat și arhivat este versiunea canonică, iar HTML/Wiki facilitează lectura. La fiecare evaluare ori cercetare se folosește copia arhivată a versiunii valabile la data faptelor; o actualizare a paginii web nu rescrie trecutul.</p>
-    <h3 id="art-138"><span class="num">Art. 138</span>Intrarea în vigoare și abrogarea versiunii anterioare</h3>
+    <p>(1) Anexele nr. 1–13 fac parte integrantă din Regulament. Acolo unde o anexă conține un formular expres, acesta poate fi transpus în ERP dacă păstrează câmpurile obligatorii, data, autorul, versiunea, istoricul, integritatea și posibilitatea exportului.</p>
+    <p>(2) Manualele și procedurile clinice, operaționale, SSM, PSI, IT, beneficii, uniforme, deplasări, decontări, carduri profesionale și flotă sunt documente separate, subordonate Regulamentului și administrate prin Anexa nr. 13. Ele nu modifică raportul de muncă ori schema salarială și nu creează sancțiuni automate.</p>
+    <p>(3) Încălcarea unei reguli dintr-un document subordonat poate fi analizată numai dacă regula era legală, compatibilă cu Regulamentul, clar etichetată, aplicabilă rolului, înscrisă în Registrul online și comunicată înaintea faptei. La fiecare evaluare ori cercetare se folosește copia arhivată a versiunii valabile la data faptelor.</p>
+    <p>(4) Fiecare document subordonat indică pe prima pagină articolele Regulamentului pe care le aplică. Registrul online păstrează și trimiterea inversă, de la articolul Regulamentului către documentele de aplicare.</p>
+<h3 id="art-138"><span class="num">Art. 138</span>Intrarea în vigoare și abrogarea versiunii anterioare</h3>
     <p>Regulamentul intră în vigoare la data completată pe copertă, după îndeplinirea formalităților de consultare și comunicare, și abrogă regulamentul anterior numai la nivelul Angajatorului care îl adoptă. Procedurile începute se analizează după norma aplicabilă la data faptelor și a declanșării, cu respectarea normei legale și a garanțiilor mai favorabile aplicabile.</p>
     <h3 id="art-139"><span class="num">Art. 139</span>Baza juridică și revizuirea</h3>
-    <p>Textul este redactat prin raportare la legislația în vigoare la 15 august 2026, în principal Codul muncii, Legea dialogului social nr. 367/2022, Legea nr. 319/2006, Legea nr. 202/2002, OG nr. 137/2000, HG nr. 970/2023 astfel cum a fost modificată prin HG nr. 27/2025, Legea nr. 361/2022, Regulamentul (UE) 2016/679, Legea nr. 190/2018, Legea nr. 81/2018 și Decizia ÎCCJ nr. 34/2016 privind comunicarea electronică a anumitor decizii de concediere. HR și funcția juridică verifică anual și înaintea fiecărei măsuri individuale existența unor modificări legislative, jurisprudențiale ori contractuale.</p>
+    <p>Textul este redactat prin raportare la legislația în vigoare la 16 august 2026, în principal Codul muncii, Legea dialogului social nr. 367/2022, Legea nr. 319/2006, Legea nr. 202/2002, OG nr. 137/2000, HG nr. 970/2023 astfel cum a fost modificată prin HG nr. 27/2025, Legea nr. 361/2022, Regulamentul (UE) 2016/679, Legea nr. 190/2018, Legea nr. 81/2018, Legea nr. 214/2024 privind utilizarea semnăturii electronice și Decizia ÎCCJ nr. 34/2016 privind comunicarea electronică a anumitor decizii de concediere. HR și funcția juridică verifică anual și înaintea fiecărei măsuri individuale existența unor modificări legislative, jurisprudențiale ori contractuale.</p>
 <!-- ============ Anexa nr. 1 ============ -->
     <h2 id="anexa-1"><span class="chapter-num">Anexa nr. 1</span>FIȘA DE ADOPTARE, CONTROL ȘI PUNERE ÎN APLICARE</h2>
     <div class="callout note"><p>Se completează integral pentru fiecare persoană juridică angajatoare. Câmpurile necompletate privind canalele obligatorii împiedică declararea documentului ca fiind pregătit pentru semnare.</p></div>
     <h4>A. Identificarea entității și aprobarea</h4>
     <table>
 <tbody>
-<tr><td><strong>Denumirea legală</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Forma juridică / CUI / nr. ORC</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Sediu și puncte de lucru</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Reprezentant legal</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Denumirea legală</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Forma juridică / CUI / nr. ORC</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Sediu și puncte de lucru</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Reprezentant legal</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Decizia de adoptare</strong></td><td>Nr. __________ din ____ / ____ / ______</td></tr>
 <tr><td><strong>Data intrării în vigoare</strong></td><td>____ / ____ / ______</td></tr>
-<tr><td><strong>Versiunea înlocuită</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Versiunea înlocuită</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <h4>B. Consultarea și comunicarea</h4>
     <table>
@@ -1867,42 +2132,67 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>☐ Regulamentul a fost comunicat individual tuturor salariaților, dovada este păstrată și noilor angajați li se va comunica în prima zi.</p>
     <table>
 <tbody>
-<tr><td><strong>Întocmit / HR</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Avizat juridic</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Aprobat / reprezentant legal</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Întocmit / HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Avizat juridic</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aprobat / reprezentant legal</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 2 ============ -->
-    <h2 id="anexa-2"><span class="chapter-num">Anexa nr. 2</span>DECLARAȚIE DE LUARE LA CUNOȘTINȚĂ</h2>
-    <div class="callout note"><p>Se păstrează la dosarul de personal sau în registrul electronic de comunicare.</p></div>
+        <h2 id="anexa-2"><span class="chapter-num">Anexa nr. 2</span>DECLARAȚIE DE LUARE LA CUNOȘTINȚĂ</h2>
+    <div class="callout note"><p>Formular individual generat pentru fiecare document și versiune.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Angajator</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Salariat</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Funcție / compartiment</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Versiune comunicată</strong></td><td>ADC-RI-02 / V2.5, datată 15.08.2026, adoptată prin Decizia nr. ______</td></tr>
-<tr><td><strong>Modalitate</strong></td><td>☐ exemplar pe hârtie   ☐ ERP-RP   ☐ e-mail   ☐ altă modalitate: __________</td></tr>
-<tr><td><strong>Identificator jurnal / lot</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Publicare / livrare e-mail</strong></td><td>Data ____ / ____ / ______ ora ______  Status ______________________</td></tr>
-<tr><td><strong>Acces / descărcare</strong></td><td>Data ____ / ____ / ______ ora ______  Dovadă ______________________</td></tr>
-<tr><td><strong>Confirmare electronică</strong></td><td>☐ Da, la data/ora __________________  ☐ Refuz / lipsă confirmare consemnată</td></tr>
-<tr><td><strong>Data comunicării</strong></td><td>____ / ____ / ______, ora ______</td></tr>
-<tr><td><strong>Subiect e-mail / link direct</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Sinteza comunicată</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Nr. confirmare</strong></td><td><span class="ph">[generat de ERP]</span></td></tr>
+<tr><td><strong>Data emiterii</strong></td><td><span class="ph">[ZZ.LL.AAAA, hh:mm]</span></td></tr>
 </tbody></table>
-    <p>Declar că am primit acces la Regulamentul intern indicat mai sus, într-o formă integrală pe care o pot descărca, păstra și tipări, și că mi-au fost indicate Registrul Digital Oficial și canalele electronice oficiale. În cazul comunicării electronice, notificarea a identificat documentul și versiunea, data aplicării, o scurtă descriere și linkul direct de acces. Înțeleg obligația de a consulta canalele în timpul programului, de a respecta prevederile aplicabile și dreptul de a solicita clarificări ori de a semnala o problemă tehnică. Confirmarea dovedește comunicarea și luarea la cunoștință; nu reprezintă renunțare la drepturi, acord cu o măsură individuală sau acceptarea unei modificări contractuale care ar necesita consimțământ separat.</p>
+    <h4>A. Datele angajatorului</h4>
     <table>
 <tbody>
-<tr><td><strong>Salariat</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Reprezentant Angajator / dovada electronică</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Angajator</strong></td><td><span class="ph">[denumirea angajatorului]</span></td></tr>
+<tr><td><strong>Unitate / punct de lucru</strong></td><td><span class="ph">[unitatea]</span></td></tr>
 </tbody></table>
-
+    <h4>B. Datele salariatului</h4>
+    <table>
+<tbody>
+<tr><td><strong>Nume și prenume</strong></td><td><span class="ph">[nume și prenume]</span></td></tr>
+<tr><td><strong>Funcție</strong></td><td><span class="ph">[funcție]</span></td></tr>
+<tr><td><strong>Compartiment</strong></td><td><span class="ph">[compartiment]</span></td></tr>
+</tbody></table>
+    <h4>C. Documentul comunicat</h4>
+    <table>
+<tbody>
+<tr><td><strong>Titlu</strong></td><td><span class="ph">[titlul complet al documentului]</span></td></tr>
+<tr><td><strong>Cod</strong></td><td><span class="ph">[cod document]</span></td></tr>
+<tr><td><strong>Versiune</strong></td><td><span class="ph">[versiune]</span></td></tr>
+<tr><td><strong>Data aprobării</strong></td><td><span class="ph">[ZZ.LL.AAAA]</span></td></tr>
+<tr><td><strong>În vigoare de la</strong></td><td><span class="ph">[ZZ.LL.AAAA]</span></td></tr>
+</tbody></table>
+    <p>Documentul integral, în versiunea indicată, este disponibil în ERP și în Registrul online, prin linkul asociat prezentei confirmări, pentru vizualizare, descărcare și tipărire.</p>
+    <h4>D. Declarația salariatului</h4>
+    <p>Prin semnarea prezentului formular:</p>
+    <ol>
+<li>confirm că am primit documentul identificat mai sus;</li>
+<li>confirm că am avut acces la documentul integral și am putut să îl consult, să îl descarc și să îl tipăresc;</li>
+<li>declar că am luat la cunoștință conținutul documentului și că pot solicita clarificări;</li>
+<li>înțeleg că semnătura confirmă primirea și luarea la cunoștință, fără să reprezinte renunțarea la drepturi și fără să înlocuiască instruirea sau alte formalități cerute de lege.</li>
+</ol>
+    <h4>E. Confirmarea și semnarea</h4>
+    <div class="callout"><p><strong>CONFIRM CĂ AM PRIMIT ȘI AM LUAT LA CUNOȘTINȚĂ DOCUMENTUL IDENTIFICAT ÎN PREZENTUL FORMULAR, ÎN VERSIUNEA INDICATĂ.</strong></p></div>
+    <table>
+<tbody>
+<tr><td><strong>Semnatar</strong></td><td><span class="ph">[nume și prenume]</span></td></tr>
+<tr><td><strong>Data și ora semnării</strong></td><td><span class="ph">[ZZ.LL.AAAA, hh:mm:ss]</span></td></tr>
+<tr><td><strong>Semnătura electronică</strong></td><td><span class="ph">[semnătură aplicată în ERP]</span></td></tr>
+<tr><td><strong>ID tranzacție ERP</strong></td><td><span class="ph">[ID unic]</span></td></tr>
+</tbody></table>
+    <p>Notă: Pentru fiecare luare la cunoștință, ERP generează un formular nou, cu număr unic și semnătură proprie. Formularul semnat și dovada tehnică se arhivează în dosarul electronic de personal, cu legătura către documentul și versiunea din ERP și Registrul online.</p>
 <!-- ============ Anexa nr. 3 ============ -->
     <h2 id="anexa-3"><span class="chapter-num">Anexa nr. 3</span>FIȘA PROGRAMELOR DE LUCRU ȘI A LOCAȚIILOR</h2>
     <div class="callout note"><p>Se validează de HR și salarizare înainte de adoptare și la fiecare modificare.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Angajator</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Angajator</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Perioada de valabilitate</strong></td><td>De la ____ / ____ / ______ până la modificare / ____ / ____ / ______</td></tr>
-<tr><td><strong>Canalul de publicare a graficelor</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Termen uzual de comunicare</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Canalul de publicare a graficelor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Termen uzual de comunicare</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <thead><tr><th>Punct / compartiment</th><th>Fereastră funcționare</th><th>Tip repartizare</th><th>Pauză</th><th>Repaus / spor</th><th>Observații</th></tr></thead>
@@ -1924,7 +2214,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>HR</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Salarizare</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Aprobat</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Salarizare</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aprobat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 4 ============ -->
@@ -1978,15 +2268,15 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 6A — Sesizarea unei posibile abateri</h4>
     <table>
 <tbody>
-<tr><td><strong>Emitent / contact</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana / rolul vizat</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Emitent / contact</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana / rolul vizat</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data sesizării</strong></td><td>____ / ____ / ______</td></tr>
-<tr><td><strong>Data / locul faptei</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Descriere factuală</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Obligația posibil încălcată</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoane care cunosc faptele</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Probe anexate / de conservat</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Măsură urgentă solicitată</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Data / locul faptei</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Descriere factuală</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Obligația posibil încălcată</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoane care cunosc faptele</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Probe anexate / de conservat</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Măsură urgentă solicitată</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <tbody>
@@ -1994,7 +2284,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Emitent</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>HR / număr de înregistrare</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Emitent</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR / număr de înregistrare</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Formular 6B — Triere și decizie de desemnare</h4>
     <table>
@@ -2009,35 +2299,35 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Decizia nr. / data</strong></td><td>________________________ / ____ / ____ / ______</td></tr>
-<tr><td><strong>Persoană / comisie / consultant</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Obiectul exact</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Mandat / termen intern</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Persoană / comisie / consultant</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Obiectul exact</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Mandat / termen intern</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Conflict / confidențialitate</strong></td><td>☐ verificat  ☐ declarații anexate</td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Reprezentant legal</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Persoana / comisia desemnată</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Reprezentant legal</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Persoana / comisia desemnată</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Formular 6C — Convocarea disciplinară</h4>
     <table>
 <tbody>
-<tr><td><strong>Către</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Obiectul cercetării</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Către</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Obiectul cercetării</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data / ora / locul</strong></td><td>____ / ____ / ______, ora ______, __________________________________________</td></tr>
 <tr><td><strong>Data comunicării</strong></td><td>____ / ____ / ______, prin _________________________________________________</td></tr>
 </tbody></table>
     <p>În cursul cercetării aveți dreptul să formulați și să susțineți toate apărările, să oferiți probe și motivații și, la cerere, să fiți asistat(ă) de un consultant extern specializat în legislația muncii ori de un reprezentant al sindicatului al cărui membru sunteți. Neprezentarea fără motiv obiectiv permite aplicarea art. 251 alin. (3) din Codul muncii. O cerere motivată de amânare se transmite imediat.</p>
     <table>
 <tbody>
-<tr><td><strong>Emitent</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Salariat / dovada comunicării</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Emitent</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Salariat / dovada comunicării</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Formular 6D — Proces-verbal al audierii</h4>
     <table>
 <tbody>
-<tr><td><strong>Dosar / data</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Participanți și calități</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Asistentul salariatului</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente prezentate</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Dosar / data</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Participanți și calități</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Asistentul salariatului</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Documente prezentate</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <thead><tr><th>Faptă / întrebare</th><th>Răspuns / apărare</th><th>Probă indicată</th><th>Clarificare / termen</th></tr></thead>
@@ -2052,18 +2342,18 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Obiecții / incidente</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Refuz de răspuns / semnare</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Obiecții / incidente</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Refuz de răspuns / semnare</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Probe suplimentare până la</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Persoana / comisia</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Salariat</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Asistent / martor procedural</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Persoana / comisia</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Salariat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Asistent / martor procedural</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Formular 6E — Raport final și checklistul deciziei</h4>
     <table>
 <tbody>
-<tr><td><strong>Dosar / salariat</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Dosar / salariat</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data înregistrării raportului</strong></td><td>____ / ____ / ______, nr. __________</td></tr>
 </tbody></table>
     <table>
@@ -2078,7 +2368,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <tbody>
 <tr><td><strong>Individualizare art. 250</strong></td><td>Împrejurări: __________________  Vinovăție: __________________  Consecințe: __________________Conduită generală: __________________  Sancțiuni neradiate: __________________</td></tr>
 <tr><td><strong>Recomandare</strong></td><td>☐ clasare  ☐ avertisment scris  ☐ retrogradare  ☐ reducere salarială  ☐ concediere disciplinară</td></tr>
-<tr><td><strong>Motivare</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Motivare</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 </tbody></table>
     <p>☐ Raportul a fost înregistrat; limita de 30 de zile calendaristice a fost calculată.</p>
     <p>☐ Limita de 6 luni de la faptă a fost verificată.</p>
@@ -2088,7 +2378,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>☐ Comunicarea este pregătită în maximum 5 zile de la emitere, iar pentru aceeași abatere nu s-a aplicat altă sancțiune.</p>
     <table>
 <tbody>
-<tr><td><strong>Persoana / comisia</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Aviz HR</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Aviz juridic / decident</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Persoana / comisia</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aviz HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aviz juridic / decident</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 7 ============ -->
@@ -2097,17 +2387,17 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Către</strong></td><td>☐ superior direct  ☐ HR  ☐ reprezentant legal  ☐ alt compartiment: __________________</td></tr>
-<tr><td><strong>Solicitant / post / contact</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Solicitant / post / contact</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Tip</strong></td><td>☐ program  ☐ concediu  ☐ salariu  ☐ document  ☐ condiții  ☐ relații  ☐ altul: __________</td></tr>
-<tr><td><strong>Obiectul cererii</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Fapte / perioadă</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Soluția solicitată</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente anexate</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Obiectul cererii</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Fapte / perioadă</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Soluția solicitată</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Documente anexate</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Confidențialitate justificată</strong></td><td>☐ Nu  ☐ Da, motiv: __________________________________________________</td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Solicitant</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Registratură / HR</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Solicitant</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Registratură / HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Circuitul de soluționare</h4>
     <table>
@@ -2122,11 +2412,11 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Soluție și motivare</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Soluție și motivare</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Responsabil soluționare</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Solicitant / comunicare</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Responsabil soluționare</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Solicitant / comunicare</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 8 ============ -->
@@ -2136,14 +2426,14 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Persoană care sesizează</strong></td><td>__________________________________________________________________  ☐ doresc anonimat</td></tr>
-<tr><td><strong>Contact sigur / modalitate</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana/persoanele reclamate</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Relația profesională</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Descrierea faptelor</strong></td><td>________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Date / locuri / frecvență</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Martori / probe</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Demersuri anterioare</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Nevoi imediate de protecție</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Contact sigur / modalitate</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana/persoanele reclamate</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Relația profesională</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Descrierea faptelor</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Date / locuri / frecvență</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Martori / probe</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Demersuri anterioare</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Nevoi imediate de protecție</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Opțiune informală</strong></td><td>☐ nu doresc  ☐ pot discuta opțiunea; acordul separat este necesar</td></tr>
 </tbody></table>
     <table>
@@ -2152,7 +2442,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Persoană / opțional</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Responsabil / înregistrare confidențială</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Persoană / opțional</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Responsabil / înregistrare confidențială</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Formular 8B — Evaluare preliminară și măsuri (maximum 7 zile lucrătoare)</h4>
     <table>
@@ -2167,13 +2457,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Măsuri temporare propuse</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Măsuri temporare propuse</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data raportului preliminar</strong></td><td>____ / ____ / ______</td></tr>
 <tr><td><strong>Termen raport final</strong></td><td>____ / ____ / ______ (maximum 45 zile calendaristice de la sesizare)</td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Responsabil / comisie</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Aprobare măsuri</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Responsabil / comisie</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aprobare măsuri</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Formular 8C — Registrul audierilor și raportul final</h4>
     <table>
@@ -2187,8 +2477,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Fapte stabilite</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Analiza contextului și probelor</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Fapte stabilite</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Analiza contextului și probelor</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Concluzie</strong></td><td>☐ se confirmă  ☐ se confirmă parțial  ☐ nu se confirmă  ☐ probe insuficiente</td></tr>
 <tr><td><strong>Măsuri recomandate</strong></td><td>☐ protecție  ☐ organizare  ☐ instruire  ☐ disciplinar separat  ☐ autorități  ☐ monitorizare</td></tr>
 <tr><td><strong>Informarea părților</strong></td><td>Data / modalitatea: ______________________________________________________</td></tr>
@@ -2196,7 +2486,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Responsabil / comisie</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Aviz juridic / conducere</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Responsabil / comisie</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aviz juridic / conducere</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 9 ============ -->
@@ -2205,14 +2495,14 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 9A — Raportare</h4>
     <table>
 <tbody>
-<tr><td><strong>Nume / calitate (opțional)</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Contact sigur (opțional)</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Context profesional</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana / structura vizată</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Descrierea încălcării</strong></td><td>______________________________________________________________________________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Perioada / locul</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente / indicii / martori</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Risc imediat / represalii</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Nume / calitate (opțional)</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Contact sigur (opțional)</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Context profesional</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana / structura vizată</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Descrierea încălcării</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Perioada / locul</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Documente / indicii / martori</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Risc imediat / represalii</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Preferință</strong></td><td>☐ doresc confirmări  ☐ nu doresc confirmări  ☐ raportare anonimă</td></tr>
 </tbody></table>
     <table>
@@ -2223,8 +2513,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <table>
 <tbody>
 <tr><td><strong>Număr unic / data</strong></td><td>________________________ / ____ / ____ / ______</td></tr>
-<tr><td><strong>Canal / anonim</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Responsabil / conflict verificat</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Canal / anonim</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Responsabil / conflict verificat</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Confirmare în 7 zile</strong></td><td>Data __________________  ☐ imposibilă / necerută</td></tr>
 <tr><td><strong>Termen feedback 3 luni</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
@@ -2240,14 +2530,14 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Măsuri anti-represalii</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Măsuri anti-represalii</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Feedback transmis</strong></td><td>Data / conținut permis: __________________________________________________</td></tr>
-<tr><td><strong>Închidere / motivare</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Închidere / motivare</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data distrugerii (5 ani)</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Persoana desemnată</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Verificare independentă / conflict</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Persoana desemnată</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Verificare independentă / conflict</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 10 ============ -->
@@ -2255,30 +2545,30 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Declararea nu presupune existența unei abateri. Scopul este prevenirea și gestionarea proporțională.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Salariat / post</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Salariat / post</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data / tip declarație</strong></td><td>____ / ____ / ______   ☐ inițială  ☐ anuală  ☐ actualizare</td></tr>
-<tr><td><strong>Interes / activitate externă</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Entitate / persoană relevantă</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Relația cu atribuțiile</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Acces la informații / decizie</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Interes / activitate externă</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Entitate / persoană relevantă</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Relația cu atribuțiile</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Acces la informații / decizie</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Măsuri propuse de salariat</strong></td><td>☐ abținere  ☐ informare  ☐ separare atribuții  ☐ altă măsură: __________________</td></tr>
 </tbody></table>
     <p>Declar că informațiile sunt complete după cunoștința mea și mă oblig să actualizez declarația când situația se schimbă.</p>
     <table>
 <tbody>
-<tr><td><strong>Salariat</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Manager / HR</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Salariat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Manager / HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
     <h4>Formular 10B — Planul de gestionare</h4>
     <table>
 <tbody>
 <tr><td><strong>Evaluarea materialității</strong></td><td>☐ fără conflict  ☐ potențial  ☐ aparent  ☐ actual</td></tr>
-<tr><td><strong>Măsuri stabilite</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Durata / reverificare</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Persoana care supraveghează</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Măsuri stabilite</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Durata / reverificare</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Persoana care supraveghează</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Decident</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Salariat / luare la cunoștință</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Decident</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Salariat / luare la cunoștință</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 11 ============ -->
@@ -2286,10 +2576,10 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Se folosește la schimbarea rolului, suspendare relevantă ori încetare. Parolele nu se scriu în clar în formular.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Salariat / post</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Motiv / ultima zi</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Predare către</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Data / interval</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Salariat / post</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Motiv / ultima zi</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Predare către</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Data / interval</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <thead><tr><th>Categorie</th><th>Element / identificator</th><th>Stare / locație</th><th>Predat / acțiune</th><th>Observații</th></tr></thead>
@@ -2306,10 +2596,10 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <h4>Formular 11B — Finalizarea predării</h4>
     <table>
 <tbody>
-<tr><td><strong>Sume / deconturi în curs</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Sume / deconturi în curs</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Documente HR de eliberat</strong></td><td>☐ adeverință  ☐ extras registru  ☐ fișă fiscală / alte: __________________</td></tr>
-<tr><td><strong>Concediu neefectuat / drepturi</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Incidente / neconcordanțe</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Concediu neefectuat / drepturi</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Incidente / neconcordanțe</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <table>
 <tbody>
@@ -2317,7 +2607,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Predător</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Primitor</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>HR / IT / administrativ</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Predător</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Primitor</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR / IT / administrativ</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 12 ============ -->
@@ -2325,50 +2615,51 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div class="callout note"><p>Pentru obligații de fidelitate și recuperarea costurilor se încheie act adițional separat.</p></div>
     <table>
 <tbody>
-<tr><td><strong>Salariat / post</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Program / furnizor</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Perioada / program</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Salariat / post</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Program / furnizor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Perioada / program</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Inițiativa</strong></td><td>☐ Angajator  ☐ salariat  ☐ obligație profesională / legală</td></tr>
-<tr><td><strong>Legătura cu postul / obiectiv</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Legătura cu postul / obiectiv</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Costuri estimate</strong></td><td>Taxă ______  Transport ______  Cazare ______  Alte ______  Total ______</td></tr>
 <tr><td><strong>Timp de lucru / concediu</strong></td><td>☐ timp de muncă  ☐ concediu plătit legal  ☐ concediu fără plată  ☐ altul: ______</td></tr>
-<tr><td><strong>Documente anexate</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Documente anexate</strong></td><td class="value-line"></td></tr>
 </tbody></table>
     <h4>Formular 12B — Decizia Angajatorului</h4>
     <table>
 <tbody>
 <tr><td><strong>Soluție</strong></td><td>☐ aprobat integral  ☐ aprobat parțial  ☐ respins motivat</td></tr>
-<tr><td><strong>Costuri suportate</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Condiții / livrabil</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Costuri suportate</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Condiții / livrabil</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Act adițional necesar</strong></td><td>☐ Nu  ☐ Da — durată / costuri și recuperare proporțională</td></tr>
-<tr><td><strong>Motivarea soluției</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Motivarea soluției</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Data soluționării</strong></td><td>____ / ____ / ______ (în termen de 15 zile de la cerere)</td></tr>
 </tbody></table>
     <table>
 <tbody>
-<tr><td><strong>Salariat</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Manager</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>HR / reprezentant legal</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Salariat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Manager</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR / reprezentant legal</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
 
 <!-- ============ Anexa nr. 13 ============ -->
-    <h2 id="anexa-13"><span class="chapter-num">Anexa nr. 13</span>REGISTRUL DIGITAL OFICIAL AL MANUALELOR ȘI PROCEDURILOR CONTROLATE</h2>
-    <div class="callout note"><p>Anexa realizează legătura juridică și operațională dintre Regulament, manualele de rol, organigramă, criteriile de performanță, schemele de bonus, procedurile de beneficii, deplasări/decontări și politica de flotă/GPS. PDF-ul aprobat și arhivat este versiunea canonică; HTML/Wiki facilitează lectura, iar notificarea individuală dovedește comunicarea.</p></div>
-    <h4>A. Portaluri și responsabilitatea registrului</h4>
-    <table>
+    <h2 id="anexa-13"><span class="chapter-num">Anexa nr. 13</span>REGISTRUL ONLINE AL DOCUMENTELOR INTERNE</h2>
+<div class="callout note"><p>Registrul online este sursa internă oficială pentru Regulament și documentele subordonate. Regulamentul are cel mai înalt rang în cadrul documentelor interne unilaterale; manualele și procedurile îl detaliază. Registrul păstrează versiunile oficiale, istoricul și trimiterile în ambele sensuri, iar notificarea și confirmarea individuală se gestionează prin ERP conform Art. 19 și Anexei nr. 2.</p></div>
+<p>Denumirea oficială afișată în interfață este «Registrul online al documentelor interne». Denumirea tehnică a depozitului de fișiere sau adresa URL poate fi diferită, dar nu înlocuiește această denumire funcțională și nu stabilește singură versiunea juridic aplicabilă.</p>
+<h4>A. Portaluri și responsabilitatea registrului</h4>
+<table>
 <tbody>
-<tr><td><strong>Portal manuale</strong></td><td>https://vladtm75.github.io/manuale-dr-ardeleanu/index.html</td></tr>
+<tr><td><strong>Registrul online al documentelor interne</strong></td><td>https://vladtm75.github.io/manuale-dr-ardeleanu/index.html</td></tr>
 <tr><td><strong>Organigramă</strong></td><td>https://vladtm75.github.io/dr-ardeleanu-org-chart/</td></tr>
-<tr><td><strong>Secțiunea «Documente» ERP-RP</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Locația PDF-urilor canonice</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Locația versiunilor HTML/Wiki</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Registrul modificărilor</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Jurnalul comunicărilor</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Secțiunea «Documente» ERP-RP</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Locația documentelor oficiale pentru descărcare și tipărire</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Interfața online pentru lectură</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Registrul modificărilor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Jurnalul notificărilor și confirmărilor ERP</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Proprietar registru</strong></td><td>HR, împreună cu proprietarul funcțional al fiecărui document</td></tr>
-<tr><td><strong>Locația arhivei imuabile</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Locația arhivei imuabile</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Data ultimei reconcilieri</strong></td><td>____ / ____ / ______</td></tr>
 </tbody></table>
-    <p>Pentru fiecare document, proprietarul funcțional redactează și validează conținutul tehnic, HR verifică destinatarii, legătura cu fișa postului, performanța și egalitatea de tratament, funcția financiar-contabilă validează efectele fiscale, salariale, bugetare, de avans și de decont, iar funcția juridică și responsabilul cu protecția datelor verifică efectele disciplinare, contractuale și de monitorizare. Aprobatorul autorizează versiunea, iar publicarea are loc numai după înregistrare. PDF-ul aprobat, identificatorul său, versiunea HTML/Wiki, sinteza modificărilor, istoricul și rapoartele de comunicare se păstrează astfel încât înlocuirea unei pagini să nu poată modifica retrospectiv standardul aplicabil.</p>
-    <h4>B. Etichetele obligatorii ale regulilor</h4>
-    <table>
+<p>Pentru fiecare document, proprietarul funcțional redactează și validează conținutul tehnic, HR verifică destinatarii, legătura cu fișa postului, performanța și egalitatea de tratament, funcția financiar-contabilă validează efectele fiscale, salariale, bugetare, de avans și de decont, iar funcția juridică și responsabilul cu protecția datelor verifică efectele disciplinare, contractuale și de monitorizare. Aprobatorul autorizează versiunea, iar publicarea are loc numai după înregistrare. PDF-ul aprobat, identificatorul său, versiunea HTML/Wiki, sinteza modificărilor, istoricul și rapoartele de comunicare se păstrează astfel încât înlocuirea unei pagini să nu poată modifica retrospectiv standardul aplicabil.</p>
+<h4>B. Etichetele obligatorii ale regulilor</h4>
+<table>
 <thead><tr><th>Etichetă</th><th>Semnificație</th><th>Efect permis</th></tr></thead>
 <tbody>
 <tr><td>[OBL]</td><td>Obligație clară, legală și aplicabilă rolului</td><td>Poate fundamenta analiza disciplinară numai cu dovada comunicării și vinovăției</td></tr>
@@ -2379,12 +2670,12 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <tr><td>[KPI-B]</td><td>Indicator ori condiție a remunerației variabile</td><td>Produce efect asupra bonusului potrivit scrisorii/fișei; nu dovedește automat necorespunderea</td></tr>
 <tr><td>[GHID]</td><td>Recomandare, exemplu sau bună practică</td><td>Orientează activitatea; nu fundamentează singură sancțiune, scor negativ ori concediere</td></tr>
 </tbody></table>
-    <table>
+<table>
 <tbody>
 <tr><td>Etichetele sunt cumulative. De exemplu, un pas de sterilizare poate purta [OPR][OBL][CRIT][EVD], iar un indicator de conversie folosit atât pentru evaluare, cât și pentru bonus poate purta [KPI-P][KPI-B]. Nicio etichetă nu înlătură analiza faptelor, controlului, resurselor, vinovăției și procedurii legale.</td></tr>
 </tbody></table>
-    <h4>C. Registrul inițial al documentelor de rol</h4>
-    <table>
+<h4>C. Registrul inițial al documentelor de rol</h4>
+<table>
 <thead><tr><th>Cod / document</th><th>Versiune / statut</th><th>Destinatari</th><th>Ciclu și instrumente</th><th>Condiție înainte de folosire</th></tr></thead>
 <tbody>
 <tr><td>ADC-MED-01 — Manualul Medicului</td><td>V1.0 / 2026; existent</td><td>medici salariați; colaboratori numai contractual</td><td>instrumente conforme Anexei nr. 4, după nivel; colaboratori — scorecard contractual</td><td>etichetare pe reguli și separarea comisionului de evaluarea profesională</td></tr>
@@ -2397,19 +2688,19 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <tr><td>ADC-DEP-01 — Procedura privind deplasările în interes de serviciu și decontarea cheltuielilor</td><td>V1.0 / 2026; document controlat; aplicabil după adoptare și comunicare</td><td>salariații care efectuează deplasări; aprobatori; HR; Financiar</td><td>aprobarea deplasării, cazare, card profesional, decont în ERP și matrice financiară versionată</td><td>validare financiar-contabilă/fiscală și juridică; delimitarea delegării, diurnei și cheltuielilor; fără efect retroactiv sau rețineri automate</td></tr>
 <tr><td>ADC-FLT-01 — Politica privind autovehiculele de serviciu și monitorizarea GPS</td><td>V1.0 / 2026; document controlat; GPS activ numai după închiderea condițiilor de conformitate</td><td>utilizatorii și conducătorii autorizați; HR; Administrativ; Financiar</td><td>predare, utilizare, întreținere, incidente, restituire și informare GPS individuală</td><td>consultarea reprezentanților, test de interes legitim/proporționalitate, informare GDPR, acces limitat și retenție de regulă maximum 30 zile</td></tr>
 </tbody></table>
-    <table>
+<table>
 <tbody>
 <tr><td>Mențiunea «NEAPLICABIL» exclude orice utilizare disciplinară, profesională ori salarială a proiectului Manualului Managerului de Clinică. Codul ADC-MCL-01 este o rezervare propusă și se confirmă de proprietarul registrului înainte de publicarea V1.0.</td></tr>
 </tbody></table>
-    <h4>D. Inventarul codurilor identificate și reconcilierea obligatorie</h4>
-    <table>
+<h4>D. Inventarul codurilor identificate și reconcilierea obligatorie</h4>
+<table>
 <thead><tr><th>Sursă</th><th>Coduri / familii identificate</th><th>Acțiune de control</th></tr></thead>
 <tbody>
 <tr><td>Manualul Medicului</td><td>ADC-MED-01; ADC-UNF-02</td><td>se etichetează normele clinice, dovezile și KPI; se stabilește expres aplicarea salariați versus colaboratori</td></tr>
 <tr><td>Manualul Asistentului</td><td>ADC-AJT-01; ASM-02/03; CHR-01; DIE-01; DSD-02; DSM-01; ECH-01; END-01; MAC-01; OIM-01/02; ONB-01/02/03; ORT-01; PAR-01; PED-01; PRO-01; RAD-01; STE-01; STG-01; UNF-02</td><td>se alocă un singur cod și o versiune fiecărui document; se corectează trimiterile istorice ori duplicate</td></tr>
 <tr><td>Manualul Registratorului</td><td>ADC-REC-01; ADC-PAC-01; ADC-UNF-01</td><td>se aliniază denumirea circuitului radiologic și procedura uniformei cu registrul canonic</td></tr>
 </tbody></table>
-    <table>
+<table>
 <thead><tr><th>Neconcordanță detectată</th><th>Decizie canonică înainte de adoptare / evaluare</th><th>Responsabil / termen</th></tr></thead>
 <tbody>
 <tr><td>ADC-ASM-02 versus ADC-ASM-03</td><td>se confirmă codul manualului actual și se marchează trimiterile istorice</td><td></td></tr>
@@ -2418,32 +2709,33 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <tr><td>ADC-DSD-02 folosit pentru scanare și fotografii</td><td>se atribuie cod unic fiecărei proceduri; codul duplicat nu se invocă până la clarificare</td><td></td></tr>
 <tr><td>ADC-RAD-01 versus ADC-PAC-01</td><td>se alege codul canonic și se actualizează toate trimiterile</td><td></td></tr>
 <tr><td>ADC-UNF-01 versus ADC-UNF-02</td><td>se aprobă o singură procedură canonică ori se explică domeniile distincte</td><td></td></tr>
-</tbody></table>
-    <h4>Formular 13A — Fișa de înregistrare a unui document controlat</h4>
-    <table>
+</tbody></table><h4>Formular 13A — Fișa de înregistrare a unui document controlat</h4>
+<table>
 <tbody>
-<tr><td><strong>Cod unic / titlu</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Versiune / data efectivă</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Proprietar / aprobator</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Destinatari / roluri / nivel</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Documente înlocuite</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Cod unic / titlu</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Versiune / data efectivă</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Proprietar / aprobator</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Destinatari / roluri / nivel</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Articole RI aplicate / detaliate</strong></td><td>Art. __________________________________________________________</td></tr>
+<tr><td><strong>Trimitere inversă din RI</strong></td><td>Art. __________ → cod document / versiune __________________________</td></tr>
+<tr><td><strong>Documente înlocuite</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Etichete utilizate</strong></td><td>☐ OBL  ☐ CRIT  ☐ OPR  ☐ EVD  ☐ KPI-P  ☐ KPI-B  ☐ GHID</td></tr>
-<tr><td><strong>Legătura cu fișa postului</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Legătura cu fișa postului</strong></td><td class="value-line"></td></tr>
 <tr><td><strong>Instrumente corelate</strong></td><td>☐ performanță/bonus — Anexa 4 ☐ necorespundere — Anexa 5 ☐ disciplinar — 6A ☐ altele: ______</td></tr>
-<tr><td><strong>PDF canonic / hash</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>HTML/Wiki / link de lectură</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Arhivă versiuni anterioare</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Sinteza modificărilor</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
-<tr><td><strong>Notificare / termen de parcurgere</strong></td><td>Data ______  Termen ______  Lot / roluri __________________________</td></tr>
+<tr><td><strong>Document oficial / hash</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>HTML/Wiki / link de lectură</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Arhivă versiuni anterioare</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Sinteza modificărilor</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Notificare și confirmare individuală</strong></td><td>Sarcină ERP ID ______  E-mail / QR ______  Lot / roluri __________________</td></tr>
 <tr><td><strong>Test alocat / prag / reexaminare</strong></td><td>☐ Nu  ☐ Da — ERP ID ______  Prag ______  Reexaminare ______________</td></tr>
 <tr><td><strong>Dovada comunicării</strong></td><td>ERP-RP __________________  E-mail __________________  Acces / confirmare __________________</td></tr>
 </tbody></table>
-    <h4>Formular 13B — Registrul versiunilor și aprobărilor</h4>
-    <table>
+<h4>Formular 13B — Registrul versiunilor și aprobărilor</h4>
+<table>
 <tbody>
-<tr><td><strong>Retenție / acces</strong></td><td>__________________________________________________________________</td></tr>
+<tr><td><strong>Retenție / acces</strong></td><td class="value-line"></td></tr>
 </tbody></table>
-    <table>
+<table>
 <thead><tr><th>Versiune</th><th>Data</th><th>Modificare</th><th>Aprobat</th><th>PDF / hash</th><th>Comunicare / destinatari</th></tr></thead>
 <tbody>
 <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -2452,68 +2744,76 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </tbody></table>
-    <table>
+<table>
 <tbody>
-<tr><td><strong>Proprietar funcțional</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>HR / Juridic</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Aprobator</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Proprietar funcțional</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR / Juridic</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aprobator</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
-    <h4>Clauza standard pentru prima pagină a fiecărui manual</h4>
-    <table>
+<h4>Clauza standard pentru prima pagină a fiecărui manual</h4>
+<table>
 <tbody>
-<tr><td>«Acest manual este un document controlat și completează Regulamentul intern numai pentru destinatarii și perioada indicate în registrul oficial. Se aplică versiunea comunicată înaintea activității evaluate. Etichetele [OBL], [CRIT], [OPR], [EVD], [KPI-P], [KPI-B] și [GHID] au semnificația din Anexa nr. 13 a Regulamentului intern. Un KPI de bonus, un exemplu sau o recomandare nu constituie, prin ele însele, abatere disciplinară ori necorespundere profesională. Pentru salariați se aplică procedurile Regulamentului și Codului muncii; pentru colaboratori se aplică exclusiv contractul de servicii și regulile profesionale incidente.»</td></tr>
+<tr><td>«Acest manual este un document controlat, subordonat Regulamentului intern, și detaliază articolele RI indicate în fișa sa din Registrul online al documentelor interne. Se aplică exclusiv versiunea marcată „În vigoare” și comunicată destinatarului înaintea activității evaluate. În caz de neconcordanță prevalează legea, dreptul contractual aplicabil și Regulamentul intern. Etichetele [OBL], [CRIT], [OPR], [EVD], [KPI-P], [KPI-B] și [GHID] au semnificația din Anexa nr. 13. Un KPI de bonus, un exemplu sau o recomandare nu constituie, prin ele însele, abatere disciplinară ori necorespundere profesională.»</td></tr>
 </tbody></table>
-    <p>Înaintea publicării unei versiuni, proprietarul verifică dacă fiecare regulă care poate produce consecințe este formulată în termeni observabili, are responsabil clar, condiții de aplicare, dovadă oficială și traseu de excepție. Manualul nu reproduce sancțiuni, nu promite încetarea automată și nu stabilește sume permanente de bonus; el face trimitere la instrumentul controlat și ciclul aplicabil.</p>
-    <p>Pentru procedurile de beneficii, prima pagină indică natura contractuală ori discreționară, entitatea care acordă beneficiul, destinatarii, perioada, versiunea și regulile de modificare prospectivă. Procedura nu poate influența indicația medicală, nu transformă avantajul într-un criteriu de performanță și nu autorizează rețineri automate din salariu.</p>
-    <p>Pentru procedurile de deplasare și decontare, prima pagină indică entitatea, destinatarii, drepturile de delegare, aprobatorii, documentele financiar-contabile, versiunea matricei de plafoane, traseul excepțiilor și regula modificării numai pentru viitor. Procedura nu transformă bugetul într-un drept salarial, nu substituie indemnizația datorată și nu autorizează rețineri automate.</p>
-    <p>Pentru politica de flotă și GPS, prima pagină indică scopurile localizării, temeiul, datele, destinatarii, accesul, retenția, utilizarea personală, drepturile persoanei și condițiile prealabile activării. Datele nu produc singure consecințe disciplinare, profesionale sau patrimoniale.</p>
-    <h4>Formular 13C — Controlul de publicare</h4>
-    <table>
+<p>Înaintea publicării unei versiuni, proprietarul verifică dacă fiecare regulă care poate produce consecințe este formulată în termeni observabili, are responsabil clar, condiții de aplicare, dovadă oficială și traseu de excepție. Manualul nu reproduce sancțiuni, nu promite încetarea automată și nu stabilește sume permanente de bonus; el face trimitere la instrumentul controlat și ciclul aplicabil.</p>
+<p>Pentru procedurile de beneficii, prima pagină indică natura contractuală ori discreționară, entitatea care acordă beneficiul, destinatarii, perioada, versiunea și regulile de modificare prospectivă. Procedura nu poate influența indicația medicală, nu transformă avantajul într-un criteriu de performanță și nu autorizează rețineri automate din salariu.</p>
+<p>Pentru procedurile de deplasare și decontare, prima pagină indică entitatea, destinatarii, drepturile de delegare, aprobatorii, documentele financiar-contabile, versiunea matricei de plafoane, traseul excepțiilor și regula modificării numai pentru viitor. Procedura nu transformă bugetul într-un drept salarial, nu substituie indemnizația datorată și nu autorizează rețineri automate.</p>
+<p>Pentru politica de flotă și GPS, prima pagină indică scopurile localizării, temeiul, datele, destinatarii, accesul, retenția, utilizarea personală, drepturile persoanei și condițiile prealabile activării. Datele nu produc singure consecințe disciplinare, profesionale sau patrimoniale.</p>
+<h4>Formular 13C — Controlul de publicare</h4>
+<table>
 <thead><tr><th>Control de publicare</th><th>Da / Nu</th><th>Dovadă / observație</th></tr></thead>
 <tbody>
 <tr><td>Codul este unic și toate trimiterile au fost reconciliate</td><td>☐ Da ☐ Nu</td><td></td></tr>
 <tr><td>Fiecare regulă cu efect este etichetată</td><td>☐ Da ☐ Nu</td><td></td></tr>
 <tr><td>KPI-P și KPI-B sunt clasificate și mapate prospectiv în instrumente controlate conform Anexei nr. 4</td><td>☐ Da ☐ Nu</td><td></td></tr>
-<tr><td>PDF-ul canonic și HTML/Wiki au fost comparate și sunt concordante</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>documentul oficial și HTML/Wiki au fost comparate și sunt concordante</td><td>☐ Da ☐ Nu</td><td></td></tr>
 <tr><td>Sinteza și istoricul modificărilor sunt complete</td><td>☐ Da ☐ Nu</td><td></td></tr>
-<tr><td>Lotul de destinatari, notificarea și termenul de parcurgere sunt definite</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Lotul de destinatari, notificarea ERP și fluxul individual de confirmare sunt definite</td><td>☐ Da ☐ Nu</td><td></td></tr>
 <tr><td>Testul folosește numai conținut comunicat și efectul pragului de 80% este mapat</td><td>☐ Da ☐ Nu</td><td></td></tr>
 <tr><td>Sursa oficială înlocuiește mesajele informale</td><td>☐ Da ☐ Nu</td><td></td></tr>
 <tr><td>Impactul asupra siguranței și factorii externi sunt definiți</td><td>☐ Da ☐ Nu</td><td></td></tr>
 <tr><td>Versiunea a fost aprobată, arhivată și comunicată</td><td>☐ Da ☐ Nu</td><td></td></tr>
 </tbody></table>
-    <table>
+<table>
 <tbody>
-<tr><td><strong>Proprietar</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>HR</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>Juridic / aprobare</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Proprietar</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Juridic / aprobare</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
-    <h4>Formular 13D — Fișa de comunicare a unei versiuni și raportul de lot</h4>
-    <table>
+<h4>Formular 13D — Fișa de comunicare a unei versiuni și raportul de lot</h4>
+<table>
 <tbody>
-<tr><td><strong>Document / cod / versiune</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>PDF canonic / hash</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Destinatari / roluri / lot</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Document / cod / versiune</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Document oficial / hash</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Destinatari / roluri / lot</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>ERP-RP publicare</strong></td><td>ID __________________  Data ____ / ____ / ______  Ora ______</td></tr>
-<tr><td><strong>Raport livrare e-mail</strong></td><td>Fișier / ID __________________  Livrate ______  Eșuate ______</td></tr>
+<tr><td><strong>E-mail individual cu link / QR</strong></td><td>Fișier / ID __________________  Livrate ______  Eșuate ______</td></tr>
 <tr><td><strong>Acces / descărcare</strong></td><td>Accesări ______  Descărcări ______  Raport la data __________</td></tr>
-<tr><td><strong>Confirmare luare la cunoștință</strong></td><td>Confirmări ______  Refuzuri ______  Lipsă confirmare ______</td></tr>
-<tr><td><strong>Termen de parcurgere</strong></td><td>____ / ____ / ______  Extinderi pentru absențe / incidente __________________</td></tr>
+<tr><td><strong>Anexe nr. 2 semnate</strong></td><td>Confirmări ______  Refuzuri ______  Lipsă confirmare ______</td></tr>
+<tr><td><strong>Anexa nr. 2 / arhivare</strong></td><td>ID-uri / lot __________________  Dosare personal / arhivă __________________</td></tr>
 <tr><td><strong>Test ERP / prag</strong></td><td>☐ Neaplicabil  ☐ Alocat — ID ______  Prag ______  Termen ______</td></tr>
-<tr><td><strong>Reexaminare / remediere</strong></td><td>__________________________________________________________________</td></tr>
-<tr><td><strong>Incidente tehnice / canal alternativ</strong></td><td>____________________________________________________________________________________________________________________________________</td></tr>
+<tr><td><strong>Reexaminare / remediere</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Incidente tehnice / canal alternativ</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
 <tr><td><strong>Export jurnal / retenție</strong></td><td>Locație __________________  Până la __________________</td></tr>
 </tbody></table>
-    <table>
+<table>
 <tbody>
 <tr><td>Raportul de lot se închide numai după reconcilierea livrărilor eșuate, a salariaților absenți și a persoanelor fără acces electronic. Lipsa unei confirmări nu se transformă automat în abatere; HR stabilește dacă informarea individuală este dovedită ori dacă documentul trebuie comunicat din nou printr-o modalitate adecvată.</td></tr>
 </tbody></table>
-    <table>
+<table>
 <tbody>
-<tr><td><strong>Administrator Registru</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>HR</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td><td><strong>IT / audit</strong><br>Nume: __________________  Funcție: __________________Data: __________  Semnătura: __________</td></tr>
+<tr><td><strong>Administrator Registru</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>IT / audit</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
 </tbody></table>
-    <p>SFÂRȘITUL DOCUMENTULUI</p>
-    <p>ADC-RI-02 · V2.5 · 15 august 2026</p>
+<p>SFÂRȘITUL DOCUMENTULUI</p>
+<p>ADC-RI-02 · V2.6 · 16 august 2026</p>
 
-    <!-- ============ § Modificări între ediții ============ -->
     <h2 id="modificari">Modificări între ediții<span class="h-edit">— rezumat de ediție</span></h2>
-    <p class="lead">Ediția V2.5 înlocuiește integral documentul V2 (ADC-RI-02). Ca și trecerea de la Ediția 2026 la V2, este o rescriere primită de la Vlad ca document Word separat și integrată aici articol cu articol, nu o corectură punctuală.</p>
+    <p class="lead">Ediția V2.6 înlocuiește integral V2.5 (ADC-RI-02) și păstrează structura de 18 capitole, articolele 1–139, articolul 43^1 și cele 13 anexe. Actualizarea este concentrată asupra ierarhiei documentelor, Registrului online, notificării și confirmării individuale.</p>
+
+    <h3>V2.6 față de V2.5 (ADC-RI-02)</h3>
+    <p><strong>1.</strong> Regulamentul intern este declarat expres documentul cu cel mai înalt rang în ierarhia actelor interne unilaterale, sub lege și drepturile contractuale aplicabile.</p>
+    <p><strong>2.</strong> «Registrul Digital Oficial» este consolidat sub denumirea «Registrul online al documentelor interne», ca sursă oficială pentru versiunile în vigoare, arhivă și controlul relațiilor dintre documente.</p>
+    <p><strong>3.</strong> Trimiterile devin bidirecționale: fiecare manual indică articolele RI pe care le aplică, iar fișa fiecărui articol RI permite identificarea manualelor și procedurilor subordonate.</p>
+    <p><strong>4.</strong> Pentru fiecare document și versiune care necesită luare la cunoștință, ERP creează o sarcină individuală, afișează notificarea în ERP și transmite suplimentar e-mail cu link și/sau cod QR către aceeași sarcină.</p>
+    <p><strong>5.</strong> Pentru fiecare luare la cunoștință se generează și se semnează o nouă Anexă nr. 2. Formularul semnat și dovada tehnică se arhivează în dosarul electronic de personal, cu legătura către documentul oficial.</p>
+    <p><strong>6.</strong> Anexa nr. 2 este înlocuită cu un formular individual de o pagină, limitat la identificarea părților, documentul comunicat, declarația salariatului și semnarea în ERP.</p>
+    <p>Toate celelalte reguli de fond și anexele operaționale ale V2.5 sunt păstrate, cu actualizările terminologice și de trimitere necesare pentru coerența V2.6.</p>
 
     <h3>V2.5 față de V2 (ADC-RI-02)</h3>
     <p>Cele 16 capitole dintre „Drepturile și obligațiile părților" și „Dispoziții finale" rămân neschimbate ca temă și ordine relativă — doar renumerotate cu +1, ca urmare a punctului următor.</p>
@@ -2528,17 +2828,18 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>Ediția 2026 (ADC-ROI-01) era un Regulament de Organizare Internă unic, redactat direct pe numele Grupului de societăți afiliate Clinicile Dr. Ardeleanu, cu cele patru entități numite explicit în text. Ediția V2 (ADC-RI-02) s-a prezentat ca un <strong>model-cadru</strong> — un șablon pe care fiecare entitate angajatoare care operează sub marca Dr. Ardeleanu îl adoptă separat, după consultare cu sindicatul ori reprezentanții salariaților, completându-și propriile date în Anexa nr. 1. V2 a introdus și numerotarea continuă a articolelor (de la Art. 1 la Art. 131, indiferent de capitol), a separat managementul performanței de procedura de necorespundere profesională în capitole distincte, a redus codul vestimentar la un singur articol și a extins anexele de la 2 la 13, majoritatea formulare operaționale complete.</p>
 
     <h3>Concluzie</h3>
-    <p>Ediția V2.5 (ADC-RI-02) păstrează neschimbată natura de model-cadru multi-entitate introdusă de V2, dar reintroduce codul vestimentar ca un capitol dedicat, extinde registrul documentelor controlate (Anexa 13) într-un sistem digital cu patru formulare proprii, precizează titlurile mai multor anexe și extinde Preambulul. Documentul rămâne, deliberat, cu câmpurile de identificare a angajatorului necompletate, până la adoptarea sa formală de către fiecare societate din rețea.</p>
+    <p>V2.6 transformă RI și Registrul online într-un sistem juridic și operațional coerent: regula principală se află în RI, detalierea în documentele subordonate, versiunea oficială în Registrul online, iar dovada individuală în ERP și în dosarul de personal. Documentul rămâne, deliberat, cu câmpurile de identificare a angajatorului necompletate, până la adoptarea sa formală de către fiecare societate din rețea.</p>
 
 
     <!-- ============ § Registru de modificări ============ -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 3</strong> · 15 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 4</strong> · 16 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr><td>4</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V2.6 (ADC-RI-02) — actualizare concentrată asupra ierarhiei documentelor și a Registrului online: RI declarat expres documentul cu cel mai înalt rang intern (Art. 4, 5, 15), Registrul Digital Oficial redenumit „Registrul online al documentelor interne" cu trimiteri bidirecționale față de manuale (Art. 19, 20, 134, 135, 137, Anexa nr. 13), iar Anexa nr. 2 (Declarație de luare la cunoștință) înlocuită cu un formular individual de o pagină generat de ERP. Structura de 18 capitole, articolele 1–139 (plus Art. 43^1) și cele 13 anexe rămân neschimbate.</td></tr>
         <tr><td>3</td><td>15 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V2.5 (ADC-RI-02) — reintroduce Codul vestimentar ca și capitol dedicat (Capitolul IV, document ajunge la 18 capitole), extinde articolele continue de la 131 la 140 (inclusiv Art. 43^1), transformă Anexa nr. 13 într-un Registru Digital Oficial cu patru formulare proprii (13A–13D), precizează titlurile Anexelor 4, 5, 7, 10, 11 și 12, extinde Preambulul și adaugă rezumatul modificărilor față de Ediția V2.</td></tr>
         <tr><td>2</td><td>15 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V2 (ADC-RI-02) — înlocuire completă a documentului ADC-ROI-01: model-cadru multi-entitate, 17 capitole restructurate cu 131 de articole numerotate continuu, 13 anexe operaționale noi (performanță, necorespundere profesională, disciplină, hărțuire, avertizare de integritate) și rezumatul modificărilor față de Ediția 2026.</td></tr>
         <tr><td>1</td><td>14 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea inițială a manualului ROI (ADC-ROI-01) — integrarea Regulamentului de Organizare Internă ediția 2026 cu cele două politici noi (Anti-Hărțuire, Avertizori de Integritate) și rezumatul modificărilor față de ediția Iunie 2025 (V2.2).</td></tr>
@@ -2559,8 +2860,8 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <div>
       <h5>Document</h5>
       <p>Cod: ADC-RI-02</p>
-      <p>Model-cadru V2.5</p>
-      <p>15 august 2026</p>
+      <p>Model-cadru V2.6</p>
+      <p>16 august 2026</p>
       <p>18 capitole · 13 anexe</p>
     </div>
     <div>
