@@ -322,6 +322,49 @@
   .article .callout.keep .callout-label{ color:#6e7726; }
   .article .callout.avoid{ background:#f8efec; border-left-color:var(--terra); }
   .article .callout.avoid .callout-label{ color:#b0503c; }
+
+  /* Inline document reference (ex. „Document părinte") */
+  .docref{
+    display:flex;align-items:center;gap:14px;
+    padding:14px 16px;margin:8px 0 18px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:3px solid var(--amber);
+    border-radius:0 4px 4px 0;
+    text-decoration:none;color:var(--ink);
+    transition:background .14s,border-left-color .14s,transform .12s;
+  }
+  .docref:hover{
+    background:var(--cream);
+    border-left-color:var(--primary);
+    transform:translateY(-1px);
+  }
+  .docref .docref-meta{flex:1;min-width:0}
+  .docref .docref-code{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;letter-spacing:.04em;
+    color:var(--primary);font-weight:600;
+    margin-bottom:2px;display:block;
+  }
+  .docref .docref-name{
+    font-size:14.5px;font-weight:600;line-height:1.3;
+    color:var(--ink);
+  }
+  .docref .docref-desc{
+    font-size:12px;line-height:1.45;color:var(--muted);
+    margin-top:3px;
+  }
+  .docref .docref-action{
+    flex-shrink:0;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+    display:flex;align-items:center;gap:5px;
+  }
+  .docref .docref-action svg{
+    width:14px;height:14px;color:var(--primary);
+  }
+  .docref:hover .docref-action{color:var(--primary)}
+
   .spec-toc{ list-style:none; padding:0; margin:14px 0 26px; display:grid; grid-template-columns:1fr 1fr; gap:2px 30px; counter-reset:st; border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2); }
   .spec-toc li{ counter-increment:st; position:relative; padding:9px 0 9px 30px; font-size:13.5px; border-bottom:1px dotted var(--line); }
   .spec-toc li:last-child, .spec-toc li:nth-last-child(2){ border-bottom:none; }
@@ -596,7 +639,7 @@
     <div class="hero-inner">
       <div class="kicker">Document cadru · Operațional medical <span class="status-badge status-badge--pending">Nu a fost comunicat încă</span></div>
       <h1>Manualul Activităților Medicului —<span class="t2">Ghidul Medicului</span></h1>
-      <p class="subtitle">Documentul-cadru care guvernează activitatea medicilor în cele opt clinici ale rețelei Dr. Ardeleanu — un singur standard de îngrijire.</p>
+      <p class="subtitle">Documentul-cadru care guvernează activitatea medicilor din rețeaua Dr. Ardeleanu — un singur standard de calitate a actului medical, pentru fiecare pacient.</p>
       <dl class="meta-row">
         <div><dt>Ediție</dt><dd>V1.0 — <span class="mono">2026</span></dd></div>
         <div><dt>Cod document</dt><dd><span class="mono">ADC-MED-01</span></dd></div>
@@ -735,6 +778,15 @@
             <p>Manualul este împărțit în trei capitole mari: <a href="#cap-1"><b>Operațional</b></a> — cum e organizată rețeaua și cum parcurge pacientul drumul prin clinică; <a href="#cap-2"><b>Comportamental</b></a> — cum transformă medicul diagnosticul în înțelegere și decizie; și <a href="#cap-3"><b>Partea medicală</b></a> — protocoalele clinice pe specialități, urgențele și formarea continuă.</p>
           </div>
 
+          <a class="docref" href="https://vladtm75.github.io/Aplicatie-Contractare-Medici-Dr-Ardeleanu/index.html?v=2" target="_blank" rel="noopener">
+            <div class="docref-meta">
+              <span class="docref-code">Contract de prestări servicii · Anexe</span>
+              <div class="docref-name">Document părinte: Contractul de prestări servicii</div>
+              <div class="docref-desc">Manualul Medicului produce efecte în cadrul raportului contractual — ierarhia aplicabilă este Contractul de prestări servicii → Anexele contractului → Manualul Medicului, nu Regulamentul Intern. Contractul și anexele sale sunt disponibile în ERP-ul Medicilor.</div>
+            </div>
+            <div class="docref-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Acces ERP</div>
+          </a>
+
           <h4>Scopul și obiectivele manualului</h4>
           <p>Manualul Medicului stabilește standardele comune potrivit cărora se desfășoară activitatea medicală în rețeaua Dr. Ardeleanu, astfel încât fiecare pacient să beneficieze de un act medical de calitate, sigur, documentat și adaptat nevoilor sale.</p>
           <p>Manualul integrează standardele medicale cu organizarea parcursului pacientului, colaborarea dintre specialități și conduita profesională a medicului. Protocoalele medicale, comunicarea cu pacientul, documentarea cazului și utilizarea sistemelor digitale autorizate trebuie înțelese și aplicate împreună.</p>
@@ -773,7 +825,7 @@
 
         <!-- ============ Capitolul I (Operațional) ============ -->
         <h2 class="ch" id="cap-1"><span class="rn">I</span><span>Capitolul 1 — Operațional</span></h2>
-        <p class="ch-desc">Mersul în Dr. Ardeleanu: fundamentele rețelei, onboarding-ul medicului, parcursul pacientului (de la recepție la planul de tratament în P2) și partea operațională — sisteme, HR, financiar, laborator și KPI.</p>
+        <p class="ch-desc">Fundamentele rețelei, onboarding-ul medicului, parcursul pacientului (de la recepție la planul de tratament în P2) și partea operațională — sisteme, HR, financiar, laborator și KPI.</p>
         <div class="group-divider"><span>Fundamentele rețelei</span></div>
         <h3 class="sub" id="cap-1-1"><span class="sn">1.1</span><span>De unde am pornit și ce construim</span><a class="anchor" href="#cap-1-1">§</a></h3>
 <p>Clinicile Dr. Ardeleanu au început în 2017 ca un singur cabinet în Oltenița, deschis de <b>Dr. Virginia Ardeleanu</b>. De acolo au crescut într-o rețea națională de stomatologie și un reper în domeniu în România, construită în jurul unei idei simple: <b>excelență medicală la prețuri accesibile, pentru toată familia</b>.</p><p>Rețeaua s-a extins rapid, cu 8 clinici în București (Cotroceni și Dorobanți), Giurgiu, Oltenița, Călărași, Slobozia, Târgoviște și Focșani, dotate cu tehnologie de ultimă generație — tomografe computerizate și lasere dentare — pentru tratamente precise și eficiente, cât mai aproape de pacient. Un element distinctiv este conceptul <b>„Dental Safari"</b>, dedicat copiilor, care transformă vizita la dentist într-o experiență plăcută și educativă prin gamificare.</p><div class="callout"><span class="callout-label">Astăzi</span><p>8 clinici · 90+ medici supraspecializați · 30.000 pacienți unici și 70.000 vizite/an · 4.9★. În perioada 2021–2024, numărul de pacienți s-a dublat de la an la an.</p></div>
@@ -948,12 +1000,15 @@
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 36</strong> · 16 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 38</strong> · 16 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr data-rev="38"><td>38</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>Text hero: elimină numărul de clinici din subtitlu (se schimbă independent de conținutul manualului) și mută accentul pe calitatea actului medical. Cap. 1, descrierea capitolului: elimină formularea colocvială „Mersul în Dr. Ardeleanu".</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="38"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
+              <tr class="rev-old" data-rev-old="38" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 38</span><button type="button" class="rev-old-close" data-rev-close="38">✕ Închide</button></div><div class="rev-old-content" data-rev-body="38"></div></div></td></tr>
+              <tr data-rev="37"><td>37</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugată caseta „Document părinte", care indică Contractul de prestări servicii (și anexele sale, disponibile în ERP-ul Medicilor) drept documentul care guvernează aplicabilitatea manualului — nu Regulamentul Intern.</td><td class="rev-na">—</td></tr>
               <tr data-rev="36"><td>36</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>Standardizare denumire: „platformă dedicată contractării medicilor" / „Aplicație Contractare Medici" (cap. 1.6) devine peste tot <b>ERP-ul Medicilor</b>, cu clarificarea „(aplicație de gestiune digitală a relațiilor contractuale cu Medicii din Rețeaua Dr. Ardeleanu)" la prima mențiune din §1 și din cap. 1.6 — inclusiv butonul de acces și eticheta din platform-cta.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="36"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
               <tr class="rev-old" data-rev-old="36" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 36</span><button type="button" class="rev-old-close" data-rev-close="36">✕ Închide</button></div><div class="rev-old-content" data-rev-body="36"></div></div></td></tr>
               <tr data-rev="35"><td>35</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugat un preambul formal, cu patru secțiuni noi — scopul și obiectivele manualului, statutul contractual al documentului (ierarhia Contract de prestări servicii → Anexe → Manualul Medicului), legătura cu Regulamentul Intern și mecanismul de luare la cunoștință / acces prin ERP-ul Medicilor (format HTML/Wiki vs. PDF oficial).</td><td class="rev-na">—</td></tr>
