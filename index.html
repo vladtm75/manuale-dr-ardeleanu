@@ -93,7 +93,7 @@
   .card.registratori .card-head{ background:linear-gradient(135deg,#5d6625 0%,var(--olive) 140%); }
   .card.roi .card-head{ background:linear-gradient(135deg,#4a4340 0%,#2a2624 100%); }
   .card-pill{ display:inline-block; font-size:10px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); color:#fff; padding:4px 11px; border-radius:999px; }
-  .card-head h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:29px; line-height:1.12; margin:13px 0 0; }
+  .card-head h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:29px; line-height:1.12; margin:13px 0 0; min-height:calc(1.12em * 2); }
   .card-head .aud{ font-size:13px; color:rgba(255,255,255,.85); margin:7px 0 0; }
   .card-body{ padding:20px 28px 24px; display:flex; flex-direction:column; flex:1; }
   .card-body p.desc{ font-size:13.5px; color:var(--muted); margin:0 0 18px; }
@@ -122,8 +122,10 @@
 
   .card.card-soon{ cursor:default; }
   .card.card-soon:hover{ transform:none; box-shadow:0 1px 3px rgba(40,30,20,.06); }
-  .card.card-soon .card-head{ background:linear-gradient(135deg,#8a8580 0%,#5c5751 100%); }
-  .card.card-soon .card-pill.soon{ background:rgba(255,255,255,.12); border-style:dashed; }
+  /* culori din brand book Dr. Ardeleanu / Dental Safari — Jungle Green și Safari Gold, mai vii decât gri */
+  .card.manager .card-head{ background:linear-gradient(135deg,#168247 0%,#0d5c33 100%); }
+  .card.proceduri .card-head{ background:linear-gradient(135deg,#FAA703 0%,#b97832 100%); }
+  .card.card-soon .card-pill.soon{ background:rgba(255,255,255,.16); border-style:dashed; }
   .card.card-soon .cta.soon{
     background:none; border:1.5px dashed var(--line-2); color:var(--muted); cursor:default;
   }
@@ -316,7 +318,7 @@
       </div>
     </a>
 
-    <div class="card card-soon">
+    <div class="card card-soon manager">
       <div class="card-head">
         <span class="card-pill soon">ADC-MCL-01 · ÎN CURÂND</span>
         <h2>Manualul Managerului de Clinică</h2>
@@ -351,7 +353,7 @@
       </div>
     </a>
 
-    <div class="card card-soon">
+    <div class="card card-soon proceduri">
       <div class="card-head">
         <span class="card-pill soon">ÎN CURÂND</span>
         <h2>Proceduri de lucru</h2>
