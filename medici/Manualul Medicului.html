@@ -47,20 +47,21 @@
 <style>
   :root{
     --primary:#7B1C16;        /* Falu Red */
-    --primary-deep:#5E140F;
+    --primary-deep:#5d140f;
     --wheat:#F2DAB7;
     --cream:#F5EDE3;
+    --cream-warm:#FBF6EE;
     --olive:#B5BD5C;
     --amber:#C9A227;
     --yellow:#FBE483;
     --terra:#dd7e6b;
     --ink:#222222;
-    --muted:#6b5f59;
-    --faint:#917f76;
-    --page:#F4F1EC;
+    --muted:#4a4541;
+    --faint:#7a736d;
+    --page:#fbf7f1;
     --surface:#FFFFFF;
-    --line:#e7ded2;
-    --line-2:#d8ccbb;
+    --line:#e6dccd;
+    --line-2:#efe7d7;
     --link:#7B1C16;
     --sidebar-w:280px;
     --infobox-w:300px;
@@ -176,19 +177,19 @@
 
   /* sidebar / TOC — sistem comun cu asistenți/registratori/ROI (.toc-side) */
   .toc-side{
-    position:sticky;top:64px;
+    position:sticky;top:78px;
     align-self:start;
-    max-height:calc(100vh - 82px);
+    max-height:calc(100vh - 96px);
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     overscroll-behavior:contain;
     font-size:13px;
-    padding:22px 14px 60px 20px;
+    padding:30px 14px 60px 28px;
     border-right:1px solid var(--line);
     scrollbar-width:thin;scrollbar-color:var(--line-2) transparent;
   }
-  .toc-side::-webkit-scrollbar{width:8px}
-  .toc-side::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px}
+  .toc-side::-webkit-scrollbar{width:6px}
+  .toc-side::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:3px}
   .toc-side h4{
     font-size:10px;letter-spacing:.22em;text-transform:uppercase;
     color:var(--faint);font-weight:600;
@@ -233,7 +234,7 @@
   .toc-side .toc-toggle{
     width:28px;height:26px;flex-shrink:0;
     display:flex;align-items:center;justify-content:center;
-    background:var(--cream);border:1px solid var(--line);
+    background:var(--cream-warm);border:1px solid var(--line);
     cursor:pointer;color:var(--primary);border-radius:4px;
     transition:background .12s,color .12s,border-color .12s;
     padding:0;
@@ -265,7 +266,9 @@
 
   /* main */
   .main{ padding:30px 46px 120px; min-width:0; background:var(--surface); }
-  .article{ max-width:880px; }
+  .article{ max-width:880px; font-size:15.5px; line-height:1.7; color:var(--muted); }
+  .article strong, .article b{ color:var(--ink); font-weight:600; }
+  .article em{ color:var(--primary); font-style:italic; }
 
   /* article header */
   .hatnote{ font-size:12.5px; font-style:italic; color:var(--muted); background:var(--cream); border-left:3px solid var(--amber); padding:7px 12px; border-radius:0 5px 5px 0; margin-bottom:18px; }
@@ -307,7 +310,7 @@
   h3.sub:hover .anchor{ opacity:1; }
 
   .article h4{ font-size:15px; font-weight:600; color:var(--primary-deep); margin:18px 0 4px; }
-  .article p{ margin:0 0 11px; }
+  .article p{ margin:0 0 14px; text-wrap:pretty; }
   .article p.byline{ font-size:12px; color:var(--faint); font-style:italic; margin:-2px 0 12px; }
   .article ul, .article ol{ margin:0 0 12px; padding-left:22px; }
   .article li{ margin:3px 0; }
