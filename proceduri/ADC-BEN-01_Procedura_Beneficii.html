@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<script>
+/* Gate: acces cu parola generală (sessionStorage, ca înainte) SAU cu cheia proprie
+   a documentului — memorată în localStorage sau primită printr-un link #k=... */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='9d3dffbb111f9a0bd5a70c325a5de235d65d1210b5528ecfdc9b0ad6d8d53236';
+  var LK='adcAuthBEN';
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Procedură Beneficii Stomatologice, Dr. Ardeleanu (ADC-BEN-01)</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Procedură Beneficii Stomatologice, Dr. Ardeleanu" />
+<meta property="og:description" content="Procedură Beneficii Stomatologice (ADC-BEN-01) — eligibilitate, matricea aprobată, fluxul ERP și protecția datelor. Document de aplicare al Regulamentului Intern, proiect pentru validare și adoptare." />
+<meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/ADC-BEN-01_Procedura_Beneficii.html" />
+<meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/og-ben-01.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta property="og:locale" content="ro_RO" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/og-ben-01.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-primary:#7B1C16;
+  --brand-primary-deep:#5d140f;
+  --brand-primary-soft:#a14841;
+  --brand-wheat:#F2DAB7;
+  --brand-cream:#F5EDE3;
+  --brand-cream-warm:#FBF6EE;
+  --brand-olive:#B5BD5C;
+  --brand-amber:#C9A227;
+  --brand-yellow:#FBE483;
+  --brand-terracotta:#dd7e6b;
+  --brand-alert:#FF0300;
+  --ink:#222222;
+  --ink-soft:#4a4541;
+  --ink-mute:#7a736d;
+  --rule:#e6dccd;
+  --rule-soft:#efe7d7;
+  --paper:#fbf7f1;
+  --paper-pure:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Poppins',system-ui,sans-serif;
+  font-weight:400;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--brand-primary);text-decoration:none;border-bottom:1px solid rgba(123,28,22,.25)}
+a:hover{border-bottom-color:var(--brand-primary)}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper-pure);
+  border-bottom:1px solid var(--rule);
+  box-shadow:0 1px 0 rgba(123,28,22,.04);
+}
+.topbar-inner{
+  max-width:1380px;margin:0 auto;padding:10px 28px;
+  display:flex;align-items:center;gap:18px;
+}
+.topbar img.logo{height:34px;width:auto;display:block}
+.back-home{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  font-size:12.5px;font-weight:600;color:var(--brand-primary);white-space:nowrap;
+  border:1.5px solid var(--rule);border-radius:999px;padding:6px 15px;
+  transition:background .15s,border-color .15s;border-bottom:1.5px solid var(--rule);
+}
+.back-home:hover{background:var(--brand-cream);border-color:var(--brand-primary);}
+.back-home .bh-arrow{font-size:15px;line-height:1}
+@media(max-width:840px){ .back-home .bh-txt{display:none} .back-home{padding:6px 11px} }
+.topbar .crumbs{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:12px;letter-spacing:.04em;color:var(--ink-mute);
+  border-left:1px solid var(--rule);padding-left:14px;
+}
+.topbar .crumbs strong{color:var(--brand-primary);font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+.topbar .crumbs .crumb-title{display:none;color:var(--ink);font-weight:600}
+.topbar.scrolled .crumbs .crumb-path{display:none}
+.topbar.scrolled .crumbs .crumb-title{display:inline}
+.topbar .spacer{flex:1}
+.topbar .pill{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;
+  background:var(--brand-cream);color:var(--brand-primary);
+  font-weight:600;border:1px solid var(--brand-wheat);
+}
+.topbar .pill.dark{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.topbar .mh-share{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 13px;
+  font-family:inherit;font-weight:600;font-size:12px;color:var(--brand-primary);
+  cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
+}
+.topbar .mh-share:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
+.topbar .actions{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-mute)}
+.topbar .actions span{padding:0 8px}
+
+/* ============ HERO / TITLE ============ */
+.hero{
+  background:linear-gradient(180deg,var(--paper-pure) 0%, var(--paper) 100%);
+  border-bottom:1px solid var(--rule);
+  padding:42px 0 28px;
+}
+.hero-inner{max-width:1380px;margin:0 auto;padding:0 28px}
+.hero .kicker{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero .kicker:before{content:"";display:inline-block;width:28px;height:1px;background:var(--brand-amber)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  color:var(--ink);
+  font-size:clamp(38px,5.6vw,58px);line-height:1.04;
+  margin:0 0 14px;letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:italic;color:var(--brand-primary);font-weight:500}
+.hero .subtitle{
+  font-size:19px;color:var(--ink-soft);font-weight:300;
+  margin:0 0 26px;line-height:1.5;
+}
+.hero .meta-row{
+  display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-top:22px;
+}
+.hero .meta-row > div{
+  padding:11px 8px;
+  border-right:1px solid var(--rule);
+  text-align:center;
+}
+.hero .meta-row > div:last-child{border-right:none}
+@media(max-width:900px){
+  .hero .meta-row{grid-auto-flow:row;grid-template-columns:repeat(4,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:none}
+}
+@media(max-width:560px){
+  .hero .meta-row{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:1px solid var(--rule)}
+  .hero .meta-row > div:nth-child(2n){border-right:none}
+}
+.hero .meta-row dt{
+  font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-bottom:3px;
+}
+.hero .meta-row dd{
+  margin:0;font-size:12px;color:var(--ink);font-weight:500;line-height:1.3;
+}
+.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--brand-primary)}
+
+/* status badge: comunicare oficială / intrare în vigoare — setat manual per document */
+.status-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;letter-spacing:.06em;text-transform:none;font-weight:700;
+  padding:4px 11px;border-radius:999px;line-height:1.3;
+}
+.status-badge:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.status-badge--active{background:#eaf3e6;color:#3f7d3a;border:1px solid #bcdcb3}
+.status-badge--pending{background:#f2ede6;color:#8a6d3a;border:1px solid #ddd0b8}
+
+/* ============ ARTICLE LAYOUT ============ */
+.layout{
+  max-width:1380px;margin:0 auto;padding:38px 0 80px;
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  align-items:start;
+}
+@media(max-width:980px){.layout{grid-template-columns:minmax(0,1fr);gap:18px;padding:38px 28px 80px}}
+
+/* TOC sidebar */
+.toc-side{
+  position:sticky;top:78px;
+  align-self:start;
+  max-height:calc(100vh - 96px);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  font-size:13px;
+  padding:30px 14px 60px 28px;
+  border-right:1px solid var(--rule);
+  scrollbar-width:thin;scrollbar-color:var(--rule) transparent;
+}
+.main{ padding:30px 46px 120px; min-width:0; background:var(--paper-pure); }
+@media(max-width:980px){ .main{ padding:20px 28px 80px; } }
+.toc-side::-webkit-scrollbar{width:6px}
+.toc-side::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.toc-side h4{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+.toc-side .group{margin-bottom:18px}
+.toc-side .group-label{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:700;
+  margin:14px 0 6px;display:flex;align-items:center;gap:8px;
+}
+.toc-side .group-label:before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand-amber);display:inline-block}
+.toc-side .group-label.clinical:before{background:var(--brand-primary)}
+.toc-side .group-label.clinical{color:var(--brand-primary)}
+.toc-side .group-label.ops:before{background:var(--ink-soft)}
+.toc-side .group-label.ops{color:var(--ink-soft)}
+
+.toc-side ol{list-style:none;margin:0;padding:0;counter-reset:none}
+.toc-side ol > li{
+  padding:3px 0;line-height:1.35;
+}
+.toc-side a{
+  color:var(--ink-soft);border-bottom:none;
+  display:flex;gap:8px;align-items:baseline;
+  padding:3px 8px;border-radius:6px;border-left:2px solid transparent;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.toc-side a:hover{background:var(--brand-cream);color:var(--brand-primary)}
+.toc-side .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--ink-mute);font-weight:500;
+  min-width:24px;flex-shrink:0;
+}
+.toc-side a.active{background:var(--brand-cream);color:var(--brand-primary);font-weight:600;border-left-color:var(--brand-primary)}
+
+/* ============ ARTICLE BODY ============ */
+.article{
+  max-width:900px;
+  font-size:15.5px;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+.article p{margin:0 0 14px;text-wrap:pretty}
+.article strong{color:var(--ink);font-weight:600}
+.article em{color:var(--brand-primary);font-style:italic}
+
+/* Hatnote — Wikipedia top notice */
+.hatnote{
+  font-size:13px;color:var(--ink-mute);font-style:italic;
+  padding:10px 14px;background:var(--brand-cream-warm);
+  border-left:3px solid var(--brand-amber);
+  margin:0 0 28px;border-radius:0 3px 3px 0;
+}
+.hatnote strong{color:var(--brand-primary);font-style:normal}
+
+/* Article headings */
+.article h2{
+  font-family:'Playfair Display',serif;
+  font-weight:800;color:var(--ink);
+  font-size:32px;line-height:1.2;
+  margin:48px 0 8px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--rule);
+  letter-spacing:-.005em;
+  scroll-margin-top:78px;
+}
+.article h2 .chapter-num{
+  display:block;
+  font-family:'Poppins',sans-serif;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+  margin-bottom:8px;
+}
+.article h3{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);font-size:21px;
+  margin:34px 0 8px;padding-bottom:6px;
+  border-bottom:1px solid var(--rule);
+  line-height:1.3;scroll-margin-top:78px;
+}
+.article h4{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--ink);font-size:16px;margin:22px 0 8px;
+  letter-spacing:.005em;
+}
+
+/* Lists */
+.article ul, .article ol{margin:8px 0 18px;padding-left:24px}
+.article ul li, .article ol li{margin-bottom:6px;line-height:1.6}
+.article ul li::marker{color:var(--brand-primary)}
+.article ul.dash{list-style:none;padding-left:0}
+.article ul.dash li{position:relative;padding-left:18px}
+.article ul.dash li:before{content:"—";color:var(--brand-amber);position:absolute;left:0;font-weight:600}
+
+/* Numbered protocol steps */
+.steps{counter-reset:step;list-style:none;padding:0;margin:18px 0 24px;clear:both}
+.steps > li{
+  counter-increment:step;
+  position:relative;padding:12px 14px 12px 56px;
+  margin-bottom:8px;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-primary);
+  border-radius:0 4px 4px 0;
+  font-size:14.5px;line-height:1.55;
+}
+.steps > li:before{
+  content:counter(step,decimal-leading-zero);
+  position:absolute;left:14px;top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  color:var(--brand-primary);font-weight:600;
+  background:var(--brand-cream);padding:2px 8px;border-radius:3px;
+  letter-spacing:.05em;
+}
+.steps > li strong{color:var(--brand-primary);font-weight:600;display:block;margin-bottom:3px}
+
+/* Callouts */
+.callout{
+  margin:22px 0;padding:16px 18px;
+  border-radius:4px;font-size:14px;line-height:1.55;
+  border:1px solid var(--rule);
+}
+.callout .label{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.callout .label:before{
+  content:"";width:14px;height:14px;border-radius:50%;
+  display:inline-block;
+}
+.callout.warn{background:#fdf3f2;border-left:4px solid var(--brand-primary)}
+.callout.warn .label{color:var(--brand-primary)}
+.callout.warn .label:before{background:var(--brand-primary)}
+.callout.note{background:var(--brand-cream-warm);border-left:4px solid var(--brand-amber)}
+.callout.note .label{color:#8a6f17}
+.callout.note .label:before{background:var(--brand-amber)}
+.callout p:last-child{margin-bottom:0}
+.callout ul{margin:6px 0 0}
+
+/* Definition list (medical terms) */
+.deflist{
+  background:var(--paper-pure);border:1px solid var(--rule);border-radius:4px;
+  padding:6px 0;margin:18px 0;
+}
+.deflist dt{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);
+  padding:10px 18px 4px;font-size:14.5px;
+}
+.deflist dd{
+  margin:0;padding:0 18px 12px;
+  font-size:14px;color:var(--ink-soft);line-height:1.55;
+  border-bottom:1px solid var(--rule-soft);
+}
+.deflist > div:last-child dd{border-bottom:none}
+
+/* Tables */
+.article table{
+  width:100%;border-collapse:collapse;margin:18px 0 24px;
+  font-size:13.5px;background:var(--paper-pure);
+  border:1px solid var(--rule);border-radius:4px;overflow:hidden;
+}
+.article table th{
+  background:var(--brand-primary);color:#fff;
+  padding:10px 12px;text-align:left;font-weight:600;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  overflow-wrap:anywhere;word-break:break-word;
+}
+.article table td{
+  padding:10px 12px;border-top:1px solid var(--rule-soft);
+  vertical-align:top;overflow-wrap:anywhere;word-break:break-word;
+}
+.article table tr:nth-child(even) td{background:var(--brand-cream-warm)}
+.article table .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--brand-primary);font-weight:500}
+.article table.pct th:not(:first-child),.article table.pct td:not(:first-child){text-align:center}
+
+/* formulare cu perechi etichetă/valoare (fără thead) — coloana etichetei mai lată */
+.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)):not(:has(.sig-field)){
+  width:34%;min-width:150px;
+  word-break:normal;overflow-wrap:break-word;
+}
+
+/* bloc de semnătură — fiecare câmp pe rândul lui */
+.sig-field{display:flex;align-items:baseline;gap:6px;margin-top:5px}
+.sig-field span:first-child{white-space:nowrap;flex:none}
+.sig-field .sig-line{flex:1;border-bottom:1px solid var(--ink-mute);min-width:20px;height:.9em}
+
+/* celule de completat */
+.article td.value-line{border-bottom:1px solid var(--ink-mute)}
+.article .value-lines{display:flex;flex-direction:column;gap:16px;padding:4px 0 2px}
+.article .value-lines .vline{height:18px;border-bottom:1px solid var(--ink-mute)}
+
+/* indiciu de câmp completat automat (ex. de ERP) */
+.article .ph{color:var(--ink-mute);font-style:italic}
+
+/* Chapter divider */
+.chap-divider{
+  display:flex;align-items:center;gap:14px;
+  margin:50px 0 24px;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+}
+.chap-divider:before, .chap-divider:after{
+  content:"";flex:1;height:1px;background:var(--rule);
+}
+
+/* Mini badge */
+.codetag{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:11px;background:var(--brand-cream);color:var(--brand-primary);
+  padding:2px 7px;border-radius:3px;letter-spacing:0;font-weight:500;
+  margin-right:6px;vertical-align:1px;
+}
+.article p .codetag{ margin-right:8px; }
+
+/* Inline document reference (single download row) */
+.docref{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;margin:14px 0;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-amber);
+  border-radius:0 4px 4px 0;
+  text-decoration:none;color:var(--ink);
+  transition:background .14s,border-left-color .14s,transform .12s;
+}
+.docref:hover{
+  background:var(--brand-cream-warm);
+  border-left-color:var(--brand-primary);
+  transform:translateY(-1px);
+}
+.docref .docref-meta{flex:1;min-width:0}
+.docref .docref-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;letter-spacing:.04em;
+  color:var(--brand-primary);font-weight:600;
+  margin-bottom:2px;display:block;
+}
+.docref .docref-name{
+  font-size:14.5px;font-weight:600;line-height:1.3;
+  color:var(--ink);
+}
+.docref .docref-desc{
+  font-size:12px;line-height:1.45;color:var(--ink-mute);
+  margin-top:3px;
+}
+.docref .docref-action{
+  flex-shrink:0;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  display:flex;align-items:center;gap:5px;
+}
+.docref:hover .docref-action{color:var(--brand-primary)}
+
+/* Changelog */
+.changelog{
+  margin:14px 0 22px;
+  display:flex;flex-direction:column;
+  border:1px solid var(--rule);border-radius:6px;
+  background:var(--paper-pure);overflow:hidden;
+}
+.changelog .cl-item{
+  display:grid;grid-template-columns:130px 1fr;
+  gap:14px;align-items:start;
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:13px;line-height:1.5;
+}
+.changelog .cl-item:last-child{border-bottom:none}
+.changelog .cl-item:nth-child(even){background:var(--brand-cream-warm)}
+.changelog .cl-chap{
+  display:flex;align-items:center;gap:6px;
+  text-decoration:none;color:var(--brand-primary);
+  border:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--brand-cream);
+  padding:3px 9px;border-radius:3px;
+  font-size:11.5px;font-weight:600;line-height:1.2;
+  align-self:start;
+  white-space:nowrap;
+}
+.changelog .cl-code{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0}
+.changelog .cl-text{color:var(--ink-soft);font-size:13px}
+@media(max-width:580px){
+  .changelog .cl-item{grid-template-columns:1fr;gap:6px}
+  .changelog .cl-chap{align-self:flex-start}
+}
+
+/* ============ PLATFORM FRAME (unified) ============ */
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--brand-amber);outline-offset:2px;border-radius:4px}
+
+.readbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand-amber),var(--brand-primary));z-index:120;pointer-events:none}
+
+.mh-search{position:relative;width:280px;max-width:34vw;flex:none}
+.mh-search input{
+  width:100%;font-family:inherit;font-size:13.5px;color:var(--ink);
+  padding:8px 34px 8px 32px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);
+}
+.mh-search input:focus{outline:none;border-color:var(--brand-primary)}
+.mh-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-mute)}
+.mh-search kbd{
+  position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;
+  font-family:'Poppins',sans-serif;font-size:10.5px;color:var(--ink-mute);
+  border:1px solid var(--rule);border-radius:4px;padding:1px 6px;background:var(--paper-pure);
+}
+.mh-search input:focus ~ kbd{display:none}
+.toc-search-hide{display:none !important}
+
+.menu-btn{display:none;background:none;border:1px solid var(--rule);border-radius:6px;padding:6px 9px;cursor:pointer;color:var(--brand-primary);font-size:14px;flex:none}
+
+.totop{
+  position:fixed;right:22px;bottom:22px;z-index:60;background:var(--brand-primary);color:#fff;border:none;
+  width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;
+  box-shadow:0 6px 18px -6px rgba(123,28,22,.6);opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.totop.show{opacity:1;pointer-events:auto}
+
+@media(max-width:980px){
+  .menu-btn{display:inline-flex}
+  .toc-side{
+    align-self:stretch;
+    position:fixed;left:0;top:56px;bottom:0;width:300px;height:auto;max-height:none;margin:0;z-index:55;
+    background:var(--paper-pure);box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
+    padding:20px 18px 40px;transform:translateX(-105%) translateZ(0);transition:transform .25s;
+    -webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior:contain;
+    touch-action:pan-y;scroll-behavior:auto;
+  }
+  .toc-side.open{transform:translateZ(0)}
+  body.menu-open{overflow:hidden}
+}
+@media(max-width:840px){
+  .crumbs span{display:none}
+  .mh-search{max-width:30vw}
+  .mh-search kbd{display:none}
+}
+@media(max-width:560px){
+  .topbar-inner .pill:not(.dark){display:none}
+  .mh-search{width:150px}
+}
+
+/* ============ MOBILE-LITE (telefon) ============ */
+#mobileNotice{display:none}
+@media(max-width:640px){
+  .topbar-inner{padding:10px 14px; gap:12px}
+  .topbar img.logo{height:26px}
+  .topbar-inner .brand-home{margin-left:auto}
+  .topbar-inner .crumbs{display:none}
+  .topbar-inner .spacer{display:none}
+  .topbar-inner .pill{display:none}
+  .topbar-inner .mh-share{display:none}
+  .mh-search{display:none}
+  .article{overflow-wrap:break-word}
+  #mobileNotice{
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--brand-cream); border:1px solid var(--rule); border-left:3px solid var(--brand-amber);
+    border-radius:8px; padding:11px 13px; margin:0 0 18px; font-size:12.5px; line-height:1.5; color:var(--ink-soft);
+  }
+  #mobileNotice strong{color:var(--brand-primary)}
+  #mobileNotice button{flex:none; background:none; border:none; color:var(--ink-mute); font-size:16px; line-height:1; cursor:pointer; padding:0 2px}
+  .article table{display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .layout{padding:20px 16px 90px}
+}
+
+/* buton „Printează formularul" — atașat dinamic, per formular */
+.print-form-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:600;letter-spacing:.02em;
+  color:var(--brand-primary);background:var(--brand-cream);
+  border:1px solid var(--brand-wheat);border-radius:999px;
+  padding:4px 12px;margin-left:14px;cursor:pointer;
+  font-family:inherit;white-space:nowrap;vertical-align:middle;
+  transition:background .15s,border-color .15s;
+}
+.print-form-btn:hover{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.print-form-btn svg{width:12px;height:12px;flex:none}
+h2 .print-form-btn,h4 .print-form-btn{float:right}
+@media(max-width:760px){
+  h2 .print-form-btn,h4 .print-form-btn{float:none;display:inline-flex;margin:8px 0 0}
+}
+
+/* Footer */
+footer{
+  background:var(--brand-primary);color:#fff;
+  padding:48px 0 38px;margin-top:60px;
+}
+.footer-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;
+  font-size:13px;line-height:1.6;
+}
+@media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+footer h5{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
+}
+footer .tagline{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.3;margin:8px 0 14px;color:#fff;
+}
+footer a{color:#fff;border-bottom:1px solid rgba(255,255,255,.3)}
+footer a:hover{border-bottom-color:var(--brand-yellow);color:var(--brand-yellow)}
+footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
+.din-2017{
+  margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;text-align:center;
+}
+.din-2017 span{margin:0 22px}
+
+/* antet minimal, vizibil doar la printare */
+.print-header{ display:none; }
+@media print{
+  .print-header{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding-bottom:10px;margin-bottom:16px;
+    border-bottom:2px solid var(--brand-primary);
+  }
+  .print-header-logo{ height:28px;width:auto;flex:none; }
+  .print-header-text{ flex:1;min-width:0; }
+  .print-header-brand{ font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-primary);font-weight:700; }
+  .print-header-title{ font-size:13px;font-weight:600;color:var(--ink);margin-top:1px; }
+  .print-header-meta{ display:flex;gap:6px;flex:none; }
+  .print-header-pill{ font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--brand-cream);color:var(--brand-primary);border:1px solid var(--brand-wheat);font-weight:600; }
+  .print-header-pill.dark{ background:var(--brand-primary);color:#fff;border-color:var(--brand-primary); }
+}
+@media print{
+  @page{size:A4;margin:14mm 12mm}
+  .topbar,.toc-side,.totop,.readbar,.menu-btn,.mh-search{display:none !important}
+  .layout{display:block;max-width:none;padding:0}
+  body{background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,h4{break-after:avoid}
+  table,figure,img,.callout{break-inside:avoid}
+  p,li{orphans:3;widows:3}
+  footer{display:none !important}
+  .print-form-btn{display:none !important}
+  body.printing-form [data-print-hidden]{display:none !important}
+  body.printing-form .hero{display:none !important}
+  body.printing-form{font-size:12.5px}
+  body.printing-form table{font-size:11.5px}
+  body.printing-form p{margin:5px 0}
+  body.printing-form h2{margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<!-- Antet vizibil doar la printare -->
+<div class="print-header" aria-hidden="true">
+  <img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="print-header-logo">
+  <div class="print-header-text">
+    <div class="print-header-brand">Dr. Ardeleanu Dental Clinics</div>
+    <div class="print-header-title">Procedură Beneficii Stomatologice</div>
+  </div>
+  <div class="print-header-meta">
+    <span class="print-header-pill">ADC-BEN-01</span>
+    <span class="print-header-pill dark">V3.0 · proiect</span>
+  </div>
+</div>
+
+<!-- =========================== TOP BAR =========================== -->
+<header class="topbar" data-screen-label="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
+    <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
+    <a href="../index.html" style="border-bottom:none" title="Înapoi la Manuale Interne" class="brand-home"><img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
+    <div class="crumbs">
+      <span class="crumb-path">
+        <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
+        <span>›</span>
+        <span>Proceduri de lucru</span>
+      </span>
+      <span class="crumb-title">Procedură Beneficii Stomatologice</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="mh-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="search" type="text" placeholder="Caută în procedură…" autocomplete="off" />
+      <kbd>/</kbd>
+    </div>
+    <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest document"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
+    <span class="pill">ADC-BEN-01</span>
+    <span class="pill dark">V3.0 · proiect</span>
+  </div>
+</header>
+
+<!-- =========================== HERO =========================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Procedură de lucru · Resurse Umane <span class="status-badge status-badge--pending">Proiect — nepublicat încă</span></div>
+    <h1>Procedură <em>Beneficii Stomatologice</em></h1>
+    <p class="subtitle">Condițiile de acordare a facilităților pentru tratamente stomatologice personalului și beneficiarilor eligibili — eligibilitate, matricea aprobată, fluxul de acces în ERP, protecția datelor și controlul lunar. Document de aplicare al Regulamentului Intern V2.6 (art. 4, 5, 19, 50 și 137), fără efecte înainte de aprobare și comunicare.</p>
+
+    <dl class="meta-row">
+      <div><dt>Ediție</dt><dd><span class="mono">V3.0 · proiect</span></dd></div>
+      <div><dt>Cod document</dt><dd><span class="mono">ADC-BEN-01</span></dd></div>
+      <div><dt>Data proiectului</dt><dd>16 august 2026</dd></div>
+      <div><dt>Categorie</dt><dd>Resurse Umane · Beneficii</dd></div>
+      <div><dt>Secțiuni</dt><dd>17 · 2 anexe</dd></div>
+      <div><dt>Aplicabilitate</dt><dd>Salariați și beneficiari eligibili</dd></div>
+      <div><dt>Document părinte</dt><dd>RI V2.6 · art. 4, 5, 19, 50, 137</dd></div>
+      <div><dt>Administrare</dt><dd>Vlad Ardeleanu</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- =========================== ARTICLE LAYOUT =========================== -->
+<div class="layout">
+
+  <!-- ============ TOC SIDEBAR ============ -->
+  <nav class="toc-side" aria-label="Cuprins">
+    <h4>Cuprins</h4>
+
+    <div class="group">
+      <div class="group-label">Cadru</div>
+      <ol>
+        <li><a href="#pozitie"><span class="num">§</span>Poziție și efect juridic</a></li>
+        <li><a href="#doc-fields"><span class="num">§</span>Datele documentului</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Procedură</div>
+      <ol>
+        <li><a href="#sec-1"><span class="num">1</span>Scop și obiect</a></li>
+        <li><a href="#sec-2"><span class="num">2</span>Domeniu de aplicare</a></li>
+        <li><a href="#sec-3"><span class="num">3</span>Definiții</a></li>
+        <li><a href="#sec-4"><span class="num">4</span>Principii de acordare</a></li>
+        <li><a href="#sec-5"><span class="num">5</span>Eligibilitate și matricea beneficiilor</a></li>
+        <li><a href="#sec-6"><span class="num">6</span>Fluxul de acces și aprobare</a></li>
+        <li><a href="#sec-7"><span class="num">7</span>Documentele de eligibilitate</a></li>
+        <li><a href="#sec-8"><span class="num">8</span>Drepturile pacientului și independența medicală</a></li>
+        <li><a href="#sec-9"><span class="num">9</span>Plată, rate și tratament financiar</a></li>
+        <li><a href="#sec-10"><span class="num">10</span>Protecția datelor și separarea accesului</a></li>
+        <li><a href="#sec-11"><span class="num">11</span>Evidență, reconciliere și control</a></li>
+        <li><a href="#sec-12"><span class="num">12</span>Excepții, erori și utilizare neconformă</a></li>
+        <li><a href="#sec-13"><span class="num">13</span>Încetarea sau modificarea raportului de muncă</a></li>
+        <li><a href="#sec-14"><span class="num">14</span>Roluri și responsabilități</a></li>
+        <li><a href="#sec-15"><span class="num">15</span>Controlul versiunii, publicare și comunicare</a></li>
+        <li><a href="#sec-16"><span class="num">16</span>Repere juridice pentru validare</a></li>
+        <li><a href="#sec-17"><span class="num">17</span>Evidența modificărilor și aprobarea</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Anexe</div>
+      <ol>
+        <li><a href="#anexa-a"><span class="num">A</span>Câmpuri minime ale solicitării ERP</a></li>
+        <li><a href="#anexa-b"><span class="num">B</span>Legături obligatorii în Registrul online</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Istoric</div>
+      <ol>
+        <li><a href="#registru"><span class="num">§</span>Registru de modificări</a></li>
+      </ol>
+    </div>
+
+  </nav>
+
+  <!-- ============ ARTICLE ============ -->
+  <main class="main">
+  <article class="article">
+
+    <div id="mobileNotice" role="note">
+      <span>📱 <strong>Vizualizare mobil.</strong> Pentru o lectură curată pe telefon, unele elemente vizuale sunt ascunse. Deschide documentul pe desktop pentru versiunea completă.</span>
+      <button type="button" aria-label="Închide" onclick="try{sessionStorage.setItem('adcMobileNoticeDismissed','1')}catch(e){} this.parentNode.style.display='none'">✕</button>
+    </div>
+
+    <h2 id="pozitie">Poziție în ierarhia documentelor</h2>
+    <div class="callout note"><p><strong>Poziție în ierarhia documentelor.</strong> Prezenta procedură este subordonată Regulamentului intern V2.6 și îl pune în aplicare. Nu modifică RI, contractul individual de muncă ori drepturile prevăzute de lege. În caz de neconcordanță prevalează legea, dreptul contractual mai favorabil aplicabil și RI.</p></div>
+    <div class="callout warn"><p><strong>Efect juridic.</strong> Acest proiect nu produce efecte înainte de aprobarea de către entitatea angajatoare, înscrierea versiunii oficiale în Registrul online și comunicarea individuală conform art. 19 din RI V2.6.</p></div>
+    <div class="hatnote"><strong>Etichete:</strong> <span class="codetag">OBL</span> regulă obligatorie · <span class="codetag">OPR</span> flux operațional · <span class="codetag">EVD</span> dovadă/înregistrare · <span class="codetag">GHID</span> reper de aplicare</div>
+
+    <h2 id="doc-fields">Datele documentului</h2>
+    <table>
+      <tbody>
+        <tr><td><strong>Entitatea angajatoare</strong></td><td><span class="ph">[denumirea juridică a angajatorului]</span></td></tr>
+        <tr><td><strong>Proprietar document</strong></td><td>HR</td></tr>
+        <tr><td><strong>Avizare</strong></td><td>Juridic · Financiar · Director Medical · Responsabil protecția datelor</td></tr>
+        <tr><td><strong>Aprobare</strong></td><td><span class="ph">[reprezentant legal / organ competent]</span></td></tr>
+        <tr><td><strong>Intrare în vigoare</strong></td><td><span class="ph">[data adoptării și comunicării]</span></td></tr>
+        <tr><td><strong>Document părinte</strong></td><td>Regulamentul intern V2.6 · art. 4, 5, 19, 50 și 137</td></tr>
+        <tr><td><strong>Locație oficială</strong></td><td>Registrul online al documentelor interne / ERP</td></tr>
+      </tbody>
+    </table>
+    <p class="docref" style="pointer-events:none">
+      <span class="docref-meta">
+        <span class="docref-code">ADC-RI-02</span>
+        <span class="docref-name">Document părinte: Regulamentul Intern V2.6, art. 4, 5, 19, 50 și 137</span>
+        <span class="docref-desc">Prezenta procedură pune în aplicare articolele privind ierarhia documentelor, documentul controlat, comunicarea ERP și cadrul beneficiilor.</span>
+      </span>
+    </p>
+
+    <h2 id="sec-1"><span class="chapter-num">Secțiunea 1</span>Scop și obiect</h2>
+    <p><span class="codetag">OBL</span>Procedura stabilește condițiile în care Angajatorul acordă facilități pentru tratamente stomatologice personalului și beneficiarilor eligibili, precum și modul de solicitare, validare, aplicare, plată, evidență și control.</p>
+    <p><span class="codetag">OBL</span>Beneficiul este distinct de salariul de bază și de evaluarea profesională. El nu poate fi folosit ca recompensă ori sancțiune individuală și nu afectează independența profesională, indicația medicală, consimțământul pacientului sau confidențialitatea datelor medicale.</p>
+    <p><span class="codetag">OBL</span>Beneficiul are natură discreționară și se acordă în limitele contractelor, bugetului și capacității aprobate, cu excepția drepturilor mai favorabile stabilite prin contract ori prin lege. Versiunea în vigoare nu creează un drept permanent pentru perioade ulterioare acesteia.</p>
+    <p><span class="codetag">GHID</span>Obiectivul este accesul transparent și previzibil la servicii stomatologice în rețeaua Dr. Ardeleanu, în limitele matricei aprobate și ale capacității operaționale disponibile.</p>
+
+    <h2 id="sec-2"><span class="chapter-num">Secțiunea 2</span>Domeniu de aplicare</h2>
+    <p><span class="codetag">OBL</span>Procedura se aplică exclusiv salariaților entității juridice care o adoptă și beneficiarilor eligibili declarați de aceștia. Aplicarea la o altă societate afiliată necesită adoptare separată ori un act juridic expres.</p>
+    <p><span class="codetag">OBL</span>Beneficiul este disponibil cât timp raportul individual de muncă este activ, sub rezerva regulilor speciale pentru servicii deja prestate, planuri acceptate și plăți restante prevăzute în prezenta procedură.</p>
+    <p><span class="codetag">OBL</span>Procedura nu se aplică retroactiv serviciilor deja facturate sau achitate și nu generează dreptul la plata în numerar a unei reduceri neutilizate.</p>
+
+    <h2 id="sec-3"><span class="chapter-num">Secțiunea 3</span>Definiții</h2>
+    <table>
+      <thead><tr><th style="width:200px">Termen</th><th>Înțeles în prezenta procedură</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Salariat</strong></td><td>persoana încadrată prin contract individual de muncă la entitatea juridică ce adoptă procedura.</td></tr>
+        <tr><td><strong>Beneficiar eligibil</strong></td><td>soțul/soția, copilul, părintele, fratele/sora ori bunicul/bunica salariatului. Termenul este unul convențional al procedurii și nu califică toate aceste persoane drept «rude de gradul I».</td></tr>
+        <tr><td><strong>Pacient-beneficiar</strong></td><td>salariatul sau beneficiarul eligibil care primește serviciul medical și exercită personal drepturile pacientului.</td></tr>
+        <tr><td><strong>Vechime recunoscută</strong></td><td>vechimea continuă rezultată din evidențele HR, inclusiv continuitatea recunoscută expres prin contract ori decizie a Angajatorului.</td></tr>
+        <tr><td><strong>Preț de referință</strong></td><td>tariful în vigoare în sistemul clinicii la data aprobării planului de tratament, înaintea aplicării beneficiului, cu componentele incluse și cele facturate separat afișate transparent.</td></tr>
+        <tr><td><strong>Plan aprobat</strong></td><td>planul de tratament identificat în sistem, care indică serviciile, prețul de referință, procentul aplicabil, costurile distincte, contribuția pacientului, versiunea și valabilitatea.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-4"><span class="chapter-num">Secțiunea 4</span>Principii de acordare</h2>
+    <ul class="dash">
+      <li>criterii obiective, verificabile și aplicate uniform persoanelor aflate în situații comparabile;</li>
+      <li>tratament egal și nediscriminare, inclusiv în legătură cu concediile ori absențele protejate, sesizările de bună-credință și exercitarea drepturilor legale;</li>
+      <li>aplicare numai pentru viitor a modificărilor de procente, limite sau beneficiari;</li>
+      <li>separarea validării HR de decizia medicală și de prelucrarea datelor clinice;</li>
+      <li>transparența prețului și a contribuției pacientului înaintea începerii serviciului;</li>
+      <li>trasabilitatea fiecărei solicitări, aprobări, reduceri și plăți în ERP și în sistemul clinicii.</li>
+    </ul>
+
+    <h2 id="sec-5"><span class="chapter-num">Secțiunea 5</span>Eligibilitate și matricea beneficiilor</h2>
+    <h3 id="sec-5-1"><span class="num">5.1</span>Stabilirea tranșei de vechime</h3>
+    <p><span class="codetag">OBL</span>Nu există o condiție generală de vechime minimă. Pentru salariat, procentul se stabilește la data validării solicitării, în una dintre tranșele: 0–mai puțin de 6 luni; 6–mai puțin de 24 de luni; cel puțin 24 de luni.</p>
+    <p><span class="codetag">OBL</span>Beneficiarii eligibili primesc procentele din coloana dedicată, indiferent de tranșa de vechime a salariatului, dacă relația de eligibilitate este validată.</p>
+    <p><span class="codetag">OBL</span>Suspendarea contractului ori o absență protejată nu reduce automat vechimea recunoscută și nu poate conduce singură la un tratament nefavorabil. HR aplică regimul legal și contractual concret.</p>
+
+    <h3 id="sec-5-2"><span class="num">5.2</span>Matricea aprobată</h3>
+    <table class="pct">
+      <thead><tr><th>Categorie servicii</th><th>Salariat<br>0–&lt;6 luni</th><th>Salariat<br>6–&lt;24 luni</th><th>Salariat<br>≥24 luni</th><th>Beneficiar eligibil</th></tr></thead>
+      <tbody>
+        <tr><td>Consultații · imagistică · profilaxie</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+        <tr><td>Odontale · chirurgie · parodontologie · endodonție · pedodonție</td><td>50%</td><td>70%</td><td>100%</td><td>50%</td></tr>
+        <tr><td>Implantologie · protetică</td><td>0%</td><td>50%</td><td>60%</td><td>30%</td></tr>
+        <tr><td>Estetică · ortodonție</td><td>0%</td><td>30%</td><td>50%</td><td>25%</td></tr>
+      </tbody>
+    </table>
+    <div class="callout note"><p><strong>Cum se citește matricea.</strong> Procentul reprezintă reducerea aplicată prețului de referință al serviciului eligibil. 100% înseamnă contribuție zero pentru componenta acoperită. Materialele, componentele ori serviciile facturate distinct trebuie identificate în plan; procentul li se aplică numai dacă sunt incluse expres în categoria și tariful eligibil.</p></div>
+
+    <h3 id="sec-5-3"><span class="num">5.3</span>Reguli de aplicare a procentelor</h3>
+    <p><span class="codetag">OBL</span>Categoria serviciului este stabilită în sistem de clinica prestatoare, potrivit nomenclatorului controlat; încadrarea nu se modifică ad-hoc pentru a obține un procent diferit.</p>
+    <p><span class="codetag">OBL</span>Beneficiul se acordă numai pentru servicii prestate în rețeaua aprobată și numai după validarea eligibilității. Nu se acordă rambursări pentru servicii din afara rețelei.</p>
+    <p><span class="codetag">OBL</span>Beneficiul nu se cumulează cu promoții, abonamente ori alte reduceri pentru aceeași componentă, dacă regula campaniei nu permite expres cumulul. Pacientului i se aplică opțiunea mai favorabilă dintre cele eligibile și necumulabile.</p>
+    <p><span class="codetag">EVD</span>Planul de tratament păstrează prețul de referință, procentul, suma redusă, costurile distincte și contribuția finală a pacientului.</p>
+
+    <h2 id="sec-6"><span class="chapter-num">Secțiunea 6</span>Fluxul de acces și aprobare</h2>
+    <ol class="steps">
+      <li><strong>Inițiere în ERP.</strong> Salariatul deschide o solicitare pentru sine sau pentru un beneficiar eligibil. Solicitarea identifică persoana și relația de eligibilitate, fără informații despre diagnostic ori tratament.</li>
+      <li><strong>Validare HR.</strong> HR verifică existența raportului de muncă, vechimea recunoscută și categoria beneficiarului. Documentele justificative sunt solicitate numai în măsura necesară și prin canalul securizat aprobat.</li>
+      <li><strong>Identificator de eligibilitate.</strong> ERP generează un număr unic și transmite clinicii numai datele necesare confirmării beneficiului și procentului potențial aplicabil.</li>
+      <li><strong>Consultație și decizie medicală.</strong> Medicul evaluează pacientul în mod independent, stabilește indicația și discută alternativele, riscurile și costurile. Eligibilitatea financiară nu garantează indicația medicală și nu obligă pacientul să accepte tratamentul.</li>
+      <li><strong>Plan transparent.</strong> Clinica înregistrează planul cu prețul de referință, procentul, componentele incluse, costurile distincte și suma datorată de pacient. Planul primește număr, versiune și perioadă de valabilitate.</li>
+      <li><strong>Acceptare și programare.</strong> Pacientul acceptă planul și semnează documentele clinice aplicabile. Programarea se face în limita capacității operaționale și potrivit priorității medicale, fără discriminare.</li>
+      <li><strong>Prestare, plată și închidere.</strong> La fiecare etapă, recepția aplică exact codul aprobat, încasează contribuția pacientului și înregistrează serviciul. Solicitarea se închide după reconcilierea dintre ERP, sistemul clinicii și documentele financiare.</li>
+    </ol>
+    <div class="callout note"><p><strong>Separarea celor două semnături.</strong> Anexa nr. 2 la RI confirmă că salariatul a primit și a luat la cunoștință prezenta procedură. Documentele de informare și consimțământ semnate de pacient înaintea tratamentului au un scop medical distinct. Niciunul nu îl înlocuiește pe celălalt.</p></div>
+
+    <h2 id="sec-7"><span class="chapter-num">Secțiunea 7</span>Documentele de eligibilitate</h2>
+    <p><span class="codetag">OBL</span>Pentru salariat, HR utilizează evidențele proprii și nu solicită o dovadă suplimentară a calității de angajat.</p>
+    <p><span class="codetag">OBL</span>Pentru beneficiarul eligibil, HR poate solicita un document de stare civilă sau un alt înscris suficient pentru dovedirea relației declarate. Se verifică doar datele necesare eligibilității.</p>
+    <p><span class="codetag">EVD</span>ERP păstrează rezultatul verificării, categoria beneficiarului, persoana care a validat și data. Copia documentului se păstrează numai dacă există un temei și o perioadă de retenție aprobate; altfel se consemnează verificarea fără arhivarea unei copii integrale.</p>
+    <p><span class="codetag">OBL</span>O schimbare a situației declarate se comunică HR. Angajatorul poate reverifica eligibilitatea, cu respectarea minimizării datelor și fără acces la informațiile clinice.</p>
+
+    <h2 id="sec-8"><span class="chapter-num">Secțiunea 8</span>Drepturile pacientului și independența medicală</h2>
+    <ul class="dash">
+      <li><span class="codetag">OBL</span>pacientul primește informațiile medicale și financiare necesare și își exprimă consimțământul în nume propriu, potrivit legii;</li>
+      <li><span class="codetag">OBL</span>pentru un beneficiar adult, salariatul nu primește date medicale și nu semnează în locul acestuia fără consimțământul ori reprezentarea permisă de lege;</li>
+      <li><span class="codetag">OBL</span>medicul poate recomanda, amâna sau refuza un act medical exclusiv pe criterii profesionale și de siguranță;</li>
+      <li><span class="codetag">OBL</span>refuzul ori întreruperea tratamentului de către pacient nu afectează raportul de muncă al salariatului;</li>
+      <li><span class="codetag">OBL</span>beneficiul nu poate condiționa alegerea medicului în afara limitărilor obiective de disponibilitate, competență și organizare a rețelei.</li>
+    </ul>
+
+    <h2 id="sec-9"><span class="chapter-num">Secțiunea 9</span>Plată, rate și tratament financiar</h2>
+    <p><span class="codetag">OBL</span>Pacientul achită la recepție contribuția rămasă după aplicarea beneficiului, pe baza documentului fiscal și a planului aprobat.</p>
+    <p><span class="codetag">OBL</span>Plata în rate se poate aproba numai printr-un acord financiar separat, acceptat înainte de prestarea serviciilor vizate și administrat de Financiar împreună cu HR. Acordul stabilește sumele, scadențele, metodele de plată și consecințele întârzierii.</p>
+    <p><span class="codetag">OBL</span>Nu se operează rețineri automate din salariu. Orice reținere ori recuperare se realizează numai în cazurile și condițiile permise de lege, pe baza documentelor juridice necesare.</p>
+    <p><span class="codetag">EVD</span>Financiarul stabilește și documentează tratamentul contabil și fiscal aplicabil la data acordării beneficiului. Dacă legea impune declararea ori impozitarea, acestea se realizează prin fluxul salarial/contabil corespunzător.</p>
+
+    <h2 id="sec-10"><span class="chapter-num">Secțiunea 10</span>Protecția datelor și separarea accesului</h2>
+    <table>
+      <thead><tr><th style="width:130px">Rol</th><th>Poate utiliza</th><th>Nu primește în mod obișnuit</th></tr></thead>
+      <tbody>
+        <tr><td><strong>HR</strong></td><td>statutul de salariat, vechimea, categoria beneficiarului, dovada verificării</td><td>diagnostic, imagini, recomandări sau detalii ale tratamentului</td></tr>
+        <tr><td><strong>Echipa medicală</strong></td><td>datele necesare actului medical și planului de tratament</td><td>documente de muncă ori criterii de evaluare profesională</td></tr>
+        <tr><td><strong>Financiar</strong></td><td>identificatorul solicitării, valori, procent, contribuție, facturare și plată</td><td>detalii clinice care nu sunt necesare documentului financiar</td></tr>
+        <tr><td><strong>Manager clinică</strong></td><td>programare, eligibilitate confirmată, categorie servicii și starea fluxului</td><td>documente de rudenie și informații de personal fără necesitate</td></tr>
+      </tbody>
+    </table>
+    <p><span class="codetag">OBL</span>Accesul este acordat pe rol, jurnalizat și revizuit periodic. Datele se păstrează potrivit termenelor legale și nomenclatorului intern de retenție, apoi se șterg sau se anonimizează controlat.</p>
+    <p><span class="codetag">OBL</span>Transmiterea prin e-mail a documentelor de stare civilă ori a datelor medicale este evitată dacă nu există un canal aprobat și securizat. Codul QR poate conduce la ERP, dar nu trebuie să expună date personale în clar.</p>
+
+    <h2 id="sec-11"><span class="chapter-num">Secțiunea 11</span>Evidență, reconciliere și control</h2>
+    <p><span class="codetag">EVD</span>Fiecare utilizare a beneficiului este legată de identificatorul solicitării, salariatul titular, categoria beneficiarului, tranșa de vechime, categoria serviciului, prețul de referință, procentul, reducerea, contribuția pacientului, starea plății și unitatea prestatoare.</p>
+    <p><span class="codetag">OPR</span>Lunar, HR, Financiar și responsabilul clinicii reconciliază raportul ERP cu sistemul clinicii și cu documentele financiare. Raportul nu conține diagnostice ori alte date clinice care nu sunt necesare controlului beneficiului.</p>
+    <p><span class="codetag">OBL</span>Orice diferență este investigată înainte de corectarea documentelor ori a plăților. O eroare de sistem sau o neconcordanță nu este imputată automat salariatului ori personalului medical.</p>
+    <p><span class="codetag">OBL</span>Comisioanele medicilor și compensarea internă a costurilor se calculează potrivit documentelor financiare și de remunerare controlate, distinct de prezenta procedură și fără a influența indicația medicală.</p>
+    <table>
+      <thead><tr><th>Control minim lunar</th><th style="width:260px">Responsabil principal</th></tr></thead>
+      <tbody>
+        <tr><td>validarea tranșei și a beneficiarului</td><td><strong>HR</strong></td></tr>
+        <tr><td>încadrarea serviciului și aplicarea procentului</td><td><strong>Manager clinică / responsabil sistem</strong></td></tr>
+        <tr><td>valoarea, documentul fiscal, plata și eventualele rate</td><td><strong>Financiar</strong></td></tr>
+        <tr><td>acces, jurnale și incidente de securitate</td><td><strong>IT / responsabil protecția datelor</strong></td></tr>
+        <tr><td>eșantion de conformitate și excepții</td><td><strong>HR + Juridic + Financiar</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-12"><span class="chapter-num">Secțiunea 12</span>Excepții, erori și utilizare neconformă</h2>
+    <p><span class="codetag">OBL</span>O excepție de la matrice sau de la flux necesită motivare scrisă, criteriu obiectiv, aviz HR și Financiar și aprobarea autorității stabilite de Angajator. Excepția nu produce precedent automat și nu se aplică retroactiv.</p>
+    <p><span class="codetag">OBL</span>Dacă există indicii de declarație inexactă, acces neautorizat ori aplicare greșită a reducerii, solicitarea poate fi suspendată temporar pentru verificare. Persoana vizată este informată și poate prezenta explicații și documente.</p>
+    <p><span class="codetag">OBL</span>Corectarea financiară, recuperarea unei sume ori o eventuală măsură disciplinară urmează procedura legală aplicabilă și RI. Prezenta procedură nu creează consecințe automate.</p>
+    <p><span class="codetag">GHID</span>Sesizările privind eligibilitatea sau prețul se transmit prin ERP către HR/Financiar; aspectele medicale și drepturile pacientului se soluționează prin circuitul clinic dedicat.</p>
+
+    <h2 id="sec-13"><span class="chapter-num">Secțiunea 13</span>Încetarea sau modificarea raportului de muncă</h2>
+    <p><span class="codetag">OBL</span>Serviciile prestate înainte de încetarea raportului de muncă păstrează procentul validat și nu sunt recalificate numai pentru motivul încetării.</p>
+    <p><span class="codetag">OBL</span>Pentru servicii viitoare dintr-un plan nefinalizat, eligibilitatea se verifică la data prestării, dacă planul aprobat nu garantează expres procentul până la expirarea valabilității sale. Pacientul este informat înaintea continuării tratamentului.</p>
+    <p><span class="codetag">OBL</span>Sumele datorate de pacient potrivit unui plan ori acord financiar rămân datorate conform acelui document. Încetarea raportului de muncă nu autorizează o reținere automată din drepturile salariale finale.</p>
+    <p><span class="codetag">OBL</span>Beneficiile deja acordate cu bună-credință nu se recuperează retroactiv numai pentru că raportul de muncă a încetat ulterior.</p>
+
+    <h2 id="sec-14"><span class="chapter-num">Secțiunea 14</span>Roluri și responsabilități</h2>
+    <table>
+      <thead><tr><th style="width:190px">Rol</th><th>Responsabilități principale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Reprezentant legal</strong></td><td>aprobă procedura, matricea și excepțiile aflate în competența sa; asigură resursele și controlul.</td></tr>
+        <tr><td><strong>HR</strong></td><td>deține documentul, validează salariatul/vechimea/beneficiarul, comunică versiunea, administrează confirmările și verifică nediscriminarea.</td></tr>
+        <tr><td><strong>Director Medical</strong></td><td>asigură independența profesională, nomenclatorul clinic și separarea beneficiului de indicația și consimțământul medical.</td></tr>
+        <tr><td><strong>Financiar</strong></td><td>validează prețurile și tratamentul financiar/fiscal, administrează ratele și reconciliază valorile.</td></tr>
+        <tr><td><strong>Manager clinică / recepție</strong></td><td>programează, aplică în sistem procentul validat, prezintă costurile și înregistrează plata.</td></tr>
+        <tr><td><strong>IT / ERP</strong></td><td>asigură fluxul, accesul pe rol, jurnalele, integritatea, exportul și legăturile cu Registrul online.</td></tr>
+        <tr><td><strong>Responsabil protecția datelor</strong></td><td>avizează minimizarea, accesul, retenția, securitatea și gestionarea incidentelor.</td></tr>
+        <tr><td><strong>Salariat</strong></td><td>furnizează informații corecte, utilizează fluxul ERP, achită contribuția și comunică schimbările relevante.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-15"><span class="chapter-num">Secțiunea 15</span>Controlul versiunii, publicare și comunicare</h2>
+    <p><span class="codetag">OBL</span>Versiunea oficială este PDF-ul aprobat și arhivat în Registrul online. Interfața HTML poate fi utilizată pentru lectură; dacă apar diferențe, prevalează documentul oficial aprobat.</p>
+    <p><span class="codetag">OBL</span>Fișa din Registrul online indică această procedură drept document de aplicare pentru art. 4, 5, 19, 50 și 137 din RI V2.6, iar articolele respective păstrează trimiterea inversă către ADC-BEN-01.</p>
+    <p><span class="codetag">OBL</span>La adoptare și la fiecare versiune nouă care necesită luare la cunoștință, salariatul primește sarcină/notificare în ERP și, suplimentar, e-mail cu link și/sau cod QR. Pentru fiecare salariat, document și versiune, ERP generează o nouă Anexă nr. 2, semnată electronic și arhivată în dosarul de personal.</p>
+    <p><span class="codetag">OBL</span>Simpla publicare, notificare, deschidere ori descărcare nu echivalează cu semnarea. Anexa nr. 2 confirmă primirea și luarea la cunoștință, fără a modifica prin ea însăși contractul individual de muncă.</p>
+    <p><span class="codetag">OBL</span>Modificările de procente, beneficiari, condiții, limite ori reguli de plată se aprobă și se comunică prospectiv. Nu sunt afectate serviciile deja prestate și drepturile contractuale mai favorabile.</p>
+
+    <h2 id="sec-16"><span class="chapter-num">Secțiunea 16</span>Repere juridice pentru validare</h2>
+    <table>
+      <thead><tr><th style="width:220px">Reper</th><th>Relevanță pentru procedură</th></tr></thead>
+      <tbody>
+        <tr><td>Codul civil, art. 406–407</td><td>gradele de rudenie și afinitatea; justifică folosirea noțiunii convenționale «beneficiar eligibil».</td></tr>
+        <tr><td>Codul muncii, art. 169</td><td>limitele reținerilor din salariu și necesitatea evitării recuperării automate.</td></tr>
+        <tr><td>Legea drepturilor pacientului nr. 46/2003</td><td>informarea, consimțământul și confidențialitatea datelor medicale.</td></tr>
+        <tr><td>Regulamentul (UE) 2016/679, art. 5, 9 și 32</td><td>minimizarea, protecția datelor privind sănătatea și securitatea prelucrării.</td></tr>
+        <tr><td>RI V2.6, art. 4, 5, 19, 50 și 137</td><td>ierarhia, documentul controlat, comunicarea ERP, cadrul beneficiilor și legăturile din Registrul online.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:var(--ink-mute)"><strong>Surse oficiale:</strong> Codul civil · Codul muncii · Legea nr. 46/2003 · GDPR</p>
+    <p style="font-size:13px;color:var(--ink-mute);font-style:italic">Forma se reverifică juridic, fiscal și operațional la data adoptării și ori de câte ori se modifică legislația, structura angajatorului, sistemele informatice ori matricea beneficiilor.</p>
+
+    <h2 id="sec-17"><span class="chapter-num">Secțiunea 17</span>Evidența modificărilor și aprobarea</h2>
+    <table>
+      <thead><tr><th style="width:90px">Versiune</th><th style="width:120px">Data</th><th style="width:140px">Statut</th><th>Modificări principale</th></tr></thead>
+      <tbody>
+        <tr><td>V2.0</td><td>octombrie 2024</td><td>Versiune anterioară</td><td>Matrice inițială; solicitare prin manager/HR; monitorizare SPSS.</td></tr>
+        <tr><td>V3.0</td><td>16.08.2026</td><td>Proiect</td><td>Subordonare RI V2.6; beneficiari eligibili; ERP; protecția datelor; separare medicală; plată și control legal.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout warn"><p><strong>Înlocuirea versiunii anterioare.</strong> ADC-BEN-01 V3.0 înlocuiește V2.0 numai de la data intrării sale în vigoare. Până atunci, proiectul rămâne fără efect, iar situațiile anterioare se analizează potrivit documentelor valabile la data faptelor.</p></div>
+    <table>
+      <thead><tr><th style="width:110px">Rol</th><th>Nume / funcție</th><th style="width:110px">Data</th><th style="width:170px">Semnătură / aprobare ERP</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Elaborat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div></td><td>HR</td><td class="value-line"></td><td class="value-line"></td></tr>
+        <tr><td><strong>Avizat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div></td><td>Juridic · Financiar · Medical · DPO</td><td class="value-line"></td><td class="value-line"></td></tr>
+        <tr><td><strong>Aprobat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div></td><td>Reprezentant legal / organ competent</td><td class="value-line"></td><td class="value-line"></td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="anexa-a"><span class="chapter-num">Anexa nr. A</span>Câmpuri minime ale solicitării ERP</h2>
+    <p style="font-style:italic;color:var(--ink-mute)">Interfața poate avea o prezentare diferită, dar trebuie să păstreze câmpurile și dovezile minime de mai jos.</p>
+    <table>
+      <thead><tr><th style="width:130px">Grup</th><th>Câmpuri minime</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Identificare</strong></td><td>număr solicitare; data/ora; salariat titular; entitate angajatoare; unitate.</td></tr>
+        <tr><td><strong>Eligibilitate</strong></td><td>beneficiar: salariat/soț/soție/copil/părinte/frate/soră/bunic/bunică; tranșă de vechime; validare HR; dată.</td></tr>
+        <tr><td><strong>Plan</strong></td><td>clinică; pacient-beneficiar; categorie servicii; plan nr./versiune; preț de referință; costuri distincte; valabilitate.</td></tr>
+        <tr><td><strong>Beneficiu</strong></td><td>procent; valoare reducere; contribuție pacient; regulă de necumul; aprobări/excepții.</td></tr>
+        <tr><td><strong>Finalizare</strong></td><td>servicii prestate; document fiscal; încasare/rate; stare; reconciliere; utilizator și jurnal modificări.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="anexa-b"><span class="chapter-num">Anexa nr. B</span>Legături obligatorii în Registrul online</h2>
+    <ul class="dash">
+      <li>RI V2.6 art. 4 → ADC-BEN-01 V3.0: subordonare și soluționarea conflictelor;</li>
+      <li>RI V2.6 art. 5 → ADC-BEN-01 V3.0: document controlat, Registru online și confirmare individuală;</li>
+      <li>RI V2.6 art. 19 → ADC-BEN-01 V3.0: notificare ERP, e-mail/QR, Anexa nr. 2 și arhivare;</li>
+      <li>RI V2.6 art. 50 → ADC-BEN-01 V3.0: beneficiari, criterii, procente, plată și limite;</li>
+      <li>RI V2.6 art. 137 → ADC-BEN-01 V3.0: statut de procedură subordonată și controlul versiunii;</li>
+      <li>ADC-BEN-01 V3.0 → RI V2.6 art. 4, 5, 19, 50 și 137: trimiterea inversă de pe prima pagină și din fișa documentului.</li>
+    </ul>
+    <div class="callout note"><p><strong>Notă de implementare.</strong> Publicarea V3.0 trebuie să creeze un document nou în Registrul online, nu să suprascrie fișierul V2.0. Versiunea anterioară se arhivează cu statutul «Retras/Înlocuit», iar relațiile și confirmările rămân verificabile.</p></div>
+
+    <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 1</strong> · 16 august 2026.</p>
+    <table>
+      <thead>
+        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea proiectului ADC-BEN-01 V3.0 pentru validare și adoptare — primul document integrat în secțiunea Proceduri de lucru a Registrului online, cu cele 17 secțiuni și 2 anexe convertite integral, subordonat Regulamentului Intern V2.6 (art. 4, 5, 19, 50 și 137).</td></tr>
+      </tbody>
+    </table>
+
+  </article>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h5>Clinicile Dr. Ardeleanu</h5>
+      <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
+      <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
+    </div>
+    <div>
+      <h5>Document</h5>
+      <p>Cod: ADC-BEN-01</p>
+      <p>V3.0 · proiect</p>
+      <p>16 august 2026</p>
+      <p>17 secțiuni · 2 anexe</p>
+    </div>
+    <div>
+      <h5>Rețea</h5>
+      <p>8 clinici în 7 orașe</p>
+      <p>80+ medici supraspecializați</p>
+      <p>30.000+ pacienți unici</p>
+      <p>4.9★ Google · 2.950 recenzii</p>
+    </div>
+    <div>
+      <h5>Contact &amp; Acces</h5>
+      <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
+      <p>031 99 63</p>
+      <p><a href="mailto:clinici@ardeleanu.ro">clinici@ardeleanu.ro</a></p>
+      <p>ERP intern: erp.clinicile-ardeleanu.ro</p>
+    </div>
+  </div>
+  <div class="din-2017">
+    <span>DIN 2017</span>·<span>EXCELENȚĂ</span>·<span>ACCESIBILITATE</span>·<span>FAMILIE</span>
+  </div>
+</footer>
+
+<script>
+// Highlight current section in TOC on scroll
+(function(){
+  const links = document.querySelectorAll('.toc-side a[href^="#"]');
+  const map = new Map();
+  links.forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el) map.set(el, a);
+  });
+  if(!map.size) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a = map.get(e.target);
+        if(a) a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-15% 0px -75% 0px'});
+  map.forEach((a,el)=>io.observe(el));
+})();
+</script>
+
+<div class="readbar" aria-hidden="true"></div>
+<button class="totop" id="totop" aria-label="Sus">↑</button>
+<script>
+// ============ PLATFORM FRAME (unified) ============
+(function(){
+  // ---- reading progress ----
+  var bar=document.querySelector('.readbar');
+  function upBar(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  }
+  window.addEventListener('scroll',upBar,{passive:true}); upBar();
+
+  // ---- back to top ----
+  var totop=document.getElementById('totop');
+  window.addEventListener('scroll',function(){ totop.classList.toggle('show', window.scrollY>600); },{passive:true});
+  totop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // ---- sticky header: swap breadcrumb for document title once hero scrolls past ----
+  var topbar=document.querySelector('.topbar');
+  var hero=document.querySelector('.hero');
+  if(topbar && hero){
+    function upCrumb(){
+      var r=hero.getBoundingClientRect();
+      topbar.classList.toggle('scrolled', r.bottom<=topbar.offsetHeight);
+    }
+    window.addEventListener('scroll',upCrumb,{passive:true});
+    window.addEventListener('resize',upCrumb);
+    upCrumb();
+  }
+
+  // ---- mobile drawer ----
+  var sidebar=document.querySelector('.toc-side');
+  var menuBtn=document.getElementById('menuBtn');
+  function openMenu(){
+    sidebar.classList.add('open');
+    document.body.classList.add('menu-open');
+  }
+  function closeMenu(){
+    if(!sidebar.classList.contains('open')) return;
+    sidebar.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  }
+  if(menuBtn&&sidebar){
+    menuBtn.addEventListener('click',function(){
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    sidebar.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(){ if(window.innerWidth<=980) closeMenu(); });
+    });
+    document.addEventListener('click',function(e){
+      if(!sidebar.classList.contains('open')) return;
+      if(sidebar.contains(e.target)||menuBtn.contains(e.target)) return;
+      closeMenu();
+    });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMenu(); });
+    document.addEventListener('touchmove',function(e){
+      if(sidebar.classList.contains('open') && !sidebar.contains(e.target)) e.preventDefault();
+    },{passive:false});
+  }
+
+  // ---- search (filter cuprins) ----
+  var search=document.getElementById('search');
+  if(search&&sidebar){
+    var norm=function(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); };
+    var groups=[].slice.call(sidebar.querySelectorAll('.group'));
+    search.addEventListener('input',function(){
+      var q=norm(search.value.trim());
+      groups.forEach(function(g){
+        var visible=0;
+        [].slice.call(g.children).forEach(function(child){
+          if(child.tagName!=='OL') return;
+          [].slice.call(child.children).forEach(function(li){
+            var mainLink=li.querySelector('a');
+            var mainMatch=!q||(mainLink&&norm(mainLink.textContent).indexOf(q)!==-1);
+            li.classList.toggle('toc-search-hide', !!q&&!mainMatch);
+            if(mainMatch) visible++;
+          });
+        });
+        g.classList.toggle('toc-search-hide', !!q&&visible===0);
+      });
+      if(q&&window.innerWidth<=980) sidebar.classList.add('open');
+    });
+  }
+
+  // ---- keyboard shortcuts ----
+  document.addEventListener('keydown',function(e){
+    var tag=(document.activeElement&&document.activeElement.tagName)||'';
+    if((e.key==='/'||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'))&&tag!=='INPUT'&&tag!=='TEXTAREA'){
+      if(search){ e.preventDefault(); search.focus(); }
+    } else if(e.key==='Escape'&&document.activeElement===search){
+      search.value=''; search.dispatchEvent(new Event('input')); search.blur();
+    }
+  });
+
+  // ---- mobile notice: keep dismissed within session ----
+  try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ var mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
+
+  // ---- partajare document: butonul apare doar pentru accesul cu parola generală ----
+  var shareBtn=document.getElementById('shareBtn');
+  if(shareBtn){
+    try{ if(sessionStorage.getItem('adcManualeAuth')==='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b') shareBtn.hidden=false; }catch(e){}
+    shareBtn.addEventListener('click',function(){
+      var link=location.origin+location.pathname+'#k='+encodeURIComponent('beneficii-7f3a1c');
+      function done(){ var t=shareBtn.innerHTML; shareBtn.innerHTML='✓ Link copiat'; setTimeout(function(){ shareBtn.innerHTML=t; },2200); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:',link); });
+      else window.prompt('Copiază linkul:',link);
+    });
+  }
+})();
+</script>
+
+<!-- ============ Print PDF per formular (generat dinamic) ============ -->
+<script>
+(function(){
+  var article = document.querySelector('.article');
+  if(!article) return;
+  var kids = Array.prototype.slice.call(article.children);
+  var n = kids.length;
+
+  function rangeHasTable(start, end){
+    for(var i = start; i < end; i++){ if(kids[i].tagName === 'TABLE') return true; }
+    return false;
+  }
+
+  function makeBtn(label){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'print-form-btn';
+    b.title = 'Printează „' + label + '” ca PDF';
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>PDF</span>';
+    return b;
+  }
+
+  var restoring = false;
+  function restore(){
+    if(restoring) return;
+    restoring = true;
+    kids.forEach(function(el){ el.removeAttribute('data-print-hidden'); });
+    document.body.classList.remove('printing-form');
+    restoring = false;
+  }
+  window.addEventListener('afterprint', restore);
+
+  function printRange(startIdx, endIdx){
+    kids.forEach(function(el, i){
+      if(i < startIdx || i >= endIdx) el.setAttribute('data-print-hidden', '1');
+    });
+    document.body.classList.add('printing-form');
+    window.print();
+    setTimeout(restore, 4000);
+  }
+
+  for(var i = 0; i < n; i++){
+    var el = kids[i];
+    var isAnexaH2 = el.tagName === 'H2' && el.id && el.id.indexOf('anexa-') === 0;
+    var isSec17 = el.tagName === 'H2' && el.id === 'sec-17';
+    if(!isAnexaH2 && !isSec17) continue;
+
+    var end = i + 1;
+    while(end < n && kids[end].tagName !== 'H2') end++;
+
+    if(!rangeHasTable(i + 1, end)) continue;
+
+    (function(startIdx, endIdx, headingEl){
+      var btn = makeBtn(headingEl.textContent.trim());
+      btn.addEventListener('click', function(e){ e.preventDefault(); printRange(startIdx, endIdx); });
+      headingEl.appendChild(btn);
+    })(i, end, el);
+  }
+})();
+</script>
+</body>
+</html>

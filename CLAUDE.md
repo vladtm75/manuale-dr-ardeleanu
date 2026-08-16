@@ -93,6 +93,8 @@ registratori/Manualul Registratorului Medical.html ← TOT manualul registratori
 registratori/assets/                         ← imagini (+ .docx-ul sursă al manualului)
 roi/Regulamentul de Organizare Interna.html  ← Regulamentul de Organizare Internă (ROI), un singur fișier
 roi/assets/                                  ← imagini/documente (gol momentan)
+proceduri/                                   ← Proceduri de lucru, subordonate RI (Anexa nr. 13) — un fișier HTML per procedură
+proceduri/assets/                            ← imagini/documente per procedură
 ```
 
 ### Paritatea de design între manuale (OBLIGATORIE)
@@ -207,6 +209,19 @@ ar trebui să fie doar despre modificările de substanță ale textului, nu desp
    - **Blancurile scurte, inline, cu format fix** (zi/lună/an, numere de decizie, ex. „Nr. ___ din
      ___ / ___ / ____") RĂMÂN underscore-uri simple în text — nu sunt „valoare de completat"
      în sensul de mai sus, ci câmpuri de lățime fixă; nu li se aplică `.value-line`.
+
+### Proceduri de lucru (`proceduri/`)
+- Documente subordonate RI, câte unul per procedură (ex. `proceduri/ADC-BEN-01_Procedura_Beneficii.html`),
+  administrate prin Registrul din Anexa nr. 13 a RI. Folosesc **exact același template** (CSS, topbar,
+  hero, TOC, gate script, footer, script-urile de platformă) ca ROI — la o procedură nouă, copiază
+  structura unei proceduri existente în loc să reinventezi.
+- Fiecare procedură are cheie de acces proprie (`localStorage` `adcAuthBEN` etc.) și buton „Partajează",
+  la fel ca manualele — adaugă intrarea corespunzătoare în obiectul `SHARE` din `index.html`.
+- Cardul „Proceduri de lucru" de pe homepage devine link viu de îndată ce există cel puțin o procedură
+  publicată; câmpurile „Publicate"/„În pregătire" din meta se actualizează la fiecare procedură nouă.
+  Nu are încă o editoare desemnată; Vlad administrează direct conținutul până va desemna pe cineva.
+- Sursa fiecărei proceduri: primită de la Vlad ca PDF, convertit direct în HTML (extragere de text +
+  tabele) — nu presupune că fișierul PDF original rămâne în repo.
 
 ## Versiuni și statistici (de actualizat împreună)
 
