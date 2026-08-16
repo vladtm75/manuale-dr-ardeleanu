@@ -215,11 +215,25 @@ ar trebui să fie doar despre modificările de substanță ale textului, nu desp
   administrate prin Registrul din Anexa nr. 13 a RI. Folosesc **exact același template** (CSS, topbar,
   hero, TOC, gate script, footer, script-urile de platformă) ca ROI — la o procedură nouă, copiază
   structura unei proceduri existente în loc să reinventezi.
+- **Hub central:** `proceduri/index.html` listează toate procedurile (publicate + „în pregătire") într-un
+  card grid (`.proto-index`/`.proto-grid`/`.proto-card`). Cardul „Proceduri de lucru" de pe homepage
+  indică mereu spre acest hub, **nu** spre o procedură anume — așa nu trebuie schimbat la fiecare
+  procedură nouă, doar hub-ul se actualizează.
+- **Bară de taburi între proceduri:** fiecare pagină de procedură are, sub topbar și deasupra hero-ului,
+  un `<nav class="proc-tabs">` cu un tab per procedură (publicate = link `.proc-tab`, în pregătire =
+  `.proc-tab.soon` fără link) plus un tab final spre hub (`.proc-tab.hub`). **La orice procedură nouă
+  adăugată sau publicată, actualizează acest bloc identic în TOATE paginile din `proceduri/`** (inclusiv
+  hub-ul, care nu are tab-bar propriu dar trebuie să reflecte aceeași listă în `.proto-grid`) — altfel
+  taburile ies desincronizate între pagini.
+- Adăugarea tab-bar-ului împinge conținutul sub el cu ~44px (~36px pe mobil) — la o pagină de procedură
+  nouă, pornește de la CSS-ul unei proceduri existente (nu de la ROI direct), ca să moștenești automat
+  offset-urile corecte (`.toc-side{top:122px}`, `scroll-margin-top:122px` pe `h2`/`h3`, sertarul mobil
+  la `top:96px`) — altfel linkurile de ancoră aterizează sub taburi.
 - Fiecare procedură are cheie de acces proprie (`localStorage` `adcAuthBEN` etc.) și buton „Partajează",
-  la fel ca manualele — adaugă intrarea corespunzătoare în obiectul `SHARE` din `index.html`.
-- Cardul „Proceduri de lucru" de pe homepage devine link viu de îndată ce există cel puțin o procedură
-  publicată; câmpurile „Publicate"/„În pregătire" din meta se actualizează la fiecare procedură nouă.
-  Nu are încă o editoare desemnată; Vlad administrează direct conținutul până va desemna pe cineva.
+  la fel ca manualele — adaugă intrarea corespunzătoare în obiectul `SHARE` din `index.html`. Hub-ul are
+  și el propria cheie (`adcAuthPROC`) **și** acceptă cheia oricărei proceduri publicate (lista `PROC_KEYS`
+  din gate-ul hub-ului) — la o procedură nouă cu cheie proprie, adaugă intrarea și acolo.
+- Nu are încă o editoare desemnată; Vlad administrează direct conținutul până va desemna pe cineva.
 - Sursa fiecărei proceduri: primită de la Vlad ca PDF, convertit direct în HTML (extragere de text +
   tabele) — nu presupune că fișierul PDF original rămâne în repo.
 

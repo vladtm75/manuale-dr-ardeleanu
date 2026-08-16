@@ -193,6 +193,37 @@ a:hover{border-bottom-color:var(--brand-primary)}
 .status-badge--active{background:#eaf3e6;color:#3f7d3a;border:1px solid #bcdcb3}
 .status-badge--pending{background:#f2ede6;color:#8a6d3a;border:1px solid #ddd0b8}
 
+/* ============ TABS ÎNTRE PROCEDURI (comun tuturor paginilor din proceduri/) ============ */
+.proc-tabs{
+  position:sticky;top:54px;z-index:45;
+  background:var(--paper-pure);border-bottom:1px solid var(--rule);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.proc-tabs-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;gap:4px;white-space:nowrap;
+}
+.proc-tab{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 14px;font-size:13px;font-weight:600;
+  color:var(--ink-mute);text-decoration:none;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+}
+.proc-tab:hover{color:#b97832;border-bottom-color:var(--rule)}
+.proc-tab.active{color:#b97832;border-bottom-color:#FAA703}
+.proc-tab .pt-code{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-mute)}
+.proc-tab.active .pt-code{color:#b97832}
+.proc-tab.soon{color:var(--ink-mute);opacity:.5;cursor:default}
+.proc-tab.soon .pt-code{font-style:italic}
+.proc-tab.hub{margin-left:auto;color:var(--brand-primary);border-bottom-color:transparent}
+.proc-tab.hub:hover{color:var(--brand-primary);border-bottom-color:var(--brand-wheat)}
+@media(max-width:640px){
+  .proc-tabs{top:46px}
+  .proc-tabs-inner{padding:0 14px;gap:2px}
+  .proc-tab{padding:9px 10px;font-size:12px}
+}
+
 /* ============ ARTICLE LAYOUT ============ */
 .layout{
   max-width:1380px;margin:0 auto;padding:38px 0 80px;
@@ -204,9 +235,9 @@ a:hover{border-bottom-color:var(--brand-primary)}
 
 /* TOC sidebar */
 .toc-side{
-  position:sticky;top:78px;
+  position:sticky;top:122px;
   align-self:start;
-  max-height:calc(100vh - 96px);
+  max-height:calc(100vh - 140px);
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
@@ -283,7 +314,7 @@ a:hover{border-bottom-color:var(--brand-primary)}
   padding-bottom:10px;
   border-bottom:2px solid var(--rule);
   letter-spacing:-.005em;
-  scroll-margin-top:78px;
+  scroll-margin-top:122px;
 }
 .article h2 .chapter-num{
   display:block;
@@ -297,7 +328,7 @@ a:hover{border-bottom-color:var(--brand-primary)}
   color:var(--brand-primary);font-size:21px;
   margin:34px 0 8px;padding-bottom:6px;
   border-bottom:1px solid var(--rule);
-  line-height:1.3;scroll-margin-top:78px;
+  line-height:1.3;scroll-margin-top:122px;
 }
 .article h4{
   font-family:'Poppins',sans-serif;font-weight:600;
@@ -540,7 +571,7 @@ html{scroll-behavior:smooth}
   .menu-btn{display:inline-flex}
   .toc-side{
     align-self:stretch;
-    position:fixed;left:0;top:56px;bottom:0;width:300px;height:auto;max-height:none;margin:0;z-index:55;
+    position:fixed;left:0;top:96px;bottom:0;width:300px;height:auto;max-height:none;margin:0;z-index:55;
     background:var(--paper-pure);box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
     padding:20px 18px 40px;transform:translateX(-105%) translateZ(0);transition:transform .25s;
     -webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior:contain;
@@ -689,7 +720,7 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
       <span class="crumb-path">
         <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
         <span>›</span>
-        <span>Proceduri de lucru</span>
+        <a href="index.html" style="border-bottom:none">Proceduri de lucru</a>
       </span>
       <span class="crumb-title">Procedură Beneficii Stomatologice</span>
     </div>
@@ -704,6 +735,17 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
     <span class="pill dark">V3.0 · proiect</span>
   </div>
 </header>
+
+<!-- =========================== TABURI ÎNTRE PROCEDURI =========================== -->
+<nav class="proc-tabs" aria-label="Proceduri de lucru">
+  <div class="proc-tabs-inner">
+    <a class="proc-tab active" href="ADC-BEN-01_Procedura_Beneficii.html">Beneficii <span class="pt-code">ADC-BEN-01</span></a>
+    <span class="proc-tab soon">Deconturi <span class="pt-code">în pregătire</span></span>
+    <span class="proc-tab soon">Flotă &amp; GPS <span class="pt-code">în pregătire</span></span>
+    <span class="proc-tab soon">Uniforme <span class="pt-code">în pregătire</span></span>
+    <a class="proc-tab hub" href="index.html">Toate procedurile ↗</a>
+  </div>
+</nav>
 
 <!-- =========================== HERO =========================== -->
 <section class="hero">
