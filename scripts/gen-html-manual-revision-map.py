@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
 Regenerează revision-map.js pentru manualele cu conținut HTML direct în
-fișier (Asistenți, Registratori — spre deosebire de Medici, care are
-conținutul structurat în manual-data.js). Vezi scripts/gen-medici-revision-map.py
-pentru varianta echivalentă a Manualului Medicului.
+fișier (Asistenți, Registratori, Medici — toate trei folosesc același
+sistem de la migrarea Manualului Medicului la HTML static, rev. 30).
 
 De ce există: paginile nu țin un istoric propriu al textului vechi; toggle-ul
 "versiune anterioară" din Registrul de modificări aduce textul „dinainte"
@@ -41,6 +40,11 @@ MANUALS = {
         "path": "registratori/Manualul Registratorului Medical.html",
         "output": "registratori/revision-map.js",
         "global_var": "REGISTRATORI_REVISION_MAP",
+    },
+    "medici": {
+        "path": "medici/Manualul Medicului.html",
+        "output": "medici/revision-map.js",
+        "global_var": "MEDICI_REVISION_MAP",
     },
 }
 
