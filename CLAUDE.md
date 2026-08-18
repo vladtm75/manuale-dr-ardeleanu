@@ -60,6 +60,36 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
    - Registratori: în `registratori/Manualul Registratorului Medical.html`, înainte de `</article>`.
    Numerotarea reviziilor e per-manual și crește mereu cu 1; nu se rescriu rândurile vechi.
 
+## Stilul redacțional — manual-proză (OBLIGATORIU la orice conținut nou sau rescris)
+
+De la rev. 14 a Manualului Asistenților (18 august 2026), manualele se scriu în **proză narativă
+cursivă**, nu în liste cu buline. Regula se aplică la orice conținut nou, la orice rescriere și,
+treptat, la celelalte manuale (registratori, medici) pe măsură ce sunt aduse la același stil.
+
+1. **Proză, nu checklist.** Pașii unei proceduri devin o narațiune pe firul acțiunii („Se începe
+   cu… Apoi… La final…"); regulile devin fraze legate prin sens, cu conectori naturali („apoi",
+   „în paralel", „tocmai de aceea"). Enumerările scurte (2–4 elemente simple) devin enumerare în
+   frază: „mănuși, mască și ochelari de protecție".
+2. **Fidelitate totală.** Rescrierea în proză nu pierde și nu inventează NIMIC: toate valorile
+   numerice, dozele, timpii, temperaturile, concentrațiile, denumirile de produse, codurile ADC-*,
+   numele și responsabilitățile rămân exacte. Volumul de text rezultat trebuie să fie ≥ 90% din
+   original — proza leagă, nu comprimă.
+3. **Ce rămâne NE-proză (nu se transformă):** tabelele (sunt date, nu text), figurile cu
+   figcaption, casetele `callout` (rămân casete; doar conținutul-listă din interior devine proză),
+   cardurile `docref`, cuprinsurile `hatnote`/`chapter-toc`, organigramele, indexurile de
+   protocoale, bibliografia (index de legislație) și enumerarea de secțiuni din preambul.
+4. **Evidențierile ghidează ochiul.** Termenii critici păstrează `<strong>`, denumirile și
+   formulele `<em>` — proza fără evidențieri e la fel de greu de scanat ca un checklist fără
+   context. Ancorele (id-urile), href-urile interne și structura h2/h3/h4 rămân neatinse.
+5. **Verificare înainte de PR:** zero `<ul>`/`<ol>` de conținut rămase în secțiunea editată;
+   număr identic de figuri/tabele/casete față de versiunea anterioară; toate id-urile și
+   linkurile prezente. Modelul aprobat: Fundamentele și Capitolele I–XXIII din Manualul
+   Asistenților (rev. 12–14).
+6. **Capturile de ecran de telefon** (SMS-uri, ecrane de semnare pe mobil) se integrează mici, în
+   fluxul textului: `<figure>` cu `float:right; width:min(240–300px, 42–46%)` și text-wrap, cu
+   `clear:both` pe elementul următor — nu ca imagini late pe toată coloana. Capturile de ecran
+   desktop (ex. taburi SPS) rămân pe lățimea întreagă.
+
 ## Imagini și fotografii (permise editoarelor)
 
 Editoarele (Bianca, Loredana, Alexandra) pot adăuga fotografii/imagini în manualul lor, pe branch-ul lor,
