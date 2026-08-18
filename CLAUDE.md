@@ -75,19 +75,19 @@ treptat, la celelalte manuale (registratori, medici) pe măsură ce sunt aduse l
    numele și responsabilitățile rămân exacte. Volumul de text rezultat trebuie să fie ≥ 90% din
    original — proza leagă, nu comprimă.
 3. **Ce rămâne NE-proză (nu se transformă):** tabelele (sunt date, nu text), figurile cu
-   figcaption, casetele  (rămân casete; doar conținutul-listă din interior devine proză),
-   cardurile , cuprinsurile /, organigramele, indexurile de
+   figcaption, casetele `callout` (rămân casete; doar conținutul-listă din interior devine proză),
+   cardurile `docref`, cuprinsurile `hatnote`/`chapter-toc`, organigramele, indexurile de
    protocoale, bibliografia (index de legislație) și enumerarea de secțiuni din preambul.
-4. **Evidențierile ghidează ochiul.** Termenii critici păstrează , denumirile și
-   formulele  — proza fără evidențieri e la fel de greu de scanat ca un checklist fără
+4. **Evidențierile ghidează ochiul.** Termenii critici păstrează `<strong>`, denumirile și
+   formulele `<em>` — proza fără evidențieri e la fel de greu de scanat ca un checklist fără
    context. Ancorele (id-urile), href-urile interne și structura h2/h3/h4 rămân neatinse.
-5. **Verificare înainte de PR:** zero / de conținut rămase în secțiunea editată;
+5. **Verificare înainte de PR:** zero `<ul>`/`<ol>` de conținut rămase în secțiunea editată;
    număr identic de figuri/tabele/casete față de versiunea anterioară; toate id-urile și
    linkurile prezente. Modelul aprobat: Fundamentele și Capitolele I–XXIII din Manualul
    Asistenților (rev. 12–14).
 6. **Capturile de ecran de telefon** (SMS-uri, ecrane de semnare pe mobil) se integrează mici, în
-   fluxul textului:  cu  și text-wrap, cu
-    pe elementul următor — nu ca imagini late pe toată coloana. Capturile de ecran
+   fluxul textului: `<figure>` cu `float:right; width:min(240–300px, 42–46%)` și text-wrap, cu
+   `clear:both` pe elementul următor — nu ca imagini late pe toată coloana. Capturile de ecran
    desktop (ex. taburi SPS) rămân pe lățimea întreagă.
 
 ## Imagini și fotografii (permise editoarelor)
