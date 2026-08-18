@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<script>
+/* Gate: acces cu parola generală (sessionStorage, ca înainte) SAU cu cheia proprie
+   a documentului — memorată în localStorage sau primită printr-un link #k=... */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='3453ce9334620bda34bab965d37f0d6cc81798651d7ce7c4a1775ce8dcad5a09';
+  var LK='adcAuthONB';
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Procedura de Onboarding al Pacientului, Dr. Ardeleanu (ADC-ONB-01)</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Procedura de Onboarding al Pacientului P0–P2, Dr. Ardeleanu" />
+<meta property="og:description" content="Procedura de onboarding al pacientului (ADC-ONB-01, V18) — fluxul integrat P0–P2: programarea, primirea la recepție, consultația, API-ul, consimțămintele, RX/CBCT și gestionarea refuzurilor. Manual narativ pentru recepție, asistență și echipa medicală." />
+<meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/ADC-ONB-01_Procedura_Onboarding_Pacient.html" />
+<meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/onb-cele-patru-porti.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="ro_RO" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/onb-cele-patru-porti.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-primary:#7B1C16;
+  --brand-primary-deep:#5d140f;
+  --brand-primary-soft:#a14841;
+  --brand-wheat:#F2DAB7;
+  --brand-cream:#F5EDE3;
+  --brand-cream-warm:#FBF6EE;
+  --brand-olive:#B5BD5C;
+  --brand-amber:#C9A227;
+  --brand-yellow:#FBE483;
+  --brand-terracotta:#dd7e6b;
+  --brand-alert:#FF0300;
+  --ink:#222222;
+  --ink-soft:#4a4541;
+  --ink-mute:#7a736d;
+  --rule:#e6dccd;
+  --rule-soft:#efe7d7;
+  --paper:#fbf7f1;
+  --paper-pure:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Poppins',system-ui,sans-serif;
+  font-weight:400;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--brand-primary);text-decoration:none;border-bottom:1px solid rgba(123,28,22,.25)}
+a:hover{border-bottom-color:var(--brand-primary)}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper-pure);
+  border-bottom:1px solid var(--rule);
+  box-shadow:0 1px 0 rgba(123,28,22,.04);
+}
+.topbar-inner{
+  max-width:1380px;margin:0 auto;padding:10px 28px;
+  display:flex;align-items:center;gap:18px;
+}
+.topbar img.logo{height:34px;width:auto;display:block}
+.back-home{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  font-size:12.5px;font-weight:600;color:var(--brand-primary);white-space:nowrap;
+  border:1.5px solid var(--rule);border-radius:999px;padding:6px 15px;
+  transition:background .15s,border-color .15s;border-bottom:1.5px solid var(--rule);
+}
+.back-home:hover{background:var(--brand-cream);border-color:var(--brand-primary);}
+.back-home .bh-arrow{font-size:15px;line-height:1}
+@media(max-width:840px){ .back-home .bh-txt{display:none} .back-home{padding:6px 11px} }
+.topbar .crumbs{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:12px;letter-spacing:.04em;color:var(--ink-mute);
+  border-left:1px solid var(--rule);padding-left:14px;
+}
+.topbar .crumbs strong{color:var(--brand-primary);font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+.topbar .crumbs .crumb-title{display:none;color:var(--ink);font-weight:600}
+.topbar.scrolled .crumbs .crumb-path{display:none}
+.topbar.scrolled .crumbs .crumb-title{display:inline}
+.topbar .spacer{flex:1}
+.topbar .pill{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;
+  background:var(--brand-cream);color:var(--brand-primary);
+  font-weight:600;border:1px solid var(--brand-wheat);
+}
+.topbar .pill.dark{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.topbar .mh-share{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 13px;
+  font-family:inherit;font-weight:600;font-size:12px;color:var(--brand-primary);
+  cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
+}
+.topbar .mh-share:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
+.topbar .actions{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-mute)}
+.topbar .actions span{padding:0 8px}
+
+/* ============ HERO / TITLE ============ */
+.hero{
+  background:linear-gradient(180deg,var(--paper-pure) 0%, var(--paper) 100%);
+  border-bottom:1px solid var(--rule);
+  padding:42px 0 28px;
+}
+.hero-inner{max-width:1380px;margin:0 auto;padding:0 28px}
+.hero .kicker{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero .kicker:before{content:"";display:inline-block;width:28px;height:1px;background:var(--brand-amber)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  color:var(--ink);
+  font-size:clamp(38px,5.6vw,58px);line-height:1.04;
+  margin:0 0 14px;letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:italic;color:var(--brand-primary);font-weight:500}
+.hero .subtitle{
+  font-size:19px;color:var(--ink-soft);font-weight:300;
+  margin:0 0 26px;line-height:1.5;
+}
+.hero .meta-row{
+  display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-top:22px;
+}
+.hero .meta-row > div{
+  padding:11px 8px;
+  border-right:1px solid var(--rule);
+  text-align:center;
+}
+.hero .meta-row > div:last-child{border-right:none}
+@media(max-width:900px){
+  .hero .meta-row{grid-auto-flow:row;grid-template-columns:repeat(4,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:none}
+}
+@media(max-width:560px){
+  .hero .meta-row{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:1px solid var(--rule)}
+  .hero .meta-row > div:nth-child(2n){border-right:none}
+}
+.hero .meta-row dt{
+  font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-bottom:3px;
+}
+.hero .meta-row dd{
+  margin:0;font-size:12px;color:var(--ink);font-weight:500;line-height:1.3;
+}
+.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--brand-primary)}
+
+/* status badge: comunicare oficială / intrare în vigoare — setat manual per document */
+.status-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;letter-spacing:.06em;text-transform:none;font-weight:700;
+  padding:4px 11px;border-radius:999px;line-height:1.3;
+}
+.status-badge:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.status-badge--active{background:#eaf3e6;color:#3f7d3a;border:1px solid #bcdcb3}
+.status-badge--pending{background:#f2ede6;color:#8a6d3a;border:1px solid #ddd0b8}
+
+/* ============ TABS ÎNTRE PROCEDURI (comun tuturor paginilor din proceduri/) ============ */
+.proc-tabs{
+  position:sticky;top:54px;z-index:45;
+  background:var(--paper-pure);border-bottom:1px solid var(--rule);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.proc-tabs-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;gap:4px;white-space:nowrap;
+}
+.proc-tab{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 14px;font-size:13px;font-weight:600;
+  color:var(--ink-mute);text-decoration:none;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+}
+.proc-tab:hover{color:#75604A;border-bottom-color:var(--rule)}
+.proc-tab.active{color:#75604A;border-bottom-color:#8A6F52}
+.proc-tab .pt-code{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-mute)}
+.proc-tab.active .pt-code{color:#75604A}
+.proc-tab.soon{color:var(--ink-mute);opacity:.5;cursor:default}
+.proc-tab.soon .pt-code{font-style:italic}
+.proc-tab.hub{margin-left:auto;color:var(--brand-primary);border-bottom-color:transparent}
+.proc-tab.hub:hover{color:var(--brand-primary);border-bottom-color:var(--brand-wheat)}
+@media(max-width:640px){
+  .proc-tabs{top:46px}
+  .proc-tabs-inner{padding:0 14px;gap:2px}
+  .proc-tab{padding:9px 10px;font-size:12px}
+}
+
+/* ============ ARTICLE LAYOUT ============ */
+.layout{
+  max-width:1380px;margin:0 auto;padding:38px 0 80px;
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  align-items:start;
+}
+@media(max-width:980px){.layout{grid-template-columns:minmax(0,1fr);gap:18px;padding:38px 28px 80px}}
+
+/* TOC sidebar */
+.toc-side{
+  position:sticky;top:122px;
+  align-self:start;
+  max-height:calc(100vh - 140px);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  font-size:13px;
+  padding:30px 14px 60px 28px;
+  border-right:1px solid var(--rule);
+  scrollbar-width:thin;scrollbar-color:var(--rule) transparent;
+}
+.main{ padding:30px 46px 120px; min-width:0; background:var(--paper-pure); }
+@media(max-width:980px){ .main{ padding:20px 28px 80px; } }
+.toc-side::-webkit-scrollbar{width:6px}
+.toc-side::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.toc-side h4{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+.toc-side .group{margin-bottom:18px}
+.toc-side .group-label{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:700;
+  margin:14px 0 6px;display:flex;align-items:center;gap:8px;
+}
+.toc-side .group-label:before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand-amber);display:inline-block}
+.toc-side .group-label.clinical:before{background:var(--brand-primary)}
+.toc-side .group-label.clinical{color:var(--brand-primary)}
+.toc-side .group-label.ops:before{background:var(--ink-soft)}
+.toc-side .group-label.ops{color:var(--ink-soft)}
+
+.toc-side ol{list-style:none;margin:0;padding:0;counter-reset:none}
+.toc-side ol > li{
+  padding:3px 0;line-height:1.35;
+}
+.toc-side a{
+  color:var(--ink-soft);border-bottom:none;
+  display:flex;gap:8px;align-items:baseline;
+  padding:3px 8px;border-radius:6px;border-left:2px solid transparent;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.toc-side a:hover{background:var(--brand-cream);color:var(--brand-primary)}
+.toc-side .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--ink-mute);font-weight:500;
+  min-width:24px;flex-shrink:0;
+}
+.toc-side a.active{background:var(--brand-cream);color:var(--brand-primary);font-weight:600;border-left-color:var(--brand-primary)}
+
+/* ============ ARTICLE BODY ============ */
+.article{
+  max-width:900px;
+  font-size:15.5px;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+.article p{margin:0 0 14px;text-wrap:pretty}
+.article strong{color:var(--ink);font-weight:600}
+.article em{color:var(--brand-primary);font-style:italic}
+
+/* Hatnote — Wikipedia top notice */
+.hatnote{
+  font-size:13px;color:var(--ink-mute);font-style:italic;
+  padding:10px 14px;background:var(--brand-cream-warm);
+  border-left:3px solid var(--brand-amber);
+  margin:0 0 28px;border-radius:0 3px 3px 0;
+}
+.hatnote strong{color:var(--brand-primary);font-style:normal}
+
+/* Article headings */
+.article h2{
+  font-family:'Playfair Display',serif;
+  font-weight:800;color:var(--ink);
+  font-size:32px;line-height:1.2;
+  margin:48px 0 8px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--rule);
+  letter-spacing:-.005em;
+  scroll-margin-top:122px;
+}
+.article h2 .chapter-num{
+  display:block;
+  font-family:'Poppins',sans-serif;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+  margin-bottom:8px;
+}
+.article h3{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);font-size:21px;
+  margin:34px 0 8px;padding-bottom:6px;
+  border-bottom:1px solid var(--rule);
+  line-height:1.3;scroll-margin-top:122px;
+}
+.article h4{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--ink);font-size:16px;margin:22px 0 8px;
+  letter-spacing:.005em;
+}
+
+/* Lists */
+.article ul, .article ol{margin:8px 0 18px;padding-left:24px}
+.article ul li, .article ol li{margin-bottom:6px;line-height:1.6}
+.article ul li::marker{color:var(--brand-primary)}
+.article ul.dash{list-style:none;padding-left:0}
+.article ul.dash li{position:relative;padding-left:18px}
+.article ul.dash li:before{content:"—";color:var(--brand-amber);position:absolute;left:0;font-weight:600}
+
+/* Numbered protocol steps */
+.steps{counter-reset:step;list-style:none;padding:0;margin:18px 0 24px;clear:both}
+.steps > li{
+  counter-increment:step;
+  position:relative;padding:12px 14px 12px 56px;
+  margin-bottom:8px;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-primary);
+  border-radius:0 4px 4px 0;
+  font-size:14.5px;line-height:1.55;
+}
+.steps > li:before{
+  content:counter(step,decimal-leading-zero);
+  position:absolute;left:14px;top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  color:var(--brand-primary);font-weight:600;
+  background:var(--brand-cream);padding:2px 8px;border-radius:3px;
+  letter-spacing:.05em;
+}
+.steps > li strong{color:var(--brand-primary);font-weight:600;display:block;margin-bottom:3px}
+
+/* Callouts */
+.callout{
+  margin:22px 0;padding:16px 18px;
+  border-radius:4px;font-size:14px;line-height:1.55;
+  border:1px solid var(--rule);
+}
+.callout .label{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.callout .label:before{
+  content:"";width:14px;height:14px;border-radius:50%;
+  display:inline-block;
+}
+.callout.warn{background:#fdf3f2;border-left:4px solid var(--brand-primary)}
+.callout.warn .label{color:var(--brand-primary)}
+.callout.warn .label:before{background:var(--brand-primary)}
+.callout.note{background:var(--brand-cream-warm);border-left:4px solid var(--brand-amber)}
+.callout.note .label{color:#8a6f17}
+.callout.note .label:before{background:var(--brand-amber)}
+.callout p:last-child{margin-bottom:0}
+.callout ul{margin:6px 0 0}
+
+/* Figuri și capturi */
+.article figure{margin:24px auto;text-align:center;max-width:680px}
+.article figure img{max-width:100%;height:auto;border:1px solid var(--rule);border-radius:8px;box-shadow:0 2px 10px rgba(34,34,34,.05)}
+.article figure figcaption{font-size:12.5px;color:var(--ink-mute);font-style:italic;margin-top:9px;line-height:1.5}
+
+/* Definition list (medical terms) */
+.deflist{
+  background:var(--paper-pure);border:1px solid var(--rule);border-radius:4px;
+  padding:6px 0;margin:18px 0;
+}
+.deflist dt{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);
+  padding:10px 18px 4px;font-size:14.5px;
+}
+.deflist dd{
+  margin:0;padding:0 18px 12px;
+  font-size:14px;color:var(--ink-soft);line-height:1.55;
+  border-bottom:1px solid var(--rule-soft);
+}
+.deflist > div:last-child dd{border-bottom:none}
+
+/* Tables */
+.article table{
+  width:100%;border-collapse:collapse;margin:18px 0 24px;
+  font-size:13.5px;background:var(--paper-pure);
+  border:1px solid var(--rule);border-radius:4px;overflow:hidden;
+}
+.article table th{
+  background:var(--brand-primary);color:#fff;
+  padding:10px 12px;text-align:left;font-weight:600;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  overflow-wrap:anywhere;word-break:break-word;
+}
+.article table td{
+  padding:10px 12px;border-top:1px solid var(--rule-soft);
+  vertical-align:top;overflow-wrap:anywhere;word-break:break-word;
+}
+.article table tr:nth-child(even) td{background:var(--brand-cream-warm)}
+.article table .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--brand-primary);font-weight:500}
+.article table.pct th:not(:first-child),.article table.pct td:not(:first-child){text-align:center}
+
+/* formulare cu perechi etichetă/valoare (fără thead) — coloana etichetei mai lată */
+.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)):not(:has(.sig-field)){
+  width:34%;min-width:150px;
+  word-break:normal;overflow-wrap:break-word;
+}
+
+/* bloc de semnătură — fiecare câmp pe rândul lui */
+.sig-field{display:flex;align-items:baseline;gap:6px;margin-top:5px}
+.sig-field span:first-child{white-space:nowrap;flex:none}
+.sig-field .sig-line{flex:1;border-bottom:1px solid var(--ink-mute);min-width:20px;height:.9em}
+
+/* celule de completat */
+.article td.value-line{border-bottom:1px solid var(--ink-mute)}
+.article .value-lines{display:flex;flex-direction:column;gap:16px;padding:4px 0 2px}
+.article .value-lines .vline{height:18px;border-bottom:1px solid var(--ink-mute)}
+
+/* indiciu de câmp completat automat (ex. de ERP) */
+.article .ph{color:var(--ink-mute);font-style:italic}
+
+/* Chapter divider */
+.chap-divider{
+  display:flex;align-items:center;gap:14px;
+  margin:50px 0 24px;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+}
+.chap-divider:before, .chap-divider:after{
+  content:"";flex:1;height:1px;background:var(--rule);
+}
+
+/* Mini badge */
+.codetag{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:11px;background:var(--brand-cream);color:var(--brand-primary);
+  padding:2px 7px;border-radius:3px;letter-spacing:0;font-weight:500;
+  margin-right:6px;vertical-align:1px;
+}
+.article p .codetag{ margin-right:8px; }
+
+/* Inline document reference (single download row) */
+.docref{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;margin:14px 0;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-amber);
+  border-radius:0 4px 4px 0;
+  text-decoration:none;color:var(--ink);
+  transition:background .14s,border-left-color .14s,transform .12s;
+}
+.docref:hover{
+  background:var(--brand-cream-warm);
+  border-left-color:var(--brand-primary);
+  transform:translateY(-1px);
+}
+.docref .docref-meta{flex:1;min-width:0}
+.docref .docref-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;letter-spacing:.04em;
+  color:var(--brand-primary);font-weight:600;
+  margin-bottom:2px;display:block;
+}
+.docref .docref-name{
+  font-size:14.5px;font-weight:600;line-height:1.3;
+  color:var(--ink);
+}
+.docref .docref-desc{
+  font-size:12px;line-height:1.45;color:var(--ink-mute);
+  margin-top:3px;
+}
+.docref .docref-action{
+  flex-shrink:0;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  display:flex;align-items:center;gap:5px;
+}
+.docref:hover .docref-action{color:var(--brand-primary)}
+
+/* Changelog */
+.changelog{
+  margin:14px 0 22px;
+  display:flex;flex-direction:column;
+  border:1px solid var(--rule);border-radius:6px;
+  background:var(--paper-pure);overflow:hidden;
+}
+.changelog .cl-item{
+  display:grid;grid-template-columns:130px 1fr;
+  gap:14px;align-items:start;
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:13px;line-height:1.5;
+}
+.changelog .cl-item:last-child{border-bottom:none}
+.changelog .cl-item:nth-child(even){background:var(--brand-cream-warm)}
+.changelog .cl-chap{
+  display:flex;align-items:center;gap:6px;
+  text-decoration:none;color:var(--brand-primary);
+  border:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--brand-cream);
+  padding:3px 9px;border-radius:3px;
+  font-size:11.5px;font-weight:600;line-height:1.2;
+  align-self:start;
+  white-space:nowrap;
+}
+.changelog .cl-code{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0}
+.changelog .cl-text{color:var(--ink-soft);font-size:13px}
+@media(max-width:580px){
+  .changelog .cl-item{grid-template-columns:1fr;gap:6px}
+  .changelog .cl-chap{align-self:flex-start}
+}
+
+/* ============ PLATFORM FRAME (unified) ============ */
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--brand-amber);outline-offset:2px;border-radius:4px}
+
+.readbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand-amber),var(--brand-primary));z-index:120;pointer-events:none}
+
+.mh-search{position:relative;width:280px;max-width:34vw;flex:none}
+.mh-search input{
+  width:100%;font-family:inherit;font-size:13.5px;color:var(--ink);
+  padding:8px 34px 8px 32px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);
+}
+.mh-search input:focus{outline:none;border-color:var(--brand-primary)}
+.mh-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-mute)}
+.mh-search kbd{
+  position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;
+  font-family:'Poppins',sans-serif;font-size:10.5px;color:var(--ink-mute);
+  border:1px solid var(--rule);border-radius:4px;padding:1px 6px;background:var(--paper-pure);
+}
+.mh-search input:focus ~ kbd{display:none}
+.toc-search-hide{display:none !important}
+
+.menu-btn{display:none;background:none;border:1px solid var(--rule);border-radius:6px;padding:6px 9px;cursor:pointer;color:var(--brand-primary);font-size:14px;flex:none}
+
+.totop{
+  position:fixed;right:22px;bottom:22px;z-index:60;background:var(--brand-primary);color:#fff;border:none;
+  width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;
+  box-shadow:0 6px 18px -6px rgba(123,28,22,.6);opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.totop.show{opacity:1;pointer-events:auto}
+
+@media(max-width:980px){
+  .menu-btn{display:inline-flex}
+  .toc-side{
+    align-self:stretch;
+    position:fixed;left:0;top:96px;bottom:0;width:300px;height:auto;max-height:none;margin:0;z-index:55;
+    background:var(--paper-pure);box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
+    padding:20px 18px 40px;transform:translateX(-105%) translateZ(0);transition:transform .25s;
+    -webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior:contain;
+    touch-action:pan-y;scroll-behavior:auto;
+  }
+  .toc-side.open{transform:translateZ(0)}
+  body.menu-open{overflow:hidden}
+}
+@media(max-width:840px){
+  .crumbs span{display:none}
+  .mh-search{max-width:30vw}
+  .mh-search kbd{display:none}
+}
+@media(max-width:560px){
+  .topbar-inner .pill:not(.dark){display:none}
+  .mh-search{width:150px}
+}
+
+/* ============ MOBILE-LITE (telefon) ============ */
+#mobileNotice{display:none}
+@media(max-width:640px){
+  .topbar-inner{padding:10px 14px; gap:12px}
+  .topbar img.logo{height:26px}
+  .topbar-inner .brand-home{margin-left:auto}
+  .topbar-inner .crumbs{display:none}
+  .topbar-inner .spacer{display:none}
+  .topbar-inner .pill{display:none}
+  .topbar-inner .mh-share{display:none}
+  .mh-search{display:none}
+  .article{overflow-wrap:break-word}
+  #mobileNotice{
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--brand-cream); border:1px solid var(--rule); border-left:3px solid var(--brand-amber);
+    border-radius:8px; padding:11px 13px; margin:0 0 18px; font-size:12.5px; line-height:1.5; color:var(--ink-soft);
+  }
+  #mobileNotice strong{color:var(--brand-primary)}
+  #mobileNotice button{flex:none; background:none; border:none; color:var(--ink-mute); font-size:16px; line-height:1; cursor:pointer; padding:0 2px}
+  .article table{display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .layout{padding:20px 16px 90px}
+}
+
+/* buton „Printează formularul" — atașat dinamic, per formular */
+.print-form-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:600;letter-spacing:.02em;
+  color:var(--brand-primary);background:var(--brand-cream);
+  border:1px solid var(--brand-wheat);border-radius:999px;
+  padding:4px 12px;margin-left:14px;cursor:pointer;
+  font-family:inherit;white-space:nowrap;vertical-align:middle;
+  transition:background .15s,border-color .15s;
+}
+.print-form-btn:hover{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.print-form-btn svg{width:12px;height:12px;flex:none}
+h2 .print-form-btn,h4 .print-form-btn{float:right}
+@media(max-width:760px){
+  h2 .print-form-btn,h4 .print-form-btn{float:none;display:inline-flex;margin:8px 0 0}
+}
+
+/* Footer */
+footer{
+  background:var(--brand-primary);color:#fff;
+  padding:48px 0 38px;margin-top:60px;
+}
+.footer-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;
+  font-size:13px;line-height:1.6;
+}
+@media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+footer h5{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
+}
+footer .tagline{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.3;margin:8px 0 14px;color:#fff;
+}
+footer a{color:#fff;border-bottom:1px solid rgba(255,255,255,.3)}
+footer a:hover{border-bottom-color:var(--brand-yellow);color:var(--brand-yellow)}
+footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
+.din-2017{
+  margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;text-align:center;
+}
+.din-2017 span{margin:0 22px}
+
+/* antet minimal, vizibil doar la printare */
+.print-header{ display:none; }
+@media print{
+  .print-header{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding-bottom:10px;margin-bottom:16px;
+    border-bottom:2px solid var(--brand-primary);
+  }
+  .print-header-logo{ height:28px;width:auto;flex:none; }
+  .print-header-text{ flex:1;min-width:0; }
+  .print-header-brand{ font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-primary);font-weight:700; }
+  .print-header-title{ font-size:13px;font-weight:600;color:var(--ink);margin-top:1px; }
+  .print-header-meta{ display:flex;gap:6px;flex:none; }
+  .print-header-pill{ font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--brand-cream);color:var(--brand-primary);border:1px solid var(--brand-wheat);font-weight:600; }
+  .print-header-pill.dark{ background:var(--brand-primary);color:#fff;border-color:var(--brand-primary); }
+}
+@media print{
+  @page{size:A4;margin:14mm 12mm}
+  .topbar,.toc-side,.totop,.readbar,.menu-btn,.mh-search{display:none !important}
+  .layout{display:block;max-width:none;padding:0}
+  body{background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,h4{break-after:avoid}
+  table,figure,img,.callout{break-inside:avoid}
+  p,li{orphans:3;widows:3}
+  footer{display:none !important}
+  .print-form-btn{display:none !important}
+  body.printing-form [data-print-hidden]{display:none !important}
+  body.printing-form .hero{display:none !important}
+  body.printing-form{font-size:12.5px}
+  body.printing-form table{font-size:11.5px}
+  body.printing-form p{margin:5px 0}
+  body.printing-form h2{margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<!-- Antet vizibil doar la printare -->
+<div class="print-header" aria-hidden="true">
+  <img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="print-header-logo">
+  <div class="print-header-text">
+    <div class="print-header-brand">Dr. Ardeleanu Dental Clinics</div>
+    <div class="print-header-title">Procedura de Onboarding al Pacientului — flux integrat P0–P2</div>
+  </div>
+  <div class="print-header-meta">
+    <span class="print-header-pill">ADC-ONB-01</span>
+    <span class="print-header-pill dark">V18 · sept. 2026</span>
+  </div>
+</div>
+
+<!-- =========================== TOP BAR =========================== -->
+<header class="topbar" data-screen-label="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
+    <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
+    <a href="../index.html" style="border-bottom:none" title="Înapoi la Manuale Interne" class="brand-home"><img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
+    <div class="crumbs">
+      <span class="crumb-path">
+        <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
+        <span>›</span>
+        <a href="index.html" style="border-bottom:none">Proceduri de lucru</a>
+      </span>
+      <span class="crumb-title">Onboardingul Pacientului</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="mh-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="search" type="text" placeholder="Caută în procedură…" autocomplete="off" />
+      <kbd>/</kbd>
+    </div>
+    <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest document"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
+    <span class="pill">ADC-ONB-01</span>
+    <span class="pill dark">V18 · sept. 2026</span>
+  </div>
+</header>
+
+<!-- =========================== TABURI ÎNTRE PROCEDURI =========================== -->
+<nav class="proc-tabs" aria-label="Proceduri de lucru">
+  <div class="proc-tabs-inner">
+    <a class="proc-tab" href="ADC-BEN-01_Procedura_Beneficii.html">Beneficii <span class="pt-code">ADC-BEN-01</span></a>
+    <a class="proc-tab" href="ADC-REG-01_Procedura_Registrul_Online.html">Registrul online <span class="pt-code">ADC-REG-01</span></a>
+    <a class="proc-tab active" href="ADC-ONB-01_Procedura_Onboarding_Pacient.html">Onboarding pacient <span class="pt-code">ADC-ONB-01</span></a>
+    <span class="proc-tab soon">Deconturi <span class="pt-code">în pregătire</span></span>
+    <span class="proc-tab soon">Flotă &amp; GPS <span class="pt-code">în pregătire</span></span>
+    <span class="proc-tab soon">Uniforme <span class="pt-code">în pregătire</span></span>
+    <a class="proc-tab hub" href="index.html">Toate procedurile ↗</a>
+  </div>
+</nav>
+
+<!-- =========================== HERO =========================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Procedură operațională · Recepție, Asistență &amp; Echipa medicală <span class="status-badge status-badge--active">V18 — în vigoare</span></div>
+    <h1>Procedura de <em>onboarding al pacientului</em> — fluxul integrat P0–P2</h1>
+    <p class="subtitle">Manual narativ pentru recepție, asistență și echipa medicală: de la primul telefon și programarea inițială (P0), prin primirea la recepție (P1A) și consultația din cabinet (P1B), până la tratamentele și vizitele ulterioare (P2). Onboardingul nu este o succesiune de formulare, ci procesul prin care pacientul este cunoscut, înțeles și pregătit pentru un act medical sigur.</p>
+
+    <dl class="meta-row">
+      <div><dt>Ediție</dt><dd><span class="mono">V18 · septembrie 2026</span></dd></div>
+      <div><dt>Cod document</dt><dd><span class="mono">ADC-ONB-01</span></dd></div>
+      <div><dt>Data publicării</dt><dd>18 august 2026</dd></div>
+      <div><dt>Categorie</dt><dd>Flux operațional pacient</dd></div>
+      <div><dt>Structură</dt><dd>10 secțiuni · 3 anexe</dd></div>
+      <div><dt>Aplicabilitate</dt><dd>Registratori, asistenți, medici, Clinic Manageri</dd></div>
+      <div><dt>Documente conexe</dt><dd>ADC-REC-01 · ADC-ASM-03 · ADC-PAC-01</dd></div>
+      <div><dt>Administrare</dt><dd>Vlad Ardeleanu</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- =========================== ARTICLE LAYOUT =========================== -->
+<div class="layout">
+
+  <!-- ============ TOC SIDEBAR ============ -->
+  <nav class="toc-side" aria-label="Cuprins">
+    <h4>Cuprins</h4>
+
+    <div class="group">
+      <div class="group-label">Cadru</div>
+      <ol>
+        <li><a href="#pozitie"><span class="num">§</span>Poziție și ideea centrală</a></li>
+        <li><a href="#doc-fields"><span class="num">§</span>Datele documentului</a></li>
+        <li><a href="#sec-intro"><span class="num">§</span>Introducere: un singur flux</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label clinical">Fluxul P0–P2</div>
+      <ol>
+        <li><a href="#sec-1"><span class="num">1</span>P0 — programarea inițială</a></li>
+        <li><a href="#sec-2"><span class="num">2</span>P1A — primirea la recepție</a></li>
+        <li><a href="#sec-3"><span class="num">3</span>P1B — consultația și planul</a></li>
+        <li><a href="#sec-4"><span class="num">4</span>API — Acordul Pacientului Informat</a></li>
+        <li><a href="#sec-5"><span class="num">5</span>P2 — vizitele ulterioare</a></li>
+        <li><a href="#sec-6"><span class="num">6</span>Rolul asistentei</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label ops">Documente și date</div>
+      <ol>
+        <li><a href="#sec-7"><span class="num">7</span>Consimțăminte specifice și arhivare</a></li>
+        <li><a href="#sec-8"><span class="num">8</span>RX și CBCT</a></li>
+        <li><a href="#sec-9"><span class="num">9</span>Gestionarea răspunsurilor „Nu”</a></li>
+        <li><a href="#sec-10"><span class="num">10</span>Escaladarea și închiderea</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Anexe</div>
+      <ol>
+        <li><a href="#anexa-1"><span class="num">A1</span>Checklist rapid la post</a></li>
+        <li><a href="#anexa-2"><span class="num">A2</span>Matricea documentelor</a></li>
+        <li><a href="#anexa-3"><span class="num">A3</span>Surse de control</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Istoric</div>
+      <ol>
+        <li><a href="#registru"><span class="num">§</span>Registru de modificări</a></li>
+      </ol>
+    </div>
+
+  </nav>
+
+  <!-- ============ ARTICLE ============ -->
+  <main class="main">
+  <article class="article">
+
+    <div id="mobileNotice" role="note">
+      <span>📱 <strong>Vizualizare mobil.</strong> Pentru o lectură curată pe telefon, unele elemente vizuale sunt ascunse. Deschide documentul pe desktop pentru versiunea completă.</span>
+      <button type="button" aria-label="Închide" onclick="try{sessionStorage.setItem('adcMobileNoticeDismissed','1')}catch(e){} this.parentNode.style.display='none'">✕</button>
+    </div>
+
+    <h2 id="pozitie">Poziție în ierarhia documentelor</h2>
+    <div class="callout note"><p><strong>Poziție în ierarhia documentelor.</strong> Prezenta procedură este un document de lucru operațional al rețelei, subordonat Regulamentului intern și administrat prin Registrul online al documentelor interne (ADC-REG-01). Nu modifică RI, contractul individual de muncă ori drepturile prevăzute de lege. Se aplică împreună cu Manualul Registratorului Medical, Manualul Asistentului Medical și procedurile conexe la care face trimitere.</p></div>
+    <div class="callout note"><p><strong>Ideea centrală.</strong> Onboardingul nu este o succesiune de formulare, ci procesul prin care pacientul este cunoscut, înțeles și pregătit pentru un act medical sigur. Fiecare coleg preia responsabilitatea de la etapa anterioară și o predă mai departe numai după ce informația este completă.</p></div>
+
+    <h2 id="doc-fields">Datele documentului</h2>
+    <table>
+<tbody>
+<tr><td><strong>Cod / titlu</strong></td><td>ADC-ONB-01 — Procedura de onboarding al pacientului (manual narativ P0–P2)</td></tr>
+<tr><td><strong>Versiune / statut</strong></td><td>V18 · septembrie 2026</td></tr>
+<tr><td><strong>Proprietar funcțional</strong></td><td>Vlad Ardeleanu, împreună cu echipa de management al clinicilor</td></tr>
+<tr><td><strong>Destinatari</strong></td><td>Registratori medicali (recepție), asistenți medicali, medici, Clinic Manageri</td></tr>
+<tr><td><strong>Documente conexe</strong></td><td>Manualul Registratorului Medical (ADC-REC-01) · Manualul Asistentului Medical (ADC-ASM-03) · Procedura Radiologie/Imagistică și PACS (ADC-PAC-01) · Procedura de prevenire și recuperare a anulărilor · Procedura „Identificarea pacientului care refuză legitimarea” · Procedura pentru vizualizarea investigației CBCT</td></tr>
+<tr><td><strong>Sursă</strong></td><td>Procedura onboarding pacient — manual narativ P0–P2, v18 (docx), integrată integral</td></tr>
+</tbody></table>
+
+    <h2 id="sec-intro"><span class="chapter-num">Introducere</span>De ce avem nevoie de un singur flux</h2>
+    <p>Un pacient nu trebuie să simtă că trece de la un birou la altul. El trebuie să simtă că aceeași echipă îl însoțește de la primul telefon până la finalul tratamentului.</p>
+    <p>Onboardingul începe înainte ca pacientul să intre în clinică. Prima conversație, calitatea datelor introduse în SPS, mesajele de confirmare și posibilitatea de a completa documentele de acasă pregătesc consultația. Când această etapă este făcută corect, recepția nu mai lucrează sub presiune, asistenta primește un pacient pregătit, iar medicul poate dedica timpul consultației deciziei clinice și dialogului.</p>
+    <p>Procedura urmărește patru momente ale aceleiași călătorii: <strong>P0</strong>, programarea inițială; <strong>P1A</strong>, primirea la recepție; <strong>P1B</strong>, consultația și pregătirea tratamentului în cabinet; <strong>P2</strong>, tratamentele și vizitele ulterioare. Între aceste momente există predări de responsabilitate. O predare este corectă numai când următorul coleg primește atât pacientul, cât și informația necesară pentru a continua în siguranță.</p>
+    <p>Planul de tratament se construiește, ca principiu, la P1, dar finalizarea lui poate avea loc și la P2. La o parte semnificativă dintre pacienți există justificări reale pentru care planul nu poate fi încheiat la P1 — investigații suplimentare, analize, timp de reflecție sau etapizarea deciziei. De aceea, obiectivul clinicii nu se măsoară doar la P1: privite împreună, <strong>P1 și P2 trebuie să conducă la un plan de tratament complet pentru toți pacienții care parcurg aceste două programări</strong>. P1 rămâne momentul preferat pentru plan, iar P2 este plasa de siguranță care îl închide atunci când există o justificare pentru amânare.</p>
+    <p>Recepția și asistenta au un rol activ, dar diferit de rolul medicului. Ele verifică documentele, observă neconcordanțele, explică pașii administrativi și transmit alertele. Nu interpretează clinic și nu decid tratamentul. Medicul analizează informația, stabilește indicația, explică actul și decide ce poate fi realizat dacă pacientul refuză o investigație ori un tip de prelucrare necesar tratamentului.</p>
+    <div class="callout warn"><p><strong>CELE PATRU PORȚI.</strong> Înainte de tratament trebuie să fie îndeplinite patru condiții: identitatea este verificată; Înregistrarea Medicală este completată, semnată și se află în termenul maxim de nouă luni; alertele au fost citite și transmise; API-ul corect este semnat și salvat în PDF.</p></div>
+    <div class="callout warn"><p><strong>EXCEPȚIA DE URGENȚĂ.</strong> În durere acută sau traumă, medicul evaluează pacientul imediat și decide fluxul. Înainte de act se parcurge strictul necesar: identitatea este verificată, cel puțin verbal, iar API-ul pentru actul de urgență este semnat. Restul documentelor — Înregistrarea Medicală completă și consimțămintele aferente — se finalizează imediat după stabilizare, în aceeași vizită. Urgența comprimă ordinea pașilor, nu elimină documentele.</p></div>
+    <figure><img src="assets/onb-cele-patru-porti.png" alt="Infografic: cele patru porți verificate înainte de fiecare tratament"><figcaption>Cele patru porți verificate înainte de fiecare tratament, cu excepția de urgență decisă de medic.</figcaption></figure>
+
+    <h2 id="sec-1"><span class="chapter-num">Secțiunea 1</span>P0 — programarea inițială</h2>
+    <p>P0 transformă un contact într-o programare clară și într-un pacient pregătit să intre în relația medicală.</p>
+    <figure><img src="assets/onb-fluxul-p0.png" alt="Infografic: fluxul P0 de la lead la reminder, în nouă pași"><figcaption>Fluxul P0 de la lead la reminder: cei nouă pași, cu cele două SMS-uri trimise în pereche imediat după confirmare.</figcaption></figure>
+
+    <h3 id="sec-1-1">1.1 De la lead la conversația cu recepția</h3>
+    <p>Primul contact poate veni prin formularul de pe site, din social media sau printr-un apel direct. Indiferent de canal, recepția trebuie să preia conversația într-o manieră umană. Nu este suficient să întrebe ce zi dorește pacientul. Trebuie să înțeleagă motivul prezentării, urgența percepută de pacient, serviciul căutat și eventualele întrebări care îl împiedică să ia o decizie.</p>
+    <p>Detaliile lead-urilor — numele, prenumele și datele de contact — se află deja în fișierul de lucru Excel la care registratorii au acces în fiecare dimineață. Fișierul este gestionat la nivelul infrastructurii Dr.&nbsp;Ardeleanu, pe linia mai multor departamente — call center, marketing și celelalte canale prin care intră lead-urile — astfel încât recepția pornește conversația cu datele de bază deja pregătite. În paralel, lead-urile intră și direct, inbound telefonic, iar registratorul preia aceste apeluri cu aceeași atenție ca pe orice lead din fișier.</p>
+    <p>În această etapă recepția oferă informații despre serviciile clinicii și despre disponibilitate, fără să promită un diagnostic sau un anumit rezultat. Dacă nevoia descrisă depășește ceea ce poate clarifica recepția, întrebarea se transmite unui medic sau Clinic Managerului, iar pacientul primește un răspuns ulterior. Scopul nu este închiderea rapidă a apelului, ci programarea corectă de la prima încercare.</p>
+
+    <h3 id="sec-1-2">1.2 Datele de bază și alocarea medicului</h3>
+    <p>După clarificarea nevoii, în SPS se introduc numele, prenumele, telefonul, adresa de e-mail, orașul și profesia. Datele trebuie repetate sau confirmate, mai ales numărul de telefon și adresa de e-mail, deoarece acestea vor fi folosite pentru mesajele automate, documente și comunicări ulterioare. O literă greșită sau o cifră inversată poate rupe întregul flux digital.</p>
+    <p>Recepția alocă medicul potrivit și stabilește data și ora în calendarul clinicii. Confirmarea verbală trebuie să fie explicită: pacientului i se repetă ziua, ora, clinica și recomandarea de a sosi cu câteva minute înainte. O programare este considerată completă numai când informațiile din SPS și cele comunicate pacientului coincid.</p>
+    <p>Tot la P0 telefonic, registratorul îl informează pe pacient că trebuie să vină în clinică cu actul de identitate — cartea de identitate — și să se identifice la sosire. Formularea recomandată este simplă: <em>„Nu uitați să vă aduceți actul de identitate cu dumneavoastră la clinică, pentru înregistrarea medicală.”</em></p>
+
+    <h3 id="sec-1-3">1.3 Mesajele automate și Înregistrarea Medicală</h3>
+    <p>După confirmarea verbală, pacientul primește SMS-ul cu data și ora programării, denumirea clinicii, linkul către locație și numărul de contact. Acest mesaj este urmat de un al doilea SMS, trimis în pereche, prin care pacientul este invitat să completeze formularul de Înregistrare Medicală. Linkul este dinamic și îl conduce direct către documentul aferent pacientului.</p>
+    <figure><img src="assets/onb-sms-formular.jpeg" alt="Cele două SMS-uri primite de pacient după confirmare"><figcaption>Cele două SMS-uri trimise în pereche după confirmare: programarea cu locația și invitația la formularul de Înregistrare Medicală.</figcaption></figure>
+    <p>Pentru instruire și exerciții interne, formularul poate fi parcurs pe pacientul de test al clinicii — un dosar de test, fără probleme de GDPR — folosind linkul dinamic de mai jos, care rămâne activ și poate fi accesat direct: <a href="https://sps.clinicile-ardeleanu.ro/onbrd?p=GhsRHRod&amp;x=SktBTUpN" target="_blank" rel="noopener">https://sps.clinicile-ardeleanu.ro/onbrd?p=GhsRHRod&amp;x=SktBTUpN</a>. Exercițiul se face exclusiv pe pacientul de test, niciodată pe un dosar real.</p>
+    <figure><img src="assets/onb-formular-partea1.png" alt="Prima parte a formularului de Înregistrare Medicală: fotografia cărții de identitate, datele de identificare și profilul psiho-social"><figcaption>Prima parte a formularului de Înregistrare Medicală, deschis prin linkul dinamic al pacientului de test: fotografia cărții de identitate, datele de identificare și profilul psiho-social.</figcaption></figure>
+    <figure><img src="assets/onb-formular-anamneza.png" alt="A doua parte a formularului: Anamneza-CESGS cu întrebări Da/Nu și răspuns detaliat"><figcaption>A doua parte a formularului: Anamneza-CESGS — întrebările despre starea generală de sănătate, cu răspuns „Da”/„Nu” și rubrică de răspuns detaliat.</figcaption></figure>
+    <figure><img src="assets/onb-formular-semnatura.png" alt="Finalul formularului: cele șase opțiuni privind utilizarea datelor și zona de semnătură digitală"><figcaption>Finalul formularului: cele șase opțiuni privind utilizarea datelor („Sunteți de acord cu”) și zona de semnătură digitală, urmate de butonul Trimite.</figcaption></figure>
+    <p>Varianta preferată este completarea de acasă, pe telefonul sau tableta pacientului. Aceasta îi oferă timp să citească întrebările, să verifice informațiile medicale și să ia decizii fără presiunea recepției. Dacă nu poate sau nu dorește să completeze acasă, formularul rămâne disponibil în clinică, pe dispozitivul pus la dispoziție. Recepția poate explica sensul unei întrebări și poate oferi ajutor tehnic, dar nu completează răspunsurile și nu semnează în locul pacientului.</p>
+    <p>Cu 24 de ore înainte de programare, SPS trimite reminderul, <strong>exclusiv în format SMS</strong> — un mesaj de telefonie mobilă, nu e-mail și nu o aplicație de mesagerie. Dacă pacientul spune că nu a primit mesajele, recepția verifică în primul rând numărul de telefon și apoi reia trimiterea, tot exclusiv prin SMS, prin fluxul disponibil în SPS. În această situație trebuie verificat și dacă linkul de Înregistrare Medicală aparține pacientului corect.</p>
+
+    <h3 id="sec-1-4">1.4 Anulările și neprezentările</h3>
+    <p>O programare pierdută nu se abandonează. Când pacientul anunță că nu mai poate ajunge, recepția încearcă reprogramarea pe loc, propunând imediat variante alternative. Pacientul care nu s-a prezentat și nu a anunțat este contactat în dimineața zilei următoare, iar motivul și rezultatul apelului se înregistrează în SPS. Detaliile complete — scripturile de conversație, apelurile preventive pentru procedurile complexe, evidența și indicatorii — sunt stabilite în Procedura de prevenire și recuperare a anulărilor și neprezentărilor, care se aplică integral alături de prezenta procedură. Procedura se regăsește în <a href="../registratori/Manualul%20Registratorului%20Medical.html#cap-5-4">Manualul Registratorului Medical, capitolul „Responsabilități și activități legate de activitatea de vânzare”, secțiunea „Reducerea Ratei Anulărilor/Neprezentărilor [KPI 2]”</a>.</p>
+    <p>Registratorul realizează, în plus, prevenția neprezentărilor pentru lucrările importante. Pentru manoperele majore de implantologie, endodonție și protetică — în special atunci când medicul care efectuează tratamentul nu este din zonă sau se deplasează din București — pacienții sunt sunați în prealabil pentru confirmarea verbală a prezenței în clinică. Acest apel de confirmare se face în plus față de fluxul standard de remindere și de gestionarea anulărilor.</p>
+
+    <h2 id="sec-2"><span class="chapter-num">Secțiunea 2</span>P1A — sosirea și primirea la recepție</h2>
+    <p>Recepția nu predă cabinetului doar un nume din calendar, ci un pacient identificat și un dosar pregătit pentru consultație.</p>
+
+    <h3 id="sec-2-1">2.1 Întâmpinarea și verificarea programării</h3>
+    <p>La sosire, pacientul este întâmpinat și identificat în programarea din SPS. Se verifică numele, medicul, serviciul, data și ora. Dacă există pacienți cu nume similare sau informații contradictorii, pregătirea se oprește până când identitatea programării este clarificată. Această verificare simplă previne asocierea documentelor sau a tratamentului cu dosarul greșit.</p>
+
+    <h3 id="sec-2-2">2.2 Identitatea și fotografia cărții de identitate</h3>
+    <p>În fluxul standard, identitatea se confruntă cu actul prezentat, iar imaginea cărții de identitate se păstrează prin primul buton al formularului de Înregistrare Medicală, denumit „Fotografie carte de identitate”. Fotografia nu înlocuiește verificarea vizuală; ea documentează datele pe baza cărora a fost creat dosarul pacientului.</p>
+    <p>Identificarea pacientului nu este o formalitate administrativă, ci o obligație cu temei legal. Medicul își asumă actul medical și trebuie să știe cu certitudine cui acordă tratamentul, pe numele cui întocmește documentele medicale și cine își exprimă consimțământul; verificarea previne atribuirea greșită a informațiilor medicale și îl protejează în primul rând pe pacient. <strong>Bază legală:</strong> Codul deontologic al medicului stomatolog — art. 17, 34, 48, 50 și 54, privind asumarea actului medical, evidența medicală și eliberarea documentelor persoanei îndreptățite; Legea nr. 46/2003 privind drepturile pacientului — consimțământul informat și confidențialitatea; GDPR, art. 5 alin. (1) lit. d) și f) — exactitatea datelor și integritatea și confidențialitatea prelucrării, care impun ca dosarul medical să aparțină cu certitudine persoanei corecte.</p>
+    <p>Dacă pacientul nu are documentul fizic asupra lui, este rugat să arate o fotografie clară a cărții de identitate pe telefon. În majoritatea cazurilor, aceasta permite verificarea datelor și continuarea fluxului. Dacă pacientul acceptă, fotografia necesară dosarului este preluată prin formular. Dacă refuză numai păstrarea copiei, clinica face un pas în spate: recepția verifică vizual identitatea, nu păstrează imaginea și notează refuzul. Pacientul poate continua dacă identitatea a putut fi stabilită.</p>
+    <p>Refuzul legitimării este o situație diferită. Atunci când pacientul refuză să permită orice verificare a identității, tratamentul electiv nu începe. Recepția explică calm că documentele medicale, consimțămintele și actele efectuate trebuie asociate persoanei corecte. Dacă refuzul persistă, cazul este transmis Clinic Managerului și medicului înainte de orice continuare.</p>
+    <p>Regula de lucru stabilită prin procedura transmisă de departamentul juridic separă clar cele două situații: refuzul păstrării copiei actului poate fi acceptat, la cererea expresă a pacientului; refuzul verificării vizuale a originalului sau al completării datelor obligatorii P0/P1 blochează onboardingul — fără acestea nu se poate finaliza Înregistrarea Medicală, iar consultația sau actul medical electiv nu poate începe. Recepția nu spune „trebuie să ne lăsați copia”, ci „putem renunța la copie, dar trebuie să verificăm actul și să completăm datele necesare”. Recepția nu decide dacă există o urgență și nu formulează singură un refuz medical: înainte de orice amânare, medicul confirmă că nu există o urgență. Scripturile complete de conversație sunt stabilite în procedura dedicată „Identificarea pacientului care refuză legitimarea”, care se aplică alături de prezenta procedură.</p>
+
+    <h3 id="sec-2-3">2.3 Înregistrarea Medicală și tab-ul Alerte</h3>
+    <p>Recepția verifică dacă formularul este complet, semnat și salvat. În versiunea în curs de dezvoltare a SPS, formularul nu va putea fi trimis cu câmpuri necompletate: sistemul va impune un răspuns la fiecare întrebare, astfel încât fiecare dintre cele șase opțiuni va avea întotdeauna un răspuns explicit „Da” sau „Nu”. Până la activarea acestei validări, recepția verifică manual că nicio opțiune nu a rămas fără răspuns. Dacă este incomplet, pacientul îl finalizează în clinică. După trimiterea formularului, SPS preia automat răspunsurile și actualizează tab-ul Alerte. Registratorul nu generează manual alertele și nu recopiază informațiile din formular.</p>
+    <p>Tab-ul Alerte, actualizat automat de SPS din formularul de Înregistrare Medicală, reunește trei categorii, în ordinea în care apar în tab. Prima secțiune este profilul psiho-social, care descrie preferințele și limitele pacientului. A doua secțiune este anamneza — informația clinică din Anamneza-CESGS (Chestionarul de Evaluare a Stării Generale de Sănătate, denumirea cerută de Colegiul Medicilor). A treia secțiune este consimțământul privind prelucrarea datelor exprimat de pacient — în tab apar în special răspunsurile „Nu” la cele șase opțiuni din formular privind utilizarea datelor: prelucrarea datelor personale medicale; imaginile clinice și scanările intraorale digitale 2D/3D; scanările faciale 3D și modelele digitale ale feței; înregistrările video fără sunet în cabinet; prelucrarea datelor în scop de marketing; procedurile radiologice RX/CBCT. Recepția citește informația deja preluată de sistem și o transmite asistentei. Nu stabilește dacă o boală este relevantă și nu negociază tratamentul; se asigură că informația ajunge la cabinet înaintea pacientului.</p>
+
+    <h3 id="sec-2-4">2.4 Valabilitatea informațiilor: maximum nouă luni</h3>
+    <p>Clinica stabilește un termen intern maxim de valabilitate de nouă luni pentru informațiile colectate prin formularul de Înregistrare Medicală. Termenul curge de la data completării și semnării celui mai recent formular. La împlinirea celor nouă luni, datele nu mai sunt considerate suficient de actuale pentru a fundamenta o nouă decizie clinică, chiar dacă pacientul declară verbal că „nu s-a schimbat nimic”. Formularul trebuie reluat integral și semnat din nou înainte de continuarea fluxului medical.</p>
+    <figure><img src="assets/onb-termenul-9-luni.png" alt="Infografic: termenul de nouă luni pentru valabilitatea formularului de Înregistrare Medicală"><figcaption>Termenul de nouă luni: ce acoperă regula și când se recolectează formularul — la expirare sau anticipat, la orice schimbare relevantă.</figcaption></figure>
+    <p>Regula celor nouă luni se aplică informațiilor din Anamneza-CESGS, profilului psiho-social și celor șase opțiuni privind prelevarea și utilizarea datelor pacientului. La recolectare, pacientul își exprimă din nou opțiunile. Dacă anterior a existat un răspuns „Nu” urmat de un consimțământ special, noul formular și, după caz, consimțământul special aferent trebuie reconfirmate; o alegere veche nu este presupusă automat ca fiind încă actuală.</p>
+    <p>Formularul se reia mai devreme de nouă luni ori de câte ori pacientul anunță sau echipa identifică o schimbare relevantă: diagnostic nou, internare, intervenție, alergie, reacție la anestezie, tratament medicamentos nou, anticoagulante, sarcină sau suspiciune de sarcină, modificarea stării generale, schimbarea semnificativă a disponibilității, bugetului, etapizării, toleranței la durere ori a obiectivului estetic. Medicul poate solicita în orice moment o recolectare anticipată dacă informațiile existente nu mai sunt suficiente.</p>
+    <p>Registratorul medical verifică la fiecare prezentare data ultimului formular valid. Dacă au trecut nouă luni sau există un motiv de actualizare anticipată, pacientul completează un formular nou înainte de consultație ori tratament. După trimitere, SPS preia automat noile răspunsuri și actualizează tab-ul Alerte. Registratorul verifică actualizarea și transmite asistentei orice diferență importantă față de formularul anterior.</p>
+    <p>Expirarea termenului operațional nu înseamnă ștergerea documentelor vechi. Formularele și consimțămintele anterioare rămân în dosarul medical ca istoric și dovadă a informației disponibile la momentul respectiv. Regula de nouă luni privește actualitatea datelor folosite pentru continuarea îngrijirii. API-ul și consimțămintele aferente unor tratamente specifice se verifică separat, în raport cu actul, medicul și planul de tratament.</p>
+    <div class="callout warn"><p><strong>POARTA RECEPȚIEI.</strong> Pacientul este predat cabinetului numai după clarificarea identității, verificarea faptului că Înregistrarea Medicală este completă și în termenul maxim de nouă luni și transmiterea alertelor.</p></div>
+
+    <h2 id="sec-3"><span class="chapter-num">Secțiunea 3</span>P1B — consultația și construirea planului</h2>
+    <p>Consultația începe cu înțelegerea pacientului, nu direct cu propunerea unei manopere.</p>
+
+    <h3 id="sec-3-1">3.1 Informația clinică și profilul psiho-social</h3>
+    <p>Medicul citește informația din Anamneza-CESGS și o corelează cu examinarea clinică. Rolul acestui document este deja cunoscut echipei și nu trebuie dublat prin explicații administrative. Important este ca datele să fie actuale, iar orice răspuns care poate schimba conduita să fie discutat înaintea actului medical.</p>
+    <p>În paralel, SPS extrage automat din formularul de Înregistrare Medicală elementele profilului psiho-social și le afișează în tab-ul Alerte. Aceste informații arată cât timp poate aloca pacientul, ce limitări bugetare are, dacă preferă etapizarea, cum percepe durerea, ce experiențe negative a avut și cât de important este rezultatul estetic. Ele nu sunt simple detalii comerciale. Folosite corect, îl ajută pe medic să formuleze un plan realist, să aleagă ritmul potrivit și să explice tratamentul într-o manieră pe care pacientul o poate accepta și urma.</p>
+    <p>Un pacient cu anxietate mare poate avea nevoie de o consultație mai lentă și de explicații suplimentare. Un pacient cu timp limitat poate prefera ședințe mai lungi și mai puține. Un buget restrâns poate impune etapizarea, fără ca standardul medical să fie compromis. O așteptare estetică foarte precisă trebuie discutată înainte de începerea tratamentului, nu descoperită la final.</p>
+
+    <h3 id="sec-3-2">3.2 Verificarea asistentei</h3>
+    <p>Înainte ca medicul să înceapă actul, asistenta face propria verificare de siguranță. Ea urmărește în special alergiile, reacțiile adverse la anestezie, bolile cardiace, tratamentul anticoagulant, sarcina, bolile cronice relevante și orice risc medical crescut. La fel de important, observă anxietatea, experiențele negative, toleranța la durere și așteptările care pot influența experiența pacientului.</p>
+    <p>Verificarea asistentei include și componenta fizică: înainte de primirea pacientului, asistenta verifică și pregătește cabinetul pentru programarea respectivă — igienizarea și dezinfecția suprafețelor, instrumentarul și materialele necesare manoperelor planificate, funcționarea echipamentelor. Pașii compleți sunt stabiliți în secțiunea <a href="../asistenti/Manualul%20Asistentului%20Medical.html">„Igiena și pregătirea cabinetului” din Manualul Asistentului Medical</a>, care se aplică integral; pacientul nu este introdus în cabinet înainte ca pregătirea să fie încheiată.</p>
+    <p>Asistenta nu interpretează aceste date și nu decide dacă un tratament este permis. Ea îi spune medicului clar, complet și rapid ce a observat. Atunci când informația schimbă conduita sau trebuie urmărită ulterior, aceasta se documentează în SPS. Dacă o alertă nu a fost clarificată, pregătirea se oprește până când medicul o evaluează.</p>
+
+    <h3 id="sec-3-3">3.3 Consultația și indicația</h3>
+    <p>Medicul discută motivul prezentării, examinează pacientul și stabilește indicația. Planul trebuie explicat într-un limbaj pe care pacientul îl poate înțelege, incluzând scopul, etapele, limitele, riscurile relevante și alternativele aplicabile. Profilul psiho-social îl ajută pe medic să transforme un plan corect medical într-un plan posibil pentru pacient.</p>
+    <p>Consimțământul informat nu este obținut prin grăbire sau prin repetarea mecanică a unei formule. Pacientul trebuie să aibă posibilitatea de a pune întrebări și, dacă este nevoie, de a cere timp. Semnătura confirmă o conversație și o decizie, nu o înlocuiește.</p>
+
+    <h2 id="sec-4"><span class="chapter-num">Secțiunea 4</span>API — Acordul Pacientului Informat</h2>
+    <p>API-ul leagă explicația medicului de actul concret care urmează să fie efectuat. Este un document transversal: se întocmește la P1B și se semnează din nou la fiecare vizită P2.</p>
+    <p>După stabilirea indicației, medicul completează în API numele medicului care efectuează tratamentul și denumirea exactă a manoperei. O descriere generică nu este suficientă dacă pacientului urmează să i se efectueze un act precis. Documentul trebuie să corespundă conversației din cabinet și tratamentului planificat pentru acel moment.</p>
+    <p>Pacientul primește documentul prin codul QR și îl semnează, de regulă, pe propriul telefon. Dacă apar dificultăți tehnice sau pacientul nu poate utiliza telefonul, documentul este deschis pe tableta clinicii. Indiferent de dispozitiv, asistenta verifică dacă semnătura a fost înregistrată și dacă PDF-ul se află în SPS.</p>
+    <figure><img src="assets/onb-cod-qr-api.jpeg" alt="Ecranul Acord Pacient din SPS cu codul QR pentru semnarea API-ului"><figcaption>Ecranul Acord Pacient din SPS: codul QR generat pentru semnarea API-ului pe telefonul pacientului, cu actul medical completat de medic.</figcaption></figure>
+    <figure><img src="assets/onb-api-telefon.jpeg" alt="API-ul deschis pe telefonul pacientului după scanarea codului QR"><figcaption>API-ul deschis pe telefonul pacientului după scanarea codului QR: medicul și manopera sunt completate, iar pacientul confirmă informațiile primite și semnează.</figcaption></figure>
+    <div class="callout warn"><p><strong>REGULA CRITICĂ.</strong> Tratamentul începe numai după semnarea API-ului și salvarea PDF-ului, înainte ca pacientul să fie așezat pentru actul medical.</p></div>
+    <p>Regula generală este simplă: <strong>la fiecare vizită, medicul și pacientul semnează un API</strong>. În mod normal, medicul trece în API toate tratamentele și manoperele pe care urmează să le efectueze pacientului în vizita respectivă, astfel încât, din momentul în care pacientul se așază pe scaunul stomatologic și până se ridică, toate manoperele realizate să fie acoperite de acordul semnat înainte de începerea actului. Există însă situații în care nu toate manoperele pot fi cuprinse într-un singur document; atunci se semnează mai multe API-uri în aceeași vizită. Procesul este facil atât pentru medic, cât și pentru pacient: semnarea se face digital, pe telefonul pacientului, în câteva momente.</p>
+    <p>Dacă planul se schimbă în timpul consultației sau al tratamentului, medicul explică schimbarea și generează documentul corespunzător înainte de continuare. Pacientul nu părăsește cabinetul după un tratament modificat fără ca API-ul corect să fie semnat și salvat.</p>
+    <div class="callout warn"><p><strong>AVERTISMENT MALPRAXIS.</strong> Lipsa API-ului semnat este cauză de nulitate a asigurării de malpraxis a medicului. Termenii și condițiile polițelor de malpraxis condiționează acoperirea de existența consimțământului informat documentat; fără API, asigurarea devine, cel mai probabil, irelevantă. Regula este esențială pentru medici, dar la fel de importantă pentru asistente și registratori, care verifică existența documentului înainte de act.</p></div>
+
+    <h2 id="sec-5"><span class="chapter-num">Secțiunea 5</span>P2 — tratamentul și vizitele ulterioare</h2>
+    <p>Un dosar complet la prima vizită nu elimină nevoia de verificare la vizitele următoare.</p>
+    <p>La fiecare prezentare, asistenta confirmă că are pacientul corect, că programarea corespunde actului planificat și că formularul de Înregistrare Medicală se află în termenul maxim de nouă luni. Chiar dacă formularul este încă valabil, asistenta întreabă dacă au apărut modificări medicale de la ultima vizită. Pacientul poate începe un tratament nou, poate primi un diagnostic între vizite, poate începe un anticoagulant sau poate anunța o sarcină; într-o asemenea situație, formularul se actualizează mai devreme și informația ajunge la medic înainte de act.</p>
+    <p>După confirmarea actualității Înregistrării Medicale, asistenta verifică semnarea API-ului pentru vizita curentă: la fiecare vizită, medicul și pacientul semnează un API care acoperă manoperele zilei, iar dacă nu toate manoperele au putut fi trecute într-un singur document, se semnează API-uri suplimentare în aceeași vizită. Asistenta verifică totodată dacă este necesar un consimțământ specific. Termenul de nouă luni pentru formular nu înlocuiește această verificare. Ea devine cu atât mai importantă la schimbarea medicului, schimbarea specialității, începerea unei etape noi sau înaintea unei proceduri cu document dedicat. Dacă există îndoială, medicul decide documentul necesar înainte de tratament.</p>
+    <p>După act, asistenta confirmă că documentele sunt salvate, predă recepției eventualele originale pe hârtie și transmite pacientului instrucțiunile stabilite de medic. Înainte de plecare trebuie să fie clar ce s-a realizat, ce urmează și dacă există documente sau investigații care trebuie trimise.</p>
+
+    <h2 id="sec-6"><span class="chapter-num">Secțiunea 6</span>Rolul asistentei în continuitatea fluxului</h2>
+    <p>Asistenta este legătura dintre informația administrativă, decizia medicului și experiența concretă a pacientului.</p>
+    <p>Înainte de act, asistenta verifică documentele, citește alertele, confirmă existența API-ului și a consimțământului specific și îi transmite medicului riscurile relevante. Această verificare trebuie să fie activă: nu este suficient ca un document să existe dacă este incomplet, aparține altei etape sau nu acoperă manopera zilei.</p>
+    <p>În timpul consultației și al tratamentului, asistenta observă pacientul. Teama, disconfortul, o informație nouă sau o schimbare de plan trebuie aduse în atenția medicului. Asistenta nu contrazice explicația medicului și nu promite rezultate, dar poate relua pe înțelesul pacientului instrucțiunile operaționale și poate verifica dacă acesta a înțeles ce trebuie să facă.</p>
+    <p>După act, asistenta închide bucla: documentele sunt în dosar, originalele pe hârtie ajung la recepție, investigațiile sunt transmise, iar pacientul cunoaște următorul pas. Dacă lipsește o piesă, fluxul nu este abandonat în speranța că va fi completat ulterior. Este clarificat atunci când pacientul și echipa sunt încă disponibili.</p>
+    <div class="callout warn"><p><strong>ROL ACTIV, NU FORMAL.</strong> Când lipsește un document, există o alertă neclarificată sau planul nu corespunde API-ului, asistenta oprește pregătirea și cheamă medicul.</p></div>
+
+    <h2 id="sec-7"><span class="chapter-num">Secțiunea 7</span>Consimțămintele specifice și arhivarea</h2>
+    <p>Clinica utilizează o bibliotecă de consimțăminte pentru chirurgie și implantologie, sedare și anestezie, ortodonție, protetică, endodonție și parodontologie, estetică și injectabile, precum și pentru fotografie și documentare clinică. Personalul nu trebuie să memoreze titlurile tuturor documentelor. Înaintea unei proceduri, asistenta și medicul consultă matricea curentă din SPS sau din manualul clinicii și aleg formularul indicat.</p>
+    <p>Regula generală este semnarea digitală. Pentru categoriile marcate în matrice se păstrează și varianta pe hârtie, semnată olograf: chirurgie, sedare conștientă, protoxid de azot, toxină botulinică, acid hialuronic și PRF. Această listă a fost confirmată operațional în august 2026. Dacă lista se modifică în viitor, matricea curentă din SPS are prioritate față de memoria personalului.</p>
+    <p>După semnare, asistenta predă originalul pe hârtie recepției. Recepția îl arhivează în Biblioraftul de Consimțăminte, păstrat în biroul managerului sau în spațiul confidențial desemnat. Varianta digitală rămâne în dosarul pacientului. Pentru minori, Înregistrarea Medicală se completează și se semnează de reprezentantul legal. La introducerea CNP-ului de copil, formularul afișează automat rubricile „Nume Reprezentant” și „Prenume Reprezentant”, iar întrebările devin anamneza pediatrică. Identitatea reprezentantului legal se verifică la fel ca identitatea unui pacient adult, iar API-ul și consimțămintele specifice se semnează tot de reprezentantul legal, urmând documentul prevăzut în matrice pentru actul concret; cazurile neclare se rezolvă înainte de tratament.</p>
+
+    <h2 id="sec-8"><span class="chapter-num">Secțiunea 8</span>RX și CBCT — comunicare și trasabilitate</h2>
+    <p>Asistenta care efectuează investigația, în limitele competenței și organizării clinicii, nu este trecută pe formularul investigației. Tocmai de aceea, numele și prenumele asistentei care a realizat investigația se înscriu obligatoriu în câmpul „Observații” din SPS. Această înregistrare asigură trasabilitatea și permite echipei să știe cine a realizat etapa tehnică.</p>
+    <p>Pacientului i se spune că imaginile vor fi transmise prin e-mail, cu link către PACS-ul clinicii. PACS-ul este serverul nostru de stocare a imaginilor medicale: toate investigațiile sunt urcate și păstrate acolo în standardul DICOM. Pe PACS, clinica pune la dispoziție un cititor de imagini integrat, în versiune light, 2D, orientat în special către radiografii; CBCT-urile pot fi vizualizate în acest cititor doar într-un singur plan, adică tot 2D. Dacă pacientul sau medicul dorește citirea CBCT-ului într-o reconstrucție 3D, este necesară instalarea unui viewer compatibil, de tip medical grade, pe stația de lucru de pe care se face citirea. Medicii stomatologi care citesc în mod curent CT-uri au deja o astfel de aplicație; este posibil ca unii pacienți să semnaleze că „nu au putut deschide CT-ul” — linkul este corect și imaginile sunt acolo, dar citirea 3D cere aplicația specializată. E-mailul se trimite imediat, conform procedurii tehnice aplicabile, iar înainte ca pacientul să plece asistenta verifică primirea mesajului și obține o confirmare explicită. Simpla apăsare a butonului de trimitere nu închide sarcina dacă mesajul nu a ajuns.</p>
+    <p>Detaliile tehnice complete sunt stabilite în Procedura Radiologie/Imagistică și PACS (ADC-PAC-01): pentru pașii de lucru ai asistentei, în <a href="../asistenti/Manualul%20Asistentului%20Medical.html">Manualul Asistentului Medical, secțiunea „Responsabilități în cazul radiografiilor și CT-urilor”</a>; pentru informarea pacientului la recepție, în <a href="../registratori/Manualul%20Registratorului%20Medical.html#cap-6-9">Manualul Registratorului Medical, secțiunea „Responsabilitățile de informare a pacientului în cadrul procedurii Radiologie/Imagistică și PACS ADC-PAC-01”</a>.</p>
+    <p>Pentru pacient există o instrucțiune dedicată, pas cu pas: „Procedura pentru vizualizarea investigației CBCT”. Aceasta descrie deschiderea e-mailului primit, butonul „Vezi imaginile”, încărcarea platformei de vizualizare și navigarea prin secțiunile investigației cu rotița mouse-ului, cu recomandarea de a folosi un calculator sau laptop. Tot acolo sunt notate două limite pe care echipa trebuie să le cunoască: accesul prin link poate fi limitat în timp, iar vizualizarea imaginilor de către pacient nu înlocuiește interpretarea și diagnosticul medicului. Când un pacient semnalează că „nu a putut deschide CT-ul”, recepția sau asistenta îi transmite această instrucțiune ori îi parcurge pașii la telefon, înainte de a escalada problema.</p>
+    <p>Nu mai este necesar un consimțământ separat la fiecare investigație RX sau CBCT atunci când pacientul a bifat „Da” în formularul de Înregistrare Medicală, la opțiunea privind procedurile radiologice: acordul dat la înregistrare acoperă investigațiile indicate de medic. Dacă pacientul a bifat „Nu” sau opțiunea a rămas necompletată, la fiecare trimitere către RX sau CBCT se obține un consimțământ separat, înainte de efectuarea investigației.</p>
+    <p>Indicația și justificarea clinică aparțin medicului. Dacă pacientul refuză RX sau CBCT, investigația nu se efectuează. Medicul explică ce alternative există și ce limite apar în diagnostic sau tratament. Sarcina recepției și a asistentei este să documenteze alegerea și să se asigure că medicul o cunoaște înainte de continuare.</p>
+
+    <h2 id="sec-9"><span class="chapter-num">Secțiunea 9</span>Gestionarea activă a răspunsurilor „Nu”</h2>
+    <p>Un răspuns „Nu” declanșează o conversație de clarificare. Registratorul medical nu îl trece cu vederea și nu îl tratează ca pe o bifă administrativă definitivă înainte de a se asigura că pacientul a înțeles ce a refuzat.</p>
+    <figure><img src="assets/onb-gestionarea-nu-urilor.png" alt="Infografic: fluxul de clarificare a unui răspuns Nu"><figcaption>Fluxul de clarificare a unui răspuns „Nu”: cei patru pași ai conversației, cele două rezultate posibile și traseele de escaladare pe categorii.</figcaption></figure>
+    <p>Registratorul medical vede în tab-ul Alerte răspunsurile preluate automat de SPS din formular și are obligația operațională de a interveni pentru fiecare „Nu”. După activarea validării obligatorii aflate în dezvoltare la SPS, formularul nu va putea fi trimis cu opțiuni necompletate, deci nu vor exista răspunsuri lipsă sau ambigue: fiecare categorie va avea un „Da” sau un „Nu” explicit. Până atunci, un câmp gol se tratează ca răspuns lipsă — registratorul îl clarifică cu pacientul înainte de continuare. Pentru fiecare „Nu” se aplică fluxul de mai jos. Nu introduce și nu reconstruiește manual alerta. Obiectivul său este să afle motivul refuzului, să corecteze o neînțelegere sau o prejudecată și să îi ofere pacientului explicația completă din formularul specializat aferent acelui drept de utilizare. Registratorul nu se limitează la formula „ați bifat Nu”, ci conduce o conversație calmă și substanțiată despre scop, utilitate, protecții și consecințele concrete ale refuzului.</p>
+    <p>Ținta de lucru este ca, după clarificare, pacientul să poată acorda toate permisiunile care sunt necesare sau utile îngrijirii sale. Într-un caz obișnuit, registratorul urmărește obținerea unui răspuns „Da” informat pentru fiecare dintre cele șase categorii. Această țintă nu se transformă însă într-o obligație de rezultat: un acord obținut prin presiune, informații incomplete sau prin ascunderea caracterului facultativ al unei opțiuni nu este un acord valid.</p>
+    <p>Conversația urmează aceeași logică. Mai întâi, registratorul întreabă ce anume îl preocupă pe pacient și îl lasă să explice. Apoi reformulează pe înțelesul lui de ce clinica solicită acel drept și arată ce etapă medicală sau operațională depinde de el. În continuare, deschide formularul specializat din biblioteca de formulare, îi oferă pacientului timp să îl citească și răspunde numai în limitele rolului său. La final îl întreabă explicit dacă, în lumina explicațiilor, dorește să își revizuiască alegerea. Întrebările clinice sunt transferate medicului, iar excepțiile operaționale Clinic Managerului.</p>
+    <p><strong>Formularul de Înregistrare Medicală nu se mai modifică după trimitere</strong>: răspunsul „Nu” rămâne consemnat așa cum a fost exprimat de pacient. În schimb, recepția lucrează cu pacientul și, dacă acesta se răzgândește în urma explicațiilor, pacientul semnează un nou acord individual, particularizat exact pe speța și pe dreptul pe care îl refuzase inițial. Aceste consimțăminte individuale se arhivează alături de formularul de Înregistrare Medicală: formularul inițial și acordul individual ulterior asigură împreună trasabilitatea completă a deciziei pacientului. Dacă pacientul menține refuzul după explicație, acest lucru se notează factual și se aplică traseul prevăzut pentru categoria respectivă.</p>
+    <p>Registratorul poate explica, poate reveni cu o formulare diferită și poate invita pacientul să discute cu medicul, dar nu poate bifa, semna sau decide în locul lui. Nu se condiționează îngrijirea de o opțiune care nu este necesară actului medical, nu se minimalizează riscurile și nu se promit rezultate pentru a obține semnătura. În special pentru marketing, un refuz clar încheie tentativa de conversie și nu afectează în niciun fel tratamentul.</p>
+
+    <h3 id="sec-9-1">9.1 Prelucrarea datelor personale medicale</h3>
+    <p>Pentru datele medicale, registratorul explică faptul că informațiile sunt indispensabile evaluării, documentării dosarului și desfășurării tratamentului în siguranță. Nu prezintă această categorie ca pe o opțiune comparabilă cu newsletterul. Formula recomandată este: <em>„Datele medicale îi permit medicului să înțeleagă riscurile, să stabilească tratamentul și să documenteze corect ceea ce face. Fără informațiile indispensabile, nu putem începe în siguranță tratamentul electiv.”</em></p>
+    <p>Registratorul deschide formularul special pentru prelevarea și utilizarea datelor medicale, clarifică scopurile descrise acolo și îl invită pe pacient să își reanalizeze răspunsul. Dacă pacientul acceptă, semnează acordul individual aferent, care se arhivează alături de formularul de Înregistrare Medicală. Dacă refuzul rămâne, registratorul îl notează și solicită medicului să decidă ce evaluare sau tratament mai este posibil; nu promite continuarea în lipsa datelor necesare.</p>
+    <p><strong>Bază legală:</strong> pentru datele necesare actului medical, temeiul prelucrării este chiar furnizarea asistenței medicale — art. 9 alin. (2) lit. h) din GDPR, coroborat cu art. 6 alin. (1) lit. b) și c) — iar Legea nr. 46/2003 și legislația sanitară impun documentarea completă a dosarului medical. De aceea, formularul special are aici mai ales rol de informare și de documentare a luării la cunoștință: fără datele indispensabile, actul medical electiv nu poate începe în siguranță.</p>
+
+    <h3 id="sec-9-2">9.2 Imagini clinice și scanări intraorale digitale 2D/3D</h3>
+    <p>Pentru imaginile clinice și scanările intraorale digitale 2D/3D, registratorul explică rolul lor în diagnostic, planificare, comunicare, proiectarea lucrărilor și verificarea rezultatului. Pacientului i se poate spune: <em>„Aceste înregistrări nu sunt fotografii făcute din curiozitate; sunt instrumente de lucru pentru cazul dumneavoastră. În multe tratamente, medicul și laboratorul nu pot proiecta sau verifica lucrarea fără ele.”</em></p>
+    <p>Se prezintă formularul special aferent imaginilor și scanărilor, iar pacientul este invitat să semneze după ce a înțeles utilizarea. Dacă îndoiala privește un caz concret, medicul explică exact ce etapă depinde de aceste date. Dacă răspunsul rămâne „Nu”, medicul stabilește ce tratamente nu pot fi efectuate corect și dacă există o alternativă rezonabilă. Formularul validat juridic precizează consecința pe care registratorul o poate cita: refuzul poate limita posibilitatea clinicii de a formula un diagnostic complet, de a realiza un plan de tratament digitalizat, de a documenta evoluția tratamentului și, în anumite situații, de a furniza serviciile medicale care depind de aceste imagini sau scanări.</p>
+    <p><strong>Bază legală:</strong> atunci când imaginile și scanările sunt necesare diagnosticului și tratamentului, prelucrarea se întemeiază pe art. 9 alin. (2) lit. h) din GDPR, ca parte a actului medical și a dosarului pacientului; pentru orice utilizare dincolo de scopul clinic direct, clinica se bazează pe consimțământul explicit al pacientului, potrivit art. 9 alin. (2) lit. a) din GDPR. Legea nr. 46/2003 garantează în paralel confidențialitatea informațiilor medicale.</p>
+
+    <h3 id="sec-9-3">9.3 Scanări faciale 3D și modele digitale ale feței</h3>
+    <p>Pentru scanările faciale 3D și modelele digitale ale feței, explicația se leagă de planificarea cazului. Aceste date sunt folosite mai ales în tratamente chirurgicale și protetice ample, pentru corelarea poziției dinților cu trăsăturile feței și pentru anticiparea rezultatului. Registratorul evită afirmația că sunt obligatorii pentru orice pacient și spune concret: <em>„În cazul dumneavoastră, acest model îi permite medicului să planifice tratamentul în raport cu întreaga față, nu numai cu dinții.”</em></p>
+    <p>Pacientului i se oferă formularul special și, dacă are întrebări despre necesitatea clinică, este invitat medicul. Dacă acceptă, semnează acordul dedicat. Dacă refuză în continuare, se notează alegerea, iar medicul limitează planul la opțiunile care pot fi realizate corect fără aceste date. Conform formularului validat juridic, refuzul exclude pacientul de la tratamentele care depind de planificarea facială digitală — smile design, planificarea protetică integrată, planificarea ortognatică, simulările 3D ale rezultatului și implantologia ghidată avansată — rămânând disponibile doar alternative mai puțin precise și mai puțin predictibile; clinica își rezervă dreptul de a refuza procedurile care depind de aceste date.</p>
+    <p><strong>Bază legală:</strong> scanările faciale 3D și modelele digitale ale feței pot constitui date biometrice în sensul art. 4 pct. 14 din GDPR — categorie specială de date potrivit art. 9 alin. (1); prelucrarea lor se întemeiază pe consimțământul explicit al pacientului, conform art. 9 alin. (2) lit. a) din GDPR. Acesta este motivul pentru care clinica solicită un acord dedicat, iar refuzul limitează exclusiv tratamentele care depind de planificarea facială digitală.</p>
+
+    <h3 id="sec-9-4">9.4 Înregistrări video fără sunet în cabinet</h3>
+    <p>Pentru înregistrările video fără sunet, registratorul explică scopul declarat în informarea clinicii și faptul că sistemul este fix, fără sunet, neputând fi oprit și repornit individual pentru fiecare pacient. Conversația trebuie să fie transparentă, nu defensivă. Formula recomandată este: <em>„Înțeleg că doriți să știți exact ce se întâmplă cu imaginile. Vă prezint formularul dedicat, unde sunt descrise scopul, accesul și regulile de utilizare, iar dacă rămân întrebări chemăm managerul și medicul înainte de intrarea în cabinet.”</em> Registratorul poate sublinia, conform formularului validat, că înregistrarea este o componentă a controlului calității realizată în interesul direct al pacientului: îi oferă o probă obiectivă în cazul oricăror dispute ulterioare, iar refuzul îl lipsește de această protecție.</p>
+    <p>Dacă pacientul acceptă după clarificare, semnează formularul special. Dacă refuzul persistă, registratorul nu îl contrazice și transmite cazul Clinic Managerului înainte de intrarea în cabinet. Sistemul video este fix și nu poate fi oprit individual. Conform formularului de consimțământ validat juridic, clinica își rezervă dreptul de a efectua intervențiile chirurgicale, sedarea, implantologia, endodonția, protetica și procedurile complexe exclusiv în cabinete dotate cu sistem de înregistrare video: Clinic Managerul explică politicos această limită, iar dacă refuzul se menține, aceste proceduri nu pot fi programate. Tratamentele care nu depind de înregistrarea video pot continua, conform deciziei medicului. Pentru aceste proceduri uzuale, dacă pacientul nu își dă acordul pentru înregistrarea video în cabinet, clinica își asumă obligația de a șterge imaginile în termen de 30 de zile; angajamentul de ștergere privește exclusiv investigațiile și procedurile ușoare, nu și procedurile complexe enumerate mai sus, pentru care înregistrarea este o condiție de efectuare. Refuzul, explicația oferită și decizia se documentează factual în SPS, iar medicul este informat.</p>
+    <p><strong>Bază legală:</strong> supravegherea video în cabinet se întemeiază pe interesul legitim al clinicii — art. 6 alin. (1) lit. f) din GDPR — pentru controlul calității actului medical și protecția pacientului și a echipei, în acord cu Orientările EDPB 3/2019 privind prelucrarea datelor cu caracter personal prin mijloace video; regula ștergerii la 30 de zile pentru procedurile ușoare aplică principiul limitării stocării, art. 5 alin. (1) lit. e) din GDPR. Formularul dedicat documentează informarea pacientului.</p>
+
+    <h3 id="sec-9-5">9.5 Prelucrarea datelor în scop de marketing</h3>
+    <p>Pentru marketing, registratorul poate explica o singură dată și clar ce tip de informații ar primi pacientul — noutăți, materiale educaționale sau comunicări despre serviciile clinicii — și îl poate întreba dacă dorește să își revizuiască opțiunea. Dacă răspunsul devine „Da”, pacientul semnează consimțământul special de marketing. Acceptarea trebuie să fie separată de documentele medicale și să nu fie prezentată ca o condiție a tratamentului.</p>
+    <p>Dacă pacientul spune din nou „Nu”, conversația se încheie fără insistențe. Refuzul nu are nicio consecință asupra consultației sau tratamentului, iar adresa sa nu este introdusă în comunicările de marketing ori este suprimată din lista utilizată. O limitare tehnică a SPS nu justifică trimiterea newsletterului împotriva opțiunii exprimate.</p>
+    <p><strong>Bază legală:</strong> comunicările de marketing se întemeiază exclusiv pe consimțământul prealabil al pacientului — art. 6 alin. (1) lit. a) din GDPR, Directiva 2002/58/CE privind comunicările electronice și Legea nr. 506/2004, art. 12. Pacientul are oricând dreptul de a se opune prelucrării în scop de marketing, potrivit art. 21 alin. (2) și (3) din GDPR, iar refuzul sau retragerea consimțământului nu afectează în niciun fel îngrijirea medicală.</p>
+
+    <h3 id="sec-9-6">9.6 Proceduri radiologice RX/CBCT</h3>
+    <p>Pentru RX/CBCT, registratorul explică faptul că investigația este solicitată pentru un scop clinic și că medicul are nevoie de imagine pentru a vedea structuri care nu pot fi evaluate complet prin simpla examinare. Formula recomandată este: <em>„Investigația nu se face automat și nici fără motiv. Medicul o indică pentru informația necesară diagnosticului sau planului și vă poate explica exact ce trebuie să vadă.”</em> Pacientului i se prezintă formularul special și este invitat să își reanalizeze alegerea.</p>
+    <p>Dacă există sarcină, suspiciune de sarcină sau o altă situație medicală relevantă, registratorul nu încearcă să obțină singur schimbarea răspunsului, ci transmite imediat informația medicului. Dacă pacientul refuză în continuare, investigația nu se efectuează; medicul decide alternativa și limitele tratamentului. Nu se aplică de către recepție o regulă simplificată bazată pe un anumit număr de luni de sarcină. Formularul validat juridic oferă registratorului elementele de informare: dozele medii pe investigație (RX ≈ 1,7 Gy·cm², CBCT ≈ 2,5 Gy·cm² — valorile exacte se regăsesc în registrul cabinetului de radiologie), principiul ALARA și dreptul pacientului de a refuza punctual fiecare investigație. Tot acolo este precizată consecința refuzului: diagnosticarea corectă și efectuarea în siguranță a endodonției, implantologiei, ortodonției complexe, chirurgiei orale, parodontologiei și proteticii complexe devin imposibile, iar clinica își rezervă dreptul de a refuza procedurile pentru care diagnosticul radiologic este indispensabil.</p>
+    <p><strong>Bază legală:</strong> expunerile medicale la radiații ionizante sunt permise numai dacă sunt justificate de medic și optimizate, potrivit Directivei 2013/59/Euratom și normelor naționale de securitate radiologică — principiul ALARA. Legea nr. 46/2003, art. 13, garantează dreptul pacientului de a refuza o intervenție medicală, inclusiv o investigație radiologică, după informarea asupra consecințelor refuzului. Acordul „Da” bifat în formularul de Înregistrare Medicală acoperă investigațiile indicate de medic, fără consimțământ separat la fiecare trimitere; la „Nu” sau la opțiune necompletată, se obține un consimțământ separat pentru fiecare investigație, conform Secțiunii 8.</p>
+
+    <h2 id="sec-10"><span class="chapter-num">Secțiunea 10</span>Escaladarea și închiderea fluxului</h2>
+    <p>O alertă clinică, o schimbare medicală, o sarcină, tratamentul anticoagulant, o alergie sau o modificare a planului ajung la medic înainte de act. Un refuz video, un conflict operațional, o nemulțumire sau o excepție care nu poate fi rezolvată prin fluxul standard ajung la Clinic Manager și la medic. Un document ori un PDF lipsă nu se compensează printr-o promisiune că va fi completat mai târziu: tratamentul așteaptă remedierea.</p>
+    <p>Notarea în SPS trebuie să fie factuală și suficientă pentru colegul care va citi ulterior. Se consemnează categoria refuzată, motivul exprimat de pacient, formularul special prezentat, explicația oferită, întrebările trimise medicului sau Clinic Managerului și rezultatul final. Dacă pacientul și-a schimbat opțiunea, se menționează consimțământul special semnat și statusul curent; dacă refuzul a rămas, se notează consecința comunicată. Se evită calificativele despre atitudinea pacientului și formulările defensive.</p>
+    <p>Fluxul este închis corect atunci când identitatea este clară, documentele se află în dosar, alertele au ajuns la medic, actul realizat este acoperit de API și de consimțămintele specifice, iar pacientul știe ce urmează. Echipa nu trebuie să memoreze fiecare situație posibilă. Trebuie să recunoască momentul în care una dintre porți nu este îndeplinită și să oprească elegant procesul până la clarificare.</p>
+    <div class="callout warn"><p><strong>REGULA FINALĂ.</strong> Identitate verificată. Înregistrare Medicală completă și în termenul maxim de nouă luni. Alerte citite. Fiecare „Nu” clarificat prin dialog și formularul special. API semnat la fiecare vizită și PDF salvat înainte de tratament. Acordul este urmărit activ, dar se obține numai informat și liber; refuzul rămas este respectat, documentat și evaluat de medic.</p></div>
+
+    <h2 id="anexa-1"><span class="chapter-num">Anexa 1</span>Checklist rapid la post</h2>
+    <div class="callout note"><p>Anexa nu înlocuiește procedura. Ea este folosită după instruire, pentru controlul rapid al etapelor.</p></div>
+    <table>
+      <thead><tr><th style="width:140px">Etapă</th><th>Verificări</th></tr></thead>
+      <tbody>
+        <tr><td><strong>P0</strong></td><td>Date SPS complete; medic, dată și oră; confirmare verbală; informarea privind actul de identitate; SMS locație; SMS formular; reminder 24 h; apel preventiv de confirmare pentru lucrările majore (implantologie, endodonție, protetică); anulările și neprezentările gestionate conform procedurii dedicate.</td></tr>
+        <tr><td><strong>P1A — Recepție</strong></td><td>Programare; identitate; fotografie CI sau refuz notat; data ultimului formular și termenul de maximum 9 luni; formular nou dacă este expirat; tab-ul Alerte actualizat automat și citit; fiecare „Nu” clarificat; predare către asistentă.</td></tr>
+        <tr><td><strong>P1B — Cabinet</strong></td><td>CESGS; profil psiho-social; riscuri transmise medicului; plan explicat; API corect; PDF salvat.</td></tr>
+        <tr><td><strong>P2</strong></td><td>Termenul de 9 luni și eventuale schimbări anticipate; modificări medicale; API semnat pentru vizita curentă; consimțământ specific; documente arhivate; următorul pas comunicat.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="anexa-2"><span class="chapter-num">Anexa 2</span>Matricea simplă a documentelor</h2>
+    <table>
+      <thead><tr><th style="width:200px">Document</th><th style="width:280px">Moment</th><th>Format și control</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Înregistrare Medicală</strong></td><td>înainte de prima consultație și obligatoriu din nou la maximum 9 luni sau mai devreme dacă apar schimbări</td><td>Digital; SPS actualizează automat Alertele; data și valabilitatea sunt controlate de registrator.</td></tr>
+        <tr><td><strong>API</strong></td><td>la fiecare vizită, înaintea actului medical</td><td>Digital, prin QR pe telefon sau tabletă; control medic + asistentă.</td></tr>
+        <tr><td><strong>Consimțământ specific</strong></td><td>când matricea curentă îl cere</td><td>Digital sau hârtie + digital; control medic + asistentă.</td></tr>
+        <tr><td><strong>Original pe hârtie</strong></td><td>imediat după semnare</td><td>Asistenta îl predă; recepția îl arhivează confidențial.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="anexa-3"><span class="chapter-num">Anexa 3</span>Surse de control</h2>
+    <p>Procedura este un instrument operațional. Formularele și informările se actualizează în raport cu cerințele legale și clinice în vigoare.</p>
+    <ul>
+      <li>Regulamentul (UE) 2016/679 — GDPR</li>
+      <li>Legea nr. 46/2003 privind drepturile pacientului</li>
+      <li>Normele de aplicare a Legii drepturilor pacientului</li>
+      <li>Legea nr. 190/2018</li>
+      <li>Legea nr. 506/2004 privind prelucrarea datelor cu caracter personal în sectorul comunicațiilor electronice</li>
+      <li>Directiva 2002/58/CE privind comunicările electronice</li>
+      <li>Directiva 2013/59/Euratom privind normele de securitate radiologică</li>
+      <li>EDPB — Orientările 05/2020 privind consimțământul · Orientările 3/2019 privind prelucrarea datelor prin mijloace video</li>
+      <li>Codul deontologic al medicului stomatolog (art. 17, 34, 48, 50, 54)</li>
+      <li>Consimțământ informat privind prelucrarea datelor — cele șase categorii (formular intern ADC, validat august 2026)</li>
+    </ul>
+    <p><strong>Istoric editorial al documentului-sursă (docx):</strong> v13 introduce termenul intern maxim de nouă luni. v14 adaugă excepția de urgență, regula video, trimiterea la procedura de anulări, fluxul pentru minori și clarificarea temeiurilor juridice. v15 aliniază regula video la formularul validat juridic și preia consecințele refuzurilor. v16 consemnează validarea obligatorie planificată în SPS. v17 integrează observațiile lui Vlad Ardeleanu din august 2026 (planul de tratament P1+P2, fișierul de lead-uri, linkul dinamic de test, apelurile preventive, baza legală a identificării, regula „un API la fiecare vizită” cu avertismentul de malpraxis, clarificarea PACS, formularul nemodificabil cu acorduri individuale, extinderea listei video-obligatorii, ștergerea la 30 de zile, bazele legale pe subpuncte, capturile formularului online). v18 integrează comentariile Adrianei Toma și Alexandrei Șandru (ordinea tab-ului Alerte, pregătirea cabinetului, procedura de vizualizare CBCT, reminderul exclusiv SMS) și confirmă lista documentelor olografe.</p>
+
+    <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 1</strong> · 18 august 2026.</p>
+    <table>
+      <thead>
+        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>18 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea procedurii ADC-ONB-01 în format web, prin integrarea integrală a manualului narativ de onboarding P0–P2, versiunea V18 (septembrie 2026) — inclusiv comentariile integrate ale echipei (Vlad Ardeleanu, Adriana Toma, Alexandra Șandru), capturile formularului online de Înregistrare Medicală, infograficele fluxului și bazele legale pe fiecare subpunct.</td></tr>
+      </tbody>
+    </table>
+
+  </article>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h5>Clinicile Dr. Ardeleanu</h5>
+      <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
+      <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
+    </div>
+    <div>
+      <h5>Document</h5>
+      <p>Cod: ADC-ONB-01</p>
+      <p>V18 · septembrie 2026</p>
+      <p>18 august 2026</p>
+      <p>10 secțiuni · 3 anexe</p>
+    </div>
+    <div>
+      <h5>Rețea</h5>
+      <p>8 clinici în 7 orașe</p>
+      <p>80+ medici supraspecializați</p>
+      <p>30.000+ pacienți unici</p>
+      <p>4.9★ Google · 2.950 recenzii</p>
+    </div>
+    <div>
+      <h5>Contact &amp; Acces</h5>
+      <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
+      <p>031 99 63</p>
+      <p><a href="mailto:clinici@ardeleanu.ro">clinici@ardeleanu.ro</a></p>
+      <p>ERP intern: erp.clinicile-ardeleanu.ro</p>
+    </div>
+  </div>
+  <div class="din-2017">
+    <span>DIN 2017</span>·<span>EXCELENȚĂ</span>·<span>ACCESIBILITATE</span>·<span>FAMILIE</span>
+  </div>
+</footer>
+
+<script>
+// Highlight current section in TOC on scroll
+(function(){
+  const links = document.querySelectorAll('.toc-side a[href^="#"]');
+  const map = new Map();
+  links.forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el) map.set(el, a);
+  });
+  if(!map.size) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a = map.get(e.target);
+        if(a) a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-15% 0px -75% 0px'});
+  map.forEach((a,el)=>io.observe(el));
+})();
+</script>
+
+<div class="readbar" aria-hidden="true"></div>
+<button class="totop" id="totop" aria-label="Sus">↑</button>
+<script>
+// ============ PLATFORM FRAME (unified) ============
+(function(){
+  // ---- reading progress ----
+  var bar=document.querySelector('.readbar');
+  function upBar(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  }
+  window.addEventListener('scroll',upBar,{passive:true}); upBar();
+
+  // ---- back to top ----
+  var totop=document.getElementById('totop');
+  window.addEventListener('scroll',function(){ totop.classList.toggle('show', window.scrollY>600); },{passive:true});
+  totop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // ---- sticky header: swap breadcrumb for document title once hero scrolls past ----
+  var topbar=document.querySelector('.topbar');
+  var hero=document.querySelector('.hero');
+  if(topbar && hero){
+    function upCrumb(){
+      var r=hero.getBoundingClientRect();
+      topbar.classList.toggle('scrolled', r.bottom<=topbar.offsetHeight);
+    }
+    window.addEventListener('scroll',upCrumb,{passive:true});
+    window.addEventListener('resize',upCrumb);
+    upCrumb();
+  }
+
+  // ---- mobile drawer ----
+  var sidebar=document.querySelector('.toc-side');
+  var menuBtn=document.getElementById('menuBtn');
+  function openMenu(){
+    sidebar.classList.add('open');
+    document.body.classList.add('menu-open');
+  }
+  function closeMenu(){
+    if(!sidebar.classList.contains('open')) return;
+    sidebar.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  }
+  if(menuBtn&&sidebar){
+    menuBtn.addEventListener('click',function(){
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    sidebar.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(){ if(window.innerWidth<=980) closeMenu(); });
+    });
+    document.addEventListener('click',function(e){
+      if(!sidebar.classList.contains('open')) return;
+      if(sidebar.contains(e.target)||menuBtn.contains(e.target)) return;
+      closeMenu();
+    });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMenu(); });
+    document.addEventListener('touchmove',function(e){
+      if(sidebar.classList.contains('open') && !sidebar.contains(e.target)) e.preventDefault();
+    },{passive:false});
+  }
+
+  // ---- search (filter cuprins) ----
+  var search=document.getElementById('search');
+  if(search&&sidebar){
+    var norm=function(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); };
+    var groups=[].slice.call(sidebar.querySelectorAll('.group'));
+    search.addEventListener('input',function(){
+      var q=norm(search.value.trim());
+      groups.forEach(function(g){
+        var visible=0;
+        [].slice.call(g.children).forEach(function(child){
+          if(child.tagName!=='OL') return;
+          [].slice.call(child.children).forEach(function(li){
+            var mainLink=li.querySelector('a');
+            var mainMatch=!q||(mainLink&&norm(mainLink.textContent).indexOf(q)!==-1);
+            li.classList.toggle('toc-search-hide', !!q&&!mainMatch);
+            if(mainMatch) visible++;
+          });
+        });
+        g.classList.toggle('toc-search-hide', !!q&&visible===0);
+      });
+      if(q&&window.innerWidth<=980) sidebar.classList.add('open');
+    });
+  }
+
+  // ---- keyboard shortcuts ----
+  document.addEventListener('keydown',function(e){
+    var tag=(document.activeElement&&document.activeElement.tagName)||'';
+    if((e.key==='/'||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'))&&tag!=='INPUT'&&tag!=='TEXTAREA'){
+      if(search){ e.preventDefault(); search.focus(); }
+    } else if(e.key==='Escape'&&document.activeElement===search){
+      search.value=''; search.dispatchEvent(new Event('input')); search.blur();
+    }
+  });
+
+  // ---- mobile notice: keep dismissed within session ----
+  try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ var mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
+
+  // ---- partajare document: butonul apare doar pentru accesul cu parola generală ----
+  var shareBtn=document.getElementById('shareBtn');
+  if(shareBtn){
+    try{ if(sessionStorage.getItem('adcManualeAuth')==='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b') shareBtn.hidden=false; }catch(e){}
+    shareBtn.addEventListener('click',function(){
+      var link=location.origin+location.pathname+'#k='+encodeURIComponent('onb-20d3f6');
+      function done(){ var t=shareBtn.innerHTML; shareBtn.innerHTML='✓ Link copiat'; setTimeout(function(){ shareBtn.innerHTML=t; },2200); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:',link); });
+      else window.prompt('Copiază linkul:',link);
+    });
+  }
+})();
+</script>
+
+<!-- ============ Print PDF per formular (generat dinamic) ============ -->
+<script>
+(function(){
+  var article = document.querySelector('.article');
+  if(!article) return;
+  var kids = Array.prototype.slice.call(article.children);
+  var n = kids.length;
+
+  function rangeHasTable(start, end){
+    for(var i = start; i < end; i++){ if(kids[i].tagName === 'TABLE') return true; }
+    return false;
+  }
+
+  function makeBtn(label){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'print-form-btn';
+    b.title = 'Printează „' + label + '” ca PDF';
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>PDF</span>';
+    return b;
+  }
+
+  var restoring = false;
+  function restore(){
+    if(restoring) return;
+    restoring = true;
+    kids.forEach(function(el){ el.removeAttribute('data-print-hidden'); });
+    document.body.classList.remove('printing-form');
+    restoring = false;
+  }
+  window.addEventListener('afterprint', restore);
+
+  function printRange(startIdx, endIdx){
+    kids.forEach(function(el, i){
+      if(i < startIdx || i >= endIdx) el.setAttribute('data-print-hidden', '1');
+    });
+    document.body.classList.add('printing-form');
+    window.print();
+    setTimeout(restore, 4000);
+  }
+
+  for(var i = 0; i < n; i++){
+    var el = kids[i];
+    var isAnexaH2 = el.tagName === 'H2' && el.id && el.id.indexOf('anexa-') === 0;
+    var isSec17 = el.tagName === 'H2' && el.id === 'sec-17';
+    if(!isAnexaH2 && !isSec17) continue;
+
+    var end = i + 1;
+    while(end < n && kids[end].tagName !== 'H2') end++;
+
+    if(!rangeHasTable(i + 1, end)) continue;
+
+    (function(startIdx, endIdx, headingEl){
+      var btn = makeBtn(headingEl.textContent.trim());
+      btn.addEventListener('click', function(e){ e.preventDefault(); printRange(startIdx, endIdx); });
+      headingEl.appendChild(btn);
+    })(i, end, el);
+  }
+})();
+</script>
+</body>
+</html>
