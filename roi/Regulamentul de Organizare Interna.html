@@ -2501,11 +2501,12 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
   for(var i = 0; i < n; i++){
     var el = kids[i];
     var isAnexaH2 = el.tagName === 'H2' && el.id && el.id.indexOf('anexa-') === 0;
-    var isH4 = el.tagName === 'H4';
-    if(!isAnexaH2 && !isH4) continue;
+    if(!isAnexaH2) continue;
 
+    /* butonul anexei printează ÎNTREAGA anexă, cu toate secțiunile ei (h4),
+       integrat — până la următorul h2; fără butoane separate pe fragmente */
     var end = i + 1;
-    while(end < n && kids[end].tagName !== 'H2' && kids[end].tagName !== 'H4') end++;
+    while(end < n && kids[end].tagName !== 'H2') end++;
 
     if(!rangeHasTable(i + 1, end)) continue;
 
