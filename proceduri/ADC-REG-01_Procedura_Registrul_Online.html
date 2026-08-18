@@ -1320,9 +1320,11 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
 
   for(var i = 0; i < n; i++){
     var el = kids[i];
-    var isAnexaH2 = el.tagName === 'H2' && el.id && el.id.indexOf('anexa-') === 0;
-    var isSec17 = el.tagName === 'H2' && el.id === 'sec-17';
-    if(!isAnexaH2 && !isSec17) continue;
+    /* butoane PDF pe formularele A–D și pe fișa programelor (model) —
+       fiecare printează întreaga secțiune, cu toate sub-secțiunile integrate */
+    var isFormH2 = el.tagName === 'H2' && el.id && el.id.indexOf('form-') === 0;
+    var isSec11 = el.tagName === 'H2' && el.id === 'sec-11';
+    if(!isFormH2 && !isSec11) continue;
 
     var end = i + 1;
     while(end < n && kids[end].tagName !== 'H2') end++;
