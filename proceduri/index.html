@@ -10,7 +10,7 @@
   var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
   var O='59afd7263d9b30e6643869072bc6f1c028c670fb404893620531376eef2b87de';
   var LK='adcAuthPROC';
-  var PROC_KEYS=[{lk:'adcAuthBEN',hash:'9d3dffbb111f9a0bd5a70c325a5de235d65d1210b5528ecfdc9b0ad6d8d53236'}];
+  var PROC_KEYS=[{lk:'adcAuthBEN',hash:'9d3dffbb111f9a0bd5a70c325a5de235d65d1210b5528ecfdc9b0ad6d8d53236'},{lk:'adcAuthREG',hash:'6b625f283b1cd00868dae39a70c23e24e19912d6d694261537f2cacbc9b5490b'}];
   function deny(){ location.replace('../index.html'); }
   try{
     if(sessionStorage.getItem('adcManualeAuth')===M) return;
@@ -347,14 +347,20 @@ html{scroll-behavior:smooth}
   <div class="proto-index">
     <div class="pi-head">
       <span class="pi-eyebrow">Proceduri operaționale</span>
-      <h2>Anexa nr. 13 — Registrul procedurilor de lucru</h2>
-      <span class="pi-sub">1 publicată · 3 în pregătire</span>
+      <h2>Registrul procedurilor de lucru</h2>
+      <span class="pi-sub">2 publicate · 3 în pregătire</span>
     </div>
     <div class="proto-grid">
       <a class="proto-card" href="ADC-BEN-01_Procedura_Beneficii.html">
         <span class="pc-code">ADC-BEN-01 · V3.0</span>
         <span class="pc-name">Beneficii Stomatologice</span>
         <span class="pc-desc">Eligibilitate, matricea aprobată, fluxul ERP și protecția datelor.</span>
+        <span class="pc-status">Proiect — în validare</span>
+      </a>
+      <a class="proto-card" href="ADC-REG-01_Procedura_Registrul_Online.html">
+        <span class="pc-code">ADC-REG-01 · V1.0</span>
+        <span class="pc-name">Registrul online al documentelor interne</span>
+        <span class="pc-desc">Înregistrarea, etichetarea, versionarea, publicarea și comunicarea documentelor controlate; lista de verificare la adoptarea RI.</span>
         <span class="pc-status">Proiect — în validare</span>
       </a>
       <span class="proto-card soon">

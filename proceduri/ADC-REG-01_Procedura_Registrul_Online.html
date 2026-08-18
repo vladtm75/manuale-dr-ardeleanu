@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<script>
+/* Gate: acces cu parola generală (sessionStorage, ca înainte) SAU cu cheia proprie
+   a documentului — memorată în localStorage sau primită printr-un link #k=... */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='6b625f283b1cd00868dae39a70c23e24e19912d6d694261537f2cacbc9b5490b';
+  var LK='adcAuthREG';
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Procedura Registrului Online, Dr. Ardeleanu (ADC-REG-01)</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Procedura Registrului Online al Documentelor Interne, Dr. Ardeleanu" />
+<meta property="og:description" content="Procedura Registrului online al documentelor interne (ADC-REG-01) — înregistrarea, etichetarea, versionarea, publicarea și comunicarea documentelor controlate. Document de aplicare al Regulamentului Intern V2.7, proiect pentru validare și adoptare." />
+<meta property="og:url" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/ADC-REG-01_Procedura_Registrul_Online.html" />
+<meta property="og:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/og-reg-01.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta property="og:locale" content="ro_RO" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://vladtm75.github.io/manuale-dr-ardeleanu/proceduri/assets/og-reg-01.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-primary:#7B1C16;
+  --brand-primary-deep:#5d140f;
+  --brand-primary-soft:#a14841;
+  --brand-wheat:#F2DAB7;
+  --brand-cream:#F5EDE3;
+  --brand-cream-warm:#FBF6EE;
+  --brand-olive:#B5BD5C;
+  --brand-amber:#C9A227;
+  --brand-yellow:#FBE483;
+  --brand-terracotta:#dd7e6b;
+  --brand-alert:#FF0300;
+  --ink:#222222;
+  --ink-soft:#4a4541;
+  --ink-mute:#7a736d;
+  --rule:#e6dccd;
+  --rule-soft:#efe7d7;
+  --paper:#fbf7f1;
+  --paper-pure:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Poppins',system-ui,sans-serif;
+  font-weight:400;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--brand-primary);text-decoration:none;border-bottom:1px solid rgba(123,28,22,.25)}
+a:hover{border-bottom-color:var(--brand-primary)}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper-pure);
+  border-bottom:1px solid var(--rule);
+  box-shadow:0 1px 0 rgba(123,28,22,.04);
+}
+.topbar-inner{
+  max-width:1380px;margin:0 auto;padding:10px 28px;
+  display:flex;align-items:center;gap:18px;
+}
+.topbar img.logo{height:34px;width:auto;display:block}
+.back-home{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  font-size:12.5px;font-weight:600;color:var(--brand-primary);white-space:nowrap;
+  border:1.5px solid var(--rule);border-radius:999px;padding:6px 15px;
+  transition:background .15s,border-color .15s;border-bottom:1.5px solid var(--rule);
+}
+.back-home:hover{background:var(--brand-cream);border-color:var(--brand-primary);}
+.back-home .bh-arrow{font-size:15px;line-height:1}
+@media(max-width:840px){ .back-home .bh-txt{display:none} .back-home{padding:6px 11px} }
+.topbar .crumbs{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:12px;letter-spacing:.04em;color:var(--ink-mute);
+  border-left:1px solid var(--rule);padding-left:14px;
+}
+.topbar .crumbs strong{color:var(--brand-primary);font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+.topbar .crumbs .crumb-title{display:none;color:var(--ink);font-weight:600}
+.topbar.scrolled .crumbs .crumb-path{display:none}
+.topbar.scrolled .crumbs .crumb-title{display:inline}
+.topbar .spacer{flex:1}
+.topbar .pill{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;
+  background:var(--brand-cream);color:var(--brand-primary);
+  font-weight:600;border:1px solid var(--brand-wheat);
+}
+.topbar .pill.dark{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.topbar .mh-share{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 13px;
+  font-family:inherit;font-weight:600;font-size:12px;color:var(--brand-primary);
+  cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
+}
+.topbar .mh-share:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
+.topbar .actions{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-mute)}
+.topbar .actions span{padding:0 8px}
+
+/* ============ HERO / TITLE ============ */
+.hero{
+  background:linear-gradient(180deg,var(--paper-pure) 0%, var(--paper) 100%);
+  border-bottom:1px solid var(--rule);
+  padding:42px 0 28px;
+}
+.hero-inner{max-width:1380px;margin:0 auto;padding:0 28px}
+.hero .kicker{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero .kicker:before{content:"";display:inline-block;width:28px;height:1px;background:var(--brand-amber)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  color:var(--ink);
+  font-size:clamp(38px,5.6vw,58px);line-height:1.04;
+  margin:0 0 14px;letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:italic;color:var(--brand-primary);font-weight:500}
+.hero .subtitle{
+  font-size:19px;color:var(--ink-soft);font-weight:300;
+  margin:0 0 26px;line-height:1.5;
+}
+.hero .meta-row{
+  display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-top:22px;
+}
+.hero .meta-row > div{
+  padding:11px 8px;
+  border-right:1px solid var(--rule);
+  text-align:center;
+}
+.hero .meta-row > div:last-child{border-right:none}
+@media(max-width:900px){
+  .hero .meta-row{grid-auto-flow:row;grid-template-columns:repeat(4,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:none}
+}
+@media(max-width:560px){
+  .hero .meta-row{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:1px solid var(--rule)}
+  .hero .meta-row > div:nth-child(2n){border-right:none}
+}
+.hero .meta-row dt{
+  font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-bottom:3px;
+}
+.hero .meta-row dd{
+  margin:0;font-size:12px;color:var(--ink);font-weight:500;line-height:1.3;
+}
+.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--brand-primary)}
+
+/* status badge: comunicare oficială / intrare în vigoare — setat manual per document */
+.status-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;letter-spacing:.06em;text-transform:none;font-weight:700;
+  padding:4px 11px;border-radius:999px;line-height:1.3;
+}
+.status-badge:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.status-badge--active{background:#eaf3e6;color:#3f7d3a;border:1px solid #bcdcb3}
+.status-badge--pending{background:#f2ede6;color:#8a6d3a;border:1px solid #ddd0b8}
+
+/* ============ TABS ÎNTRE PROCEDURI (comun tuturor paginilor din proceduri/) ============ */
+.proc-tabs{
+  position:sticky;top:54px;z-index:45;
+  background:var(--paper-pure);border-bottom:1px solid var(--rule);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.proc-tabs-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;gap:4px;white-space:nowrap;
+}
+.proc-tab{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 14px;font-size:13px;font-weight:600;
+  color:var(--ink-mute);text-decoration:none;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+}
+.proc-tab:hover{color:#75604A;border-bottom-color:var(--rule)}
+.proc-tab.active{color:#75604A;border-bottom-color:#8A6F52}
+.proc-tab .pt-code{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-mute)}
+.proc-tab.active .pt-code{color:#75604A}
+.proc-tab.soon{color:var(--ink-mute);opacity:.5;cursor:default}
+.proc-tab.soon .pt-code{font-style:italic}
+.proc-tab.hub{margin-left:auto;color:var(--brand-primary);border-bottom-color:transparent}
+.proc-tab.hub:hover{color:var(--brand-primary);border-bottom-color:var(--brand-wheat)}
+@media(max-width:640px){
+  .proc-tabs{top:46px}
+  .proc-tabs-inner{padding:0 14px;gap:2px}
+  .proc-tab{padding:9px 10px;font-size:12px}
+}
+
+/* ============ ARTICLE LAYOUT ============ */
+.layout{
+  max-width:1380px;margin:0 auto;padding:38px 0 80px;
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  align-items:start;
+}
+@media(max-width:980px){.layout{grid-template-columns:minmax(0,1fr);gap:18px;padding:38px 28px 80px}}
+
+/* TOC sidebar */
+.toc-side{
+  position:sticky;top:122px;
+  align-self:start;
+  max-height:calc(100vh - 140px);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  font-size:13px;
+  padding:30px 14px 60px 28px;
+  border-right:1px solid var(--rule);
+  scrollbar-width:thin;scrollbar-color:var(--rule) transparent;
+}
+.main{ padding:30px 46px 120px; min-width:0; background:var(--paper-pure); }
+@media(max-width:980px){ .main{ padding:20px 28px 80px; } }
+.toc-side::-webkit-scrollbar{width:6px}
+.toc-side::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.toc-side h4{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+.toc-side .group{margin-bottom:18px}
+.toc-side .group-label{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:700;
+  margin:14px 0 6px;display:flex;align-items:center;gap:8px;
+}
+.toc-side .group-label:before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand-amber);display:inline-block}
+.toc-side .group-label.clinical:before{background:var(--brand-primary)}
+.toc-side .group-label.clinical{color:var(--brand-primary)}
+.toc-side .group-label.ops:before{background:var(--ink-soft)}
+.toc-side .group-label.ops{color:var(--ink-soft)}
+
+.toc-side ol{list-style:none;margin:0;padding:0;counter-reset:none}
+.toc-side ol > li{
+  padding:3px 0;line-height:1.35;
+}
+.toc-side a{
+  color:var(--ink-soft);border-bottom:none;
+  display:flex;gap:8px;align-items:baseline;
+  padding:3px 8px;border-radius:6px;border-left:2px solid transparent;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.toc-side a:hover{background:var(--brand-cream);color:var(--brand-primary)}
+.toc-side .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--ink-mute);font-weight:500;
+  min-width:24px;flex-shrink:0;
+}
+.toc-side a.active{background:var(--brand-cream);color:var(--brand-primary);font-weight:600;border-left-color:var(--brand-primary)}
+
+/* ============ ARTICLE BODY ============ */
+.article{
+  max-width:900px;
+  font-size:15.5px;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+.article p{margin:0 0 14px;text-wrap:pretty}
+.article strong{color:var(--ink);font-weight:600}
+.article em{color:var(--brand-primary);font-style:italic}
+
+/* Hatnote — Wikipedia top notice */
+.hatnote{
+  font-size:13px;color:var(--ink-mute);font-style:italic;
+  padding:10px 14px;background:var(--brand-cream-warm);
+  border-left:3px solid var(--brand-amber);
+  margin:0 0 28px;border-radius:0 3px 3px 0;
+}
+.hatnote strong{color:var(--brand-primary);font-style:normal}
+
+/* Article headings */
+.article h2{
+  font-family:'Playfair Display',serif;
+  font-weight:800;color:var(--ink);
+  font-size:32px;line-height:1.2;
+  margin:48px 0 8px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--rule);
+  letter-spacing:-.005em;
+  scroll-margin-top:122px;
+}
+.article h2 .chapter-num{
+  display:block;
+  font-family:'Poppins',sans-serif;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+  margin-bottom:8px;
+}
+.article h3{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);font-size:21px;
+  margin:34px 0 8px;padding-bottom:6px;
+  border-bottom:1px solid var(--rule);
+  line-height:1.3;scroll-margin-top:122px;
+}
+.article h4{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--ink);font-size:16px;margin:22px 0 8px;
+  letter-spacing:.005em;
+}
+
+/* Lists */
+.article ul, .article ol{margin:8px 0 18px;padding-left:24px}
+.article ul li, .article ol li{margin-bottom:6px;line-height:1.6}
+.article ul li::marker{color:var(--brand-primary)}
+.article ul.dash{list-style:none;padding-left:0}
+.article ul.dash li{position:relative;padding-left:18px}
+.article ul.dash li:before{content:"—";color:var(--brand-amber);position:absolute;left:0;font-weight:600}
+
+/* Numbered protocol steps */
+.steps{counter-reset:step;list-style:none;padding:0;margin:18px 0 24px;clear:both}
+.steps > li{
+  counter-increment:step;
+  position:relative;padding:12px 14px 12px 56px;
+  margin-bottom:8px;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-primary);
+  border-radius:0 4px 4px 0;
+  font-size:14.5px;line-height:1.55;
+}
+.steps > li:before{
+  content:counter(step,decimal-leading-zero);
+  position:absolute;left:14px;top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  color:var(--brand-primary);font-weight:600;
+  background:var(--brand-cream);padding:2px 8px;border-radius:3px;
+  letter-spacing:.05em;
+}
+.steps > li strong{color:var(--brand-primary);font-weight:600;display:block;margin-bottom:3px}
+
+/* Callouts */
+.callout{
+  margin:22px 0;padding:16px 18px;
+  border-radius:4px;font-size:14px;line-height:1.55;
+  border:1px solid var(--rule);
+}
+.callout .label{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;
+}
+.callout .label:before{
+  content:"";width:14px;height:14px;border-radius:50%;
+  display:inline-block;
+}
+.callout.warn{background:#fdf3f2;border-left:4px solid var(--brand-primary)}
+.callout.warn .label{color:var(--brand-primary)}
+.callout.warn .label:before{background:var(--brand-primary)}
+.callout.note{background:var(--brand-cream-warm);border-left:4px solid var(--brand-amber)}
+.callout.note .label{color:#8a6f17}
+.callout.note .label:before{background:var(--brand-amber)}
+.callout p:last-child{margin-bottom:0}
+.callout ul{margin:6px 0 0}
+
+/* Definition list (medical terms) */
+.deflist{
+  background:var(--paper-pure);border:1px solid var(--rule);border-radius:4px;
+  padding:6px 0;margin:18px 0;
+}
+.deflist dt{
+  font-family:'Poppins',sans-serif;font-weight:600;
+  color:var(--brand-primary);
+  padding:10px 18px 4px;font-size:14.5px;
+}
+.deflist dd{
+  margin:0;padding:0 18px 12px;
+  font-size:14px;color:var(--ink-soft);line-height:1.55;
+  border-bottom:1px solid var(--rule-soft);
+}
+.deflist > div:last-child dd{border-bottom:none}
+
+/* Tables */
+.article table{
+  width:100%;border-collapse:collapse;margin:18px 0 24px;
+  font-size:13.5px;background:var(--paper-pure);
+  border:1px solid var(--rule);border-radius:4px;overflow:hidden;
+}
+.article table th{
+  background:var(--brand-primary);color:#fff;
+  padding:10px 12px;text-align:left;font-weight:600;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  overflow-wrap:anywhere;word-break:break-word;
+}
+.article table td{
+  padding:10px 12px;border-top:1px solid var(--rule-soft);
+  vertical-align:top;overflow-wrap:anywhere;word-break:break-word;
+}
+.article table tr:nth-child(even) td{background:var(--brand-cream-warm)}
+.article table .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--brand-primary);font-weight:500}
+.article table.pct th:not(:first-child),.article table.pct td:not(:first-child){text-align:center}
+
+/* formulare cu perechi etichetă/valoare (fără thead) — coloana etichetei mai lată */
+.article table:not(:has(thead)) tr td:first-child:not(:last-child):not(:has(br)):not(:has(.sig-field)){
+  width:34%;min-width:150px;
+  word-break:normal;overflow-wrap:break-word;
+}
+
+/* bloc de semnătură — fiecare câmp pe rândul lui */
+.sig-field{display:flex;align-items:baseline;gap:6px;margin-top:5px}
+.sig-field span:first-child{white-space:nowrap;flex:none}
+.sig-field .sig-line{flex:1;border-bottom:1px solid var(--ink-mute);min-width:20px;height:.9em}
+
+/* celule de completat */
+.article td.value-line{border-bottom:1px solid var(--ink-mute)}
+.article .value-lines{display:flex;flex-direction:column;gap:16px;padding:4px 0 2px}
+.article .value-lines .vline{height:18px;border-bottom:1px solid var(--ink-mute)}
+
+/* indiciu de câmp completat automat (ex. de ERP) */
+.article .ph{color:var(--ink-mute);font-style:italic}
+
+/* Chapter divider */
+.chap-divider{
+  display:flex;align-items:center;gap:14px;
+  margin:50px 0 24px;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;
+}
+.chap-divider:before, .chap-divider:after{
+  content:"";flex:1;height:1px;background:var(--rule);
+}
+
+/* Mini badge */
+.codetag{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:11px;background:var(--brand-cream);color:var(--brand-primary);
+  padding:2px 7px;border-radius:3px;letter-spacing:0;font-weight:500;
+  margin-right:6px;vertical-align:1px;
+}
+.article p .codetag{ margin-right:8px; }
+
+/* Inline document reference (single download row) */
+.docref{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;margin:14px 0;
+  background:var(--paper-pure);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--brand-amber);
+  border-radius:0 4px 4px 0;
+  text-decoration:none;color:var(--ink);
+  transition:background .14s,border-left-color .14s,transform .12s;
+}
+.docref:hover{
+  background:var(--brand-cream-warm);
+  border-left-color:var(--brand-primary);
+  transform:translateY(-1px);
+}
+.docref .docref-meta{flex:1;min-width:0}
+.docref .docref-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;letter-spacing:.04em;
+  color:var(--brand-primary);font-weight:600;
+  margin-bottom:2px;display:block;
+}
+.docref .docref-name{
+  font-size:14.5px;font-weight:600;line-height:1.3;
+  color:var(--ink);
+}
+.docref .docref-desc{
+  font-size:12px;line-height:1.45;color:var(--ink-mute);
+  margin-top:3px;
+}
+.docref .docref-action{
+  flex-shrink:0;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;
+  display:flex;align-items:center;gap:5px;
+}
+.docref:hover .docref-action{color:var(--brand-primary)}
+
+/* Changelog */
+.changelog{
+  margin:14px 0 22px;
+  display:flex;flex-direction:column;
+  border:1px solid var(--rule);border-radius:6px;
+  background:var(--paper-pure);overflow:hidden;
+}
+.changelog .cl-item{
+  display:grid;grid-template-columns:130px 1fr;
+  gap:14px;align-items:start;
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:13px;line-height:1.5;
+}
+.changelog .cl-item:last-child{border-bottom:none}
+.changelog .cl-item:nth-child(even){background:var(--brand-cream-warm)}
+.changelog .cl-chap{
+  display:flex;align-items:center;gap:6px;
+  text-decoration:none;color:var(--brand-primary);
+  border:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--brand-cream);
+  padding:3px 9px;border-radius:3px;
+  font-size:11.5px;font-weight:600;line-height:1.2;
+  align-self:start;
+  white-space:nowrap;
+}
+.changelog .cl-code{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0}
+.changelog .cl-text{color:var(--ink-soft);font-size:13px}
+@media(max-width:580px){
+  .changelog .cl-item{grid-template-columns:1fr;gap:6px}
+  .changelog .cl-chap{align-self:flex-start}
+}
+
+/* ============ PLATFORM FRAME (unified) ============ */
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--brand-amber);outline-offset:2px;border-radius:4px}
+
+.readbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand-amber),var(--brand-primary));z-index:120;pointer-events:none}
+
+.mh-search{position:relative;width:280px;max-width:34vw;flex:none}
+.mh-search input{
+  width:100%;font-family:inherit;font-size:13.5px;color:var(--ink);
+  padding:8px 34px 8px 32px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);
+}
+.mh-search input:focus{outline:none;border-color:var(--brand-primary)}
+.mh-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-mute)}
+.mh-search kbd{
+  position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;
+  font-family:'Poppins',sans-serif;font-size:10.5px;color:var(--ink-mute);
+  border:1px solid var(--rule);border-radius:4px;padding:1px 6px;background:var(--paper-pure);
+}
+.mh-search input:focus ~ kbd{display:none}
+.toc-search-hide{display:none !important}
+
+.menu-btn{display:none;background:none;border:1px solid var(--rule);border-radius:6px;padding:6px 9px;cursor:pointer;color:var(--brand-primary);font-size:14px;flex:none}
+
+.totop{
+  position:fixed;right:22px;bottom:22px;z-index:60;background:var(--brand-primary);color:#fff;border:none;
+  width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;
+  box-shadow:0 6px 18px -6px rgba(123,28,22,.6);opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.totop.show{opacity:1;pointer-events:auto}
+
+@media(max-width:980px){
+  .menu-btn{display:inline-flex}
+  .toc-side{
+    align-self:stretch;
+    position:fixed;left:0;top:96px;bottom:0;width:300px;height:auto;max-height:none;margin:0;z-index:55;
+    background:var(--paper-pure);box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
+    padding:20px 18px 40px;transform:translateX(-105%) translateZ(0);transition:transform .25s;
+    -webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior:contain;
+    touch-action:pan-y;scroll-behavior:auto;
+  }
+  .toc-side.open{transform:translateZ(0)}
+  body.menu-open{overflow:hidden}
+}
+@media(max-width:840px){
+  .crumbs span{display:none}
+  .mh-search{max-width:30vw}
+  .mh-search kbd{display:none}
+}
+@media(max-width:560px){
+  .topbar-inner .pill:not(.dark){display:none}
+  .mh-search{width:150px}
+}
+
+/* ============ MOBILE-LITE (telefon) ============ */
+#mobileNotice{display:none}
+@media(max-width:640px){
+  .topbar-inner{padding:10px 14px; gap:12px}
+  .topbar img.logo{height:26px}
+  .topbar-inner .brand-home{margin-left:auto}
+  .topbar-inner .crumbs{display:none}
+  .topbar-inner .spacer{display:none}
+  .topbar-inner .pill{display:none}
+  .topbar-inner .mh-share{display:none}
+  .mh-search{display:none}
+  .article{overflow-wrap:break-word}
+  #mobileNotice{
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--brand-cream); border:1px solid var(--rule); border-left:3px solid var(--brand-amber);
+    border-radius:8px; padding:11px 13px; margin:0 0 18px; font-size:12.5px; line-height:1.5; color:var(--ink-soft);
+  }
+  #mobileNotice strong{color:var(--brand-primary)}
+  #mobileNotice button{flex:none; background:none; border:none; color:var(--ink-mute); font-size:16px; line-height:1; cursor:pointer; padding:0 2px}
+  .article table{display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .layout{padding:20px 16px 90px}
+}
+
+/* buton „Printează formularul" — atașat dinamic, per formular */
+.print-form-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:600;letter-spacing:.02em;
+  color:var(--brand-primary);background:var(--brand-cream);
+  border:1px solid var(--brand-wheat);border-radius:999px;
+  padding:4px 12px;margin-left:14px;cursor:pointer;
+  font-family:inherit;white-space:nowrap;vertical-align:middle;
+  transition:background .15s,border-color .15s;
+}
+.print-form-btn:hover{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
+.print-form-btn svg{width:12px;height:12px;flex:none}
+h2 .print-form-btn,h4 .print-form-btn{float:right}
+@media(max-width:760px){
+  h2 .print-form-btn,h4 .print-form-btn{float:none;display:inline-flex;margin:8px 0 0}
+}
+
+/* Footer */
+footer{
+  background:var(--brand-primary);color:#fff;
+  padding:48px 0 38px;margin-top:60px;
+}
+.footer-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;
+  font-size:13px;line-height:1.6;
+}
+@media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+footer h5{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
+}
+footer .tagline{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.3;margin:8px 0 14px;color:#fff;
+}
+footer a{color:#fff;border-bottom:1px solid rgba(255,255,255,.3)}
+footer a:hover{border-bottom-color:var(--brand-yellow);color:var(--brand-yellow)}
+footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
+.din-2017{
+  margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;text-align:center;
+}
+.din-2017 span{margin:0 22px}
+
+/* antet minimal, vizibil doar la printare */
+.print-header{ display:none; }
+@media print{
+  .print-header{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding-bottom:10px;margin-bottom:16px;
+    border-bottom:2px solid var(--brand-primary);
+  }
+  .print-header-logo{ height:28px;width:auto;flex:none; }
+  .print-header-text{ flex:1;min-width:0; }
+  .print-header-brand{ font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-primary);font-weight:700; }
+  .print-header-title{ font-size:13px;font-weight:600;color:var(--ink);margin-top:1px; }
+  .print-header-meta{ display:flex;gap:6px;flex:none; }
+  .print-header-pill{ font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--brand-cream);color:var(--brand-primary);border:1px solid var(--brand-wheat);font-weight:600; }
+  .print-header-pill.dark{ background:var(--brand-primary);color:#fff;border-color:var(--brand-primary); }
+}
+@media print{
+  @page{size:A4;margin:14mm 12mm}
+  .topbar,.toc-side,.totop,.readbar,.menu-btn,.mh-search{display:none !important}
+  .layout{display:block;max-width:none;padding:0}
+  body{background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,h4{break-after:avoid}
+  table,figure,img,.callout{break-inside:avoid}
+  p,li{orphans:3;widows:3}
+  footer{display:none !important}
+  .print-form-btn{display:none !important}
+  body.printing-form [data-print-hidden]{display:none !important}
+  body.printing-form .hero{display:none !important}
+  body.printing-form{font-size:12.5px}
+  body.printing-form table{font-size:11.5px}
+  body.printing-form p{margin:5px 0}
+  body.printing-form h2{margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<!-- Antet vizibil doar la printare -->
+<div class="print-header" aria-hidden="true">
+  <img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="print-header-logo">
+  <div class="print-header-text">
+    <div class="print-header-brand">Dr. Ardeleanu Dental Clinics</div>
+    <div class="print-header-title">Procedura Registrului Online al Documentelor Interne</div>
+  </div>
+  <div class="print-header-meta">
+    <span class="print-header-pill">ADC-REG-01</span>
+    <span class="print-header-pill dark">V3.0 · proiect</span>
+  </div>
+</div>
+
+<!-- =========================== TOP BAR =========================== -->
+<header class="topbar" data-screen-label="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
+    <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
+    <a href="../index.html" style="border-bottom:none" title="Înapoi la Manuale Interne" class="brand-home"><img src="../logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
+    <div class="crumbs">
+      <span class="crumb-path">
+        <a href="../index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
+        <span>›</span>
+        <a href="index.html" style="border-bottom:none">Proceduri de lucru</a>
+      </span>
+      <span class="crumb-title">Procedura Registrului Online</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="mh-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="search" type="text" placeholder="Caută în procedură…" autocomplete="off" />
+      <kbd>/</kbd>
+    </div>
+    <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest document"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
+    <span class="pill">ADC-REG-01</span>
+    <span class="pill dark">V3.0 · proiect</span>
+  </div>
+</header>
+
+<!-- =========================== TABURI ÎNTRE PROCEDURI =========================== -->
+<nav class="proc-tabs" aria-label="Proceduri de lucru">
+  <div class="proc-tabs-inner">
+    <a class="proc-tab" href="ADC-BEN-01_Procedura_Beneficii.html">Beneficii <span class="pt-code">ADC-BEN-01</span></a>
+    <a class="proc-tab active" href="ADC-REG-01_Procedura_Registrul_Online.html">Registrul online <span class="pt-code">ADC-REG-01</span></a>
+    <span class="proc-tab soon">Deconturi <span class="pt-code">în pregătire</span></span>
+    <span class="proc-tab soon">Flotă &amp; GPS <span class="pt-code">în pregătire</span></span>
+    <span class="proc-tab soon">Uniforme <span class="pt-code">în pregătire</span></span>
+    <a class="proc-tab hub" href="index.html">Toate procedurile ↗</a>
+  </div>
+</nav>
+
+<!-- =========================== HERO =========================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Procedură de guvernanță · Resurse Umane &amp; Legal <span class="status-badge status-badge--pending">Proiect — nepublicat încă</span></div>
+    <h1>Procedura <em>Registrului online al documentelor interne</em></h1>
+    <p class="subtitle">Administrarea Registrului online: înregistrarea, etichetarea, versionarea, publicarea și comunicarea documentelor controlate subordonate Regulamentului Intern — inclusiv inventarul documentelor de rol, reconcilierea codurilor, formularele de registru, clauza standard a manualelor și lista de verificare la adoptarea RI. Preia conținutul administrativ al fostei Anexe nr. 13 din RI, potrivit Ediției V2.7 (Art. 5, 19, 20, 135 și 137).</p>
+
+    <dl class="meta-row">
+      <div><dt>Ediție</dt><dd><span class="mono">V1.0 · proiect</span></dd></div>
+      <div><dt>Cod document</dt><dd><span class="mono">ADC-REG-01</span></dd></div>
+      <div><dt>Data proiectului</dt><dd>18 august 2026</dd></div>
+      <div><dt>Categorie</dt><dd>Guvernanță documentară</dd></div>
+      <div><dt>Secțiuni</dt><dd>12 · 4 formulare</dd></div>
+      <div><dt>Aplicabilitate</dt><dd>Proprietarii de documente, HR, Juridic, aprobatori</dd></div>
+      <div><dt>Document părinte</dt><dd>RI V2.7 · Art. 5, 19, 20, 135, 137</dd></div>
+      <div><dt>Administrare</dt><dd>Vlad Ardeleanu</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- =========================== ARTICLE LAYOUT =========================== -->
+<div class="layout">
+
+  <!-- ============ TOC SIDEBAR ============ -->
+  <nav class="toc-side" aria-label="Cuprins">
+    <h4>Cuprins</h4>
+
+    <div class="group">
+      <div class="group-label">Cadru</div>
+      <ol>
+        <li><a href="#pozitie"><span class="num">§</span>Poziție și efect juridic</a></li>
+        <li><a href="#doc-fields"><span class="num">§</span>Datele documentului</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Procedură</div>
+      <ol>
+        <li><a href="#sec-1"><span class="num">1</span>Scop și obiect</a></li>
+        <li><a href="#sec-2"><span class="num">2</span>Domeniu de aplicare</a></li>
+        <li><a href="#sec-3"><span class="num">3</span>Denumirea oficială și definiții</a></li>
+        <li><a href="#sec-4"><span class="num">4</span>Portalurile și responsabilitatea registrului</a></li>
+        <li><a href="#sec-5"><span class="num">5</span>Circuitul de validare și publicare</a></li>
+        <li><a href="#sec-6"><span class="num">6</span>Etichetele obligatorii ale regulilor</a></li>
+        <li><a href="#sec-7"><span class="num">7</span>Registrul documentelor de rol</a></li>
+        <li><a href="#sec-8"><span class="num">8</span>Reconcilierea codurilor</a></li>
+        <li><a href="#sec-9"><span class="num">9</span>Clauza standard a manualelor</a></li>
+        <li><a href="#sec-10"><span class="num">10</span>Lista de verificare la adoptarea RI</a></li>
+        <li><a href="#sec-11"><span class="num">11</span>Fișa programelor de lucru — model</a></li>
+        <li><a href="#sec-12"><span class="num">12</span>Controlul versiunii și comunicarea</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Formulare</div>
+      <ol>
+        <li><a href="#form-a"><span class="num">A</span>Fișa de înregistrare a unui document controlat</a></li>
+        <li><a href="#form-b"><span class="num">B</span>Registrul versiunilor și aprobărilor</a></li>
+        <li><a href="#form-c"><span class="num">C</span>Controlul de publicare</a></li>
+        <li><a href="#form-d"><span class="num">D</span>Fișa de comunicare a unei versiuni și raportul de lot</a></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Istoric</div>
+      <ol>
+        <li><a href="#registru"><span class="num">§</span>Registru de modificări</a></li>
+      </ol>
+    </div>
+
+  </nav>
+
+  <!-- ============ ARTICLE ============ -->
+  <main class="main">
+  <article class="article">
+
+    <div id="mobileNotice" role="note">
+      <span>📱 <strong>Vizualizare mobil.</strong> Pentru o lectură curată pe telefon, unele elemente vizuale sunt ascunse. Deschide documentul pe desktop pentru versiunea completă.</span>
+      <button type="button" aria-label="Închide" onclick="try{sessionStorage.setItem('adcMobileNoticeDismissed','1')}catch(e){} this.parentNode.style.display='none'">✕</button>
+    </div>
+
+    <h2 id="pozitie">Poziție în ierarhia documentelor</h2>
+    <div class="callout note"><p><strong>Poziție în ierarhia documentelor.</strong> Prezenta procedură este subordonată Regulamentului intern V2.7 și îl pune în aplicare (Art. 5, 19, 20, 135 și 137). Nu modifică RI, contractul individual de muncă ori drepturile prevăzute de lege. În caz de neconcordanță prevalează legea, dreptul contractual mai favorabil aplicabil și RI.</p></div>
+    <div class="callout warn"><p><strong>Efect juridic.</strong> Acest proiect nu produce efecte înainte de aprobarea de către entitatea angajatoare, înscrierea versiunii oficiale în Registrul online și comunicarea potrivit Art. 19 din RI V2.7. Ediția V2.7 a RI condiționează propria comunicare de aprobarea prezentei proceduri — cele două se comunică împreună sau procedura înaintea Regulamentului.</p></div>
+    <div class="hatnote"><strong>Etichete:</strong> <span class="codetag">OBL</span> regulă obligatorie · <span class="codetag">OPR</span> flux operațional · <span class="codetag">EVD</span> dovadă/înregistrare · <span class="codetag">GHID</span> reper de aplicare</div>
+
+    <h2 id="doc-fields">Datele documentului</h2>
+    <table>
+<tbody>
+<tr><td><strong>Cod / titlu</strong></td><td>ADC-REG-01 — Procedura privind Registrul online al documentelor interne</td></tr>
+<tr><td><strong>Versiune / statut</strong></td><td>V1.0 · proiect pentru validare și adoptare</td></tr>
+<tr><td><strong>Proprietar funcțional</strong></td><td>Administratorul Registrului online (Vlad Ardeleanu), împreună cu HR</td></tr>
+<tr><td><strong>Aprobator</strong></td><td>Reprezentantul legal al fiecărei entități angajatoare</td></tr>
+<tr><td><strong>Destinatari</strong></td><td>Proprietarii funcționali de documente, HR, funcția juridică, funcția financiar-contabilă, aprobatorii, administratorul Registrului</td></tr>
+<tr><td><strong>Articole RI aplicate</strong></td><td>Art. 5 alin. (3), (4) și (9) · Art. 19 · Art. 20 · Art. 135 · Art. 137</td></tr>
+<tr><td><strong>Document înlocuit</strong></td><td>Anexa nr. 13 a RI V2.6 (conținutul administrativ; eliminată din RI la Ediția V2.7)</td></tr>
+</tbody></table>
+
+    <h2 id="sec-1"><span class="chapter-num">Secțiunea 1</span>Scop și obiect</h2>
+    <p><span class="codetag">OBL</span> Procedura stabilește modul în care se administrează Registrul online al documentelor interne: înregistrarea documentelor controlate, etichetarea regulilor, versionarea, aprobarea, publicarea, comunicarea versiunilor și arhivarea. Ea preia conținutul administrativ al fostei Anexe nr. 13 din RI, astfel încât manualele și procedurile să poată evolua pe fluxul propriu — aprobare, înscriere în Registru, comunicare individuală potrivit Art. 19 din RI — fără modificarea Regulamentului intern.</p>
+    <p><span class="codetag">GHID</span> Regula de fond rămâne în RI: ce este un document controlat (Art. 5), cum se comunică și se confirmă (Art. 19–20), în ce condiții o regulă dintr-un document subordonat este opozabilă (Art. 15 alin. (4), Art. 72, Art. 137 alin. (3)). Prezenta procedură reglementează numai mecanica registrului.</p>
+
+    <h2 id="sec-2"><span class="chapter-num">Secțiunea 2</span>Domeniu de aplicare</h2>
+    <p><span class="codetag">OBL</span> Procedura se aplică tuturor documentelor controlate subordonate RI — manuale, proceduri, protocoale, politici, instrucțiuni, formulare și modele de lucru — pentru toate entitățile angajatoare care operează sub marca Dr. Ardeleanu și adoptă modelul-cadru. Regulamentul intern însuși se modifică exclusiv potrivit Art. 135 din RI; prezenta procedură nu se aplică modificării RI, ci numai evidenței lui în Registru.</p>
+
+    <h2 id="sec-3"><span class="chapter-num">Secțiunea 3</span>Denumirea oficială și definiții</h2>
+    <p><span class="codetag">OBL</span> Denumirea oficială afișată în interfață este «Registrul online al documentelor interne». Denumirea tehnică a depozitului de fișiere sau adresa URL poate fi diferită, dar nu înlocuiește această denumire funcțională și nu stabilește singură versiunea juridic aplicabilă.</p>
+    <p><span class="codetag">GHID</span> Termenii «document controlat», «manual aplicabil», «Registrul online» și «confirmare individuală» au sensul din Art. 5 al RI. «Proprietar funcțional» este persoana ori funcția care răspunde de conținutul tehnic al unui document; «administrator al Registrului» este persoana care operează publicarea și evidența.</p>
+
+    <h2 id="sec-4"><span class="chapter-num">Secțiunea 4</span>Portalurile și responsabilitatea registrului</h2>
+    <table>
+<tbody>
+<tr><td><strong>Registrul online al documentelor interne</strong></td><td>https://vladtm75.github.io/manuale-dr-ardeleanu/index.html</td></tr>
+<tr><td><strong>Organigramă</strong></td><td>https://vladtm75.github.io/dr-ardeleanu-org-chart/</td></tr>
+<tr><td><strong>Secțiunea «Documente» ERP-RP</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Locația documentelor oficiale pentru descărcare și tipărire</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Interfața online pentru lectură</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Registrul modificărilor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Jurnalul notificărilor și confirmărilor ERP</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Proprietar registru</strong></td><td>HR, împreună cu proprietarul funcțional al fiecărui document</td></tr>
+<tr><td><strong>Locația arhivei imuabile</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Data ultimei reconcilieri</strong></td><td>____ / ____ / ______</td></tr>
+</tbody></table>
+
+    <h2 id="sec-5"><span class="chapter-num">Secțiunea 5</span>Circuitul de validare și publicare</h2>
+    <p><span class="codetag">OPR</span> Pentru fiecare document, proprietarul funcțional redactează și validează conținutul tehnic, HR verifică destinatarii, legătura cu fișa postului, performanța și egalitatea de tratament, funcția financiar-contabilă validează efectele fiscale, salariale, bugetare, de avans și de decont, iar funcția juridică și responsabilul cu protecția datelor verifică efectele disciplinare, contractuale și de monitorizare. Aprobatorul autorizează versiunea, iar publicarea are loc numai după înregistrare.</p>
+    <p><span class="codetag">EVD</span> PDF-ul aprobat, identificatorul său, versiunea HTML/Wiki, sinteza modificărilor, istoricul și rapoartele de comunicare se păstrează astfel încât înlocuirea unei pagini să nu poată modifica retrospectiv standardul aplicabil.</p>
+    <p><span class="codetag">OBL</span> Înaintea publicării unei versiuni, proprietarul verifică dacă fiecare regulă care poate produce consecințe este formulată în termeni observabili, are responsabil clar, condiții de aplicare, dovadă oficială și traseu de excepție. Manualul nu reproduce sancțiuni, nu promite încetarea automată și nu stabilește sume permanente de bonus; el face trimitere la instrumentul controlat și ciclul aplicabil.</p>
+
+    <h2 id="sec-6"><span class="chapter-num">Secțiunea 6</span>Etichetele obligatorii ale regulilor</h2>
+    <div class="callout note"><p>Semnificația juridică a etichetelor este stabilită în <strong>Art. 5 alin. (9) din RI V2.7</strong> — sursa citabilă în orice decizie. Tabelul de mai jos detaliază efectul permis al fiecărei etichete, ca instrument de lucru pentru proprietarii de documente.</p></div>
+    <table>
+<thead><tr><th>Etichetă</th><th>Semnificație</th><th>Efect permis</th></tr></thead>
+<tbody>
+<tr><td>[OBL]</td><td>Obligație clară, legală și aplicabilă rolului</td><td>Poate fundamenta analiza disciplinară numai cu dovada comunicării și vinovăției</td></tr>
+<tr><td>[CRIT]</td><td>Regulă critică pentru siguranță, legalitate ori competența esențială</td><td>Impune intervenție imediată; nu produce singură sancțiune ori concediere automată</td></tr>
+<tr><td>[OPR]</td><td>Pas, circuit sau standard operațional</td><td>Devine obligație numai dacă este asociat și cu [OBL] ori rezultă clar din post/lege</td></tr>
+<tr><td>[EVD]</td><td>Sursă oficială de dovadă și traseu de audit</td><td>Identifică sistemul, formularul, autorul, data și regula de păstrare</td></tr>
+<tr><td>[KPI-P]</td><td>Criteriu eligibil pentru evaluarea performanței (indicator de performanță)</td><td>Produce efect profesional numai după includerea, înainte de începerea perioadei evaluate, într-un instrument controlat conform Anexei nr. 3 din RI</td></tr>
+<tr><td>[KPI-B]</td><td>Indicator ori condiție a remunerației variabile</td><td>Produce efect asupra bonusului potrivit scrisorii/fișei; nu dovedește automat necorespunderea</td></tr>
+<tr><td>[GHID]</td><td>Recomandare, exemplu sau bună practică</td><td>Orientează activitatea; nu fundamentează singură sancțiune, scor negativ ori concediere</td></tr>
+</tbody></table>
+    <table>
+<tbody>
+<tr><td>Etichetele sunt cumulative. De exemplu, un pas de sterilizare poate purta [OPR][OBL][CRIT][EVD], iar un indicator de conversie folosit atât pentru evaluare, cât și pentru bonus poate purta [KPI-P][KPI-B]. Nicio etichetă nu înlătură analiza faptelor, controlului, resurselor, vinovăției și procedurii legale.</td></tr>
+</tbody></table>
+
+    <h2 id="sec-7"><span class="chapter-num">Secțiunea 7</span>Registrul documentelor de rol</h2>
+    <table>
+<thead><tr><th>Cod / document</th><th>Versiune / statut</th><th>Destinatari</th><th>Ciclu și instrumente</th><th>Condiție înainte de folosire</th></tr></thead>
+<tbody>
+<tr><td>ADC-RI-02 — Regulamentul Intern</td><td>V2.7 / 18 august 2026; model-cadru, în consultare</td><td>toți salariații fiecărei entități care îl adoptă</td><td>documentul principal; se modifică numai potrivit Art. 135</td><td>consultarea salariaților, adoptarea per entitate, comunicarea individuală</td></tr>
+<tr><td>ADC-REG-01 — Procedura Registrului online (prezenta)</td><td>V1.0 / proiect</td><td>proprietari de documente, HR, Juridic, aprobatori</td><td>guvernanța registrului; formularele A–D</td><td>aprobare și comunicare înainte de sau împreună cu RI V2.7</td></tr>
+<tr><td>ADC-MED-01 — Manualul Medicului</td><td>V1.0 / 2026; existent</td><td>medici salariați; colaboratori numai contractual</td><td>instrumente conforme Anexei nr. 3 din RI, după nivel; colaboratori — fișă de punctaj contractuală</td><td>etichetare pe reguli și separarea comisionului de evaluarea profesională</td></tr>
+<tr><td>ADC-ASM-03 — Manualul Asistentului Medical</td><td>V3.0 / mai 2026; revizuit august 2026</td><td>asistenți medicali și Asistenți șefi</td><td>instrumente lunare și anuale conforme Anexei nr. 3 din RI; dosar conform Capitolului IX din RI, dacă este cazul</td><td>reconcilierea codurilor și eliminarea efectului automat al pragului de 80%</td></tr>
+<tr><td>ADC-REC-01 — Manualul Registratorului Medical</td><td>V4.1 / mai 2025</td><td>registratori și rolurile de recepție desemnate</td><td>instrumente lunare și anuale conforme Anexei nr. 3 din RI; dosar conform Capitolului IX din RI, dacă este cazul</td><td>separarea KPI-P de KPI-B și reconcilierea codurilor PAC/UNF</td></tr>
+<tr><td>ADC-MCL-01 — Manualul Managerului de Clinică</td><td>cod propus; ÎN ELABORARE; NEAPLICABIL</td><td>Manageri de clinică</td><td>ciclu lunar și evaluare anuală; înregistrare consolidată pentru raportare duală</td><td>aprobare, versiune, etichetare, registru și comunicare; până atunci nu produce obligații</td></tr>
+<tr><td>ORG-ADC — Organigrama Dr. Ardeleanu</td><td>2026; se arhivează fiecare versiune</td><td>toate rolurile</td><td>determină evaluatorii și alimentează Matricea nivelurilor</td><td>decizia de aprobare și data efectivă; titlul nu înlocuiește comunicarea nivelului</td></tr>
+<tr><td>ADC-UNF-01/02 — Instrucțiunea operațională privind uniformele</td><td>cod canonic de confirmat înainte de adoptare</td><td>toate rolurile cărora li se stabilește ținută</td><td>execută Art. 21–28 din RI; fără criterii autonome de concediere</td><td>reconcilierea codului, aprobarea și comunicarea; conține numai modelul, furnizorii și logistica</td></tr>
+<tr><td>ADC-BEN-01 — Procedura privind beneficiile pentru personal și beneficiarii eligibili</td><td>V3.0 / proiect august 2026</td><td>salariați; membri de familie și ceilalți beneficiari definiți expres în versiunea comunicată</td><td>beneficiu distinct de salariul de bază, performanță și bonus; procentele, limitele și circuitul rămân în procedură</td><td>înaintea republicării: reconcilierea vechimii 0–6 luni, corectarea categoriei de beneficiari, validare fiscală/GDPR/medicală, eliminarea reținerii automate, aprobare, versiune și comunicare</td></tr>
+<tr><td>ADC-DEP-01 — Procedura privind deplasările în interes de serviciu și decontarea cheltuielilor</td><td>V1.0 / 2026; document controlat; aplicabil după adoptare și comunicare</td><td>salariații care efectuează deplasări; aprobatori; HR; Financiar</td><td>aprobarea deplasării, cazare, card profesional, decont în ERP și matrice financiară versionată</td><td>validare financiar-contabilă/fiscală și juridică; delimitarea delegării, diurnei și cheltuielilor; fără efect retroactiv sau rețineri automate</td></tr>
+<tr><td>ADC-FLT-01 — Politica privind autovehiculele de serviciu și monitorizarea GPS</td><td>V1.0 / 2026; document controlat; GPS activ numai după închiderea condițiilor de conformitate</td><td>utilizatorii și conducătorii autorizați; HR; Administrativ; Financiar</td><td>predare, utilizare, întreținere, incidente, restituire și informare GPS individuală</td><td>consultarea reprezentanților, test de interes legitim/proporționalitate, informare GDPR, acces limitat și retenție de regulă maximum 30 zile</td></tr>
+<tr><td>Instrucțiuni proprii SSM și radioprotecție</td><td>familie de cod la alegerea proprietarului; ÎN ELABORARE</td><td>rolurile expuse riscurilor vizate, inclusiv expunerea la radiații ionizante</td><td>execută Art. 29–34 din RI și normele CNCAN</td><td>aprobare, înscriere în Registru și comunicare înainte de folosire</td></tr>
+</tbody></table>
+    <table>
+<tbody>
+<tr><td>Mențiunea «NEAPLICABIL» exclude orice utilizare disciplinară, profesională ori salarială a proiectului Manualului Managerului de Clinică. Codul ADC-MCL-01 este o rezervare propusă și se confirmă de proprietarul registrului înainte de publicarea V1.0.</td></tr>
+</tbody></table>
+
+    <h2 id="sec-8"><span class="chapter-num">Secțiunea 8</span>Reconcilierea codurilor</h2>
+    <table>
+<thead><tr><th>Sursă</th><th>Coduri / familii identificate</th><th>Acțiune de control</th></tr></thead>
+<tbody>
+<tr><td>Manualul Medicului</td><td>ADC-MED-01; ADC-UNF-02</td><td>se etichetează normele clinice, dovezile și indicatorii de performanță (KPI); se stabilește expres aplicarea salariați versus colaboratori</td></tr>
+<tr><td>Manualul Asistentului</td><td>ADC-AJT-01; ASM-02/03; CHR-01; CUR-01; DIE-01; DSD-02; DSM-01; ECH-01; END-01; MAC-01; OIM-01/02; ONB-01/02/03; ORT-01; PAR-01; PED-01; PRO-01; RAD-01; STE-01; STG-01; UNF-02</td><td>se alocă un singur cod și o versiune fiecărui document; se corectează trimiterile istorice ori duplicate</td></tr>
+<tr><td>Manualul Registratorului</td><td>ADC-REC-01; ADC-PAC-01; ADC-UNF-01</td><td>se aliniază denumirea circuitului radiologic și procedura uniformei cu registrul canonic</td></tr>
+</tbody></table>
+    <table>
+<thead><tr><th>Neconcordanță detectată</th><th>Decizie canonică înainte de adoptare / evaluare</th><th>Responsabil / termen</th></tr></thead>
+<tbody>
+<tr><td>ADC-ASM-02 versus ADC-ASM-03</td><td>se confirmă codul manualului actual și se marchează trimiterile istorice</td><td></td></tr>
+<tr><td>ADC-OIM-01 versus ADC-OIM-02</td><td>se separă documentele dacă au obiect diferit sau se păstrează un singur cod/versionare</td><td></td></tr>
+<tr><td>ADC-ONB-01 / 02 / 03</td><td>se definește relația document principal–subprocedură ori se consolidează</td><td></td></tr>
+<tr><td>ADC-DSD-02 folosit pentru scanare și fotografii</td><td>se atribuie cod unic fiecărei proceduri; codul duplicat nu se invocă până la clarificare</td><td></td></tr>
+<tr><td>ADC-RAD-01 versus ADC-PAC-01</td><td>se alege codul canonic și se actualizează toate trimiterile</td><td></td></tr>
+<tr><td>ADC-UNF-01 versus ADC-UNF-02</td><td>se aprobă o singură procedură canonică ori se explică domeniile distincte</td><td></td></tr>
+</tbody></table>
+
+    <h2 id="sec-9"><span class="chapter-num">Secțiunea 9</span>Clauza standard a manualelor</h2>
+    <p><span class="codetag">OBL</span> Fiecare manual și procedură poartă pe prima pagină clauza standard de mai jos, actualizată la Ediția V2.7 a RI:</p>
+    <table>
+<tbody>
+<tr><td>«Acest manual este un document controlat, subordonat Regulamentului intern, și detaliază articolele RI indicate în fișa sa din Registrul online al documentelor interne. Se aplică exclusiv versiunea marcată „În vigoare” și comunicată destinatarului înaintea activității evaluate. În caz de neconcordanță prevalează legea, dreptul contractual aplicabil și Regulamentul intern. Etichetele [OBL], [CRIT], [OPR], [EVD], [KPI-P], [KPI-B] și [GHID] au semnificația prevăzută la Art. 5 din Regulamentul intern. Un KPI de bonus, un exemplu sau o recomandare nu constituie, prin ele însele, abatere disciplinară ori necorespundere profesională.»</td></tr>
+</tbody></table>
+    <p><span class="codetag">GHID</span> Pentru procedurile de beneficii, prima pagină indică natura contractuală ori discreționară, entitatea care acordă beneficiul, destinatarii, perioada, versiunea și regula modificării numai pentru viitor. Procedura nu poate influența indicația medicală, nu transformă avantajul într-un criteriu de performanță și nu autorizează rețineri automate din salariu.</p>
+    <p><span class="codetag">GHID</span> Pentru procedurile de deplasare și decontare, prima pagină indică entitatea, destinatarii, drepturile de delegare, aprobatorii, documentele financiar-contabile, versiunea matricei de plafoane, traseul excepțiilor și regula modificării numai pentru viitor. Procedura nu transformă bugetul într-un drept salarial, nu substituie indemnizația datorată și nu autorizează rețineri automate.</p>
+    <p><span class="codetag">GHID</span> Pentru politica de flotă și GPS, prima pagină indică scopurile localizării, temeiul, datele, destinatarii, accesul, retenția, utilizarea personală, drepturile persoanei și condițiile prealabile activării. Datele nu produc singure consecințe disciplinare, profesionale sau patrimoniale.</p>
+
+    <h2 id="sec-10"><span class="chapter-num">Secțiunea 10</span>Lista de verificare internă la adoptarea RI</h2>
+    <div class="callout note"><p>Instrument de lucru <strong>[GHID]</strong>, migrat din fosta Anexă nr. 1 secț. D a RI și actualizat la arhitectura V2.7. Este o listă internă de conformitate — completarea ei nu condiționează validitatea Regulamentului.</p></div>
+    <p>☐ Entitatea din copertă este identică Angajatorului din contractele individuale de muncă.</p>
+    <p>☐ Dacă există contract colectiv de muncă aplicabil, acesta a fost verificat pentru reguli mai favorabile; în lipsa lui, contractele individuale și fișele de post au fost verificate.</p>
+    <p>☐ Draftul RI a fost comunicat tuturor salariaților prin e-mail, cu termen pentru opinii; jurnalul de transmitere, opiniile primite și răspunsul angajatorului sunt arhivate în dosarul de guvernanță.</p>
+    <p>☐ Fișa programelor de lucru și a locațiilor (document operațional per entitate — Secțiunea 11) este completată, validată financiar și afișată potrivit art. 117 Codul muncii.</p>
+    <p>☐ Instrumentele de obiective, criterii, evaluare și bonus respectă standardul minim din Anexa nr. 3 a RI și au fost comunicate înainte de începerea perioadei; nu se folosesc retroactiv.</p>
+    <p>☐ Nivelurile N-1 și N-2/inferior, evaluatorul consolidator și ciclurile lunare și anuale ale fiecărui post au fost înscrise în matricea operațională controlată conform Anexei nr. 3 a RI.</p>
+    <p>☐ Manualele și procedurile active sunt înscrise în Registrul online; codurile neconcordante au fost reconciliate înainte de utilizare.</p>
+    <p>☐ Orice prag de 80%, indicator de performanță ori condiție de bonus din manuale a fost clasificat separat ca [KPI-P] sau [KPI-B], fără efect automat asupra încetării.</p>
+    <p>☐ Conturile individuale ERP-RP, adresele profesionale, accesul alternativ, instruirea și suportul tehnic sunt funcționale.</p>
+    <p>☐ PDF-ul canonic, versiunea HTML/Wiki, registrul modificărilor și arhiva versiunilor au fost publicate și verificate pentru concordanță.</p>
+    <p>☐ Jurnalul electronic păstrează documentul, versiunea, destinatarul, publicarea, livrarea, accesarea și confirmarea, potrivit politicii de retenție.</p>
+    <p>☐ Persoana responsabilă ori comisia anti-hărțuire a fost constituită prin act administrativ, potrivit HG nr. 970/2023, și instruită.</p>
+    <p>☐ Canalul de avertizare, persoana desemnată și conflictul de interese au fost configurate și publicate.</p>
+    <p>☐ Notele GDPR, politica de retenție și informarea privind monitorizarea sunt actuale.</p>
+    <p>☐ Politicile separate SSM/PSI, clinice, IT/AI, flotă/GPS, deplasări/decontări, uniforme și beneficii au proprietar, cod, versiune, aprobare, destinatari, dată efectivă și dovadă de comunicare.</p>
+    <p>☐ Instrucțiunile proprii SSM și de radioprotecție sunt înscrise în Registrul online, cu statut și condiție înainte de folosire.</p>
+    <p>☐ Lista locurilor de muncă cu concediu de odihnă suplimentar a fost întocmită pe baza evaluării riscurilor și a fișelor de aptitudine.</p>
+    <p>☐ Contractele individuale de muncă conțin clauza de program inegal unde se aplică și sporul de weekend.</p>
+    <p>☐ ADC-DEP-01 și ADC-FLT-01 au fost validate financiar-contabil, fiscal, SSM, GDPR și juridic; matricea de plafoane este datată, iar informarea GPS este arhivată înainte de activare.</p>
+    <p>☐ ADC-BEN-01 a fost revizuită înainte de republicare: vechimea și beneficiarii sunt definiți fără contradicții, tratamentul fiscal și GDPR sunt validate, independența medicală este protejată, iar recuperarea sumelor nu permite rețineri salariale automate.</p>
+    <p>☐ Regulamentul a fost comunicat individual tuturor salariaților, dovada este păstrată și noilor angajați li se va comunica în prima zi.</p>
+
+    <h2 id="sec-11"><span class="chapter-num">Secțiunea 11</span>Fișa programelor de lucru și a locațiilor — model per entitate</h2>
+    <div class="callout note"><p>Model de lucru <strong>[GHID]</strong>, migrat din fosta Anexă nr. 3 a RI. Se completează de fiecare entitate angajatoare, se validează de HR și salarizare înainte de adoptare și la fiecare modificare, se afișează potrivit art. 117 Codul muncii și se actualizează liber la fiecare punct de lucru nou, fără atingerea RI.</p></div>
+    <table>
+<tbody>
+<tr><td><strong>Angajator</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Perioada de valabilitate</strong></td><td>De la ____ / ____ / ______ până la modificare / ____ / ____ / ______</td></tr>
+<tr><td><strong>Canalul de publicare a graficelor</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Termen uzual de comunicare</strong></td><td class="value-line"></td></tr>
+</tbody></table>
+    <table>
+<thead><tr><th>Punct / compartiment</th><th>Fereastră funcționare</th><th>Tip repartizare</th><th>Pauză</th><th>Repaus / spor</th><th>Observații</th></tr></thead>
+<tbody>
+<tr><td>Administrativ</td><td></td><td>individualizat / conform CIM</td><td>30 min, neincl.</td><td>conform RI/CIM</td><td></td></tr>
+<tr><td>Clinici</td><td></td><td>inegal / ture</td><td>30 min, neincl.</td><td>48 h; spor weekend 1%/oră</td><td></td></tr>
+<tr><td>Roluri cu durată specială</td><td>conform normei speciale</td><td>conform CIM/grafic</td><td></td><td></td><td>ex. expunere la radiații</td></tr>
+<tr><td>Alt punct</td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody></table>
+    <h4>Reguli locale validate</h4>
+    <table>
+<thead><tr><th>Regulă</th><th>Opțiune / valoare</th><th>Document suport</th></tr></thead>
+<tbody>
+<tr><td>Spor de noapte</td><td>☐ reducere 1 oră  ☐ spor 25%</td><td></td></tr>
+<tr><td>Compensare ore suplimentare</td><td>90 zile / spor min. 75% dacă nu se compensează</td><td></td></tr>
+<tr><td>Munca în sărbători</td><td>30 zile / spor min. 100% dacă nu se compensează</td><td></td></tr>
+<tr><td>Repaus în alte zile</td><td>spor 1% din salariul de bază orar</td><td></td></tr>
+<tr><td>Pontaj</td><td>sistem / responsabil / procedură</td><td></td></tr>
+</tbody></table>
+    <table>
+<tbody>
+<tr><td><strong>HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Salarizare</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aprobat</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
+</tbody></table>
+
+    <h2 id="sec-12"><span class="chapter-num">Secțiunea 12</span>Controlul versiunii și comunicarea prezentei proceduri</h2>
+    <p><span class="codetag">OBL</span> Prezenta procedură se aprobă de reprezentantul legal al fiecărei entități, se înscrie în Registrul online și se comunică destinatarilor potrivit Art. 19 din RI. Versiunile ulterioare urmează același flux; modificarea nu se aplică retroactiv. Formularele migrate din fostele anexe ale RI (cercetare disciplinară, petiție, avertizori, declarație de interese, proces-verbal de predare–primire, formare profesională, formularele anti-hărțuire) se publică în documentele-destinație ca modele de lucru [GHID], modificabile fără procedura RI; până la publicare, HR pune la dispoziție modelele la cerere.</p>
+
+    <h2 id="form-a"><span class="chapter-num">Formular A</span>Fișa de înregistrare a unui document controlat</h2>
+    <table>
+<tbody>
+<tr><td><strong>Cod unic / titlu</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Versiune / data efectivă</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Proprietar / aprobator</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Destinatari / roluri / nivel</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Articole RI aplicate / detaliate</strong></td><td>Art. __________________________________________________________</td></tr>
+<tr><td><strong>Trimitere inversă din RI</strong></td><td>Art. __________ → cod document / versiune __________________________</td></tr>
+<tr><td><strong>Documente înlocuite</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Etichete utilizate</strong></td><td>☐ OBL  ☐ CRIT  ☐ OPR  ☐ EVD  ☐ KPI-P  ☐ KPI-B  ☐ GHID</td></tr>
+<tr><td><strong>Legătura cu fișa postului</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Instrumente corelate</strong></td><td>☐ performanță/bonus — Anexa nr. 3 RI ☐ necorespundere — Cap. IX RI ☐ disciplinar — model HR ☐ altele: ______</td></tr>
+<tr><td><strong>Document oficial / amprenta electronică (hash)</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>HTML/Wiki / link de lectură</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Arhivă versiuni anterioare</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Sinteza modificărilor</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Notificare și confirmare individuală</strong></td><td>Sarcină ERP ID ______  E-mail / QR ______  Lot / roluri __________________</td></tr>
+<tr><td><strong>Test alocat / prag / reexaminare</strong></td><td>☐ Nu  ☐ Da — ERP ID ______  Prag ______  Reexaminare ______________</td></tr>
+<tr><td><strong>Dovada comunicării</strong></td><td>ERP-RP __________________  E-mail __________________  Acces / confirmare __________________</td></tr>
+</tbody></table>
+
+    <h2 id="form-b"><span class="chapter-num">Formular B</span>Registrul versiunilor și aprobărilor</h2>
+    <table>
+<tbody>
+<tr><td><strong>Retenție / acces</strong></td><td class="value-line"></td></tr>
+</tbody></table>
+    <table>
+<thead><tr><th>Versiune</th><th>Data</th><th>Modificare</th><th>Aprobat</th><th>PDF / amprentă (hash)</th><th>Comunicare / destinatari</th></tr></thead>
+<tbody>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody></table>
+    <table>
+<tbody>
+<tr><td><strong>Proprietar funcțional</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR / Juridic</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Aprobator</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
+</tbody></table>
+
+    <h2 id="form-c"><span class="chapter-num">Formular C</span>Controlul de publicare</h2>
+    <table>
+<thead><tr><th>Control de publicare</th><th>Da / Nu</th><th>Dovadă / observație</th></tr></thead>
+<tbody>
+<tr><td>Codul este unic și toate trimiterile au fost reconciliate</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Fiecare regulă cu efect este etichetată</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>KPI-P și KPI-B sunt clasificate și mapate, înainte de începerea perioadei, în instrumente controlate conform Anexei nr. 3 din RI</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Documentul oficial și HTML/Wiki au fost comparate și sunt concordante</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Sinteza și istoricul modificărilor sunt complete</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Lotul de destinatari, notificarea ERP și fluxul individual de confirmare sunt definite</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Testul folosește numai conținut comunicat și efectul pragului de 80% este mapat</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Sursa oficială înlocuiește mesajele informale</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Impactul asupra siguranței și factorii externi sunt definiți</td><td>☐ Da ☐ Nu</td><td></td></tr>
+<tr><td>Versiunea a fost aprobată, arhivată și comunicată</td><td>☐ Da ☐ Nu</td><td></td></tr>
+</tbody></table>
+    <table>
+<tbody>
+<tr><td><strong>Proprietar</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>Juridic / aprobare</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
+</tbody></table>
+
+    <h2 id="form-d"><span class="chapter-num">Formular D</span>Fișa de comunicare a unei versiuni și raportul de lot</h2>
+    <table>
+<tbody>
+<tr><td><strong>Document / cod / versiune</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Document oficial / amprenta electronică (hash)</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Destinatari / roluri / lot</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>ERP-RP publicare</strong></td><td>ID __________________  Data ____ / ____ / ______  Ora ______</td></tr>
+<tr><td><strong>E-mail individual cu link / QR</strong></td><td>Fișier / ID __________________  Livrate ______  Eșuate ______</td></tr>
+<tr><td><strong>Acces / descărcare</strong></td><td>Accesări ______  Descărcări ______  Raport la data __________</td></tr>
+<tr><td><strong>Anexe nr. 2 semnate</strong></td><td>Confirmări ______  Refuzuri ______  Lipsă confirmare ______</td></tr>
+<tr><td><strong>Anexa nr. 2 / arhivare</strong></td><td>ID-uri / lot __________________  Dosare personal / arhivă __________________</td></tr>
+<tr><td><strong>Test ERP / prag</strong></td><td>☐ Neaplicabil  ☐ Alocat — ID ______  Prag ______  Termen ______</td></tr>
+<tr><td><strong>Reexaminare / remediere</strong></td><td class="value-line"></td></tr>
+<tr><td><strong>Incidente tehnice / canal alternativ</strong></td><td><div class="value-lines"><span class="vline"></span><span class="vline"></span></div></td></tr>
+<tr><td><strong>Export jurnal / retenție</strong></td><td>Locație __________________  Până la __________________</td></tr>
+</tbody></table>
+    <table>
+<tbody>
+<tr><td>Raportul de lot se închide numai după reconcilierea livrărilor eșuate, a salariaților absenți și a persoanelor fără acces electronic. Lipsa unei confirmări nu se transformă automat în abatere; HR stabilește dacă informarea individuală este dovedită ori dacă documentul trebuie comunicat din nou printr-o modalitate adecvată.</td></tr>
+</tbody></table>
+    <table>
+<tbody>
+<tr><td><strong>Administrator Registru</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>HR</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td><td><strong>IT / audit</strong><div class="sig-field"><span>Nume:</span><span class="sig-line"></span></div><div class="sig-field"><span>Funcție:</span><span class="sig-line"></span></div><div class="sig-field"><span>Data:</span><span class="sig-line"></span></div><div class="sig-field"><span>Semnătura:</span><span class="sig-line"></span></div></td></tr>
+</tbody></table>
+
+    <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 1</strong> · 18 august 2026.</p>
+    <table>
+      <thead>
+        <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>18 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea proiectului ADC-REG-01 V1.0 pentru validare și adoptare — procedura de guvernanță a Registrului online al documentelor interne, care preia conținutul administrativ al fostei Anexe nr. 13 din RI V2.6 (portaluri, etichete, inventarul documentelor de rol, reconcilierea codurilor, formularele de registru, clauza standard a manualelor), plus lista de verificare la adoptarea RI (fosta Anexă nr. 1 secț. D) și fișa programelor de lucru — model per entitate (fosta Anexă nr. 3), actualizate la arhitectura RI V2.7 (Art. 5, 19, 20, 135, 137).</td></tr>
+      </tbody>
+    </table>
+
+  </article>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h5>Clinicile Dr. Ardeleanu</h5>
+      <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
+      <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
+    </div>
+    <div>
+      <h5>Document</h5>
+      <p>Cod: ADC-REG-01</p>
+      <p>V1.0 · proiect</p>
+      <p>18 august 2026</p>
+      <p>12 secțiuni · 4 formulare</p>
+    </div>
+    <div>
+      <h5>Rețea</h5>
+      <p>8 clinici în 7 orașe</p>
+      <p>80+ medici supraspecializați</p>
+      <p>30.000+ pacienți unici</p>
+      <p>4.9★ Google · 2.950 recenzii</p>
+    </div>
+    <div>
+      <h5>Contact &amp; Acces</h5>
+      <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
+      <p>031 99 63</p>
+      <p><a href="mailto:clinici@ardeleanu.ro">clinici@ardeleanu.ro</a></p>
+      <p>ERP intern: erp.clinicile-ardeleanu.ro</p>
+    </div>
+  </div>
+  <div class="din-2017">
+    <span>DIN 2017</span>·<span>EXCELENȚĂ</span>·<span>ACCESIBILITATE</span>·<span>FAMILIE</span>
+  </div>
+</footer>
+
+<script>
+// Highlight current section in TOC on scroll
+(function(){
+  const links = document.querySelectorAll('.toc-side a[href^="#"]');
+  const map = new Map();
+  links.forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el) map.set(el, a);
+  });
+  if(!map.size) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a = map.get(e.target);
+        if(a) a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-15% 0px -75% 0px'});
+  map.forEach((a,el)=>io.observe(el));
+})();
+</script>
+
+<div class="readbar" aria-hidden="true"></div>
+<button class="totop" id="totop" aria-label="Sus">↑</button>
+<script>
+// ============ PLATFORM FRAME (unified) ============
+(function(){
+  // ---- reading progress ----
+  var bar=document.querySelector('.readbar');
+  function upBar(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  }
+  window.addEventListener('scroll',upBar,{passive:true}); upBar();
+
+  // ---- back to top ----
+  var totop=document.getElementById('totop');
+  window.addEventListener('scroll',function(){ totop.classList.toggle('show', window.scrollY>600); },{passive:true});
+  totop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // ---- sticky header: swap breadcrumb for document title once hero scrolls past ----
+  var topbar=document.querySelector('.topbar');
+  var hero=document.querySelector('.hero');
+  if(topbar && hero){
+    function upCrumb(){
+      var r=hero.getBoundingClientRect();
+      topbar.classList.toggle('scrolled', r.bottom<=topbar.offsetHeight);
+    }
+    window.addEventListener('scroll',upCrumb,{passive:true});
+    window.addEventListener('resize',upCrumb);
+    upCrumb();
+  }
+
+  // ---- mobile drawer ----
+  var sidebar=document.querySelector('.toc-side');
+  var menuBtn=document.getElementById('menuBtn');
+  function openMenu(){
+    sidebar.classList.add('open');
+    document.body.classList.add('menu-open');
+  }
+  function closeMenu(){
+    if(!sidebar.classList.contains('open')) return;
+    sidebar.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  }
+  if(menuBtn&&sidebar){
+    menuBtn.addEventListener('click',function(){
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    sidebar.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(){ if(window.innerWidth<=980) closeMenu(); });
+    });
+    document.addEventListener('click',function(e){
+      if(!sidebar.classList.contains('open')) return;
+      if(sidebar.contains(e.target)||menuBtn.contains(e.target)) return;
+      closeMenu();
+    });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMenu(); });
+    document.addEventListener('touchmove',function(e){
+      if(sidebar.classList.contains('open') && !sidebar.contains(e.target)) e.preventDefault();
+    },{passive:false});
+  }
+
+  // ---- search (filter cuprins) ----
+  var search=document.getElementById('search');
+  if(search&&sidebar){
+    var norm=function(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); };
+    var groups=[].slice.call(sidebar.querySelectorAll('.group'));
+    search.addEventListener('input',function(){
+      var q=norm(search.value.trim());
+      groups.forEach(function(g){
+        var visible=0;
+        [].slice.call(g.children).forEach(function(child){
+          if(child.tagName!=='OL') return;
+          [].slice.call(child.children).forEach(function(li){
+            var mainLink=li.querySelector('a');
+            var mainMatch=!q||(mainLink&&norm(mainLink.textContent).indexOf(q)!==-1);
+            li.classList.toggle('toc-search-hide', !!q&&!mainMatch);
+            if(mainMatch) visible++;
+          });
+        });
+        g.classList.toggle('toc-search-hide', !!q&&visible===0);
+      });
+      if(q&&window.innerWidth<=980) sidebar.classList.add('open');
+    });
+  }
+
+  // ---- keyboard shortcuts ----
+  document.addEventListener('keydown',function(e){
+    var tag=(document.activeElement&&document.activeElement.tagName)||'';
+    if((e.key==='/'||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'))&&tag!=='INPUT'&&tag!=='TEXTAREA'){
+      if(search){ e.preventDefault(); search.focus(); }
+    } else if(e.key==='Escape'&&document.activeElement===search){
+      search.value=''; search.dispatchEvent(new Event('input')); search.blur();
+    }
+  });
+
+  // ---- mobile notice: keep dismissed within session ----
+  try{ if(sessionStorage.getItem('adcMobileNoticeDismissed')==='1'){ var mn=document.getElementById('mobileNotice'); if(mn) mn.style.display='none'; } }catch(e){}
+
+  // ---- partajare document: butonul apare doar pentru accesul cu parola generală ----
+  var shareBtn=document.getElementById('shareBtn');
+  if(shareBtn){
+    try{ if(sessionStorage.getItem('adcManualeAuth')==='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b') shareBtn.hidden=false; }catch(e){}
+    shareBtn.addEventListener('click',function(){
+      var link=location.origin+location.pathname+'#k='+encodeURIComponent('reg-5f8b3a');
+      function done(){ var t=shareBtn.innerHTML; shareBtn.innerHTML='✓ Link copiat'; setTimeout(function(){ shareBtn.innerHTML=t; },2200); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done,function(){ window.prompt('Copiază linkul:',link); });
+      else window.prompt('Copiază linkul:',link);
+    });
+  }
+})();
+</script>
+
+<!-- ============ Print PDF per formular (generat dinamic) ============ -->
+<script>
+(function(){
+  var article = document.querySelector('.article');
+  if(!article) return;
+  var kids = Array.prototype.slice.call(article.children);
+  var n = kids.length;
+
+  function rangeHasTable(start, end){
+    for(var i = start; i < end; i++){ if(kids[i].tagName === 'TABLE') return true; }
+    return false;
+  }
+
+  function makeBtn(label){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'print-form-btn';
+    b.title = 'Printează „' + label + '” ca PDF';
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>PDF</span>';
+    return b;
+  }
+
+  var restoring = false;
+  function restore(){
+    if(restoring) return;
+    restoring = true;
+    kids.forEach(function(el){ el.removeAttribute('data-print-hidden'); });
+    document.body.classList.remove('printing-form');
+    restoring = false;
+  }
+  window.addEventListener('afterprint', restore);
+
+  function printRange(startIdx, endIdx){
+    kids.forEach(function(el, i){
+      if(i < startIdx || i >= endIdx) el.setAttribute('data-print-hidden', '1');
+    });
+    document.body.classList.add('printing-form');
+    window.print();
+    setTimeout(restore, 4000);
+  }
+
+  for(var i = 0; i < n; i++){
+    var el = kids[i];
+    /* butoane PDF pe formularele A–D și pe fișa programelor (model) —
+       fiecare printează întreaga secțiune, cu toate sub-secțiunile integrate */
+    var isFormH2 = el.tagName === 'H2' && el.id && el.id.indexOf('form-') === 0;
+    var isSec11 = el.tagName === 'H2' && el.id === 'sec-11';
+    if(!isFormH2 && !isSec11) continue;
+
+    var end = i + 1;
+    while(end < n && kids[end].tagName !== 'H2') end++;
+
+    if(!rangeHasTable(i + 1, end)) continue;
+
+    (function(startIdx, endIdx, headingEl){
+      var btn = makeBtn(headingEl.textContent.trim());
+      btn.addEventListener('click', function(e){ e.preventDefault(); printRange(startIdx, endIdx); });
+      headingEl.appendChild(btn);
+    })(i, end, el);
+  }
+})();
+</script>
+</body>
+</html>
