@@ -1001,5 +1001,23 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
       }
     ]
+  },
+  "28": {
+    "commit": "ef6574202543e0b289fdc949d5c1e3afc493f3b2",
+    "before": "f58cd4e3294b4e56d8b7920bfa170bd5e4bf0323",
+    "sections": [
+      {
+        "id": "cap-3",
+        "title": "Capitolul IIIProtocol medical de asistență în stomatologia generală ADC-STG-01"
+      },
+      {
+        "id": "cap-4",
+        "title": "Capitolul IVProtocol medical de asistență în endodonție ADC-END-01"
+      },
+      {
+        "id": "cap-7-2",
+        "title": "2. Reguli generale pentru buna desfășurare"
+      }
+    ]
   }
 };
