@@ -316,6 +316,20 @@ a:hover{border-bottom-color:var(--brand-primary)}
   margin:0 0 28px;border-radius:0 3px 3px 0;
 }
 .hatnote strong{color:var(--brand-primary);font-style:normal}
+.hatnote[hidden]{display:none}
+
+/* Toggle pentru Cuprinsul de capitol — pe rândul titlului, după eticheta de cod */
+.hatnote-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:26px;margin-left:10px;vertical-align:middle;
+  background:var(--brand-cream-warm);border:1px solid var(--rule);
+  cursor:pointer;color:var(--brand-primary);border-radius:4px;
+  transition:background .12s,color .12s,border-color .12s;padding:0;
+}
+.hatnote-toggle:hover,
+.hatnote-toggle[aria-expanded="true"]{background:var(--brand-primary);color:var(--brand-yellow);border-color:var(--brand-primary)}
+.hatnote-toggle svg{width:13px;height:13px;transition:transform .18s ease}
+.hatnote-toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
 
 /* Chapter sub-TOC — canonical "Cuprins" list at the start of every chapter */
 .chapter-toc{
@@ -5447,12 +5461,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 26</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 27</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>27</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol (caseta „Cuprins" de sub titlul fiecărui capitol) devine pliabil și este implicit închis — lista subcapitolelor dubla Cuprinsul lateral. Se deschide dintr-un buton-săgeată aflat pe rândul titlului de capitol, după eticheta de cod. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>26</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Preambul, secțiunea „Statutul manualului și ierarhia documentelor interne": eliminată caseta „Clauza standard a documentului controlat" — conținutul ei era deja acoperit de paragrafele existente despre ierarhia documentelor și de precizarea privind KPI/exemple/recomandări din secțiunea „Legătura cu Regulamentul Intern".</td></tr>
             <tr><td>25</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul I: indexul «Setul integral de protocoale &amp; proceduri» devine panou pliabil (implicit închis, în același stil cu biblioteca de consimțăminte de la rev. 23) și este actualizat: secțiune nouă «Fluxul Pacientului &amp; Onboarding» în capul indexului, cu cardul Onboarding pacient — fluxul medico-legal P0–P2 (Cap. II, V18); Curățenia (ADC-CUR-01, Cap. XX) figura deja ca procedură distinctă.</td></tr>
             <tr><td>24</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, iar separatorul de Parte (ex. „Partea II · Protocoale Clinice") de la 50px la 90px; primul titlu din document păstrează spațierea compactă. Doar prezentare — fără modificări de conținut.</td></tr>
@@ -5690,6 +5705,31 @@ html{scroll-behavior:smooth}
       },{rootMargin:'-10% 0px -80% 0px'});
       io.observe(el);
     });
+  });
+})();
+
+// Cuprinsul de capitol (hatnote de sub titlu) — pliabil, închis implicit
+(function(){
+  document.querySelectorAll('.hatnote').forEach(note=>{
+    if(!note.querySelector('.chapter-toc')) return;
+    const h2 = note.previousElementSibling;
+    if(!h2 || h2.tagName !== 'H2') return;
+    if(!note.id) note.id = 'cuprins-' + (h2.id || 'cap-x-' + Math.floor(Math.random()*1e6));
+    note.setAttribute('hidden','');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hatnote-toggle';
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-controls', note.id);
+    btn.setAttribute('aria-label','Comută cuprinsul capitolului');
+    btn.title = 'Cuprinsul capitolului';
+    btn.innerHTML = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+    btn.addEventListener('click',()=>{
+      const open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+      if(open){note.setAttribute('hidden','')} else {note.removeAttribute('hidden')}
+    });
+    h2.appendChild(btn);
   });
 })();
 </script>
