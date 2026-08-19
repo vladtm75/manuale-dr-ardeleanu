@@ -642,6 +642,9 @@ h2.ch{flex-wrap:wrap}
 h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;flex-basis:100%}
 @media(max-width:640px){.chapter-toc{grid-template-columns:1fr}}
 
+
+#registru .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px}
+
 </style>
 </head>
 <body>
@@ -1095,13 +1098,14 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 42</strong> · 19 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 43</strong> · 20 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
-              <tr><td>42</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista subcapitolelor (generată din titlurile reale ale capitolului). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
+              <tr><td>43</td><td>20 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări devine pliabil și este închis implicit — titlul primește butonul-săgeată de sub titlu (ca la cuprinsurile de capitol); registrul se deschide automat când pagina e accesată cu ancora #registru. Doar prezentare — fără modificări de conținut.</td></tr>
+        <tr><td>42</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista subcapitolelor (generată din titlurile reale ale capitolului). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
             <tr data-rev="41"><td>41</td><td>19 august 2026</td><td>Loredana Manoiu</td><td>Cap. 1: integrat extrasul din Procedura de onboarding al pacientului V18 care privește direct medicul. <b>1.9</b> — anamneza pediatrică declanșată automat de CNP-ul de copil, adăugată la fluxul dosarului pentru copii; cele patru porți dinaintea tratamentului și excepția de urgență, definirea formularului de Înregistrare Medicală (Anamneza-CESGS și cele șase opțiuni), plus secțiunile care lipseau față de cuprinsul propriu: P1B (informația clinică, profilul psiho-social din tab-ul Alerte, consultația și indicația), verificările la fiecare vizită ulterioară, tabelul consecințelor refuzurilor „Nu” cu temeiurile legale și regula finală. <b>2.0</b> — consimțământul radiologic: nu mai este necesar unul separat la fiecare investigație când pacientul a bifat „Da” în Înregistrarea Medicală; la „Nu” sau la opțiune necompletată se obține consimțământ la fiecare trimitere. <b>2.1</b> — denumirea API (Acordul Pacientului Informat), regula unui API la fiecare vizită, obligația de a trece denumirea exactă a manoperei (o descriere generică nu este suficientă), mai multe API-uri când manoperele nu încap într-un document, regula critică privind momentul semnării și avertismentul că lipsa API-ului este cauză de nulitate a asigurării de malpraxis. <b>2.2</b> — matricea curentă de consimțăminte din SPSS și prioritatea ei, lista olografă confirmată operațional în august 2026 și semnarea consimțămintelor specifice de către reprezentantul legal al minorului. <b>2.4</b> — obiectivul planului de tratament urmărit cumulat la P1 + P2. <b>2.8</b> — transmiterea imaginilor pe e-mail cu link către PACS, cititorul integrat 2D și viewerul medical grade necesar pentru reconstrucția 3D a CBCT-ului.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="41"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
               <tr class="rev-old" data-rev-old="41" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 41</span><button type="button" class="rev-old-close" data-rev-close="41">✕ Închide</button></div><div class="rev-old-content" data-rev-body="41"></div></div></td></tr>
               <tr data-rev="40"><td>40</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole: spațiul de deasupra titlurilor de capitol (h2.ch) mărit de la 48px la 84px; primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
@@ -1472,6 +1476,32 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
     }
     meta.appendChild(btn);
   });
+})();
+</script>
+
+<script>
+/* Registrul de modificări — pliabil, închis implicit; se deschide la #registru */
+(function(){
+  var h2=document.getElementById('registru'); if(!h2) return;
+  var els=[], el=h2.nextElementSibling;
+  while(el && el.tagName!=='H2' && !/(^|\s)(seealso|chap-divider)(\s|$)/.test(el.className||'')){ els.push(el); el=el.nextElementSibling; }
+  if(!els.length) return;
+  var wrap=document.createElement('div'); wrap.id='registru-body';
+  h2.parentNode.insertBefore(wrap, els[0]);
+  for(var i=0;i<els.length;i++) wrap.appendChild(els[i]);
+  var btn=document.createElement('button');
+  btn.type='button'; btn.className='hatnote-toggle';
+  btn.setAttribute('aria-controls','registru-body');
+  btn.setAttribute('aria-label','Comută registrul de modificări');
+  btn.title='Registrul de modificări';
+  btn.innerHTML='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+  function setOpen(open){ btn.setAttribute('aria-expanded',open?'true':'false'); if(open){wrap.removeAttribute('hidden');} else {wrap.setAttribute('hidden','');} }
+  btn.addEventListener('click',function(){ setOpen(btn.getAttribute('aria-expanded')!=='true'); });
+  var meta=h2.querySelector('.chapter-meta');
+  if(!meta){ meta=document.createElement('span'); meta.className='chapter-meta'; h2.appendChild(meta); }
+  meta.appendChild(btn);
+  setOpen(location.hash==='#registru');
+  window.addEventListener('hashchange',function(){ if(location.hash==='#registru') setOpen(true); });
 })();
 </script>
 </body>

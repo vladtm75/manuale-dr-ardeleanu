@@ -1216,6 +1216,35 @@ html{scroll-behavior:smooth}
   table,figure,img,.callout{break-inside:avoid}
   p,li{orphans:3;widows:3}
 }
+
+/* Fișele de post — printare ca formular de semnat */
+.fisa-print-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  margin:2px 0 16px;padding:7px 13px;
+  background:var(--paper-pure);border:1px solid var(--rule);
+  border-left:3px solid var(--brand-amber);border-radius:0 4px 4px 0;
+  font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+  cursor:pointer;transition:background .14s,color .14s,border-left-color .14s;
+}
+.fisa-print-btn:hover{background:var(--brand-cream-warm);color:var(--brand-primary);border-left-color:var(--brand-primary)}
+.fisa-print-btn svg{width:14px;height:14px;color:var(--brand-primary)}
+.fisa-sign{display:none}
+@media print{
+  body.print-fisa .topbar,
+  body.print-fisa .hero,
+  body.print-fisa .hero-inner,
+  body.print-fisa .toc-side,
+  body.print-fisa footer,
+  body.print-fisa #mobileNotice,
+  body.print-fisa .fisa-print-btn{display:none!important}
+  body.print-fisa .article > *:not(.print-target){display:none!important}
+  body.print-fisa .print-target{display:block!important}
+  body.print-fisa .fisa-sign{display:block!important;margin-top:28px;page-break-inside:avoid}
+  body.print-fisa .layout{display:block}
+  body.print-fisa .article{max-width:100%;padding:0}
+}
+
 </style>
 </head>
 <body>
@@ -5364,7 +5393,11 @@ html{scroll-behavior:smooth}
 
     <p>Fiecare fișă de post constituie <strong>anexă la Contractul Individual de Muncă</strong>, potrivit <em>art. 17 alin. (3) lit. d) și e) din Codul Muncii</em> (Legea nr. 53/2003), și se completează cu prevederile CIM, ale <strong>Regulamentului intern (ADC-RI-02)</strong>, ale prezentului manual și ale documentelor controlate subordonate, în versiunile în vigoare comunicate salariatului. Versiunea de mai jos reproduce edițiile 2026 ale fișelor (ADC-FP-ASM-02, Ediția a II-a, care înlocuiește ediția 2025, respectiv ADC-FP-ASS-01, Ediția I), cu trimiterile la Regulamentul intern aduse la numerotarea continuă a articolelor; exemplarul care se semnează este formularul generat în ERP.</p>
 
-    <h3 id="cap-22-1"><span class="num">1.</span>Fișa de post — Asistent Medical Generalist <span class="codetag">ADC-FP-ASM-02 · Ediția a II-a (2026)</span></h3>
+    <div class="fisa-print" id="fisa-generalist">
+<h3 id="cap-22-1"><span class="num">1.</span>Fișa de post — Asistent Medical Generalist <span class="codetag">ADC-FP-ASM-02 · Ediția a II-a (2026)</span></h3>
+
+    <button type="button" class="fisa-print-btn" data-fisa="fisa-generalist"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button>
+
 
     <h4>1.1 Identificarea postului</h4>
     <table>
@@ -5433,7 +5466,24 @@ html{scroll-behavior:smooth}
     <h4>1.7 Dispoziții finale</h4>
     <p>Prezenta fișă de post este anexă la Contractul Individual de Muncă (art. 17 din Codul Muncii) și se completează cu prevederile CIM, ale Regulamentului intern (ADC-RI-02), ale prezentului manual și ale documentelor controlate subordonate, în versiunile în vigoare. Actualizările atribuțiilor și ale criteriilor de evaluare se comunică salariatului potrivit Art. 19 din Regulamentul intern și se aplică numai pentru viitor. Neîndeplinirea culpabilă a atribuțiilor poate atrage răspunderea disciplinară, potrivit art. 247–252 din Codul Muncii și procedurii din Regulamentul intern — de la avertisment scris până la desfacerea disciplinară a contractului individual de muncă —, precum și, după caz, răspunderea patrimonială, civilă sau penală.</p>
 
-    <h3 id="cap-22-2"><span class="num">2.</span>Fișa de post — Asistent Medical Șef <span class="codetag">ADC-FP-ASS-01 · Ediția I (2026)</span></h3>
+    <div class="fisa-sign">
+      <table>
+        <tbody>
+          <tr>
+            <td style="width:50%"><strong>ANGAJATOR</strong><p style="margin:12px 0 0">Nume și prenume: _______________________</p><p style="margin:8px 0 0">Funcția: _______________________</p><p style="margin:8px 0 0">Data: _______________________</p><p style="margin:8px 0 0">Semnătura: _______________________</p></td>
+            <td style="width:50%"><strong>SALARIAT — Asistent Medical Generalist</strong><p style="margin:12px 0 0"><em>Am luat la cunoștință și am primit un exemplar.</em></p><p style="margin:8px 0 0">Nume și prenume: _______________________</p><p style="margin:8px 0 0">Data: _______________________</p><p style="margin:8px 0 0">Semnătura: _______________________</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>
+
+    <div class="fisa-print" id="fisa-sef">
+<h3 id="cap-22-2"><span class="num">2.</span>Fișa de post — Asistent Medical Șef <span class="codetag">ADC-FP-ASS-01 · Ediția I (2026)</span></h3>
+
+    <button type="button" class="fisa-print-btn" data-fisa="fisa-sef"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button>
+
 
     <h4>2.1 Identificarea postului</h4>
     <table>
@@ -5492,8 +5542,20 @@ html{scroll-behavior:smooth}
     <h4>2.7 Dispoziții finale</h4>
     <p>Prezenta fișă de post este anexă la Contractul Individual de Muncă (art. 17 din Codul Muncii) și se completează cu prevederile CIM, ale Regulamentului intern (ADC-RI-02), ale prezentului manual și ale documentelor controlate subordonate, în versiunile în vigoare. Actualizările atribuțiilor și ale criteriilor de evaluare se comunică salariatului potrivit Art. 19 din Regulamentul intern și se aplică numai pentru viitor. Neîndeplinirea culpabilă a atribuțiilor poate atrage răspunderea disciplinară, potrivit art. 247–252 din Codul Muncii și procedurii din Regulamentul intern, precum și, după caz, răspunderea patrimonială, civilă sau penală.</p>
 
-    
-<div class="chap-divider">Referințe</div>
+    <div class="fisa-sign">
+      <table>
+        <tbody>
+          <tr>
+            <td style="width:50%"><strong>ANGAJATOR</strong><p style="margin:12px 0 0">Nume și prenume: _______________________</p><p style="margin:8px 0 0">Funcția: _______________________</p><p style="margin:8px 0 0">Data: _______________________</p><p style="margin:8px 0 0">Semnătura: _______________________</p></td>
+            <td style="width:50%"><strong>SALARIAT — Asistent Medical Șef</strong><p style="margin:12px 0 0"><em>Am luat la cunoștință și am primit un exemplar.</em></p><p style="margin:8px 0 0">Nume și prenume: _______________________</p><p style="margin:8px 0 0">Data: _______________________</p><p style="margin:8px 0 0">Semnătura: _______________________</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>
+
+    <div class="chap-divider">Referințe</div>
 
     <h2 id="bibliografie">Legislație aplicabilă</h2>
 
@@ -5535,13 +5597,14 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 35</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 36</strong> · 20 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
-            <tr><td>35</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXII rescris integral: „Fișele de post", cu două subcapitole — Asistent Medical Generalist (ADC-FP-ASM-02, Ediția a II-a 2026) și Asistent Medical Șef (ADC-FP-ASS-01, Ediția I 2026). Fișele noi sunt aliniate la Regulamentul Intern ADC-RI-02 V2.7: etichetele [KPI-P]/[KPI-B], separarea evaluare profesională–bonus, atribuțiile pe domenii (A–J, respectiv A–H) legate de criteriile de evaluare, garanțiile din Cap. VIII al RI, trimiterile la articole aduse la numerotarea continuă rev. 6 (Art. 62 alin. (2), Art. 55, Art. 58). Înlocuiește fișa unică veche a generalistului (care cita „Regulamentul de Ordine Interioară" și regula depășită a mediei de 80% ca esențială pentru continuarea relației de muncă).</td></tr>
+            <tr><td>36</td><td>20 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări devine pliabil și este închis implicit (cu deschidere automată la ancora #registru) — la fel în toate manualele și procedurile. În plus, fișele de post din Capitolul XXII primesc butonul „Printează PDF — formular de semnat": printează doar fișa respectivă, cu blocul de semnături ANGAJATOR/SALARIAT, pentru semnarea cu angajații.</td></tr>
+        <tr><td>35</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXII rescris integral: „Fișele de post", cu două subcapitole — Asistent Medical Generalist (ADC-FP-ASM-02, Ediția a II-a 2026) și Asistent Medical Șef (ADC-FP-ASS-01, Ediția I 2026). Fișele noi sunt aliniate la Regulamentul Intern ADC-RI-02 V2.7: etichetele [KPI-P]/[KPI-B], separarea evaluare profesională–bonus, atribuțiile pe domenii (A–J, respectiv A–H) legate de criteriile de evaluare, garanțiile din Cap. VIII al RI, trimiterile la articole aduse la numerotarea continuă rev. 6 (Art. 62 alin. (2), Art. 55, Art. 58). Înlocuiește fișa unică veche a generalistului (care cita „Regulamentul de Ordine Interioară" și regula depășită a mediei de 80% ca esențială pentru continuarea relației de muncă).</td></tr>
             <tr><td>34</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul 0 „Cadrul general al rețelei" există acum și în corpul manualului, nu doar în Cuprins: titlu de capitol în stilul celorlalte (cu cuprins de capitol pliabil), iar cele trei secțiuni („De unde am pornit", „Misiune, valori și responsabilități", „Structura organizațională") coboară la rang de subcapitol, numerotate 1–3, cu ancorele neschimbate. Linkul capitolului din Cuprinsul lateral indică acum titlul de capitol.</td></tr>
             <tr><td>33</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Secțiunea „Legislație aplicabilă" completată cu actele citate în corpul manualului dar absente din listă — majoritatea intrate odată cu Procedura de onboarding al pacientului (Cap. II): Legea nr. 46/2003 (drepturile pacientului), Legea nr. 506/2004 și Directiva 2002/58/CE (comunicări electronice/marketing), Directiva 2013/59/Euratom (securitate radiologică, ALARA), Orientările EDPB 05/2020 și 3/2019, Codul deontologic al medicului stomatolog, plus Ordinul MS nr. 1101/2016 (infecții asociate asistenței medicale), citat în Cap. XX. Lista crește de la 16 la 23 de intrări.</td></tr>
             <tr><td>32</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Titlurile de capitol: eticheta de cod a procedurii (ex. ADC-CUR-01) și butonul de deschidere a cuprinsului de capitol coboară pe un rând propriu, sub titlu — până acum stăteau inline la capătul titlului și, la titlurile lungi, eticheta se rupea pe două rânduri. Doar prezentare — fără modificări de conținut.</td></tr>
@@ -6017,6 +6080,54 @@ html{scroll-behavior:smooth}
       if(input){ input.checked = false; input.dispatchEvent(new Event('change')); }
       const mainRow = document.querySelector(`tr[data-rev="${rev}"]`);
       if(mainRow) mainRow.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+})();
+</script>
+
+<script>
+/* Registrul de modificări — pliabil, închis implicit; se deschide la #registru */
+(function(){
+  var h2=document.getElementById('registru'); if(!h2) return;
+  var els=[], el=h2.nextElementSibling;
+  while(el && el.tagName!=='H2' && !/(^|\s)(seealso|chap-divider)(\s|$)/.test(el.className||'')){ els.push(el); el=el.nextElementSibling; }
+  if(!els.length) return;
+  var wrap=document.createElement('div'); wrap.id='registru-body';
+  h2.parentNode.insertBefore(wrap, els[0]);
+  for(var i=0;i<els.length;i++) wrap.appendChild(els[i]);
+  var btn=document.createElement('button');
+  btn.type='button'; btn.className='hatnote-toggle';
+  btn.setAttribute('aria-controls','registru-body');
+  btn.setAttribute('aria-label','Comută registrul de modificări');
+  btn.title='Registrul de modificări';
+  btn.innerHTML='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+  function setOpen(open){ btn.setAttribute('aria-expanded',open?'true':'false'); if(open){wrap.removeAttribute('hidden');} else {wrap.setAttribute('hidden','');} }
+  btn.addEventListener('click',function(){ setOpen(btn.getAttribute('aria-expanded')!=='true'); });
+  var meta=h2.querySelector('.chapter-meta');
+  if(!meta){ meta=document.createElement('span'); meta.className='chapter-meta'; h2.appendChild(meta); }
+  meta.appendChild(btn);
+  setOpen(location.hash==='#registru');
+  window.addEventListener('hashchange',function(){ if(location.hash==='#registru') setOpen(true); });
+})();
+</script>
+
+<script>
+/* Printarea fișelor de post ca formular de semnat */
+(function(){
+  document.querySelectorAll('.fisa-print-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var target=document.getElementById(btn.getAttribute('data-fisa'));
+      if(!target) return;
+      document.body.classList.add('print-fisa');
+      target.classList.add('print-target');
+      var cleanup=function(){
+        document.body.classList.remove('print-fisa');
+        target.classList.remove('print-target');
+        window.removeEventListener('afterprint',cleanup);
+      };
+      window.addEventListener('afterprint',cleanup);
+      window.print();
+      setTimeout(cleanup,1500);
     });
   });
 })();
