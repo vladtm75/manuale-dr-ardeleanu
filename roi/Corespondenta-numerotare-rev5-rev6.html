@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<script>
+/* Gate: acces cu parola generală (sessionStorage, ca înainte) SAU cu cheia proprie
+   a manualului — memorată în localStorage sau primită printr-un link #k=... */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  var O='06b9e853bdc0adf35ea51c0beaf55e8ff49a760ce16c0f110ec9a60cd2360757';
+  var LK='adcAuthROI';
+  function deny(){ location.replace('../index.html'); }
+  try{
+    if(sessionStorage.getItem('adcManualeAuth')===M) return;
+    if(localStorage.getItem(LK)===O) return;
+    var m=/^#k=(.+)/.exec(location.hash);
+    if(m && window.crypto && crypto.subtle){
+      document.documentElement.style.visibility='hidden';
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(decodeURIComponent(m[1]).trim())).then(function(b){
+        var h=Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');
+        if(h!==O){ deny(); return; }
+        try{ localStorage.setItem(LK,O); }catch(e){}
+        try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+        document.documentElement.style.visibility='';
+      }).catch(deny);
+      return;
+    }
+    deny();
+  }catch(e){ deny(); }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Corespondența numerotării ADC-RI-02, rev. 5 → rev. 6 — Clinicile Dr. Ardeleanu</title>
+<style>
+:root{--brand-primary:#7a1f1f;--ink:#2b2622;--rule:#e4dccf;--cream:#faf6ef;--cream-warm:#f5eee2}
+body{margin:0;font-family:'Poppins',system-ui,sans-serif;background:var(--cream);color:var(--ink)}
+.wrap{max-width:860px;margin:0 auto;padding:40px 20px 60px}
+h1{font-size:24px;color:var(--brand-primary)}
+p.lead{font-size:14px;line-height:1.6;color:#5b5348}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--rule);font-size:13.5px;margin-top:18px}
+th{background:var(--brand-primary);color:#fff;text-align:left;padding:8px 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+td{padding:6px 12px;border-top:1px solid var(--rule)}
+tr:nth-child(even) td{background:var(--cream-warm)}
+td:first-child,td:nth-child(2){font-family:'JetBrains Mono',monospace;font-size:12.5px;white-space:nowrap}
+a.back{color:var(--brand-primary)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Corespondența numerotării ADC-RI-02, rev. 5 → rev. 6</h1>
+<p class="lead">Document-punte al Registrului online: la rev. 6 a Ediției V2.7, fostul Art. 43^1 a fost absorbit ca Art. 44, iar articolele 44–139 au devenit 45–140 (numerotare continuă, fără indici). Articolele 1–43 sunt neschimbate. Tabela rămâne publicată până la actualizarea tuturor documentelor subordonate. Documentul de referință: <a class="back" href="Regulamentul%20de%20Organizare%20Interna.html">Regulamentul Intern (ADC-RI-02, V2.7)</a>.</p>
+<table>
+<thead><tr><th>Numerotarea veche (rev. 5)</th><th>Numerotarea nouă (rev. 6)</th><th>Titlul articolului</th></tr></thead>
+<tbody>
+<tr><td>Art. 43^1</td><td>Art. 44</td><td>Deplasările în interes de serviciu și decontarea cheltuielilor</td></tr>
+<tr><td>Art. 44</td><td>Art. 45</td><td>Concediul de odihnă</td></tr>
+<tr><td>Art. 45</td><td>Art. 46</td><td>Zile libere plătite pentru evenimente familiale</td></tr>
+<tr><td>Art. 46</td><td>Art. 47</td><td>Concedii și absențe familiale prevăzute de lege</td></tr>
+<tr><td>Art. 47</td><td>Art. 48</td><td>Concediul medical</td></tr>
+<tr><td>Art. 48</td><td>Art. 49</td><td>Concediul fără plată și formarea la inițiativa salariatului</td></tr>
+<tr><td>Art. 49</td><td>Art. 50</td><td>Salariul</td></tr>
+<tr><td>Art. 50</td><td>Art. 51</td><td>Beneficiile, sănătatea și sprijinul acordat personalului</td></tr>
+<tr><td>Art. 51</td><td>Art. 52</td><td>Scopul evaluării</td></tr>
+<tr><td>Art. 52</td><td>Art. 53</td><td>Arhitectura criteriilor</td></tr>
+<tr><td>Art. 53</td><td>Art. 54</td><td>Comunicarea și modificarea obiectivelor</td></tr>
+<tr><td>Art. 54</td><td>Art. 55</td><td>Nivelurile, ciclurile și sursele de evaluare</td></tr>
+<tr><td>Art. 55</td><td>Art. 56</td><td>Îndrumarea, observațiile și corectarea timpurie</td></tr>
+<tr><td>Art. 56</td><td>Art. 57</td><td>Factorii externi și perioadele protejate</td></tr>
+<tr><td>Art. 57</td><td>Art. 58</td><td>Evaluarea sintetică și calibrarea</td></tr>
+<tr><td>Art. 58</td><td>Art. 59</td><td>Performanța în perioada de probă</td></tr>
+<tr><td>Art. 59</td><td>Art. 60</td><td>Dosarul curent de performanță</td></tr>
+<tr><td>Art. 60</td><td>Art. 61</td><td>Natura și temeiul procedurii</td></tr>
+<tr><td>Art. 61</td><td>Art. 62</td><td>Condițiile de declanșare</td></tr>
+<tr><td>Art. 62</td><td>Art. 63</td><td>Nota de sesizare și trierea juridică</td></tr>
+<tr><td>Art. 63</td><td>Art. 64</td><td>Desemnarea evaluatorului sau comisiei</td></tr>
+<tr><td>Art. 64</td><td>Art. 65</td><td>Convocarea</td></tr>
+<tr><td>Art. 65</td><td>Art. 66</td><td>Metodele și desfășurarea evaluării</td></tr>
+<tr><td>Art. 66</td><td>Art. 67</td><td>Planul de îmbunătățire a performanței</td></tr>
+<tr><td>Art. 67</td><td>Art. 68</td><td>Raportul final</td></tr>
+<tr><td>Art. 68</td><td>Art. 69</td><td>Controlul de legalitate și măsurile ulterioare</td></tr>
+<tr><td>Art. 69</td><td>Art. 70</td><td>Posturile vacante și agenția de ocupare</td></tr>
+<tr><td>Art. 70</td><td>Art. 71</td><td>Preavizul și decizia de concediere profesională</td></tr>
+<tr><td>Art. 71</td><td>Art. 72</td><td>Aplicarea în timp și dosarul standard</td></tr>
+<tr><td>Art. 72</td><td>Art. 73</td><td>Abaterea disciplinară</td></tr>
+<tr><td>Art. 73</td><td>Art. 74</td><td>Reguli de disciplină</td></tr>
+<tr><td>Art. 74</td><td>Art. 75</td><td>Exemple de abateri relevante</td></tr>
+<tr><td>Art. 75</td><td>Art. 76</td><td>Individualizarea și proporționalitatea</td></tr>
+<tr><td>Art. 76</td><td>Art. 77</td><td>Sancțiunile disciplinare</td></tr>
+<tr><td>Art. 77</td><td>Art. 78</td><td>Sesizarea și conservarea probelor</td></tr>
+<tr><td>Art. 78</td><td>Art. 79</td><td>Desemnarea cercetării</td></tr>
+<tr><td>Art. 79</td><td>Art. 80</td><td>Convocarea disciplinară</td></tr>
+<tr><td>Art. 80</td><td>Art. 81</td><td>Drepturile salariatului cercetat</td></tr>
+<tr><td>Art. 81</td><td>Art. 82</td><td>Audierea și administrarea probelor</td></tr>
+<tr><td>Art. 82</td><td>Art. 83</td><td>Raportul final al cercetării</td></tr>
+<tr><td>Art. 83</td><td>Art. 84</td><td>Decizia de sancționare</td></tr>
+<tr><td>Art. 84</td><td>Art. 85</td><td>Radierea și evidența sancțiunilor</td></tr>
+<tr><td>Art. 85</td><td>Art. 86</td><td>Legătura cu procedurile speciale</td></tr>
+<tr><td>Art. 86</td><td>Art. 87</td><td>Canalul general</td></tr>
+<tr><td>Art. 87</td><td>Art. 88</td><td>Înregistrarea și soluționarea</td></tr>
+<tr><td>Art. 88</td><td>Art. 89</td><td>Confidențialitatea și limitele răspunsului</td></tr>
+<tr><td>Art. 89</td><td>Art. 90</td><td>Politica de toleranță zero</td></tr>
+<tr><td>Art. 90</td><td>Art. 91</td><td>Conduite relevante și delimitări</td></tr>
+<tr><td>Art. 91</td><td>Art. 92</td><td>Responsabilul și comisia</td></tr>
+<tr><td>Art. 92</td><td>Art. 93</td><td>Modalitatea de sesizare</td></tr>
+<tr><td>Art. 93</td><td>Art. 94</td><td>Procedura informală</td></tr>
+<tr><td>Art. 94</td><td>Art. 95</td><td>Analiza preliminară și măsurile de protecție</td></tr>
+<tr><td>Art. 95</td><td>Art. 96</td><td>Investigația formală</td></tr>
+<tr><td>Art. 96</td><td>Art. 97</td><td>Măsuri și procedura disciplinară</td></tr>
+<tr><td>Art. 97</td><td>Art. 98</td><td>Confidențialitate, date și sprijin</td></tr>
+<tr><td>Art. 98</td><td>Art. 99</td><td>Represalii și monitorizare</td></tr>
+<tr><td>Art. 99</td><td>Art. 100</td><td>Căile externe și prevenția</td></tr>
+<tr><td>Art. 100</td><td>Art. 101</td><td>Domeniul procedurii de avertizare</td></tr>
+<tr><td>Art. 101</td><td>Art. 102</td><td>Persoana desemnată și canalul intern</td></tr>
+<tr><td>Art. 102</td><td>Art. 103</td><td>Raportarea și anonimatul</td></tr>
+<tr><td>Art. 103</td><td>Art. 104</td><td>Înregistrarea și termenele</td></tr>
+<tr><td>Art. 104</td><td>Art. 105</td><td>Acțiunile subsecvente</td></tr>
+<tr><td>Art. 105</td><td>Art. 106</td><td>Confidențialitatea și drepturile persoanei vizate</td></tr>
+<tr><td>Art. 106</td><td>Art. 107</td><td>Protecția împotriva represaliilor</td></tr>
+<tr><td>Art. 107</td><td>Art. 108</td><td>Raportarea externă și divulgarea publică</td></tr>
+<tr><td>Art. 108</td><td>Art. 109</td><td>Buna-credință și raportările neconfirmate</td></tr>
+<tr><td>Art. 109</td><td>Art. 110</td><td>Principiile prelucrării datelor</td></tr>
+<tr><td>Art. 110</td><td>Art. 111</td><td>Informarea și drepturile persoanelor vizate</td></tr>
+<tr><td>Art. 111</td><td>Art. 112</td><td>Datele medicale și ale pacienților</td></tr>
+<tr><td>Art. 112</td><td>Art. 113</td><td>Confidențialitatea profesională și comercială</td></tr>
+<tr><td>Art. 113</td><td>Art. 114</td><td>Securitatea sistemelor și a dispozitivelor</td></tr>
+<tr><td>Art. 114</td><td>Art. 115</td><td>Utilizarea inteligenței artificiale</td></tr>
+<tr><td>Art. 115</td><td>Art. 116</td><td>Monitorizarea la locul de muncă</td></tr>
+<tr><td>Art. 116</td><td>Art. 117</td><td>Comunicarea publică și rețelele sociale</td></tr>
+<tr><td>Art. 117</td><td>Art. 118</td><td>Incidentele de date</td></tr>
+<tr><td>Art. 118</td><td>Art. 119</td><td>Principiile răspunderii patrimoniale</td></tr>
+<tr><td>Art. 119</td><td>Art. 120</td><td>Constatarea și recuperarea prejudiciului</td></tr>
+<tr><td>Art. 120</td><td>Art. 121</td><td>Paguba produsă de mai multe persoane și sumele nedatorate</td></tr>
+<tr><td>Art. 121</td><td>Art. 122</td><td>Utilizarea și predarea bunurilor</td></tr>
+<tr><td>Art. 122</td><td>Art. 123</td><td>Autovehiculele de serviciu</td></tr>
+<tr><td>Art. 123</td><td>Art. 124</td><td>Politica generală de formare</td></tr>
+<tr><td>Art. 124</td><td>Art. 125</td><td>Frecvența și costurile</td></tr>
+<tr><td>Art. 125</td><td>Art. 126</td><td>Participarea și evaluarea instruirii</td></tr>
+<tr><td>Art. 126</td><td>Art. 127</td><td>Formarea la inițiativa salariatului</td></tr>
+<tr><td>Art. 127</td><td>Art. 128</td><td>Dezvoltarea și promovarea</td></tr>
+<tr><td>Art. 128</td><td>Art. 129</td><td>Reguli generale de preaviz</td></tr>
+<tr><td>Art. 129</td><td>Art. 130</td><td>Interdicțiile și verificarea temeiului</td></tr>
+<tr><td>Art. 130</td><td>Art. 131</td><td>Comunicarea actelor de încetare</td></tr>
+<tr><td>Art. 131</td><td>Art. 132</td><td>Predarea și continuitatea</td></tr>
+<tr><td>Art. 132</td><td>Art. 133</td><td>Documentele și drepturile finale</td></tr>
+<tr><td>Art. 133</td><td>Art. 134</td><td>Adoptarea și consultarea</td></tr>
+<tr><td>Art. 134</td><td>Art. 135</td><td>Comunicarea și opozabilitatea</td></tr>
+<tr><td>Art. 135</td><td>Art. 136</td><td>Modificarea și controlul versiunii</td></tr>
+<tr><td>Art. 136</td><td>Art. 137</td><td>Sesizarea privind legalitatea Regulamentului</td></tr>
+<tr><td>Art. 137</td><td>Art. 138</td><td>Anexele și politicile separate</td></tr>
+<tr><td>Art. 138</td><td>Art. 139</td><td>Intrarea în vigoare și abrogarea versiunii anterioare</td></tr>
+<tr><td>Art. 139</td><td>Art. 140</td><td>Baza juridică și revizuirea</td></tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
