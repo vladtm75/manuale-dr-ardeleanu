@@ -331,5 +331,23 @@ window.MEDICI_REVISION_MAP = {
         "title": "1. 9Prima interacțiune — recepția și documentele§"
       }
     ]
+  },
+  "42": {
+    "commit": "144a647a3ef566ebd7dda301e1900907724b5cb7",
+    "before": "79675f61f1316ee15655eed61c3e0f31f224446f",
+    "sections": [
+      {
+        "id": "cap-1",
+        "title": "ICapitolul 1 — Operațional"
+      },
+      {
+        "id": "cap-2",
+        "title": "IICapitolul 2 — Comportamental"
+      },
+      {
+        "id": "cap-3",
+        "title": "IIICapitolul 3 — Partea medicală"
+      }
+    ]
   }
 };
