@@ -592,9 +592,12 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 }
 .article table tr:nth-child(even) td{background:var(--brand-cream-warm)}
 .article table .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--brand-primary);font-weight:500}
+.article table.checktable{margin:16px 0 22px}
 .article table.checktable td:first-child{font-style:italic}
-.article table.checktable th:nth-child(2),.article table.checktable th:nth-child(3){text-align:center;width:92px}
-.article table.checktable td.lab{text-align:center;font-weight:700;color:var(--brand-primary);font-size:15px}
+.article table.checktable th{padding:8px 12px;font-size:11px}
+.article table.checktable td{padding:7px 12px;font-size:13px}
+.article table.checktable th:nth-child(2),.article table.checktable th:nth-child(3){text-align:center;width:74px}
+.article table.checktable td.lab{text-align:center;font-weight:700;color:var(--brand-primary);font-size:13.5px}
 
 /* Stat strip */
 .stats{
@@ -1059,6 +1062,12 @@ details.consents:not([open]) .csn-hint-open{display:none}
   width:14px;height:14px;color:var(--brand-primary);
 }
 .docref:hover .docref-action{color:var(--brand-primary)}
+/* Varianta compactă — cardul curge în coloana de text, pe lângă o figură flotantă (fără clear) */
+.docref.compact{padding:10px 14px;margin:12px 0;gap:12px}
+.docref.compact .docref-icon{width:30px;height:38px;padding-bottom:4px}
+.docref.compact .docref-name{font-size:13px}
+.docref.compact .docref-desc{font-size:11.5px;margin-top:2px}
+.docref.compact .docref-action{font-size:10px;letter-spacing:.1em}
 
 /* Mini badge */
 .codetag{
@@ -2257,7 +2266,7 @@ html{scroll-behavior:smooth}
     <p>Regula generală este simplă: <strong>la fiecare vizită, medicul și pacientul semnează un API</strong>. În mod normal, medicul trece în API toate tratamentele și manoperele pe care urmează să le efectueze pacientului în vizita respectivă, astfel încât, din momentul în care pacientul se așază pe scaunul stomatologic și până se ridică, toate manoperele realizate să fie acoperite de acordul semnat înainte de începerea actului. Există însă situații în care nu toate manoperele pot fi cuprinse într-un singur document; atunci se semnează mai multe API-uri în aceeași vizită. Procesul este facil atât pentru medic, cât și pentru pacient: semnarea se face digital, pe telefonul pacientului, în câteva momente.</p>
     <p>Dacă planul se schimbă în timpul consultației sau al tratamentului, medicul explică schimbarea și generează documentul corespunzător înainte de continuare. Pacientul nu părăsește cabinetul după un tratament modificat fără ca API-ul corect să fie semnat și salvat. Responsabilitatea actualizării acordului revine în primul rând medicului și, în subsidiar, asistentului medical.</p>
 
-    <a class="docref" style="clear:both" href="assets/onboarding-docs/ADC-ONB-03-acord-pacient.pdf" download="ADC-ONB-03-acord-pacient.pdf" target="_blank" rel="noopener">
+    <a class="docref compact" href="assets/onboarding-docs/ADC-ONB-03-acord-pacient.pdf" download="ADC-ONB-03-acord-pacient.pdf" target="_blank" rel="noopener">
       <div class="docref-icon"><span class="ext">PDF</span></div>
       <div class="docref-meta">
         <span class="docref-code">ADC-ONB-03</span>
@@ -2267,7 +2276,7 @@ html{scroll-behavior:smooth}
       <div class="docref-action"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 2v9m0 0l-3-3m3 3l3-3M3 14h10"/></svg>Descarcă PDF</div>
     </a>
 
-    <div class="callout warn">
+    <div class="callout warn" style="clear:both">
       <div class="label">Avertisment malpraxis</div>
       Lipsa API-ului semnat este cauză de nulitate a asigurării de malpraxis a medicului. Termenii și condițiile polițelor de malpraxis condiționează acoperirea de existența consimțământului informat documentat; fără API, asigurarea devine, cel mai probabil, irelevantă. Regula este esențială pentru medici, dar la fel de importantă pentru asistente și registratori, care verifică existența documentului înainte de act.
     </div>
@@ -5443,12 +5452,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 28</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 29</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>29</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul II, secțiunea API: cardul de descărcare ADC-ONB-03 (Acordul Pacientului Informat) primește o variantă compactă și curge acum în coloana de text, pe același rând cu FIG. II·TEL, în loc să coboare sub fotografie — dispare golul vizual. Tabelul consimțămintelor speciale (olograf/digital) restrâns: rânduri mai dense, font ușor redus, coloanele de bifă mai înguste. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>28</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolele III și IV: eliminate barele de navigare „Cuprins:" din interiorul capitolelor — dublau inutil cuprinsul de capitol și Cuprinsul lateral (barele „Vezi și:" cu trimiteri către alte capitole rămân). Capitolul VII: FIG. VII·1 (modelul de consimțământ chirurgical) trecută de la formatul mic, cu aliniere la dreapta, la lățimea întreagă a coloanei — documentul era ilizibil la dimensiunea redusă.</td></tr>
             <tr><td>27</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol (caseta „Cuprins" de sub titlul fiecărui capitol) devine pliabil și este implicit închis — lista subcapitolelor dubla Cuprinsul lateral. Se deschide dintr-un buton-săgeată aflat pe rândul titlului de capitol, după eticheta de cod. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>26</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Preambul, secțiunea „Statutul manualului și ierarhia documentelor interne": eliminată caseta „Clauza standard a documentului controlat" — conținutul ei era deja acoperit de paragrafele existente despre ierarhia documentelor și de precizarea privind KPI/exemple/recomandări din secțiunea „Legătura cu Regulamentul Intern".</td></tr>
