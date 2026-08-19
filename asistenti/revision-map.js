@@ -807,5 +807,27 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "4. Instrumentar — chirurgia mare"
       }
     ]
+  },
+  "17": {
+    "commit": "2522373d768687c942061824254104792cbe2e93",
+    "before": "a6b3c8f0ae240c93b3e0a929722a6cc491c2e6f7",
+    "sections": [
+      {
+        "id": "anexe",
+        "title": "Anexe"
+      },
+      {
+        "id": "istoric",
+        "title": "De unde am pornit și ce construim"
+      },
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      },
+      {
+        "id": "structura",
+        "title": "Structura organizațională a rețelei și fluxuri de escaladare"
+      }
+    ]
   }
 };
