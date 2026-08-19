@@ -981,5 +981,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "1. Introducere. Rolul Asistentului Medical"
       }
     ]
+  },
+  "26": {
+    "commit": "6f31d4ce9887e0ced35746e3a465dd4b63a2e83e",
+    "before": "69e9961f2f9f5b486d1973ce86a3beb47a63a7bf",
+    "sections": [
+      {
+        "id": "despre",
+        "title": "Despre acest manual cod: ASM-03"
+      }
+    ]
   }
 };

@@ -108,6 +108,16 @@ def main():
         print(f"Niciun commit găsit pentru {path} — abandonez.", file=sys.stderr)
         sys.exit(1)
 
+    # Mapările deja publicate sunt istorie imuabilă: le păstrăm ca atare și
+    # calculăm doar reviziile noi. Altfel, mesajele de commit care menționează
+    # mai multe numere de revizie (ex. „Asistenti (rev. 10) si Registratori
+    # (rev. 5)") pot fi re-atribuite greșit la o regenerare ulterioară.
+    existing_entries = {}
+    if output_path.exists():
+        existing_text = output_path.read_text(encoding="utf-8")
+        json_start = existing_text.index("=") + 1
+        existing_entries = json.loads(existing_text[json_start:].rstrip().rstrip(";"))
+
     rev_to_commit = {}
     for h in commit_hashes:
         message = git("log", "-1", "--format=%B", h)
@@ -118,11 +128,22 @@ def main():
         print("Nicio revizie identificată din mesajele de commit.", file=sys.stderr)
         sys.exit(1)
 
-    max_rev = max(rev_to_commit)
     entries = {}
     missing = []
 
+    existing_max = max((int(k) for k in existing_entries), default=0)
+    # Plafonul include și maparea existentă: o revizie poate fi prezentă acolo
+    # fără un commit propriu „rev. N" (ex. renumerotare făcută într-un merge
+    # commit, pe care `git log --follow` nu îl parcurge).
+    max_rev = max(max(rev_to_commit), existing_max)
+
     for rev in range(2, max_rev + 1):
+        if str(rev) in existing_entries:
+            entries[str(rev)] = existing_entries[str(rev)]
+            continue
+        if rev <= existing_max:
+            missing.append(rev)
+            continue
         commit = rev_to_commit.get(rev)
         if not commit:
             missing.append(rev)
