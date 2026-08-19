@@ -302,7 +302,7 @@ window.MEDICI_REVISION_MAP = {
       }
     ]
   },
-  "40": {
+  "41": {
     "commit": "4875023d47d538d28f340e634afd9ac4b2376151",
     "before": "81d4b1b013eafcdf1eb5623514f49d6b3d25653b",
     "sections": [
