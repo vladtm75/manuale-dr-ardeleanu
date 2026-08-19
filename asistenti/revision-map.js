@@ -929,5 +929,19 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "1. P0 — Programarea inițială"
       }
     ]
+  },
+  "20": {
+    "commit": "39e21dfd8aae54a116041543edc61539e9e25fbe",
+    "before": "51ccbc377920520cf4db6d44edc527bbd5b868d3",
+    "sections": [
+      {
+        "id": "cap-16-3",
+        "title": "3. Accesarea și pregătirea sistemului Medit"
+      },
+      {
+        "id": "cap-16-4",
+        "title": "4. Crearea cazului și înregistrarea pacientului"
+      }
+    ]
   }
 };
