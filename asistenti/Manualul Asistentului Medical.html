@@ -857,6 +857,22 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
   font-size:10px;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(255,255,255,.45);font-weight:500;margin-top:2px;
 }
+/* Index de protocoale pliabil (details/summary, fără JS) */
+details.proto-index > summary{list-style:none;cursor:pointer}
+details.proto-index > summary::-webkit-details-marker{display:none}
+details.proto-index:not([open]){padding-bottom:20px}
+details.proto-index:not([open]) > summary .pi-head{border-bottom:none;padding-bottom:0;margin-bottom:0}
+details.proto-index > summary:hover h4{color:var(--brand-yellow)}
+.pi-chevron{
+  flex:0 0 auto;width:24px;height:24px;border:1px solid rgba(255,255,255,.3);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--brand-yellow);background:rgba(255,255,255,.06);
+  transition:transform .18s;align-self:center;
+}
+.pi-chevron svg{width:11px;height:11px}
+details.proto-index[open] .pi-chevron{transform:rotate(180deg)}
+details.proto-index[open] .pi-hint-closed{display:none}
+details.proto-index:not([open]) .pi-hint-open{display:none}
 
 /* Consimțăminte — downloadable consent cards */
 .consents{
@@ -1909,13 +1925,21 @@ html{scroll-behavior:smooth}
     <p>Întregul proces se desfășoară cu respectarea strictă a procedurilor și protocoalelor interne, precum și a reglementărilor legale în vigoare privind siguranța și igiena în unitățile medicale. În plus, asistenții medicali sunt încurajați să participe activ la dezvoltarea lor profesională continuă, prin perfecționarea constantă a cunoștințelor și aplicarea celor mai bune practici în domeniu. Prin acest flux structurat și bine organizat, asistența medicală din clinicile noastre asigură un nivel ridicat de calitate și eficiență, contribuind la menținerea unei experiențe medicale optime pentru fiecare pacient.</p>
     <p>În calitate de asistent medical în stomatologia generală, <strong>rolul Asistentului Medical este de a sprijini activitatea medicului stomatolog și de a asigura pacienților o experiență confortabilă și profesionistă.</strong> Protocoalele de asistență medicală detaliază responsabilitățile asistentului și modul corect de desfășurare a activităților zilnice, punând accent pe comunicarea eficientă cu pacientul, respectarea riguroasă a normelor de igienă și siguranță, precum și pe pregătirea corespunzătoare a cabinetului stomatologic. Toate aceste reguli și standarde sunt esențiale pentru menținerea unui mediu medical sigur și eficient.</p>
 
-    <div class="proto-index">
+    <details class="proto-index">
+      <summary>
       <div class="pi-head">
         <div>
           <div class="pi-eyebrow">Index</div>
           <h4>Setul integral de protocoale &amp; proceduri</h4>
         </div>
-        <div class="pi-sub">Click pe orice cod pentru a sări la capitolul aferent</div>
+        <div class="pi-sub"><span class="pi-hint-closed">Apasă pentru a deschide indexul</span><span class="pi-hint-open">Click pe orice cod pentru a sări la capitolul aferent</span></div>
+        <span class="pi-chevron" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+      </div>
+      </summary>
+
+      <div class="pi-section">Fluxul Pacientului &amp; Onboarding</div>
+      <div class="proto-grid">
+        <a class="proto-card" href="#cap-2"><span class="pc-code">ONB · V18</span><span class="pc-name">Onboarding pacient — fluxul medico-legal P0–P2</span><span class="pc-cap">Cap. II</span></a>
       </div>
 
       <div class="pi-section">Protocoale Clinice</div>
@@ -1947,7 +1971,7 @@ html{scroll-behavior:smooth}
         <a class="proto-card" href="#cap-17"><span class="pc-code">ADC-DSD-02</span><span class="pc-name">Fotografii clinice</span><span class="pc-cap">Cap. XVII</span></a>
         <a class="proto-card" href="#cap-18"><span class="pc-code">ADC-AJT-01</span><span class="pc-name">Prim ajutor</span><span class="pc-cap">Cap. XVIII</span></a>
       </div>
-    </div>
+    </details>
 
     <h3 id="cap-1-2"><span class="num">2.</span>Comunicarea cu pacientul. Relația asistent medical – pacient</h3>
     <p>Comunicarea este acțiunea prin care un expeditor transmite o serie de informații perceptibile unui destinatar. Reprezintă cea mai importantă metodă prin care stabilim o legătură cu aproapele nostru.</p>
@@ -5425,12 +5449,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 24</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 25</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>25</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul I: indexul «Setul integral de protocoale &amp; proceduri» devine panou pliabil (implicit închis, în același stil cu biblioteca de consimțăminte de la rev. 23) și este actualizat: secțiune nouă «Fluxul Pacientului &amp; Onboarding» în capul indexului, cu cardul Onboarding pacient — fluxul medico-legal P0–P2 (Cap. II, V18); Curățenia (ADC-CUR-01, Cap. XX) figura deja ca procedură distinctă.</td></tr>
             <tr><td>24</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, iar separatorul de Parte (ex. „Partea II · Protocoale Clinice") de la 50px la 90px; primul titlu din document păstrează spațierea compactă. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>23</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul II, secțiunea 4: biblioteca „Formulare oficiale de consimțământ" (17 formulare) devine panou pliabil — implicit închisă, în pagină rămâne doar antetul cu titlul, badge-ul și indicația de deschidere; la click se deschide cu toate categoriile și cardurile intacte. Fără modificări de conținut — doar prezentarea (element details/summary nativ, fără JavaScript).</td></tr>
             <tr><td>22</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXI, secțiunea 3 (procedura materialelor video): adăugat linkul către exemplul video „așa da" (YouTube Shorts), în caseta cu modelul de deschidere/încheiere.</td></tr>
