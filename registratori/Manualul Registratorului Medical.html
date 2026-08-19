@@ -317,6 +317,22 @@ a:hover{border-bottom-color:var(--brand-primary)}
 }
 .hatnote strong{color:var(--brand-primary);font-style:normal}
 
+
+/* Cuprinsul de capitol pliabil — buton pe rândul de sub titlu */
+.hatnote[hidden]{display:none}
+.hatnote-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:26px;vertical-align:middle;
+  background:var(--brand-cream-warm);border:1px solid var(--rule);
+  cursor:pointer;color:var(--brand-primary);border-radius:4px;
+  transition:background .12s,color .12s,border-color .12s;padding:0;
+}
+.hatnote-toggle:hover,
+.hatnote-toggle[aria-expanded="true"]{background:var(--brand-primary);color:var(--brand-yellow);border-color:var(--brand-primary)}
+.hatnote-toggle svg{width:13px;height:13px;transition:transform .18s ease}
+.hatnote-toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
+.article h2 .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px}
+
 /* Chapter sub-TOC — canonical "Cuprins" list at the start of every chapter */
 .chapter-toc{
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1428,6 +1444,14 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 2 Importanța Funcției ============ -->
     <h2 id="cap-2">Importanța Funcției de Registrator Medical</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-2-1"><span class="n">1.</span>Relația cu Pacientul</a></li>
+        <li><a href="#cap-2-2"><span class="n">2.</span>Concluzie</a></li>
+      </ol>
+    </div>
+
     <p>Recepția reprezintă cartea de vizită a clinicii, fiind primul punct de contact între pacient și instituție. Modul în care personalul din recepție interacționează cu pacienții reflectă direct calitatea serviciilor oferite de clinică. Atitudinea, limbajul verbal și non-verbal, comportamentul și vestimentația registratorilor contribuie în mod esențial la formarea primei impresii a pacienților.</p>
     <p>Dincolo de simpla funcție de centru de informații, personalul de la recepție joacă un rol crucial în comunicarea imaginii și a valorilor brandului Dr. Ardeleanu. Printr-un protocol bine structurat de întâmpinare, recepția facilitează stabilirea unei relații solide între pacient și clinică, asigurându-se că fiecare interacțiune este pozitivă și memorabilă.</p>
     <p>Un limbaj formal, dar plin de interes și recunoștință, utilizat de la primul contact, transmite pacientului respectul și importanța pe care i le acordăm. Un mediu ambiant cald și prietenos, combinat cu un comportament dedicat și atent, sugerează personalizarea experienței pentru fiecare pacient în parte, pacientul percepe astfel că personalul recepției este acolo exclusiv pentru el.</p>
@@ -1442,6 +1466,22 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 3 Calitățile și Abilitățile ============ -->
     <h2 id="cap-3">Calitățile și Abilitățile Necesare pentru un Registrator Medical</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-3-1"><span class="n">1.</span>Empatie și Orientare către Pacient</a></li>
+        <li><a href="#cap-3-2"><span class="n">2.</span>Abilități de Comunicare</a></li>
+        <li><a href="#cap-3-3"><span class="n">3.</span>Atitudine Prietenoasă și Empatică</a></li>
+        <li><a href="#cap-3-4"><span class="n">4.</span>Răbdare și Calm</a></li>
+        <li><a href="#cap-3-5"><span class="n">5.</span>Aspect Profesional</a></li>
+        <li><a href="#cap-3-6"><span class="n">6.</span>Managementul Timpului, Multitasking</a></li>
+        <li><a href="#cap-3-7"><span class="n">7.</span>Lucrul în Echipa și Proactivitate</a></li>
+        <li><a href="#cap-3-8"><span class="n">8.</span>Cunoștințe de Contabilitate Primara și Utilizare a Calculatorului</a></li>
+        <li><a href="#cap-3-9"><span class="n">9.</span>Studii și Pregătire Profesională</a></li>
+        <li><a href="#cap-3-10"><span class="n">10.</span>Concluzie</a></li>
+      </ol>
+    </div>
+
     <p>Funcția de Registrator Medical în cadrul unei clinici dentare implică un set divers de calități și abilități esențiale pentru asigurarea unei experiențe pozitive pentru pacienți și pentru susținerea eficienței operaționale a clinicii.</p>
 
     <h3 id="cap-3-1">Empatie și Orientare către Pacient</h3>
@@ -1476,6 +1516,16 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 4 Programul de lucru ============ -->
     <h2 id="cap-4">Programul de lucru și Relația cu Șeful Direct</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-4-1"><span class="n">1.</span>Programul de lucru și Pontaje</a></li>
+        <li><a href="#cap-4-2"><span class="n">2.</span>Începerea programului:</a></li>
+        <li><a href="#cap-4-3"><span class="n">3.</span>Terminarea programului/turei:</a></li>
+        <li><a href="#cap-4-4"><span class="n">4.</span>Relația cu șeful direct - Coordonatorul Clinicii:</a></li>
+      </ol>
+    </div>
+
 
     <h3 id="cap-4-1">Programul de lucru și Pontaje</h3>
     <ul>
@@ -1521,6 +1571,23 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 5 Vânzări ============ -->
     <h2 id="cap-5">Responsabilități și activități legate de activitatea de vanzare</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-5-1"><span class="n">1.</span>Recomandări generale:</a></li>
+        <li><a href="#cap-5-2"><span class="n">2.</span>1. Confirmarea programarilor</a></li>
+        <li><a href="#cap-5-3"><span class="n">3.</span>2. Gestionarea leadurilor și conversia acestora în programari [KPI 1]</a></li>
+        <li><a href="#cap-5-4"><span class="n">4.</span>2. Reducerea Ratei Anulărilor/Neprezentarilor [KPI 2]</a></li>
+        <li><a href="#cap-5-5"><span class="n">5.</span>3. Creșterea Ratei de Succes a aducerii pacienților în clinică în procesul de Recall 180 [KPI 3]</a></li>
+        <li><a href="#cap-5-6"><span class="n">6.</span>4. Creșterea numărului de Recenzii de la pacienți [KPI 4]</a></li>
+        <li><a href="#cap-5-7"><span class="n">7.</span>Alte Obiective și responsabilități de Vanzari:</a></li>
+        <li><a href="#cap-5-8"><span class="n">8.</span>5. Creșterea Ratei de Succes a aducerii pacienților în clinică în procesul de Recall „La Mulți Ani”, cu acordare voucher</a></li>
+        <li><a href="#cap-5-9"><span class="n">9.</span>5. Creșterea Ratei de Programări Viitoare</a></li>
+        <li><a href="#cap-5-10"><span class="n">10.</span>6. Vanzari pe credit</a></li>
+        <li><a href="#cap-5-11"><span class="n">11.</span>7. Creșterea Valorii pe Termen Lung (LTV)</a></li>
+      </ol>
+    </div>
+
 
     <p><strong>Responsabilitate Generală de Vânzări:</strong> Oferă suport pacienților în vederea programării la diferite consultații și tratamente pentru satisfacția pacientului și creșterea vânzărilor clinicii. În cadrul procesului de comunicare și programare a pacienților Registratorul Medical este responsabil pentru contribuția la vânzările generale ale clinicii prin (i) contactarea leadurilor (pacienți potențiali/interesați de tratamentele clinicii)  si (ii) promovarea activă a tratamentelor mai avansate și mai complete către pacienți. Acest lucru include identificarea oportunităților de upselling pentru servicii precum pachetele de prevenție tip 3x1 sau 6x1, stomatologia estetică, aparatele dentare moderne sau tratamentele restaurative avansate.</p>
     <p>De asemenea registratorul medical trebuie să se documenteze înainte de a aborda pacienții îi să-și îmbunătățească permanent abilitățile de comunicare:</p>
@@ -1740,6 +1807,32 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 6 Operațional ============ -->
     <h2 id="cap-6">Responsabilități și activități legate de activitatea operațională</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-6-1"><span class="n">1.</span>1. Întâmpinarea pacienților</a></li>
+        <li><a href="#cap-6-2"><span class="n">2.</span>2. Gestionarea apelurilor telefonice și a corespondenței electronice</a></li>
+        <li><a href="#cap-6-3"><span class="n">3.</span>3. Administrarea corespondenței</a></li>
+        <li><a href="#cap-6-4"><span class="n">4.</span>4. Identificarea formală a pacienților și gestionarea CNP-ului</a></li>
+        <li><a href="#cap-6-5"><span class="n">5.</span>5. Gestionarea programărilor prin telefon (pre-onboarding, programarea telefonică înaintea primei vizite în clinică)</a></li>
+        <li><a href="#cap-6-6"><span class="n">6.</span>6. Gestionarea programărilor direct în clinica, - onboarding digital</a></li>
+        <li><a href="#cap-6-7"><span class="n">7.</span>7. Gestionarea Consimțămintelor Medicale</a></li>
+        <li><a href="#cap-6-8"><span class="n">8.</span>8. Gestionarea Instrucțiunilor Medicale Post-Tratament</a></li>
+        <li><a href="#cap-6-9"><span class="n">9.</span>9. Responsabilitățile de informare a pacientului în cadrul procedurii Radiologie/Imagistica si PACS ADC-PAC-01</a></li>
+        <li><a href="#cap-6-10"><span class="n">10.</span>10. Încasarea Plăților de la Pacienți</a></li>
+        <li><a href="#cap-6-11"><span class="n">11.</span>11. Încasarea Avansurilor de la Pacienți</a></li>
+        <li><a href="#cap-6-12"><span class="n">12.</span>12. Suport pentru întocmirea Documentelor de Creditare:</a></li>
+        <li><a href="#cap-6-13"><span class="n">13.</span>13. Încasarea în rate de la Pacienți</a></li>
+        <li><a href="#cap-6-14"><span class="n">14.</span>14. Emiterea Facturilor către Pacienți:</a></li>
+        <li><a href="#cap-6-15"><span class="n">15.</span>15. Emiterea Altor Documente Medicale în favoarea pacienților:</a></li>
+        <li><a href="#cap-6-16"><span class="n">16.</span>16. Reducerea Creanțelor Rămase de Încasat de la Pacienți:</a></li>
+        <li><a href="#cap-6-17"><span class="n">17.</span>17. Gestionarea Documentelor</a></li>
+        <li><a href="#cap-6-18"><span class="n">18.</span>18. Relaționare cu Laboratoarele de Tehnică Dentară</a></li>
+        <li><a href="#cap-6-19"><span class="n">19.</span>19. Menținerea unui ambient plăcut</a></li>
+        <li><a href="#cap-6-20"><span class="n">20.</span>20. Acordă suport colegilor din clinică</a></li>
+      </ol>
+    </div>
+
 
     <h3 id="cap-6-1">1. Întâmpinarea pacienților</h3>
     <p>Registratorul Medical întâmpină pacienții cu o atitudine caldă și prietenoasă, îi îndrumă către sală de așteptare sau cabinetul medical corespunzător.</p>
@@ -1966,6 +2059,18 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 7 Operațional-financiar ============ -->
     <h2 id="cap-7">Responsabilități și activități legate de activitatea operațional - financiară</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-7-1"><span class="n">1.</span>Încasare pacient:</a></li>
+        <li><a href="#cap-7-2"><span class="n">2.</span>Întocmește Registrul de Casă:</a></li>
+        <li><a href="#cap-7-3"><span class="n">3.</span>Realizează Operațiunile de Casierie:</a></li>
+        <li><a href="#cap-7-4"><span class="n">4.</span>Modalitate de a restituire pentru avansurile plătite:</a></li>
+        <li><a href="#cap-7-5"><span class="n">5.</span>Depune numerarul la bancă:</a></li>
+        <li><a href="#cap-7-6"><span class="n">6.</span>Întocmește și trimite Dosarul de Contabilitate Primara, la sediul central.</a></li>
+      </ol>
+    </div>
+
 
     <h3 id="cap-7-1">Încasare pacient:</h3>
     <ul>
@@ -2008,6 +2113,13 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 8 KPI ============ -->
     <h2 id="cap-8">Monitorizarea Indicatorilor cheie de performanță/ KPI-urilor</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-8-1"><span class="n">1.</span>Indicatorii cheie de performanță:</a></li>
+      </ol>
+    </div>
+
 
     <h3 id="cap-8-1">Indicatorii cheie de performanță:</h3>
     <ul>
@@ -2025,6 +2137,15 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
     <!-- ============ 9 Evaluarea performanței ============ -->
     <h2 id="cap-9">Evaluarea performanței Registratorului Medical</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-9-1"><span class="n">1.</span>Obiective cantitative:</a></li>
+        <li><a href="#cap-9-2"><span class="n">2.</span>Obiective calitative:</a></li>
+        <li><a href="#cap-9-3"><span class="n">3.</span>Fișa bonus lunar: [exemplu la nivel de clinică, echipa registratori medicali]</a></li>
+      </ol>
+    </div>
+
     <p>Calitatea activităților realizate se măsoară prin următorii indicatori de performanță:</p>
 
     <h3 id="cap-9-1">Obiective cantitative:</h3>
@@ -2064,12 +2185,13 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 6</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 7</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+        <tr><td>7</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista subcapitolelor (generată din titlurile reale ale capitolului). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>6</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole/secțiuni: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px (unde există), iar primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>5</td><td>18 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugată «Clauza standard a documentului controlat» — clauza cerută de Ediția V2.7 a Regulamentului Intern și de Procedura ADC-REG-01 (versiunea „În vigoare”, prevalența legii și a RI, semnificația etichetelor potrivit Art. 5 din RI).</td></tr>
         <tr data-rev="4"><td>4</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugat un preambul formal, cu patru secțiuni noi — scopul și obiectivele manualului, statutul manualului și ierarhia documentelor interne (Regulamentul Intern → Manualul Registratorului Medical → proceduri/instrucțiuni), legătura cu Regulamentul Intern și mecanismul de luare la cunoștință / acces prin ERP (Anexa nr. 2 la RI, format HTML/Wiki vs. PDF oficial).</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="4"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
@@ -2391,6 +2513,39 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
       const mainRow = document.querySelector(`tr[data-rev="${rev}"]`);
       if(mainRow) mainRow.scrollIntoView({behavior:'smooth', block:'center'});
     });
+  });
+})();
+</script>
+
+<script>
+/* Cuprinsul de capitol (hatnote de sub titlu) — pliabil, închis implicit */
+(function(){
+  document.querySelectorAll('.hatnote').forEach(function(note){
+    if(!note.querySelector('.chapter-toc')) return;
+    var h2 = note.previousElementSibling;
+    if(!h2 || h2.tagName !== 'H2') return;
+    if(!note.id) note.id = 'cuprins-' + (h2.id || 'cap-x');
+    note.setAttribute('hidden','');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hatnote-toggle';
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-controls', note.id);
+    btn.setAttribute('aria-label','Comută cuprinsul capitolului');
+    btn.title = 'Cuprinsul capitolului';
+    btn.innerHTML = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+    btn.addEventListener('click',function(){
+      var open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+      if(open){note.setAttribute('hidden','')} else {note.removeAttribute('hidden')}
+    });
+    var meta = h2.querySelector('.chapter-meta');
+    if(!meta){
+      meta = document.createElement('span');
+      meta.className = 'chapter-meta';
+      h2.appendChild(meta);
+    }
+    meta.appendChild(btn);
   });
 })();
 </script>
