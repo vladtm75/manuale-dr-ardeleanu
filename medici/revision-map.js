@@ -301,5 +301,35 @@ window.MEDICI_REVISION_MAP = {
         "title": "ICapitolul 1 — Operațional"
       }
     ]
+  },
+  "40": {
+    "commit": "6d014ef38b2748d3c25a47b5cf880df7379ca54c",
+    "before": "a593e30759b739dfab867b8790910fc38b057d2d",
+    "sections": [
+      {
+        "id": "cap-1-10",
+        "title": "2. 0Radiografia obligatorie§"
+      },
+      {
+        "id": "cap-1-11",
+        "title": "2. 1Acordul pacientului§"
+      },
+      {
+        "id": "cap-1-12",
+        "title": "2. 2Consimțămintele semnate în clinică§"
+      },
+      {
+        "id": "cap-1-14",
+        "title": "2. 4Prezentarea planului de tratament la P2§"
+      },
+      {
+        "id": "cap-1-18",
+        "title": "2. 8Sisteme informatice — SPSS și PACS§"
+      },
+      {
+        "id": "cap-1-9",
+        "title": "1. 9Prima interacțiune — recepția și documentele§"
+      }
+    ]
   }
 };
