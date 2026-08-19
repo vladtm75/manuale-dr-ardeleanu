@@ -90,6 +90,39 @@ treptat, la celelalte manuale (registratori, medici) pe măsură ce sunt aduse l
    `clear:both` pe elementul următor — nu ca imagini late pe toată coloana. Capturile de ecran
    desktop (ex. taburi SPS) rămân pe lățimea întreagă.
 
+## Repetiția intenționată — explicație vs punct de control (OBLIGATORIU)
+
+Decizie editorială stabilită de Vlad (19 august 2026, în urma analizei repetițiilor din capitolul
+de onboarding al Manualului Asistenților): manualele NU sunt optimizate pentru citire liniară,
+cap-coadă, ci pentru **citire pe etape, la punctul de utilizare** — cititorul deschide manualul
+direct la etapa în care se află (ex. P2, înainte de o vizită) și trebuie să găsească acolo tot ce
+are de verificat, fără să navigheze înapoi prin trimiteri de tip „vezi §4".
+
+1. **Explicația** completă a unei teme există O SINGURĂ DATĂ, în secțiunea ei de origine (ex., în
+   capitolul de onboarding al asistenților: identitatea la §2.2, termenul de nouă luni la §2.4,
+   API-ul la secțiunea 4).
+2. **Punctele de control** — recapitulările scurte din etapele ulterioare, casetele de tip
+   „porți" / „Regula critică" / „Regula finală", checklisturile și matricele de la finalul
+   capitolelor — repetă intenționat regulile critice. NU sunt redundanțe de eliminat: repetarea
+   regulilor cu miză mare (API la fiecare vizită, termenul de nouă luni, verificarea identității)
+   este o alegere pedagogică deliberată pentru un public non-academic, după modelul procedurilor
+   medicale și aviatice, care repetă intenționat regulile critice.
+3. **NU dedublica.** Dacă o editoare (sau o analiză proprie de tip „capitolul are repetiții")
+   propune eliminarea reluărilor, sintetizarea conținutului sau înlocuirea recapitulărilor cu
+   trimiteri interne, NU aplica modificarea: explică politicos distincția explicație / punct de
+   control de mai sus și transmite propunerea lui Vlad — doar el aprobă restructurări de acest
+   tip. (Precedent: propunerea Biancăi din 19 august 2026 pe capitolul de onboarding — analizată
+   punct cu punct și refuzată motivat; capitolul a rămas neschimbat.)
+4. **Prețul repetiției este sincronizarea.** Când se modifică o regulă critică, actualizează
+   explicația-sursă ȘI toate ecourile ei din același manual (recapitulările din etapele
+   ulterioare, casetele, checklisturile, matricele de documente) — caută textual regula în tot
+   fișierul (ex. „nouă luni", „API", „patru porți") înainte de a închide PR-ul. Un manual care se
+   contrazice între secțiuni e mai rău decât unul repetitiv.
+5. La conținut nou, reluările pot fi formulate asumat recapitulativ („Reamintim: la fiecare
+   vizită…") ca să fie vizibil care este textul-sursă și care este ecoul — dar fără a goli
+   recapitularea de conținut: ea trebuie să rămână suficientă pentru cititorul care nu sare
+   înapoi la explicație.
+
 ## Imagini și fotografii (permise editoarelor)
 
 Editoarele (Bianca, Loredana, Alexandra) pot adăuga fotografii/imagini în manualul lor, pe branch-ul lor,
