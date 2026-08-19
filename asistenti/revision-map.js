@@ -943,5 +943,23 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "4. Crearea cazului și înregistrarea pacientului"
       }
     ]
+  },
+  "21": {
+    "commit": "a4108baa9f79fd8a8e5df025145b20e53c518ca6",
+    "before": "a593e30759b739dfab867b8790910fc38b057d2d",
+    "sections": [
+      {
+        "id": "cap-21",
+        "title": "Capitolul XXI — Actualizat integral · august 2026Monitorizarea KPI și evaluarea performanței"
+      },
+      {
+        "id": "cap-21-2",
+        "title": "2. Asistentul Medical Șef — fișa de bonus lunar (KPI 1 · KPI 2 · KPI 3)"
+      },
+      {
+        "id": "cap-21-3",
+        "title": "3. Procedura materialelor video lunare (KPI 2)"
+      }
+    ]
   }
 };
