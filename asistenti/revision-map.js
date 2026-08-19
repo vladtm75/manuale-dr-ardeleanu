@@ -981,5 +981,43 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "1. Introducere. Rolul Asistentului Medical"
       }
     ]
+  },
+  "26": {
+    "commit": "6f31d4ce9887e0ced35746e3a465dd4b63a2e83e",
+    "before": "69e9961f2f9f5b486d1973ce86a3beb47a63a7bf",
+    "sections": [
+      {
+        "id": "despre",
+        "title": "Despre acest manual cod: ASM-03"
+      }
+    ]
+  },
+  "27": {
+    "commit": "7b3a3f1ae7bbbf1147aa609afe2254c72efa7a82",
+    "before": "12fc4c606af22c618093ebd019fd8d6077f6c1fb",
+    "sections": [
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
+  },
+  "28": {
+    "commit": "ef6574202543e0b289fdc949d5c1e3afc493f3b2",
+    "before": "f58cd4e3294b4e56d8b7920bfa170bd5e4bf0323",
+    "sections": [
+      {
+        "id": "cap-3",
+        "title": "Capitolul IIIProtocol medical de asistență în stomatologia generală ADC-STG-01"
+      },
+      {
+        "id": "cap-4",
+        "title": "Capitolul IVProtocol medical de asistență în endodonție ADC-END-01"
+      },
+      {
+        "id": "cap-7-2",
+        "title": "2. Reguli generale pentru buna desfășurare"
+      }
+    ]
   }
 };

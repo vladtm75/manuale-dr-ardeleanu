@@ -316,6 +316,20 @@ a:hover{border-bottom-color:var(--brand-primary)}
   margin:0 0 28px;border-radius:0 3px 3px 0;
 }
 .hatnote strong{color:var(--brand-primary);font-style:normal}
+.hatnote[hidden]{display:none}
+
+/* Toggle pentru Cuprinsul de capitol — pe rândul titlului, după eticheta de cod */
+.hatnote-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:26px;margin-left:10px;vertical-align:middle;
+  background:var(--brand-cream-warm);border:1px solid var(--rule);
+  cursor:pointer;color:var(--brand-primary);border-radius:4px;
+  transition:background .12s,color .12s,border-color .12s;padding:0;
+}
+.hatnote-toggle:hover,
+.hatnote-toggle[aria-expanded="true"]{background:var(--brand-primary);color:var(--brand-yellow);border-color:var(--brand-primary)}
+.hatnote-toggle svg{width:13px;height:13px;transition:transform .18s ease}
+.hatnote-toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
 
 /* Chapter sub-TOC — canonical "Cuprins" list at the start of every chapter */
 .chapter-toc{
@@ -1799,8 +1813,6 @@ html{scroll-behavior:smooth}
     <p>În cazul unei neconcordanțe între documentele interne, prevalează documentul superior în această ierarhie. În toate situațiile prevalează legea, normele profesionale obligatorii, siguranța pacientului și drepturile recunoscute salariatului prin contractul individual de muncă și legislația aplicabilă.</p>
     <p>Manualul și documentele sale subsecvente nu pot modifica prin ele însele salariul, timpul de muncă, concediile, celelalte drepturi contractuale sau procedurile disciplinare stabilite prin lege și prin Regulamentul Intern.</p>
 
-    <div class="callout note"><span class="label">Clauza standard a documentului controlat</span><p>«Acest manual este un document controlat, subordonat Regulamentului intern, și detaliază articolele RI indicate în fișa sa din Registrul online al documentelor interne. Se aplică exclusiv versiunea marcată „În vigoare” și comunicată destinatarului înaintea activității evaluate. În caz de neconcordanță prevalează legea, dreptul contractual aplicabil și Regulamentul intern. Etichetele [OBL], [CRIT], [OPR], [EVD], [KPI-P], [KPI-B] și [GHID], atunci când sunt utilizate, au semnificația prevăzută la Art. 5 din Regulamentul intern. Un KPI de bonus, un exemplu sau o recomandare nu constituie, prin ele însele, abatere disciplinară ori necorespundere profesională.»</p></div>
-
     <h4>Legătura cu Regulamentul Intern</h4>
     <p>Manualul Asistentului Medical transformă cerințele generale ale Regulamentului Intern în standarde concrete pentru activitatea de asistență medicală.</p>
     <p>Regulamentul Intern stabilește cadrul general privind organizarea activității, drepturile și obligațiile salariaților, sănătatea și securitatea în muncă, evaluarea profesională, disciplina, comunicarea documentelor și administrarea Registrului online.</p>
@@ -2548,14 +2560,6 @@ html{scroll-behavior:smooth}
 
     <p>Acest capitol stabilește atribuțiile, responsabilitățile și modul în care asistentul medical contribuie la buna desfășurare a actului medical în stomatologia generală, asigurând siguranța, confortul pacientului și standardele de calitate ale Clinicilor Dr. Ardeleanu.</p>
 
-    <div class="seealso">
-      <span class="lbl">Cuprins:</span>
-      <a href="#cap-3-1">1. Definiții și termeni</a>
-      <a href="#cap-3-2">2. Protocolul medicului</a>
-      <a href="#cap-3-3">3. Protocolul asistentei</a>
-      <a href="#cap-3-4">4. Concluzii</a>
-    </div>
-
     <h3 id="cap-3-1"><span class="num">1.</span>Definiții și termeni medicali</h3>
     <p>Asistentul medical trebuie să cunoască termenii medicali pentru a putea comunica eficient cu medicul în activitatea de asistență medicală. Mai jos sunt prezentați termenii și definițiile esențiale care trebuie cunoscute de către Asistentul Medical.</p>
 
@@ -2675,16 +2679,6 @@ html{scroll-behavior:smooth}
 
     <p>Acest capitol stabilește atribuțiile, responsabilitățile și modul în care asistentul medical contribuie la buna desfășurare a tratamentului endodontic în cabinetul stomatologic, asigurând siguranța și confortul pacientului.</p>
 
-    <div class="seealso">
-      <span class="lbl">Cuprins:</span>
-      <a href="#cap-4-1">1. Definiție</a>
-      <a href="#cap-4-2">2. Pregătirea cabinetului</a>
-      <a href="#cap-4-3">3. Primirea și instruirea pacientului</a>
-      <a href="#cap-4-4">4. Asistență în tratamentul endodontic</a>
-      <a href="#cap-4-5">5. Realizarea tratamentului (medic)</a>
-      <a href="#cap-4-6">6. Soluții de irigare</a>
-      <a href="#cap-4-7">7. Pregătire pacient următor · Concluzii</a>
-    </div>
 
     <h3 id="cap-4-1"><span class="num">1.</span>Definiție</h3>
     <p><strong>Endodonția</strong> este acea ramură de specialitate a medicinei dentare care se ocupă cu diagnosticarea, prevenirea și tratarea patologiei pulpare și a complicațiilor pe care aceasta le are la nivelul parodonțiului apical.</p>
@@ -3327,7 +3321,7 @@ html{scroll-behavior:smooth}
     <h3 id="cap-7-2"><span class="num">2.</span>Reguli generale pentru buna desfășurare</h3>
 
     <h4>2.1 Verificarea documentelor medicale</h4>
-    <figure class="dimg float-right">
+    <figure class="dimg">
       <img src="assets/manual-images/image46.png" alt="Consimțământ informat privind realizarea tratamentelor chirurgicale" loading="lazy">
       <figcaption><span class="fignum">FIG. VII·1</span>Model — Consimțământ informat privind realizarea tratamentelor chirurgicale. Documentul prin care pacientul își exprimă acordul informat pentru efectuarea intervențiilor chirurgicale, după ce a fost informat cu privire la procedură, riscuri și alternative.</figcaption>
     </figure>
@@ -5449,12 +5443,15 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 25</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 28</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>28</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolele III și IV: eliminate barele de navigare „Cuprins:" din interiorul capitolelor — dublau inutil cuprinsul de capitol și Cuprinsul lateral (barele „Vezi și:" cu trimiteri către alte capitole rămân). Capitolul VII: FIG. VII·1 (modelul de consimțământ chirurgical) trecută de la formatul mic, cu aliniere la dreapta, la lățimea întreagă a coloanei — documentul era ilizibil la dimensiunea redusă.</td></tr>
+            <tr><td>27</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol (caseta „Cuprins" de sub titlul fiecărui capitol) devine pliabil și este implicit închis — lista subcapitolelor dubla Cuprinsul lateral. Se deschide dintr-un buton-săgeată aflat pe rândul titlului de capitol, după eticheta de cod. Doar prezentare — fără modificări de conținut.</td></tr>
+            <tr><td>26</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Preambul, secțiunea „Statutul manualului și ierarhia documentelor interne": eliminată caseta „Clauza standard a documentului controlat" — conținutul ei era deja acoperit de paragrafele existente despre ierarhia documentelor și de precizarea privind KPI/exemple/recomandări din secțiunea „Legătura cu Regulamentul Intern".</td></tr>
             <tr><td>25</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul I: indexul «Setul integral de protocoale &amp; proceduri» devine panou pliabil (implicit închis, în același stil cu biblioteca de consimțăminte de la rev. 23) și este actualizat: secțiune nouă «Fluxul Pacientului &amp; Onboarding» în capul indexului, cu cardul Onboarding pacient — fluxul medico-legal P0–P2 (Cap. II, V18); Curățenia (ADC-CUR-01, Cap. XX) figura deja ca procedură distinctă.</td></tr>
             <tr><td>24</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, iar separatorul de Parte (ex. „Partea II · Protocoale Clinice") de la 50px la 90px; primul titlu din document păstrează spațierea compactă. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>23</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul II, secțiunea 4: biblioteca „Formulare oficiale de consimțământ" (17 formulare) devine panou pliabil — implicit închisă, în pagină rămâne doar antetul cu titlul, badge-ul și indicația de deschidere; la click se deschide cu toate categoriile și cardurile intacte. Fără modificări de conținut — doar prezentarea (element details/summary nativ, fără JavaScript).</td></tr>
@@ -5691,6 +5688,31 @@ html{scroll-behavior:smooth}
       },{rootMargin:'-10% 0px -80% 0px'});
       io.observe(el);
     });
+  });
+})();
+
+// Cuprinsul de capitol (hatnote de sub titlu) — pliabil, închis implicit
+(function(){
+  document.querySelectorAll('.hatnote').forEach(note=>{
+    if(!note.querySelector('.chapter-toc')) return;
+    const h2 = note.previousElementSibling;
+    if(!h2 || h2.tagName !== 'H2') return;
+    if(!note.id) note.id = 'cuprins-' + (h2.id || 'cap-x-' + Math.floor(Math.random()*1e6));
+    note.setAttribute('hidden','');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hatnote-toggle';
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-controls', note.id);
+    btn.setAttribute('aria-label','Comută cuprinsul capitolului');
+    btn.title = 'Cuprinsul capitolului';
+    btn.innerHTML = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+    btn.addEventListener('click',()=>{
+      const open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+      if(open){note.setAttribute('hidden','')} else {note.removeAttribute('hidden')}
+    });
+    h2.appendChild(btn);
   });
 })();
 </script>
