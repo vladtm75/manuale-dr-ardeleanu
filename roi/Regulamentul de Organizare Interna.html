@@ -2486,12 +2486,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ § Registru de modificări ============ -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 8</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 9</strong> · 20 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr><td>9</td><td>20 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări devine pliabil și este închis implicit — titlul primește butonul-săgeată de sub titlu (ca la cuprinsurile de capitol); registrul se deschide automat când pagina e accesată cu ancora #registru. Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>8</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Corecții de închidere ale Ediției V2.7 (execuția instrucțiunilor consemnate ca „rev. 6" a ediției; rândurile 6–7 ale prezentului Registru fuseseră deja consumate de revizii de prezentare): renumerotarea continuă a articolelor — fostul Art. 43^1 devine Art. 44, articolele 44–139 devin 45–140, cu actualizarea tuturor trimiterilor interne; restructurarea Art. 75 lit. j) cu teza fermă de sancționare a hărțuirii ca teză distinctă după enumerare; înlocuirea substantivului liber „KPI" (Art. 53, 62); sursele indicatorilor — [KPI-B] stabiliți de superiorul ierarhic competent, [KPI-P] întemeiate pe documentele din Registrul online (Art. 53 alin. (5) nou); localizarea Registrului online și confirmarea individuală a accesului (Art. 20, Anexele nr. 1–2); comasarea tezelor redundante din Art. 49 și Art. 36 alin. (2); corectarea câmpului „Aprobat de" de pe copertă. <a href="Corespondenta-numerotare-rev5-rev6.html">Tabela de corespondență a numerotării</a> este publicată în Registrul online ca document-punte.</td></tr>
         <tr><td>7</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista articolelor capitolului (generată din titlurile reale). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>6</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole/secțiuni: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px (unde există), iar primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td></tr>
@@ -2820,6 +2821,32 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     }
     meta.appendChild(btn);
   });
+})();
+</script>
+
+<script>
+/* Registrul de modificări — pliabil, închis implicit; se deschide la #registru */
+(function(){
+  var h2=document.getElementById('registru'); if(!h2) return;
+  var els=[], el=h2.nextElementSibling;
+  while(el && el.tagName!=='H2' && !/(^|\s)(seealso|chap-divider)(\s|$)/.test(el.className||'')){ els.push(el); el=el.nextElementSibling; }
+  if(!els.length) return;
+  var wrap=document.createElement('div'); wrap.id='registru-body';
+  h2.parentNode.insertBefore(wrap, els[0]);
+  for(var i=0;i<els.length;i++) wrap.appendChild(els[i]);
+  var btn=document.createElement('button');
+  btn.type='button'; btn.className='hatnote-toggle';
+  btn.setAttribute('aria-controls','registru-body');
+  btn.setAttribute('aria-label','Comută registrul de modificări');
+  btn.title='Registrul de modificări';
+  btn.innerHTML='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+  function setOpen(open){ btn.setAttribute('aria-expanded',open?'true':'false'); if(open){wrap.removeAttribute('hidden');} else {wrap.setAttribute('hidden','');} }
+  btn.addEventListener('click',function(){ setOpen(btn.getAttribute('aria-expanded')!=='true'); });
+  var meta=h2.querySelector('.chapter-meta');
+  if(!meta){ meta=document.createElement('span'); meta.className='chapter-meta'; h2.appendChild(meta); }
+  meta.appendChild(btn);
+  setOpen(location.hash==='#registru');
+  window.addEventListener('hashchange',function(){ if(location.hash==='#registru') setOpen(true); });
 })();
 </script>
 </body>

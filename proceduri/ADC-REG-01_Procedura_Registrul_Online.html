@@ -694,6 +694,21 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
   body.printing-form p{margin:5px 0}
   body.printing-form h2{margin-top:0}
 }
+
+/* Registrul de modificări pliabil — buton pe rândul de sub titlu */
+.hatnote-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:26px;vertical-align:middle;
+  background:var(--brand-cream-warm);border:1px solid var(--rule);
+  cursor:pointer;color:var(--brand-primary);border-radius:4px;
+  transition:background .12s,color .12s,border-color .12s;padding:0;
+}
+.hatnote-toggle:hover,
+.hatnote-toggle[aria-expanded="true"]{background:var(--brand-primary);color:var(--brand-yellow);border-color:var(--brand-primary)}
+.hatnote-toggle svg{width:13px;height:13px;transition:transform .18s ease}
+.hatnote-toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
+.article h2 .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px}
+
 </style>
 </head>
 <body>
@@ -1339,6 +1354,32 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
       headingEl.appendChild(btn);
     })(i, end, el);
   }
+})();
+</script>
+
+<script>
+/* Registrul de modificări — pliabil, închis implicit; se deschide la #registru */
+(function(){
+  var h2=document.getElementById('registru'); if(!h2) return;
+  var els=[], el=h2.nextElementSibling;
+  while(el && el.tagName!=='H2' && !/(^|\s)(seealso|chap-divider)(\s|$)/.test(el.className||'')){ els.push(el); el=el.nextElementSibling; }
+  if(!els.length) return;
+  var wrap=document.createElement('div'); wrap.id='registru-body';
+  h2.parentNode.insertBefore(wrap, els[0]);
+  for(var i=0;i<els.length;i++) wrap.appendChild(els[i]);
+  var btn=document.createElement('button');
+  btn.type='button'; btn.className='hatnote-toggle';
+  btn.setAttribute('aria-controls','registru-body');
+  btn.setAttribute('aria-label','Comută registrul de modificări');
+  btn.title='Registrul de modificări';
+  btn.innerHTML='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+  function setOpen(open){ btn.setAttribute('aria-expanded',open?'true':'false'); if(open){wrap.removeAttribute('hidden');} else {wrap.setAttribute('hidden','');} }
+  btn.addEventListener('click',function(){ setOpen(btn.getAttribute('aria-expanded')!=='true'); });
+  var meta=h2.querySelector('.chapter-meta');
+  if(!meta){ meta=document.createElement('span'); meta.className='chapter-meta'; h2.appendChild(meta); }
+  meta.appendChild(btn);
+  setOpen(location.hash==='#registru');
+  window.addEventListener('hashchange',function(){ if(location.hash==='#registru') setOpen(true); });
 })();
 </script>
 </body>
