@@ -1019,5 +1019,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "2. Reguli generale pentru buna desfășurare"
       }
     ]
+  },
+  "29": {
+    "commit": "31b8b962af4de087a86927b99c52efabf6a10871",
+    "before": "34a543e4b716e727c59c1252c2964ea3e5d163a2",
+    "sections": [
+      {
+        "id": "cap-2-api",
+        "title": "4. API — Acordul Pacientului Informat"
+      }
+    ]
   }
 };
