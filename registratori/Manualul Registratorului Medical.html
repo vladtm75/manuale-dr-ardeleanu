@@ -352,12 +352,13 @@ a:hover{border-bottom-color:var(--brand-primary)}
   font-family:'Playfair Display',serif;
   font-weight:800;color:var(--ink);
   font-size:32px;line-height:1.2;
-  margin:48px 0 8px;
+  margin:84px 0 8px;
   padding-bottom:10px;
   border-bottom:2px solid var(--rule);
   letter-spacing:-.005em;
   scroll-margin-top:78px;
 }
+.article h2:first-of-type{margin-top:32px}
 .article h2 .chapter-num{
   display:block;
   font-family:'Poppins',sans-serif;
@@ -557,7 +558,7 @@ a:hover{border-bottom-color:var(--brand-primary)}
 /* Chapter divider */
 .chap-divider{
   display:flex;align-items:center;gap:14px;
-  margin:50px 0 24px;
+  margin:90px 0 24px;
   font-size:10px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--brand-amber);font-weight:600;
 }
@@ -2063,12 +2064,13 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 5</strong> · 18 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 6</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+        <tr><td>6</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole/secțiuni: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px (unde există), iar primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>5</td><td>18 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugată «Clauza standard a documentului controlat» — clauza cerută de Ediția V2.7 a Regulamentului Intern și de Procedura ADC-REG-01 (versiunea „În vigoare”, prevalența legii și a RI, semnificația etichetelor potrivit Art. 5 din RI).</td></tr>
         <tr data-rev="4"><td>4</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": adăugat un preambul formal, cu patru secțiuni noi — scopul și obiectivele manualului, statutul manualului și ierarhia documentelor interne (Regulamentul Intern → Manualul Registratorului Medical → proceduri/instrucțiuni), legătura cu Regulamentul Intern și mecanismul de luare la cunoștință / acces prin ERP (Anexa nr. 2 la RI, format HTML/Wiki vs. PDF oficial).</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="4"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
         <tr class="rev-old" data-rev-old="4" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 4</span><button type="button" class="rev-old-close" data-rev-close="4">✕ Închide</button></div><div class="rev-old-content" data-rev-body="4"></div></div></td></tr>
