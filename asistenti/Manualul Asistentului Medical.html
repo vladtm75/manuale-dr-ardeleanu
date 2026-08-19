@@ -952,6 +952,22 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
   display:flex;align-items:center;gap:10px;
 }
 .csn-foot strong{color:var(--brand-primary);font-style:normal;font-weight:600}
+/* Bibliotecă de consimțăminte pliabilă (details/summary, fără JS) */
+details.consents > summary{list-style:none;cursor:pointer}
+details.consents > summary::-webkit-details-marker{display:none}
+details.consents:not([open]){padding-bottom:20px}
+details.consents:not([open]) > summary .csn-head{border-bottom:none;padding-bottom:0;margin-bottom:0}
+details.consents > summary:hover h4{color:var(--brand-primary)}
+.csn-chevron{
+  flex:0 0 auto;width:24px;height:24px;border:1px solid var(--rule);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--brand-primary);background:var(--brand-cream);
+  transition:transform .18s;align-self:center;
+}
+.csn-chevron svg{width:11px;height:11px}
+details.consents[open] .csn-chevron{transform:rotate(180deg)}
+details.consents[open] .csn-hint-closed{display:none}
+details.consents:not([open]) .csn-hint-open{display:none}
 
 /* Inline document reference (single download row) */
 .docref{
@@ -2274,7 +2290,8 @@ html{scroll-behavior:smooth}
     <p><strong>Arhivarea.</strong> După semnare, asistenta predă originalul pe hârtie recepției. Recepția îl arhivează în Biblioraftul de Consimțăminte, păstrat în biroul managerului sau în spațiul confidențial desemnat. Varianta digitală rămâne în dosarul pacientului. Arhivarea corectă asigură protecția datelor pacientului, accesul controlat la documente, trasabilitatea actului medical, conformitatea legală și prevenirea pierderii documentelor.</p>
 
 
-<div class="consents">
+<details class="consents">
+      <summary>
       <div class="csn-head">
         <div>
           <div class="csn-eyebrow">Bibliotecă · Procedura de Onboarding V18</div>
@@ -2282,9 +2299,12 @@ html{scroll-behavior:smooth}
         </div>
         <div class="csn-sub">
           <span class="badge">17 formulare</span>
-          <span>Click pe orice card pentru a descărca formularul oficial</span>
+          <span class="csn-hint-closed">Apasă pentru a deschide biblioteca</span>
+          <span class="csn-hint-open">Click pe orice card pentru a descărca formularul oficial</span>
         </div>
+        <span class="csn-chevron" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
       </div>
+      </summary>
 
       <div class="csn-cat">Chirurgie &amp; Implantologie <span class="count">4</span></div>
       <div class="csn-grid">
@@ -2402,7 +2422,7 @@ html{scroll-behavior:smooth}
       <div class="csn-foot">
         <strong>⚠ Protecție medico-legală.</strong> Documentele marcate ca <strong>olograf</strong> în tabelul de la 4.6 se semnează pe hârtie și se arhivează în Biblioraftul de Consimțăminte al clinicii; restul se semnează digital. Toate sunt verificate periodic în controlul intern de calitate.
       </div>
-    </div>
+    </details>
 
     <h3 id="cap-2-rx"><span class="num">8.</span>RX și CBCT — comunicare și trasabilitate</h3>
     <p>Asistenta care efectuează investigația, în limitele competenței și organizării clinicii, nu este trecută pe formularul investigației. Tocmai de aceea, numele și prenumele asistentei care a realizat investigația se înscriu obligatoriu în câmpul „Observații” din SPS. Această înregistrare asigură trasabilitatea și permite echipei să știe cine a realizat etapa tehnică.</p>
@@ -5404,12 +5424,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 22</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 23</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>23</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul II, secțiunea 4: biblioteca „Formulare oficiale de consimțământ" (17 formulare) devine panou pliabil — implicit închisă, în pagină rămâne doar antetul cu titlul, badge-ul și indicația de deschidere; la click se deschide cu toate categoriile și cardurile intacte. Fără modificări de conținut — doar prezentarea (element details/summary nativ, fără JavaScript).</td></tr>
             <tr><td>22</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXI, secțiunea 3 (procedura materialelor video): adăugat linkul către exemplul video „așa da" (YouTube Shorts), în caseta cu modelul de deschidere/încheiere.</td></tr>
             <tr><td>21</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXI: subcapitol nou 3 „Procedura materialelor video lunare (KPI 2)" — integrarea procedurii de lucru a Asistentului Medical Șef privind realizarea materialelor video: ținta de patru clipuri pe clinică pe lună (câte unul trimis în fiecare luni, prin WeTransfer), ritmul săptămânal și ședința de direcție din săptămâna a treia cu managerul de marketing, structura conținutului (prezentare, temă pe radiografie, explicație ca pentru pacient, call to action) cu modelul de deschidere/încheiere, tabelul standardelor obligatorii de filmare (durată, format 9:16, ținută, cadru, imagine și sunet, radiografie fără date de pacient) și regula de eligibilitate (numai materialele validate de Marketing se contorizează la KPI 2). Detaliile financiare rămân confidențiale, conform casetei din secțiunea 2. Trimitere nouă din paragraful KPI 2 către procedură; cuprinsul capitolului și Cuprinsul lateral actualizate.</td></tr>
             <tr><td>20</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XVI, secțiunea 3: FIG. XVI·3 (statusul Connected în Medit Link) micșorată și integrată în fluxul textului, cu aliniere la dreapta și text-wrap — în același stil cu celelalte figuri din capitol. Fără modificări de text.</td></tr>
