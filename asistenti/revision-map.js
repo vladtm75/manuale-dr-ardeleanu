@@ -1079,5 +1079,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
       }
     ]
+  },
+  "33": {
+    "commit": "e4f91c5843fb996b7bf6e28951b0c1ebbefc6000",
+    "before": "68ff7773ede7297c2bfaed6c4cfedd2bf5eb4010",
+    "sections": [
+      {
+        "id": "bibliografie",
+        "title": "Legislație aplicabilă"
+      }
+    ]
   }
 };
