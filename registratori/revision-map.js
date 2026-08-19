@@ -21,5 +21,53 @@ window.REGISTRATORI_REVISION_MAP = {
         "title": "Despre acest manual cod: REC-01"
       }
     ]
+  },
+  "5": {
+    "commit": "98bfa9e203df13e0d27912be58a5cfc791679395",
+    "before": "4f38c55521495e05fb5b99d6f5b6550d9cc5cc73",
+    "sections": [
+      {
+        "id": "despre",
+        "title": "Despre acest manual cod: REC-01"
+      }
+    ]
+  },
+  "7": {
+    "commit": "3de6b905b5acd009cbc6d95b925dbf019cbde959",
+    "before": "a421a7472cf6d5fada4b2c449a0edb28d3168cd8",
+    "sections": [
+      {
+        "id": "cap-2",
+        "title": "Importanța Funcției de Registrator Medical"
+      },
+      {
+        "id": "cap-3",
+        "title": "Calitățile și Abilitățile Necesare pentru un Registrator Medical"
+      },
+      {
+        "id": "cap-4",
+        "title": "Programul de lucru și Relația cu Șeful Direct"
+      },
+      {
+        "id": "cap-5",
+        "title": "Responsabilități și activități legate de activitatea de vanzare"
+      },
+      {
+        "id": "cap-6",
+        "title": "Responsabilități și activități legate de activitatea operațională"
+      },
+      {
+        "id": "cap-7",
+        "title": "Responsabilități și activități legate de activitatea operațional - financiară"
+      },
+      {
+        "id": "cap-8",
+        "title": "Monitorizarea Indicatorilor cheie de performanță/ KPI-urilor"
+      },
+      {
+        "id": "cap-9",
+        "title": "Evaluarea performanței Registratorului Medical"
+      }
+    ]
   }
 };
