@@ -1089,5 +1089,19 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Legislație aplicabilă"
       }
     ]
+  },
+  "34": {
+    "commit": "3c7fff7a3456e01538bbcfb8e35c88a58d512c2c",
+    "before": "9921d9bf2bddf5d15f5cd718f63cb69744299597",
+    "sections": [
+      {
+        "id": "cap-0",
+        "title": "Capitolul 0Cadrul general al rețelei"
+      },
+      {
+        "id": "despre",
+        "title": "Despre acest manual cod: ASM-03"
+      }
+    ]
   }
 };
