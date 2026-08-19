@@ -1145,5 +1145,27 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
       }
     ]
+  },
+  "36": {
+    "commit": "adb11ddded48c2eec3f6ed29dcb2719cb6159200",
+    "before": "6bdb716131885659e778a11f5cf3d13103e55bff",
+    "sections": [
+      {
+        "id": "cap-22",
+        "title": "Capitolul XXIIFișele de post — Asistent Medical Generalist și Asistent Medical Șef"
+      },
+      {
+        "id": "cap-22-1",
+        "title": "1. Fișa de post — Asistent Medical Generalist ADC-FP-ASM-02 · Ediția a II-a (2026)"
+      },
+      {
+        "id": "cap-22-2",
+        "title": "2. Fișa de post — Asistent Medical Șef ADC-FP-ASS-01 · Ediția I (2026)"
+      },
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
   }
 };
