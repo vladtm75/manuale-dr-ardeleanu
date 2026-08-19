@@ -1062,6 +1062,11 @@ details.consents:not([open]) .csn-hint-open{display:none}
   width:14px;height:14px;color:var(--brand-primary);
 }
 .docref:hover .docref-action{color:var(--brand-primary)}
+/* Varianta „în pregătire" — document anunțat, PDF-ul nu e încă disponibil (fără link) */
+.docref.pending{cursor:default}
+.docref.pending:hover{background:var(--paper-pure);border-left-color:var(--brand-amber);transform:none}
+.docref.pending .docref-action{color:var(--ink-mute)}
+.docref.pending .docref-action svg{color:var(--ink-mute)}
 /* Varianta compactă — cardul curge în coloana de text, pe lângă o figură flotantă (fără clear) */
 .docref.compact{padding:10px 14px;margin:12px 0;gap:12px}
 .docref.compact .docref-icon{width:30px;height:38px;padding-bottom:4px}
@@ -3896,6 +3901,18 @@ html{scroll-behavior:smooth}
     <p>Fișa consemnează, în primul rând, <strong>data și ora sterilizării</strong> — notarea precisă a momentului în care a fost efectuat procesul de sterilizare — și <strong>identificarea autoclavei</strong>, adică numărul și tipul autoclavei utilizate pentru sterilizare. Se descrie apoi <strong>conținutul și numărul obiectelor sterilizate</strong>, printr-o descriere detaliată a instrumentarului și materialelor supuse sterilizării, precum și <strong>parametrii de sterilizare</strong>: temperatura, presiunea și durata fiecărui ciclu de sterilizare.</p>
     <p>Fișa mai cuprinde <strong>indicatorii fizico-chimici și biologici</strong> — rezultatele indicatorilor care atestă eficiența procesului de sterilizare — și <strong>identificarea persoanei responsabile</strong>, cu numele și semnătura persoanei care a realizat și verificat procesul de sterilizare. La final se trec <strong>observațiile</strong>: orice comentarii sau note suplimentare legate de procesul de sterilizare (de ex. anomalii detectate, repetări, condiții speciale).</p>
 
+    <!-- TODO: când Vlad furnizează PDF-ul, salvează-l în assets/onboarding-docs/ sau assets/,
+         transformă div-ul în <a class="docref"> cu href + download și schimbă textul acțiunii în „Descarcă PDF". -->
+    <div class="docref pending">
+      <div class="docref-icon"><span class="ext">PDF</span></div>
+      <div class="docref-meta">
+        <span class="docref-code">ADC-STE-01</span>
+        <div class="docref-name">Fișa de trasabilitate sterilizare</div>
+        <div class="docref-desc">Formular tipizat folosit în lipsa metodei automatizate de documentare SPSS — se completează pentru fiecare ciclu de sterilizare documentat manual.</div>
+      </div>
+      <div class="docref-action"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 1.5"/></svg>PDF în pregătire</div>
+    </div>
+
     <h4>5.5 Registrul de Sterilizare — document oficial obligatoriu</h4>
     <p>Registrul de Sterilizare este un <strong>document oficial cerut de legislație</strong>, care se completează manual în camera de sterilizare. Spre deosebire de Fișa de Trasabilitate Manuală (folosită doar ca rezervă SPSS), Registrul este obligatoriu permanent, în paralel cu sistemul digital.</p>
 
@@ -3917,6 +3934,18 @@ html{scroll-behavior:smooth}
       <img src="assets/manual-images/image7.jpg" alt="Registrul de Sterilizare cu martori termici Tip 5 și Tip Bandă și testul Bowie Dick" loading="lazy">
       <figcaption><span class="fignum">FIG. XI·d</span>Registrul de Sterilizare cu cei doi martori termici — <em>Tip 5 (4 romburi)</em> capsat în stânga și <em>Tip Bandă</em> lipit în dreapta dreptul fiecărei șarje — plus testul Bowie&amp;Dick. Dublu control de sterilizare.</figcaption>
     </figure>
+
+    <!-- TODO: când Vlad furnizează PDF-ul, salvează-l în assets/onboarding-docs/ sau assets/,
+         transformă div-ul în <a class="docref"> cu href + download și schimbă textul acțiunii în „Descarcă PDF". -->
+    <div class="docref pending">
+      <div class="docref-icon"><span class="ext">PDF</span></div>
+      <div class="docref-meta">
+        <span class="docref-code">ADC-STE-01</span>
+        <div class="docref-name">Registrul de Sterilizare</div>
+        <div class="docref-desc">Model al documentului oficial cerut de legislație — se completează manual în camera de sterilizare, în paralel cu trasabilitatea digitală SPSS.</div>
+      </div>
+      <div class="docref-action"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 1.5"/></svg>PDF în pregătire</div>
+    </div>
 
     <h3 id="cap-11-6"><span class="num">6.</span>Verificarea autoclavului — Testul Vacuum</h3>
     <p><strong>Scop:</strong> Verificarea etanșeității camerei de sterilizare și a eficienței sistemului de vidare, prin detectarea eventualelor pierderi de aer.</p>
@@ -5425,25 +5454,6 @@ html{scroll-behavior:smooth}
       </ol>
     </div>
 
-    <h2 id="anexe">Anexe</h2>
-
-    <h3>A.1 Fișa de evaluare lunară — Departament Medical</h3>
-    <p>Document digital disponibil în ERP (<code>erp.clinicile-ardeleanu.ro</code>). Completată lunar de Departamentul Medical, evaluează componenta QA medical a performanței asistentului. Pondere în evaluarea totală: 30%.</p>
-
-    <h3>A.2 Fișa de evaluare lunară — Departament Operațional</h3>
-    <p>Document digital disponibil în ERP. Completată lunar de Departamentul Operațional, evaluează componenta QA operațional. Pondere în evaluarea totală: 50%.</p>
-
-    <h3>A.3 Fișa de trasabilitate sterilizare</h3>
-    <p>Document utilizat în lipsa metodei automatizate de documentare SPSS. Conține: data și ora sterilizării, identificarea autoclavei, conținutul și numărul obiectelor sterilizate, parametrii de sterilizare, indicatorii fizico-chimici și biologici, numele și semnătura persoanei responsabile.</p>
-
-    <h3>A.4 Registrul de Sterilizare</h3>
-    <p>Document oficial, cerut de legislație, completat manual în camera de sterilizare. Conține: data și numărul aparatului, conținutul șarjei, numărul șarjei, parametrii, martorii termici (Tip 5 cu romburi și Tip bandă), rezultatele testelor Bowie&amp;Dick, semnătura persoanei responsabile.</p>
-
-    <div class="callout brand" style="margin-top:42px">
-      <div class="label">Acces digital</div>
-      <p style="margin:0">Toate procedurile sunt disponibile în format electronic în ERP: <a href="https://erp.clinicile-ardeleanu.ro/auth.php" style="color:#fff;border-bottom-color:rgba(255,255,255,.4)">erp.clinicile-ardeleanu.ro</a>. Procedurile se revizuiesc ori de câte ori este necesar în urma schimbărilor legislative sau tehnice din organizația Dr. Ardeleanu.</p>
-    </div>
-
     <!-- ============ §2 (mutat) — Noutățile Ediției 2026 sunt acum în Registrul de modificări ============ -->
 
 
@@ -5452,12 +5462,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 29</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 30</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>30</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminat capitolul „Anexe" de la finalul manualului: A.1 și A.2 (fișele de evaluare lunară — Departament Medical/Operațional) scoase complet, iar A.3 (Fișa de trasabilitate sterilizare) și A.4 (Registrul de Sterilizare) mutate în Capitolul XI, subcapitolele 5.4 și 5.5 — care descriau deja integral cele două documente — sub forma unor carduri de descărcare PDF, marcate „PDF în pregătire" până la furnizarea modelelor. Caseta „Acces digital" (ERP) a plecat odată cu capitolul.</td></tr>
             <tr><td>29</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul II, secțiunea API: cardul de descărcare ADC-ONB-03 (Acordul Pacientului Informat) primește o variantă compactă și curge acum în coloana de text, pe același rând cu FIG. II·TEL, în loc să coboare sub fotografie — dispare golul vizual. Tabelul consimțămintelor speciale (olograf/digital) restrâns: rânduri mai dense, font ușor redus, coloanele de bifă mai înguste. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>28</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolele III și IV: eliminate barele de navigare „Cuprins:" din interiorul capitolelor — dublau inutil cuprinsul de capitol și Cuprinsul lateral (barele „Vezi și:" cu trimiteri către alte capitole rămân). Capitolul VII: FIG. VII·1 (modelul de consimțământ chirurgical) trecută de la formatul mic, cu aliniere la dreapta, la lățimea întreagă a coloanei — documentul era ilizibil la dimensiunea redusă.</td></tr>
             <tr><td>27</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol (caseta „Cuprins" de sub titlul fiecărui capitol) devine pliabil și este implicit închis — lista subcapitolelor dubla Cuprinsul lateral. Se deschide dintr-un buton-săgeată aflat pe rândul titlului de capitol, după eticheta de cod. Doar prezentare — fără modificări de conținut.</td></tr>

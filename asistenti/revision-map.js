@@ -1029,5 +1029,23 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "4. API — Acordul Pacientului Informat"
       }
     ]
+  },
+  "30": {
+    "commit": "ad390209c8afde9595c49adfc9d7a37e7afee022",
+    "before": "6ca3eb7bee77775e37288d8476eab217cf035586",
+    "sections": [
+      {
+        "id": "anexe",
+        "title": "Anexe"
+      },
+      {
+        "id": "bibliografie",
+        "title": "Documente de referință și legislație aplicabilă"
+      },
+      {
+        "id": "cap-11-5",
+        "title": "5. Procedura de sterilizare prin autoclavare. Trasabilitate SPSS"
+      }
+    ]
   }
 };
