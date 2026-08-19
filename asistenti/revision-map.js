@@ -973,12 +973,12 @@ window.ASISTENTI_REVISION_MAP = {
     ]
   },
   "23": {
-    "commit": "9eee2d23929207b49c5d5af7091ee1aaa1a843d7",
-    "before": "2ab0862477f7b466e3c9283431dfd442b05ec412",
+    "commit": "620eef64ccbe9ef8fbfc199bc52469c5b3092c2c",
+    "before": "1c2d5ba77a5f9588f27fffd21599140c8dd3873d",
     "sections": [
       {
-        "id": "cap-2-arhiva",
-        "title": "7. Consimțămintele specifice și arhivarea"
+        "id": "cap-1-1",
+        "title": "1. Introducere. Rolul Asistentului Medical"
       }
     ]
   }
