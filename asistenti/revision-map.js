@@ -919,5 +919,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
       }
     ]
+  },
+  "19": {
+    "commit": "132862f4ae47cc0db2045878341281b6559ea82d",
+    "before": "5d6c98e2583511f0c6a51fd1bc418b2950786fe1",
+    "sections": [
+      {
+        "id": "cap-2-p0",
+        "title": "1. P0 — Programarea inițială"
+      }
+    ]
   }
 };
