@@ -1047,5 +1047,27 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "5. Procedura de sterilizare prin autoclavare. Trasabilitate SPSS"
       }
     ]
+  },
+  "31": {
+    "commit": "e21141329ab714d28031f8f4a76b58f8e5b53e59",
+    "before": "5367c99890a27223e8844aaf1ba61d00aef22084",
+    "sections": [
+      {
+        "id": "bibliografie",
+        "title": "Documente de referință și legislație aplicabilă"
+      },
+      {
+        "id": "cap-22-7",
+        "title": "7. Dispoziții finale"
+      },
+      {
+        "id": "cap-5-4",
+        "title": "4. Manopere ortodontice — pregătirea materialelor"
+      },
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
   }
 };

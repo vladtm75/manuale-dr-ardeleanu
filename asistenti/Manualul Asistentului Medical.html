@@ -562,6 +562,7 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 .deflist{
   background:var(--paper-pure);border:1px solid var(--rule);border-radius:4px;
   padding:6px 0;margin:18px 0;
+  display:grid;grid-template-columns:1fr 1fr;column-gap:8px;align-items:stretch;
 }
 .deflist dt{
   font-family:'Poppins',sans-serif;font-weight:600;
@@ -571,9 +572,15 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 .deflist dd{
   margin:0;padding:0 18px 12px;
   font-size:14px;color:var(--ink-soft);line-height:1.55;
-  border-bottom:1px solid var(--rule-soft);
 }
-.deflist > div:last-child dd{border-bottom:none}
+.deflist > div{border-bottom:1px solid var(--rule-soft)}
+.deflist > div:last-child,
+.deflist > div:nth-last-child(2):nth-child(odd){border-bottom:none}
+@media(max-width:680px){
+  .deflist{grid-template-columns:1fr}
+  .deflist > div:nth-last-child(2):nth-child(odd){border-bottom:1px solid var(--rule-soft)}
+  .deflist > div:last-child{border-bottom:none}
+}
 
 /* Tables */
 .article table{
@@ -1776,9 +1783,9 @@ html{scroll-behavior:smooth}
     </div>
 
     <div class="group">
-      <div class="group-label">Anexe</div>
+      <div class="group-label">Referințe</div>
       <ol>
-        <li><a href="#bibliografie"><span class="num">§</span>Documente de referință</a></li>
+        <li><a href="#bibliografie"><span class="num">§</span>Legislație aplicabilă</a></li>
         <li><a href="#registru"><span class="num">§</span>Registru de modificări</a></li>
       </ol>
     </div>
@@ -3061,7 +3068,7 @@ html{scroll-behavior:smooth}
 
     <h4 class="ort-h4" id="cap-5-4-8"><span class="n">4.8</span>Demontarea aparatului ortodontic</h4>
 
-    <figure class="dimg float-right">
+    <figure class="dimg">
       <img src="assets/manual-images/image45.jpg" alt="Instrumentar pentru demontarea aparatului ortodontic" loading="lazy">
       <figcaption><span class="fignum">FIG. V·1</span>Instrumentar pentru demontare — clește, freză sferică, piatră Arkansas, gumă de finisare și kit profilaxie.</figcaption>
     </figure>
@@ -5427,11 +5434,11 @@ html{scroll-behavior:smooth}
     <!-- =================================================================== -->
     <!-- ====================  BIBLIOGRAFIE  ============================= -->
     <!-- =================================================================== -->
-    <div class="chap-divider">Anexe</div>
+    <div class="chap-divider">Referințe</div>
 
-    <h2 id="bibliografie">Documente de referință și legislație aplicabilă</h2>
+    <h2 id="bibliografie">Legislație aplicabilă</h2>
 
-    <p>Manualul Activităților de Asistență Medicală se elaborează cu respectarea legislației și standardelor în vigoare. Lista de mai jos cuprinde principalele documente de referință utilizate transversal în cele 22 de capitole.</p>
+    <p>Manualul Activităților de Asistență Medicală se elaborează cu respectarea legislației și standardelor în vigoare. Lista de mai jos cuprinde principalele acte normative și standarde utilizate transversal în cele 22 de capitole.</p>
 
     <div class="refs">
       <ol>
@@ -5462,12 +5469,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 30</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 31</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>31</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Trei ajustări: FIG. V·1 (instrumentarul de demontare ortodontică, Cap. V 4.8) trecută de la formatul mic flotant la lățimea întreagă a coloanei; listele de definiții (casetele „Definiții" din capitolele de proceduri) așezate pe două coloane pe desktop — pe mobil rămân pe o coloană; secțiunea finală „Documente de referință și legislație aplicabilă" redenumită „Legislație aplicabilă" (după eliminarea Anexelor la rev. 30), cu actualizarea trimiterilor din Cuprins și din „Vezi și"; separatorul de secțiune „Anexe" și grupul corespunzător din Cuprinsul lateral redenumite „Referințe".</td></tr>
             <tr><td>30</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminat capitolul „Anexe" de la finalul manualului: A.1 și A.2 (fișele de evaluare lunară — Departament Medical/Operațional) scoase complet, iar A.3 (Fișa de trasabilitate sterilizare) și A.4 (Registrul de Sterilizare) mutate în Capitolul XI, subcapitolele 5.4 și 5.5 — care descriau deja integral cele două documente — sub forma unor carduri de descărcare PDF, marcate „PDF în pregătire" până la furnizarea modelelor. Caseta „Acces digital" (ERP) a plecat odată cu capitolul.</td></tr>
             <tr><td>29</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul II, secțiunea API: cardul de descărcare ADC-ONB-03 (Acordul Pacientului Informat) primește o variantă compactă și curge acum în coloana de text, pe același rând cu FIG. II·TEL, în loc să coboare sub fotografie — dispare golul vizual. Tabelul consimțămintelor speciale (olograf/digital) restrâns: rânduri mai dense, font ușor redus, coloanele de bifă mai înguste. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>28</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolele III și IV: eliminate barele de navigare „Cuprins:" din interiorul capitolelor — dublau inutil cuprinsul de capitol și Cuprinsul lateral (barele „Vezi și:" cu trimiteri către alte capitole rămân). Capitolul VII: FIG. VII·1 (modelul de consimțământ chirurgical) trecută de la formatul mic, cu aliniere la dreapta, la lățimea întreagă a coloanei — documentul era ilizibil la dimensiunea redusă.</td></tr>
@@ -5595,7 +5603,7 @@ html{scroll-behavior:smooth}
       <a href="#cap-1">Fluxul pacientului</a>
       <a href="#cap-11">Procedura de sterilizare</a>
       <a href="#cap-22">Fișa de post</a>
-      <a href="#bibliografie">Documente de referință</a>
+      <a href="#bibliografie">Legislație aplicabilă</a>
     </div>
 
 
