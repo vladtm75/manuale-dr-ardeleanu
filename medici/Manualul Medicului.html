@@ -608,6 +608,40 @@
     .article table, .article .callout, .article figure, .article img, .orgchart, .stat-row, .platform-cta, .authorcard, .spec-toc, .meta-row{ break-inside:avoid; }
     .article p, .article li{ orphans:3; widows:3; }
   }
+
+/* Cuprinsul de capitol pliabil — buton pe rândul de sub titlu */
+.hatnote{
+  font-size:13px;color:var(--muted);font-style:italic;
+  padding:10px 14px;background:var(--cream);
+  border-left:3px solid var(--amber);
+  margin:0 0 28px;border-radius:0 3px 3px 0;
+}
+.hatnote strong{color:var(--primary);font-style:normal}
+.hatnote[hidden]{display:none}
+.hatnote-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:26px;vertical-align:middle;
+  background:var(--cream);border:1px solid var(--line);
+  cursor:pointer;color:var(--primary);border-radius:4px;
+  transition:background .12s,color .12s,border-color .12s;padding:0;
+}
+.hatnote-toggle:hover,
+.hatnote-toggle[aria-expanded="true"]{background:var(--primary);color:var(--yellow);border-color:var(--primary)}
+.hatnote-toggle svg{width:13px;height:13px;transition:transform .18s ease}
+.hatnote-toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
+.chapter-toc{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 28px;margin:12px 0 0;padding:0;list-style:none;
+  font-size:13px;line-height:1.55;font-style:normal;
+}
+.chapter-toc li{padding:5px 0;border-bottom:1px dotted var(--line);margin:0}
+.chapter-toc a{border:0;color:var(--ink);display:flex;gap:10px;align-items:baseline;text-decoration:none}
+.chapter-toc a:hover{color:var(--primary)}
+.chapter-toc .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);font-weight:600;min-width:26px;flex:none}
+h2.ch{flex-wrap:wrap}
+h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;flex-basis:100%}
+@media(max-width:640px){.chapter-toc{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -822,6 +856,37 @@
 
         <!-- ============ Capitolul I (Operațional) ============ -->
         <h2 class="ch" id="cap-1"><span class="rn">I</span><span>Capitolul 1 — Operațional</span></h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-1-1"><span class="n">1.1</span>De unde am pornit și ce construim</a></li>
+        <li><a href="#cap-1-2"><span class="n">1.2</span>Misiune, valori și responsabilități</a></li>
+        <li><a href="#cap-1-3"><span class="n">1.3</span>Structura organizațională a rețelei și fluxuri de escaladare</a></li>
+        <li><a href="#cap-1-4"><span class="n">1.4</span>Rolul medicului în sistem</a></li>
+        <li><a href="#cap-1-5"><span class="n">1.5</span>De la interviu la prima tură</a></li>
+        <li><a href="#cap-1-6"><span class="n">1.6</span>Contract de prestări servicii și documente necesare</a></li>
+        <li><a href="#cap-1-7"><span class="n">1.7</span>Uniformă și echipament</a></li>
+        <li><a href="#cap-1-8"><span class="n">1.8</span>Harta parcursului pacientului</a></li>
+        <li><a href="#cap-1-9"><span class="n">1.9</span>Prima interacțiune — recepția și documentele</a></li>
+        <li><a href="#cap-1-10"><span class="n">2.0</span>Radiografia obligatorie</a></li>
+        <li><a href="#cap-1-11"><span class="n">2.1</span>Acordul pacientului</a></li>
+        <li><a href="#cap-1-12"><span class="n">2.2</span>Consimțămintele semnate în clinică</a></li>
+        <li><a href="#cap-1-13"><span class="n">2.3</span>Notițe medicale și statusul dentar</a></li>
+        <li><a href="#cap-1-14"><span class="n">2.4</span>Prezentarea planului de tratament la P2</a></li>
+        <li><a href="#cap-1-15"><span class="n">2.5</span>Imagistică și documentare foto</a></li>
+        <li><a href="#cap-1-16"><span class="n">2.6</span>Follow-up și retenție</a></li>
+        <li><a href="#cap-1-17"><span class="n">2.7</span>Gestionarea cazurilor eșuate</a></li>
+        <li><a href="#cap-1-18"><span class="n">2.8</span>Sisteme informatice — SPSS și PACS</a></li>
+        <li><a href="#cap-1-19"><span class="n">2.9</span>Comunicarea campaniilor și promoțiilor</a></li>
+        <li><a href="#cap-1-20"><span class="n">3.0</span>Beneficii și politici HR pentru medici</a></li>
+        <li><a href="#cap-1-21"><span class="n">3.1</span>Calcul comision și facturare lunară</a></li>
+        <li><a href="#cap-1-22"><span class="n">3.2</span>Securitate la locul de muncă</a></li>
+        <li><a href="#cap-1-23"><span class="n">3.3</span>Co-creație cu medicii</a></li>
+        <li><a href="#cap-1-24"><span class="n">3.4</span>Laboratorul dentar</a></li>
+        <li><a href="#cap-1-25"><span class="n">3.5</span>KPI-uri operaționale</a></li>
+      </ol>
+    </div>
+
         <p class="ch-desc">Fundamentele rețelei, onboarding-ul medicului, parcursul pacientului (de la recepție la planul de tratament în P2) și partea operațională — sisteme, HR, financiar, laborator și KPI.</p>
         <div class="group-divider"><span>Fundamentele rețelei</span></div>
         <h3 class="sub" id="cap-1-1"><span class="sn">1.1</span><span>De unde am pornit și ce construim</span><a class="anchor" href="#cap-1-1">§</a></h3>
@@ -936,6 +1001,21 @@
 <p>Fiecare etapă are un KPI operațional și un indicator de experiență. Ambele contează egal: un sistem eficient fără grijă nu produce excelență.</p><table><thead><tr><th>Etapă</th><th>KPI operațional</th><th>Țintă</th></tr></thead><tbody><tr><td>Contact</td><td>Conversie apel → programare</td><td>≥ 75%</td></tr><tr><td>Prezență</td><td>Rata no-show</td><td>≤ 15%</td></tr><tr><td>P1 — Documentare</td><td>Dosar complet în aceeași zi</td><td>≥ 98%</td></tr><tr><td>P2 — Plan</td><td>Rata acceptare plan de tratament</td><td>≥ 65%</td></tr><tr><td>Execuție</td><td>Proceduri conform planului</td><td>≥ 95%</td></tr><tr><td>Retenție</td><td>Pacienți activi la 12 luni</td><td>≥ 85%</td></tr></tbody></table><div class="callout"><span class="callout-label">Ce înseamnă excelență</span><p>Nu absența greșelilor, ci prezența constantă a grijii — în fiecare apel, în fiecare minut din cabinet, în fiecare follow-up. Standardul nostru: „cel mai bine tratat am fost la Dr. Ardeleanu — și asta povestesc oamenilor".</p></div>
         <!-- ============ Capitolul II (Comportamental) ============ -->
         <h2 class="ch" id="cap-2"><span class="rn">II</span><span>Capitolul 2 — Comportamental</span></h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-2-1"><span class="n">2.1</span>Ancorarea operațională a comportamentului</a></li>
+        <li><a href="#cap-2-2"><span class="n">2.2</span>Prima consultație (P1) — ce observi, ce faci, ce spui</a></li>
+        <li><a href="#cap-2-3"><span class="n">2.3</span>Diagnosticul conversațional</a></li>
+        <li><a href="#cap-2-4"><span class="n">2.4</span>Prezentarea planului de tratament</a></li>
+        <li><a href="#cap-2-5"><span class="n">2.5</span>Pârghii de influență — cum îl ajuți pe pacient să decidă</a></li>
+        <li><a href="#cap-2-6"><span class="n">2.6</span>Gestionarea obiecțiilor structurate</a></li>
+        <li><a href="#cap-2-7"><span class="n">2.7</span>Follow-up și închiderea vânzării — rolul medicului</a></li>
+        <li><a href="#cap-2-8"><span class="n">2.8</span>Managementul situațiilor critice</a></li>
+        <li><a href="#cap-2-9"><span class="n">2.9</span>Ce înseamnă comportament medical Dr. Ardeleanu</a></li>
+      </ol>
+    </div>
+
         <p class="ch-desc">Cum transformă medicul diagnosticul și planul în înțelegere, decizie și aderență — ce observi, ce faci, ce spui la fiecare moment.</p>
         <h3 class="sub" id="cap-2-1"><span class="sn">2.1</span><span>Ancorarea operațională a comportamentului</span><a class="anchor" href="#cap-2-1">§</a></h3>
 <p>Protocoalele de comportament medical stabilesc cum transformă medicul diagnosticul și planul de tratament în înțelegere, decizie și aderență din partea pacientului. Nu e vorba de stil personal sau empatie generică — comportamentul medical este parte integrantă a actului clinic și influențează direct rezultatul tratamentului.</p><div class="callout"><span class="callout-label">Principiu</span><p>Un plan corect, explicat incorect, este un plan neacceptat sau nefinalizat.</p></div><p>În fiecare etapă a interacțiunii, pacientul se află într-un context psihologic specific — incertitudine, anxietate, presiune sau rezistență. Dacă aceste stări nu sunt recunoscute și gestionate corect, pacientul nu va urma tratamentul, indiferent de calitatea actului medical. Rolul medicului nu este doar să prezinte informații, ci să ghideze pacientul astfel încât decizia să fie liberă, informată și asumată.</p><p>Protocoalele din acest capitol stabilesc comportamentul minim acceptabil în momentele critice ale relației medic–pacient. Nu înlocuiesc judecata clinică și nu acoperă toate situațiile posibile, dar reduc variația între medici și cresc consistența experienței pacientului. Ele definesc:</p><ul><li>contextul în care se află pacientul;</li><li>riscurile asociate unei execuții incorecte;</li><li>comportamentul așteptat al medicului.</li></ul><p class="byline">Înțelegerea profundă a mecanismelor psihologice ale pacientului și adaptarea fină a comportamentului sunt dezvoltate prin programele de training (White Flow). Manualul definește standardul de execuție; trainingul dezvoltă capacitatea de aplicare. Acest capitol se citește ca un set de protocoale operaționale aplicabile în cabinet, nu ca material teoretic.</p><h4>Modelul din spatele capitolului</h4><p>Tot ce urmează este construit pe un singur mecanism: pacientul ia decizii corecte doar când trece, în ordine, prin trei stări. Dacă una lipsește, procesul se blochează — indiferent cât de bun e planul de tratament.</p><table><thead><tr><th>Starea</th><th>Ce înseamnă</th><th>Fără ea se întâmplă</th><th>Semnalul că există</th></tr></thead><tbody><tr><td><b>Siguranță</b></td><td>Pacientul se simte în control, nejudecat, fără presiune</td><td>Nu procesează informația — aude, dar nu înregistrează</td><td>Întreabă, privește direct, respiră normal</td></tr><tr><td><b>Claritate</b></td><td>Înțelege problema, consecințele și opțiunile cu cuvintele lui</td><td>Amână, evită decizia, spune „mă mai gândesc"</td><td>Poate explica situația cu propriile cuvinte</td></tr><tr><td><b>Asumare</b></td><td>Simte că decizia îi aparține lui, nu a fost convins</td><td>Acceptă în cabinet și dispare după prima ședință</td><td>Pune întrebări despre cum va decurge tratamentul</td></tr></tbody></table><div class="callout"><span class="callout-label">Ordinea e obligatorie</span><p>Nu poți produce claritate fără siguranță. Nu poți produce asumare fără claritate. Dacă sari o treaptă, trebuie să te întorci la ea — de fiecare dată.</p></div><h4>Ce face diferit un medic Dr. Ardeleanu</h4><table><thead><tr><th>Medicul care reacționează</th><th>Medicul la Dr. Ardeleanu</th></tr></thead><tbody><tr><td>Răspunde la ce spune pacientul</td><td>Răspunde la ce simte pacientul</td></tr><tr><td>Prezintă planul când e gata el</td><td>Prezintă planul când e gata pacientul</td></tr><tr><td>Tratează obiecția ca pe un refuz</td><td>Tratează obiecția ca pe un semnal de anxietate sau lipsă de claritate</td></tr><tr><td>Tăcerea pacientului îl grăbește</td><td>Tăcerea pacientului îl oprește — este informație</td></tr><tr><td>Scopul lui este să termine consultația</td><td>Scopul lui este ca pacientul să plece cu o decizie liberă și informată</td></tr><tr><td>Conversia e obiectivul</td><td>Conversia e consecința unui proces corect</td></tr></tbody></table>
@@ -963,6 +1043,24 @@
 <p>Comportamentul medical nu este un strat adăugat peste actul clinic — este actul clinic în totalitatea lui. Un medic care știe ce observă, ce face și ce spune în fiecare moment al relației cu pacientul nu lucrează mai mult — lucrează mai bine: pacienții înțeleg, decid și rămân, planurile de tratament sunt respectate, recenziile apar de la sine.</p><p class="byline">Tot ce este scris în acest capitol este un punct de pornire, nu un script de memorat. Adaptează limbajul la vocea ta. Păstrează logica din spatele lui.</p><h4>Cum rămâne viu capitolul</h4><ul><li>Fiecare medic nou confirmă în scris că a citit și înțeles Capitolul V — în prima săptămână de activitate.</li><li>La ședința lunară de echipă, un scenariu din secțiunea 5.6 este ales și discutat 15 minute.</li><li>Capitolul se recitește integral o dată pe an, în prima săptămână din ianuarie.</li></ul><div class="callout"><span class="callout-label">Încheiere</span><p>Acest manual nu este o carte de regulament. Este o promisiune făcută fiecărui pacient care intră în rețeaua Dr. Ardeleanu și fiecărui medic care alege să fie parte din această familie profesională — o promisiune că ne ținem standardul când nu ne vede nimeni, că învățăm unii de la alții, că ne ridicăm reciproc când greșim (fără rușine, dar cu responsabilitate) și că tratăm fiecare pacient ca și cum ar fi cineva drag pentru noi.</p><p>Manualul se va schimba. Va deveni mai bun. Va corecta lucrurile pe care nu le-am gândit bine de prima dată. Va integra cazurile, lecțiile și succesele care vor veni. Ce nu se schimbă este principiul care îl ține împreună: <b>excelența la prețuri accesibile, clinica familiei tale.</b></p></div>
         <!-- ============ Capitolul III (Partea medicală) ============ -->
         <h2 class="ch" id="cap-3"><span class="rn">III</span><span>Capitolul 3 — Partea medicală</span></h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#cap-3-1"><span class="n">3.1</span>Stomatologie generală</a></li>
+        <li><a href="#cap-3-2"><span class="n">3.2</span>Parodontologie</a></li>
+        <li><a href="#cap-3-3"><span class="n">3.3</span>Endodonție</a></li>
+        <li><a href="#cap-3-4"><span class="n">3.4</span>Chirurgie orală și implantologie</a></li>
+        <li><a href="#cap-3-5"><span class="n">3.5</span>Protetică fixă</a></li>
+        <li><a href="#cap-3-6"><span class="n">3.6</span>Protetică mobilă</a></li>
+        <li><a href="#cap-3-7"><span class="n">3.7</span>Ortodonție</a></li>
+        <li><a href="#cap-3-8"><span class="n">3.8</span>Pedodonție</a></li>
+        <li><a href="#cap-3-9"><span class="n">3.9</span>Dental Safari — pedodonție gamificată</a></li>
+        <li><a href="#cap-3-10"><span class="n">3.10</span>Estetică dentară</a></li>
+        <li><a href="#cap-3-11"><span class="n">3.11</span>Urgențe medicale</a></li>
+        <li><a href="#cap-3-12"><span class="n">3.12</span>Formare medicală continuă — Dental Institute</a></li>
+      </ol>
+    </div>
+
         <p class="ch-desc">Protocoalele clinice standard pe specialități, urgențele medicale și formarea continuă — referința tehnică a actului medical.</p>
         <div class="group-divider"><span>Cadru general al protocoalelor clinice</span></div>
         <h3 class="sub" id="cap-3-1"><span class="sn">3.1</span><span>Stomatologie generală</span><a class="anchor" href="#cap-3-1">§</a></h3>
@@ -997,13 +1095,14 @@
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 41</strong> · 19 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 42</strong> · 19 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
-              <tr data-rev="41"><td>41</td><td>19 august 2026</td><td>Loredana Manoiu</td><td>Cap. 1: integrat extrasul din Procedura de onboarding al pacientului V18 care privește direct medicul. <b>1.9</b> — anamneza pediatrică declanșată automat de CNP-ul de copil, adăugată la fluxul dosarului pentru copii; cele patru porți dinaintea tratamentului și excepția de urgență, definirea formularului de Înregistrare Medicală (Anamneza-CESGS și cele șase opțiuni), plus secțiunile care lipseau față de cuprinsul propriu: P1B (informația clinică, profilul psiho-social din tab-ul Alerte, consultația și indicația), verificările la fiecare vizită ulterioară, tabelul consecințelor refuzurilor „Nu” cu temeiurile legale și regula finală. <b>2.0</b> — consimțământul radiologic: nu mai este necesar unul separat la fiecare investigație când pacientul a bifat „Da” în Înregistrarea Medicală; la „Nu” sau la opțiune necompletată se obține consimțământ la fiecare trimitere. <b>2.1</b> — denumirea API (Acordul Pacientului Informat), regula unui API la fiecare vizită, obligația de a trece denumirea exactă a manoperei (o descriere generică nu este suficientă), mai multe API-uri când manoperele nu încap într-un document, regula critică privind momentul semnării și avertismentul că lipsa API-ului este cauză de nulitate a asigurării de malpraxis. <b>2.2</b> — matricea curentă de consimțăminte din SPSS și prioritatea ei, lista olografă confirmată operațional în august 2026 și semnarea consimțămintelor specifice de către reprezentantul legal al minorului. <b>2.4</b> — obiectivul planului de tratament urmărit cumulat la P1 + P2. <b>2.8</b> — transmiterea imaginilor pe e-mail cu link către PACS, cititorul integrat 2D și viewerul medical grade necesar pentru reconstrucția 3D a CBCT-ului.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="41"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
+              <tr><td>42</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista subcapitolelor (generată din titlurile reale ale capitolului). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
+            <tr data-rev="41"><td>41</td><td>19 august 2026</td><td>Loredana Manoiu</td><td>Cap. 1: integrat extrasul din Procedura de onboarding al pacientului V18 care privește direct medicul. <b>1.9</b> — anamneza pediatrică declanșată automat de CNP-ul de copil, adăugată la fluxul dosarului pentru copii; cele patru porți dinaintea tratamentului și excepția de urgență, definirea formularului de Înregistrare Medicală (Anamneza-CESGS și cele șase opțiuni), plus secțiunile care lipseau față de cuprinsul propriu: P1B (informația clinică, profilul psiho-social din tab-ul Alerte, consultația și indicația), verificările la fiecare vizită ulterioară, tabelul consecințelor refuzurilor „Nu” cu temeiurile legale și regula finală. <b>2.0</b> — consimțământul radiologic: nu mai este necesar unul separat la fiecare investigație când pacientul a bifat „Da” în Înregistrarea Medicală; la „Nu” sau la opțiune necompletată se obține consimțământ la fiecare trimitere. <b>2.1</b> — denumirea API (Acordul Pacientului Informat), regula unui API la fiecare vizită, obligația de a trece denumirea exactă a manoperei (o descriere generică nu este suficientă), mai multe API-uri când manoperele nu încap într-un document, regula critică privind momentul semnării și avertismentul că lipsa API-ului este cauză de nulitate a asigurării de malpraxis. <b>2.2</b> — matricea curentă de consimțăminte din SPSS și prioritatea ei, lista olografă confirmată operațional în august 2026 și semnarea consimțămintelor specifice de către reprezentantul legal al minorului. <b>2.4</b> — obiectivul planului de tratament urmărit cumulat la P1 + P2. <b>2.8</b> — transmiterea imaginilor pe e-mail cu link către PACS, cititorul integrat 2D și viewerul medical grade necesar pentru reconstrucția 3D a CBCT-ului.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="41"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
               <tr class="rev-old" data-rev-old="41" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 41</span><button type="button" class="rev-old-close" data-rev-close="41">✕ Închide</button></div><div class="rev-old-content" data-rev-body="41"></div></div></td></tr>
               <tr data-rev="40"><td>40</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole: spațiul de deasupra titlurilor de capitol (h2.ch) mărit de la 48px la 84px; primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr data-rev="39"><td>39</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": elimină paragraful introductiv narativ („Acest manual este harta după care lucrăm…"), acum redundant cu preambulul formal, și mută caseta „Document părinte" la finalul secțiunii „Statutul contractual al manualului", unde ierarhia Contract → Anexe → Manual e deja explicată în text.</td><td class="rev-na">—</td></tr>
@@ -1342,5 +1441,38 @@
 })();
 </script>
 
+
+<script>
+/* Cuprinsul de capitol (hatnote de sub titlu) — pliabil, închis implicit */
+(function(){
+  document.querySelectorAll('.hatnote').forEach(function(note){
+    if(!note.querySelector('.chapter-toc')) return;
+    var h2 = note.previousElementSibling;
+    if(!h2 || h2.tagName !== 'H2') return;
+    if(!note.id) note.id = 'cuprins-' + (h2.id || 'cap-x');
+    note.setAttribute('hidden','');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hatnote-toggle';
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-controls', note.id);
+    btn.setAttribute('aria-label','Comută cuprinsul capitolului');
+    btn.title = 'Cuprinsul capitolului';
+    btn.innerHTML = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+    btn.addEventListener('click',function(){
+      var open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+      if(open){note.setAttribute('hidden','')} else {note.removeAttribute('hidden')}
+    });
+    var meta = h2.querySelector('.chapter-meta');
+    if(!meta){
+      meta = document.createElement('span');
+      meta.className = 'chapter-meta';
+      h2.appendChild(meta);
+    }
+    meta.appendChild(btn);
+  });
+})();
+</script>
 </body>
 </html>

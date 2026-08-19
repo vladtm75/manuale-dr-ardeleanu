@@ -317,6 +317,22 @@ a:hover{border-bottom-color:var(--brand-primary)}
 }
 .hatnote strong{color:var(--brand-primary);font-style:normal}
 
+
+/* Cuprinsul de capitol pliabil — buton pe rândul de sub titlu */
+.hatnote[hidden]{display:none}
+.hatnote-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:26px;vertical-align:middle;
+  background:var(--brand-cream-warm);border:1px solid var(--rule);
+  cursor:pointer;color:var(--brand-primary);border-radius:4px;
+  transition:background .12s,color .12s,border-color .12s;padding:0;
+}
+.hatnote-toggle:hover,
+.hatnote-toggle[aria-expanded="true"]{background:var(--brand-primary);color:var(--brand-yellow);border-color:var(--brand-primary)}
+.hatnote-toggle svg{width:13px;height:13px;transition:transform .18s ease}
+.hatnote-toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
+.article h2 .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px}
+
 /* Chapter sub-TOC — canonical "Cuprins" list at the start of every chapter */
 .chapter-toc{
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1585,6 +1601,18 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     
     <!-- ============ Capitolul I ============ -->
     <h2 id="cap-1"><span class="chapter-num">Capitolul I</span>DISPOZIȚII GENERALE</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-1"><span class="n">Art. 1</span>Obiectul și natura juridică</a></li>
+        <li><a href="#art-2"><span class="n">Art. 2</span>Identitatea Angajatorului și aplicarea în rețea</a></li>
+        <li><a href="#art-3"><span class="n">Art. 3</span>Domeniul personal, material și teritorial</a></li>
+        <li><a href="#art-4"><span class="n">Art. 4</span>Ierarhia normelor și regula favorabilă</a></li>
+        <li><a href="#art-5"><span class="n">Art. 5</span>Definiții operaționale</a></li>
+        <li><a href="#art-6"><span class="n">Art. 6</span>Responsabilitatea managerilor</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-1"><span class="num">Art. 1</span>Obiectul și natura juridică</h3>
     <p>(1) Prezentul Regulament intern, denumit în continuare «Regulamentul», stabilește regulile aplicabile raporturilor de muncă dintre angajatorul identificat pe copertă, denumit în continuare «Angajatorul», și salariații săi.</p>
     <p>(2) Regulamentul este un act normativ intern întocmit de Angajator cu consultarea salariaților, în condițiile legii. El nu transformă automat prevederile sale în clauze ale contractului individual de muncă și nu poate modifica unilateral elementele contractuale pentru care legea cere acordul părților.</p>
@@ -1618,6 +1646,17 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul II ============ -->
     <h2 id="cap-2"><span class="chapter-num">Capitolul II</span>PRINCIPII, EGALITATE ȘI DEMNITATE</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-7"><span class="n">Art. 7</span>Principiile culturii meritocratice</a></li>
+        <li><a href="#art-8"><span class="n">Art. 8</span>Egalitatea de șanse și interdicția discriminării</a></li>
+        <li><a href="#art-9"><span class="n">Art. 9</span>Demnitatea, respectul și libertatea profesională</a></li>
+        <li><a href="#art-10"><span class="n">Art. 10</span>Protecția maternității și a responsabilităților familiale</a></li>
+        <li><a href="#art-11"><span class="n">Art. 11</span>Buna-credință și interdicția represaliilor</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-7"><span class="num">Art. 7</span>Principiile culturii meritocratice</h3>
     <p>(1) Deciziile privind obiectivele, evaluarea, recompensa, promovarea, formarea și mobilitatea se bazează pe cerințele reale ale postului, rezultate verificabile, competențe, comportamente profesionale și potențial relevant. Relațiile personale, impresiile neargumentate și criteriile aplicate retroactiv nu pot înlocui dovezile.</p>
     <p>(2) Angajatorul urmărește atât performanța individuală, cât și contribuția la siguranța pacientului, calitate, colaborare și încredere. Atingerea unei ținte comerciale nu justifică încălcarea legii, a eticii profesionale, a protocoalelor clinice ori a drepturilor colegilor și pacienților.</p>
@@ -1636,6 +1675,21 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul III ============ -->
     <h2 id="cap-3"><span class="chapter-num">Capitolul III</span>DREPTURILE ȘI OBLIGAȚIILE PĂRȚILOR</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-12"><span class="n">Art. 12</span>Drepturile Angajatorului</a></li>
+        <li><a href="#art-13"><span class="n">Art. 13</span>Obligațiile Angajatorului</a></li>
+        <li><a href="#art-14"><span class="n">Art. 14</span>Drepturile salariaților</a></li>
+        <li><a href="#art-15"><span class="n">Art. 15</span>Obligațiile generale ale salariaților</a></li>
+        <li><a href="#art-16"><span class="n">Art. 16</span>Siguranța pacientului și limitele competenței profesionale</a></li>
+        <li><a href="#art-17"><span class="n">Art. 17</span>Conduita față de pacienți, colegi și parteneri</a></li>
+        <li><a href="#art-18"><span class="n">Art. 18</span>Conflictul de interese</a></li>
+        <li><a href="#art-19"><span class="n">Art. 19</span>Comunicarea electronică oficială și obligația de consultare</a></li>
+        <li><a href="#art-20"><span class="n">Art. 20</span>Registrul online al documentelor interne. Actualizarea profesională internă</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-12"><span class="num">Art. 12</span>Drepturile Angajatorului</h3>
     <p>(1) În condițiile legii, Angajatorul stabilește organizarea și funcționarea unității, atribuțiile fiecărui salariat, obiectivele și criteriile de evaluare, emite și actualizează documente controlate, verifică îndeplinirea sarcinilor, emite dispoziții obligatorii și constată abateri disciplinare, aplicând sancțiuni după procedura legală. Angajatorul poate reorganiza activitatea și poate utiliza date profesionale pentru decizii, fără a modifica unilateral elementele esențiale ale contractului individual de muncă în afara cazurilor permise de lege.</p>
     <p>(2) Verificarea prealabilă a aptitudinilor profesionale și personale la angajare se realizează prin analiza candidaturii și interviu, la care se pot adăuga, potrivit cerințelor postului, probă practică, test profesional ori verificarea autorizațiilor cerute de profesie. Informațiile solicitate nu pot avea alt scop decât aprecierea capacității de a ocupa postul; informații de la foștii angajatori se cer numai cu privire la activitățile îndeplinite și durata angajării și numai cu încunoștințarea prealabilă a candidatului.</p>
@@ -1684,6 +1738,20 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>(10) Registrul și testele completează, dar nu înlocuiesc educația medicală continuă acreditată, creditele profesionale, instruirile obligatorii, legea, normele deontologice și regulile de siguranță a pacientului. Pentru colaboratorii care nu sunt salariați, accesul și obligațiile se stabilesc prin contractul de servicii și regulile profesionale aplicabile.</p>
 <!-- ============ Capitolul IV ============ -->
     <h2 id="cap-4"><span class="chapter-num">Capitolul IV</span>CODUL VESTIMENTAR, IGIENA ȘI IDENTIFICAREA PROFESIONALĂ</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-21"><span class="n">Art. 21</span>Scopul și principiile codului vestimentar</a></li>
+        <li><a href="#art-22"><span class="n">Art. 22</span>Ținuta stabilită pentru fiecare categorie de personal</a></li>
+        <li><a href="#art-23"><span class="n">Art. 23</span>Igiena personală și prezentarea profesională</a></li>
+        <li><a href="#art-24"><span class="n">Art. 24</span>Starea, folosirea și păstrarea uniformei</a></li>
+        <li><a href="#art-25"><span class="n">Art. 25</span>Ecusonul și identificarea profesională</a></li>
+        <li><a href="#art-26"><span class="n">Art. 26</span>Echipamentul individual de protecție</a></li>
+        <li><a href="#art-27"><span class="n">Art. 27</span>Adaptări, excepții și protecția demnității</a></li>
+        <li><a href="#art-28"><span class="n">Art. 28</span>Instrucțiunea operațională, controlul și consecințele încălcării</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-21"><span class="num">Art. 21</span>Scopul și principiile codului vestimentar</h3>
     <p>(1) Ținuta profesională susține siguranța pacientului, prevenirea contaminării, identificarea corectă a personalului și încrederea legitimă în serviciile Angajatorului. Standardele se aplică proporțional cu rolul, riscurile postului și contactul cu pacienții, fără criterii arbitrare ori discriminatorii.</p>
     <p>(2) Regulile capitolului se aplică în timpul programului, în clinică și în celelalte locuri în care salariatul reprezintă Angajatorul, inclusiv la deplasări, evenimente și activități profesionale externe. Cerințele nu se extind asupra vieții private fără o legătură obiectivă și demonstrabilă cu munca.</p>
@@ -1720,6 +1788,18 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul V ============ -->
     <h2 id="cap-5"><span class="chapter-num">Capitolul V</span>SECURITATEA ȘI SĂNĂTATEA ÎN MUNCĂ. SITUAȚII DE URGENȚĂ</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-29"><span class="n">Art. 29</span>Principiul prevenției</a></li>
+        <li><a href="#art-30"><span class="n">Art. 30</span>Obligațiile salariaților în materie SSM și PSI</a></li>
+        <li><a href="#art-31"><span class="n">Art. 31</span>Pericolul grav și iminent</a></li>
+        <li><a href="#art-32"><span class="n">Art. 32</span>Accidente, expuneri și prim ajutor</a></li>
+        <li><a href="#art-33"><span class="n">Art. 33</span>Supravegherea sănătății și situațiile speciale</a></li>
+        <li><a href="#art-34"><span class="n">Art. 34</span>Organizarea SSM</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-29"><span class="num">Art. 29</span>Principiul prevenției</h3>
     <p>Angajatorul asigură prevenirea riscurilor profesionale, evaluarea riscurilor, instruirea, echipamentele, supravegherea sănătății și organizarea intervenției, potrivit Legii nr. 319/2006 și normelor speciale. Măsurile SSM sunt finanțate de Angajator și nu creează costuri pentru salariat.</p>
     <h3 id="art-30"><span class="num">Art. 30</span>Obligațiile salariaților în materie SSM și PSI</h3>
@@ -1737,6 +1817,21 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul VI ============ -->
     <h2 id="cap-6"><span class="chapter-num">Capitolul VI</span>TIMPUL DE MUNCĂ, PROGRAMUL ȘI EVIDENȚA</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-35"><span class="n">Art. 35</span>Durata normală și maximă</a></li>
+        <li><a href="#art-36"><span class="n">Art. 36</span>Programele de lucru</a></li>
+        <li><a href="#art-37"><span class="n">Art. 37</span>Prezența și pontajul</a></li>
+        <li><a href="#art-38"><span class="n">Art. 38</span>Pauza și repausul zilnic</a></li>
+        <li><a href="#art-39"><span class="n">Art. 39</span>Munca suplimentară</a></li>
+        <li><a href="#art-40"><span class="n">Art. 40</span>Munca de noapte</a></li>
+        <li><a href="#art-41"><span class="n">Art. 41</span>Repausul săptămânal și sărbătorile legale</a></li>
+        <li><a href="#art-42"><span class="n">Art. 42</span>Întârzierile, absențele și urgențele personale</a></li>
+        <li><a href="#art-43"><span class="n">Art. 43</span>Telemunca și programul flexibil</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-35"><span class="num">Art. 35</span>Durata normală și maximă</h3>
     <p>(1) Pentru salariații cu normă întreagă, durata normală este de 8 ore pe zi și 40 de ore pe săptămână, cu excepția duratelor speciale prevăzute de lege pentru anumite categorii. Pentru tinerii sub 18 ani durata este de 6 ore pe zi și 30 de ore pe săptămână.</p>
     <p>(2) Durata maximă nu poate depăși 48 de ore pe săptămână, inclusiv orele suplimentare, calculată ca medie în perioada de referință permisă de lege. Contractele cu timp parțial respectă repartizarea convenită și interdicția muncii suplimentare, cu excepțiile legale.</p>
@@ -1773,6 +1868,19 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul VII ============ -->
     <h2 id="cap-7"><span class="chapter-num">Capitolul VII</span>REPAUS, CONCEDII, SALARIZARE ȘI BENEFICII</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-44"><span class="n">Art. 44</span>Concediul de odihnă</a></li>
+        <li><a href="#art-45"><span class="n">Art. 45</span>Zile libere plătite pentru evenimente familiale</a></li>
+        <li><a href="#art-46"><span class="n">Art. 46</span>Concedii și absențe familiale prevăzute de lege</a></li>
+        <li><a href="#art-47"><span class="n">Art. 47</span>Concediul medical</a></li>
+        <li><a href="#art-48"><span class="n">Art. 48</span>Concediul fără plată și formarea la inițiativa salariatului</a></li>
+        <li><a href="#art-49"><span class="n">Art. 49</span>Salariul</a></li>
+        <li><a href="#art-50"><span class="n">Art. 50</span>Beneficiile, sănătatea și sprijinul acordat personalului</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-44"><span class="num">Art. 44</span>Concediul de odihnă</h3>
     <p>(1) Durata minimă acordată de Angajator este de 21 de zile lucrătoare pe an pentru o normă anuală completă, dacă contractul individual sau colectiv nu prevede mai mult. Concediul se efectuează în natură și se compensează în bani numai la încetarea contractului. Cel puțin o fracțiune programată permite 10 zile lucrătoare neîntrerupte.</p>
     <p>(2) Programarea pentru anul următor se realizează până la sfârșitul anului curent, cu consultarea salariaților și asigurarea continuității. Cererea concretă se transmite, de regulă, cu cel puțin 15 zile lucrătoare înainte; urgențele și situațiile obiective se analizează separat. Concediul neefectuat din motive justificate se acordă în perioada legală de 18 luni.</p>
@@ -1801,6 +1909,21 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul VIII ============ -->
     <h2 id="cap-8"><span class="chapter-num">Capitolul VIII</span>MANAGEMENTUL ȘI EVALUAREA PERFORMANȚEI</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-51"><span class="n">Art. 51</span>Scopul evaluării</a></li>
+        <li><a href="#art-52"><span class="n">Art. 52</span>Arhitectura criteriilor</a></li>
+        <li><a href="#art-53"><span class="n">Art. 53</span>Comunicarea și modificarea obiectivelor</a></li>
+        <li><a href="#art-54"><span class="n">Art. 54</span>Nivelurile, ciclurile și sursele de evaluare</a></li>
+        <li><a href="#art-55"><span class="n">Art. 55</span>Îndrumarea, observațiile și corectarea timpurie</a></li>
+        <li><a href="#art-56"><span class="n">Art. 56</span>Factorii externi și perioadele protejate</a></li>
+        <li><a href="#art-57"><span class="n">Art. 57</span>Evaluarea sintetică și calibrarea</a></li>
+        <li><a href="#art-58"><span class="n">Art. 58</span>Performanța în perioada de probă</a></li>
+        <li><a href="#art-59"><span class="n">Art. 59</span>Dosarul curent de performanță</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-51"><span class="num">Art. 51</span>Scopul evaluării</h3>
     <p>(1) Evaluarea performanței este un proces managerial continuu prin care se clarifică așteptările, se măsoară rezultatele, se recunoaște contribuția și se identifică rapid diferențele față de standard. Evaluarea curentă poate fundamenta îndrumarea și observațiile, recompensa, promovarea, formarea, redistribuirea legală a sarcinilor ori declanșarea evaluării prealabile pentru necorespundere profesională, dar nu înlocuiește procedura din Capitolul IX.</p>
     <p>(2) Sistemul produce două rezultate distincte: concluzia privind performanța profesională și, dacă există o schemă aplicabilă, calculul remunerației variabile. Neacordarea unui bonus pentru neîndeplinirea unei condiții comerciale ori bugetare nu dovedește, prin ea însăși, necorespunderea profesională; în sens invers, plata unui bonus nu împiedică analiza unei deficiențe de calitate sau siguranță documentate distinct. Acordarea bonusului, chiar în fiecare ciclu lunar al anului, nu prezumă corespunderea profesională și nu limitează calificativul care poate fi acordat la evaluarea profesională, inclusiv cel minim al scalei, atunci când datele privind competența, calitatea, siguranța pacientului, documentarea ori conduita îl justifică.</p>
@@ -1838,6 +1961,24 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>(3) Un rezultat sub pragul de 80% la un test ori într-o fișă de punctaj dintr-un manual determină numai efectul prevăzut pentru viitor în instrumentul aplicabil — de exemplu îndrumare și observații, reinstruire, pierderea eligibilității la bonus sau sesizarea evaluării prealabile — dar nu produce automat încetarea contractului de muncă și nu constituie singur raport final de necorespundere.</p>
     <!-- ============ Capitolul IX ============ -->
     <h2 id="cap-9"><span class="chapter-num">Capitolul IX</span>PROCEDURA PRIVIND CONSTATAREA NECORESPUNDERII PROFESIONALE</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-60"><span class="n">Art. 60</span>Natura și temeiul procedurii</a></li>
+        <li><a href="#art-61"><span class="n">Art. 61</span>Condițiile de declanșare</a></li>
+        <li><a href="#art-62"><span class="n">Art. 62</span>Nota de sesizare și trierea juridică</a></li>
+        <li><a href="#art-63"><span class="n">Art. 63</span>Desemnarea evaluatorului sau comisiei</a></li>
+        <li><a href="#art-64"><span class="n">Art. 64</span>Convocarea</a></li>
+        <li><a href="#art-65"><span class="n">Art. 65</span>Metodele și desfășurarea evaluării</a></li>
+        <li><a href="#art-66"><span class="n">Art. 66</span>Planul de îmbunătățire a performanței</a></li>
+        <li><a href="#art-67"><span class="n">Art. 67</span>Raportul final</a></li>
+        <li><a href="#art-68"><span class="n">Art. 68</span>Controlul de legalitate și măsurile ulterioare</a></li>
+        <li><a href="#art-69"><span class="n">Art. 69</span>Posturile vacante și agenția de ocupare</a></li>
+        <li><a href="#art-70"><span class="n">Art. 70</span>Preavizul și decizia de concediere profesională</a></li>
+        <li><a href="#art-71"><span class="n">Art. 71</span>Aplicarea în timp și dosarul standard</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-60"><span class="num">Art. 60</span>Natura și temeiul procedurii</h3>
     <p>(1) Necorespunderea profesională reprezintă incapacitatea neculpabilă, obiectiv verificabilă, a salariatului de a îndeplini cerințele esențiale ale postului și standardele comunicate, din motive ce țin de cunoștințe, aptitudini, deprinderi, calitatea execuției ori adaptarea profesională.</p>
     <p>(2) Procedura constituie evaluarea prealabilă cerută de art. 63 alin. (2) din Codul muncii pentru eventuala concediere prevăzută de art. 61 lit. d). Ea nu este sancțiune disciplinară. Refuzul culpabil, indisciplina, neglijența săvârșită cu vinovăție și încălcarea conștientă a obligațiilor se analizează disciplinar; inaptitudinea stabilită medical urmează ruta distinctă a art. 61 lit. c).</p>
@@ -1879,6 +2020,26 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     <p>Procedura se aplică numai criteriilor și perioadelor comunicate după intrarea sa în vigoare, fără a valida retroactiv lipsuri ale vechii documentări. Dosarul conține, prin unul sau mai multe documente ori înregistrări legate, contractul și fișa postului, instrumentele de obiective și criterii, dovezile comunicării, fișele de punctaj și sursele, manualul ori procedura în versiunea aplicabilă și extrasul din Registrul online, instruirile, sesizarea, trierea, desemnarea, convocarea, înregistrările evaluării, PIP-ul dacă există, raportul, observațiile, posturile vacante, demersul către agenție, preavizul, calculul termenelor și decizia. Pentru perioada de probă se aplică articolul distinct din Capitolul VIII.</p>
 <!-- ============ Capitolul X ============ -->
     <h2 id="cap-10"><span class="chapter-num">Capitolul X</span>DISCIPLINA MUNCII ȘI CERCETAREA DISCIPLINARĂ</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-72"><span class="n">Art. 72</span>Abaterea disciplinară</a></li>
+        <li><a href="#art-73"><span class="n">Art. 73</span>Reguli de disciplină</a></li>
+        <li><a href="#art-74"><span class="n">Art. 74</span>Exemple de abateri relevante</a></li>
+        <li><a href="#art-75"><span class="n">Art. 75</span>Individualizarea și proporționalitatea</a></li>
+        <li><a href="#art-76"><span class="n">Art. 76</span>Sancțiunile disciplinare</a></li>
+        <li><a href="#art-77"><span class="n">Art. 77</span>Sesizarea și conservarea probelor</a></li>
+        <li><a href="#art-78"><span class="n">Art. 78</span>Desemnarea cercetării</a></li>
+        <li><a href="#art-79"><span class="n">Art. 79</span>Convocarea disciplinară</a></li>
+        <li><a href="#art-80"><span class="n">Art. 80</span>Drepturile salariatului cercetat</a></li>
+        <li><a href="#art-81"><span class="n">Art. 81</span>Audierea și administrarea probelor</a></li>
+        <li><a href="#art-82"><span class="n">Art. 82</span>Raportul final al cercetării</a></li>
+        <li><a href="#art-83"><span class="n">Art. 83</span>Decizia de sancționare</a></li>
+        <li><a href="#art-84"><span class="n">Art. 84</span>Radierea și evidența sancțiunilor</a></li>
+        <li><a href="#art-85"><span class="n">Art. 85</span>Legătura cu procedurile speciale</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-72"><span class="num">Art. 72</span>Abaterea disciplinară</h3>
     <p>Abaterea disciplinară este fapta în legătură cu munca, săvârșită cu vinovăție, prin care salariatul încalcă legea, Regulamentul, contractul, fișa postului, ordinele legale ori o regulă profesională aplicabilă etichetată [OBL] sau [CRIT] într-un document controlat comunicat. Răspunderea presupune identificarea faptei, obligației încălcate, versiunii aplicabile, vinovăției și împrejurărilor; rezultatul slab neculpabil, eticheta [KPI-B] ori simpla nerespectare a unui [GHID] se analizează potrivit naturii lor, nu automat disciplinar.</p>
     <h3 id="art-73"><span class="num">Art. 73</span>Reguli de disciplină</h3>
@@ -1923,6 +2084,15 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XI ============ -->
     <h2 id="cap-11"><span class="chapter-num">Capitolul XI</span>CERERI, PETIȚII ȘI RECLAMAȚII INDIVIDUALE</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-86"><span class="n">Art. 86</span>Canalul general</a></li>
+        <li><a href="#art-87"><span class="n">Art. 87</span>Înregistrarea și soluționarea</a></li>
+        <li><a href="#art-88"><span class="n">Art. 88</span>Confidențialitatea și limitele răspunsului</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-86"><span class="num">Art. 86</span>Canalul general</h3>
     <p>Salariatul poate adresa superiorului, HR sau reprezentantului legal o cerere ori reclamație privind programul, plata, concediul, condițiile de muncă, relațiile profesionale sau aplicarea Regulamentului, prin e-mail ori înscris liber, inclusiv prin formularul pus la dispoziție de HR. Sesizările de hărțuire și raportările de integritate sunt redirecționate fără întârziere către canalele speciale, păstrând data inițială.</p>
     <h3 id="art-87"><span class="num">Art. 87</span>Înregistrarea și soluționarea</h3>
@@ -1933,6 +2103,23 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XII ============ -->
     <h2 id="cap-12"><span class="chapter-num">Capitolul XII</span>PREVENIREA ȘI COMBATEREA HĂRȚUIRII</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-89"><span class="n">Art. 89</span>Politica de toleranță zero</a></li>
+        <li><a href="#art-90"><span class="n">Art. 90</span>Conduite relevante și delimitări</a></li>
+        <li><a href="#art-91"><span class="n">Art. 91</span>Responsabilul și comisia</a></li>
+        <li><a href="#art-92"><span class="n">Art. 92</span>Modalitatea de sesizare</a></li>
+        <li><a href="#art-93"><span class="n">Art. 93</span>Procedura informală</a></li>
+        <li><a href="#art-94"><span class="n">Art. 94</span>Analiza preliminară și măsurile de protecție</a></li>
+        <li><a href="#art-95"><span class="n">Art. 95</span>Investigația formală</a></li>
+        <li><a href="#art-96"><span class="n">Art. 96</span>Măsuri și procedura disciplinară</a></li>
+        <li><a href="#art-97"><span class="n">Art. 97</span>Confidențialitate, date și sprijin</a></li>
+        <li><a href="#art-98"><span class="n">Art. 98</span>Represalii și monitorizare</a></li>
+        <li><a href="#art-99"><span class="n">Art. 99</span>Căile externe și prevenția</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-89"><span class="num">Art. 89</span>Politica de toleranță zero</h3>
     <p>Angajatorul interzice hărțuirea pe criteriul de sex, hărțuirea sexuală, hărțuirea morală, violența și orice conduită care încalcă demnitatea ori creează un mediu intimidant, ostil, degradant, umilitor sau ofensator. Politica se aplică la locul de muncă, online, în deplasări, formări, evenimente și în interacțiunea cu pacienți, colaboratori și terți.</p>
     <h3 id="art-90"><span class="num">Art. 90</span>Conduite relevante și delimitări</h3>
@@ -1961,6 +2148,21 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XIII ============ -->
     <h2 id="cap-13"><span class="chapter-num">Capitolul XIII</span>RAPORTĂRILE PRIVIND ÎNCĂLCĂRI ALE LEGII</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-100"><span class="n">Art. 100</span>Domeniul procedurii de avertizare</a></li>
+        <li><a href="#art-101"><span class="n">Art. 101</span>Persoana desemnată și canalul intern</a></li>
+        <li><a href="#art-102"><span class="n">Art. 102</span>Raportarea și anonimatul</a></li>
+        <li><a href="#art-103"><span class="n">Art. 103</span>Înregistrarea și termenele</a></li>
+        <li><a href="#art-104"><span class="n">Art. 104</span>Acțiunile subsecvente</a></li>
+        <li><a href="#art-105"><span class="n">Art. 105</span>Confidențialitatea și drepturile persoanei vizate</a></li>
+        <li><a href="#art-106"><span class="n">Art. 106</span>Protecția împotriva represaliilor</a></li>
+        <li><a href="#art-107"><span class="n">Art. 107</span>Raportarea externă și divulgarea publică</a></li>
+        <li><a href="#art-108"><span class="n">Art. 108</span>Buna-credință și raportările neconfirmate</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-100"><span class="num">Art. 100</span>Domeniul procedurii de avertizare</h3>
     <p>Procedura se aplică raportărilor privind încălcări efective sau potențiale ale legii și încercări de ascundere, obținute într-un context profesional, de către salariați, foști salariați, candidați, independenți, membri ai organelor de conducere, voluntari, stagiari și personalul contractanților, precum și persoanelor protejate de Legea nr. 361/2022. O nemulțumire exclusiv personală se direcționează spre canalul potrivit, fără clasare automată înainte de analiza conținutului.</p>
     <h3 id="art-101"><span class="num">Art. 101</span>Persoana desemnată și canalul intern</h3>
@@ -1982,6 +2184,21 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XIV ============ -->
     <h2 id="cap-14"><span class="chapter-num">Capitolul XIV</span>DATE PERSONALE, CONFIDENȚIALITATE, IT ȘI INTELIGENȚĂ ARTIFICIALĂ</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-109"><span class="n">Art. 109</span>Principiile prelucrării datelor</a></li>
+        <li><a href="#art-110"><span class="n">Art. 110</span>Informarea și drepturile persoanelor vizate</a></li>
+        <li><a href="#art-111"><span class="n">Art. 111</span>Datele medicale și ale pacienților</a></li>
+        <li><a href="#art-112"><span class="n">Art. 112</span>Confidențialitatea profesională și comercială</a></li>
+        <li><a href="#art-113"><span class="n">Art. 113</span>Securitatea sistemelor și a dispozitivelor</a></li>
+        <li><a href="#art-114"><span class="n">Art. 114</span>Utilizarea inteligenței artificiale</a></li>
+        <li><a href="#art-115"><span class="n">Art. 115</span>Monitorizarea la locul de muncă</a></li>
+        <li><a href="#art-116"><span class="n">Art. 116</span>Comunicarea publică și rețelele sociale</a></li>
+        <li><a href="#art-117"><span class="n">Art. 117</span>Incidentele de date</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-109"><span class="num">Art. 109</span>Principiile prelucrării datelor</h3>
     <p>Angajatorul prelucrează datele salariaților, pacienților și partenerilor legal, echitabil și transparent, pentru scopuri determinate, limitat la ceea ce este necesar, cu date exacte, perioade de păstrare justificate și măsuri adecvate de securitate. Temeiul este stabilit pentru fiecare operațiune; consimțământul nu este folosit formal când, din cauza raportului de muncă ori a obligației legale, nu poate fi liber sau nu este necesar.</p>
     <h3 id="art-110"><span class="num">Art. 110</span>Informarea și drepturile persoanelor vizate</h3>
@@ -2006,6 +2223,17 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XV ============ -->
     <h2 id="cap-15"><span class="chapter-num">Capitolul XV</span>RĂSPUNDEREA PATRIMONIALĂ ȘI BUNURILE ANGAJATORULUI</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-118"><span class="n">Art. 118</span>Principiile răspunderii patrimoniale</a></li>
+        <li><a href="#art-119"><span class="n">Art. 119</span>Constatarea și recuperarea prejudiciului</a></li>
+        <li><a href="#art-120"><span class="n">Art. 120</span>Paguba produsă de mai multe persoane și sumele nedatorate</a></li>
+        <li><a href="#art-121"><span class="n">Art. 121</span>Utilizarea și predarea bunurilor</a></li>
+        <li><a href="#art-122"><span class="n">Art. 122</span>Autovehiculele de serviciu</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-118"><span class="num">Art. 118</span>Principiile răspunderii patrimoniale</h3>
     <p>Angajatorul despăgubește salariatul pentru prejudiciul material ori moral produs din culpa sa în legătură cu munca, iar salariatul răspunde pentru pagubele materiale produse Angajatorului din vină și în legătură cu munca. Salariatul nu răspunde pentru forță majoră, cauze neprevăzute și inevitabile ori riscul normal al serviciului.</p>
     <h3 id="art-119"><span class="num">Art. 119</span>Constatarea și recuperarea prejudiciului</h3>
@@ -2023,6 +2251,17 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XVI ============ -->
     <h2 id="cap-16"><span class="chapter-num">Capitolul XVI</span>FORMAREA PROFESIONALĂ ȘI DEZVOLTAREA</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-123"><span class="n">Art. 123</span>Politica generală de formare</a></li>
+        <li><a href="#art-124"><span class="n">Art. 124</span>Frecvența și costurile</a></li>
+        <li><a href="#art-125"><span class="n">Art. 125</span>Participarea și evaluarea instruirii</a></li>
+        <li><a href="#art-126"><span class="n">Art. 126</span>Formarea la inițiativa salariatului</a></li>
+        <li><a href="#art-127"><span class="n">Art. 127</span>Dezvoltarea și promovarea</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-123"><span class="num">Art. 123</span>Politica generală de formare</h3>
     <p>Formarea urmărește adaptarea la post, actualizarea competențelor, siguranța pacientului, calificarea, reconversia, utilizarea tehnologiilor, promovarea și prevenirea riscului profesional. Angajatorul întocmește planul anual în funcție de risc, evaluări, strategia și obligațiile profesionale și consultă reprezentanții salariaților când legea o impune.</p>
     <h3 id="art-124"><span class="num">Art. 124</span>Frecvența și costurile</h3>
@@ -2036,6 +2275,17 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XVII ============ -->
     <h2 id="cap-17"><span class="chapter-num">Capitolul XVII</span>PREAVIZ, ÎNCETAREA RAPORTULUI DE MUNCĂ ȘI PREDAREA</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-128"><span class="n">Art. 128</span>Reguli generale de preaviz</a></li>
+        <li><a href="#art-129"><span class="n">Art. 129</span>Interdicțiile și verificarea temeiului</a></li>
+        <li><a href="#art-130"><span class="n">Art. 130</span>Comunicarea actelor de încetare</a></li>
+        <li><a href="#art-131"><span class="n">Art. 131</span>Predarea și continuitatea</a></li>
+        <li><a href="#art-132"><span class="n">Art. 132</span>Documentele și drepturile finale</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-128"><span class="num">Art. 128</span>Reguli generale de preaviz</h3>
     <p>(1) Pentru concedierea în cazurile prevăzute de art. 61 lit. c) și d) și art. 65–66 din Codul muncii, preavizul nu poate fi mai mic de 20 de zile lucrătoare, fără a afecta o durată mai favorabilă. Excepțiile, inclusiv situația persoanei aflate în probă în condițiile legii, se aplică strict.</p>
     <p>(2) Termenul începe în ziua următoare comunicării notificării și se împlinește în ultima zi, iar suspendarea contractului suspendă preavizul în condițiile legii. Notificarea și decizia pot fi documente distincte ori organizate legal pentru cazul concret, după verificarea termenelor și a temeiului.</p>
@@ -2051,6 +2301,19 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ Capitolul XVIII ============ -->
     <h2 id="cap-18"><span class="chapter-num">Capitolul XVIII</span>DISPOZIȚII FINALE</h2>
+    <div class="hatnote">
+      <strong>Cuprins.</strong>
+      <ol class="chapter-toc">
+        <li><a href="#art-133"><span class="n">Art. 133</span>Adoptarea și consultarea</a></li>
+        <li><a href="#art-134"><span class="n">Art. 134</span>Comunicarea și opozabilitatea</a></li>
+        <li><a href="#art-135"><span class="n">Art. 135</span>Modificarea și controlul versiunii</a></li>
+        <li><a href="#art-136"><span class="n">Art. 136</span>Sesizarea privind legalitatea Regulamentului</a></li>
+        <li><a href="#art-137"><span class="n">Art. 137</span>Anexele și politicile separate</a></li>
+        <li><a href="#art-138"><span class="n">Art. 138</span>Intrarea în vigoare și abrogarea versiunii anterioare</a></li>
+        <li><a href="#art-139"><span class="n">Art. 139</span>Baza juridică și revizuirea</a></li>
+      </ol>
+    </div>
+
     <h3 id="art-133"><span class="num">Art. 133</span>Adoptarea și consultarea</h3>
     <p>Regulamentul se adoptă prin decizia reprezentantului legal al fiecărei entități angajatoare, cu consultarea salariaților, în condițiile legii, conform Fișei din Anexa nr. 1. Consultarea nu înseamnă drept de veto, dar observațiile sunt analizate real și consemnate.</p>
     <h3 id="art-134"><span class="num">Art. 134</span>Comunicarea și opozabilitatea</h3>
@@ -2219,12 +2482,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ § Registru de modificări ============ -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 6</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 7</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr><td>7</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista articolelor capitolului (generată din titlurile reale). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>6</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole/secțiuni: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px (unde există), iar primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>5</td><td>18 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V2.7 (ADC-RI-02) — conformare la conținutul minim legal prin completări punctuale, cu redactare minimală: reintegrare profesională (Art. 46), verificare la angajare (Art. 12), suspendare pentru absențe nemotivate (Art. 42), durata concediului fără plată prin acord (Art. 48), programul inegal (Art. 36), sancționarea expresă a hărțuirii (Art. 74), trimiteri dinamice la metodologia anti-hărțuire (Art. 91, 94–95), instruirea SSM, fumatul și radioprotecția (Art. 30, 73), concediul suplimentar de 3 zile (Art. 44), semnătura electronică — regim permisiv (Art. 19), concilierea (Art. 88); catalog granular al abaterilor (Art. 74), separarea bonus–evaluare profesională (Art. 51, Anexa nr. 3), eliminarea alineatului declarativ privind negocierea colectivă (Art. 13), înlocuirea englezismelor neconsacrate și a termenului „prospectiv", regimul dovezii de comunicare fără confirmare semnată (Art. 19, 134), modalitățile de comunicare a convocărilor (Art. 64, 79), reformularea naturii juridice a PIP (Art. 66), mutarea citărilor de jurisprudență în Art. 139, adoptarea cu consultarea directă a tuturor salariaților, data plății „până cel târziu pe 15" cu prioritatea CIM (Art. 49), ferestrele de funcționare în formulare generică (Art. 36) și simplificarea structurală: eliminarea Anexelor nr. 3 și 5–13, cu migrarea registrului documentelor subordonate într-o procedură separată, a formularelor în modele de lucru și a etichetelor în Art. 5. Numerotarea articolelor V2.6 este păstrată; anexele finale sunt nr. 1–3 (adoptare, luare la cunoștință, standardul instrumentelor de performanță).</td></tr>
         <tr><td>4</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea Ediției V2.6 (ADC-RI-02) — actualizare concentrată asupra ierarhiei documentelor și a Registrului online: RI declarat expres documentul cu cel mai înalt rang intern (Art. 4, 5, 15), Registrul Digital Oficial redenumit „Registrul online al documentelor interne" cu trimiteri bidirecționale față de manuale (Art. 19, 20, 134, 135, 137, Anexa nr. 13), iar Anexa nr. 2 (Declarație de luare la cunoștință) înlocuită cu un formular individual de o pagină generat de ERP. Structura de 18 capitole, articolele 1–139 (plus Art. 43^1) și cele 13 anexe rămân neschimbate.</td></tr>
@@ -2518,6 +2782,39 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
       headingEl.appendChild(btn);
     })(i, end, el);
   }
+})();
+</script>
+
+<script>
+/* Cuprinsul de capitol (hatnote de sub titlu) — pliabil, închis implicit */
+(function(){
+  document.querySelectorAll('.hatnote').forEach(function(note){
+    if(!note.querySelector('.chapter-toc')) return;
+    var h2 = note.previousElementSibling;
+    if(!h2 || h2.tagName !== 'H2') return;
+    if(!note.id) note.id = 'cuprins-' + (h2.id || 'cap-x');
+    note.setAttribute('hidden','');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'hatnote-toggle';
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-controls', note.id);
+    btn.setAttribute('aria-label','Comută cuprinsul capitolului');
+    btn.title = 'Cuprinsul capitolului';
+    btn.innerHTML = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 2 8 6 4 10"/></svg>';
+    btn.addEventListener('click',function(){
+      var open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+      if(open){note.setAttribute('hidden','')} else {note.removeAttribute('hidden')}
+    });
+    var meta = h2.querySelector('.chapter-meta');
+    if(!meta){
+      meta = document.createElement('span');
+      meta.className = 'chapter-meta';
+      h2.appendChild(meta);
+    }
+    meta.appendChild(btn);
+  });
 })();
 </script>
 </body>
