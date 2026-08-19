@@ -829,5 +829,95 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Structura organizațională a rețelei și fluxuri de escaladare"
       }
     ]
+  },
+  "18": {
+    "commit": "e0eed18c0cf1d28ab488104dc90a88ca680964bd",
+    "before": "5a7eb64210338e927a6fe872d8f1c70a34f2f125",
+    "sections": [
+      {
+        "id": "bibliografie",
+        "title": "Documente de referință și legislație aplicabilă"
+      },
+      {
+        "id": "cap-21",
+        "title": "Capitolul XXIMonitorizarea indicatorilor cheie de performanță (KPI)"
+      },
+      {
+        "id": "cap-21-1",
+        "title": "1. KPI calitativi lunari — Asistenții Medicali"
+      },
+      {
+        "id": "cap-21-2",
+        "title": "2. Fișa de bonus lunar — Asistentul Medical Șef"
+      },
+      {
+        "id": "cap-22",
+        "title": "Capitolul XXIIEvaluarea performanței Asistentului Medical"
+      },
+      {
+        "id": "cap-22-1",
+        "title": "1. Misiunea Clinicilor Dr. Ardeleanu"
+      },
+      {
+        "id": "cap-22-2",
+        "title": "2. Date de identificare a postului"
+      },
+      {
+        "id": "cap-22-3",
+        "title": "3. Nivel de certificare și autorizare"
+      },
+      {
+        "id": "cap-22-4",
+        "title": "4. Atribuții generale"
+      },
+      {
+        "id": "cap-22-5",
+        "title": "5. Atribuții specifice. Misiune"
+      },
+      {
+        "id": "cap-22-6",
+        "title": "6. Evaluarea performanței"
+      },
+      {
+        "id": "cap-22-7",
+        "title": "7. Dispoziții finale"
+      },
+      {
+        "id": "cap-23",
+        "title": "Capitolul XXIIIFișa de post — Asistent Medical Generalist"
+      },
+      {
+        "id": "cap-23-1",
+        "title": "1. Misiunea Clinicilor Dr. Ardeleanu"
+      },
+      {
+        "id": "cap-23-2",
+        "title": "2. Date de identificare a postului"
+      },
+      {
+        "id": "cap-23-3",
+        "title": "3. Nivel de certificare și autorizare"
+      },
+      {
+        "id": "cap-23-4",
+        "title": "4. Atribuții generale"
+      },
+      {
+        "id": "cap-23-5",
+        "title": "5. Atribuții specifice. Misiune"
+      },
+      {
+        "id": "cap-23-6",
+        "title": "6. Evaluarea performanței"
+      },
+      {
+        "id": "cap-23-7",
+        "title": "7. Dispoziții finale"
+      },
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
   }
 };
