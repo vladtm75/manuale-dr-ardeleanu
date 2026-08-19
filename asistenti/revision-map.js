@@ -991,5 +991,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Despre acest manual cod: ASM-03"
       }
     ]
+  },
+  "27": {
+    "commit": "7b3a3f1ae7bbbf1147aa609afe2254c72efa7a82",
+    "before": "12fc4c606af22c618093ebd019fd8d6077f6c1fb",
+    "sections": [
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
   }
 };
