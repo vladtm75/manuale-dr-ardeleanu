@@ -971,5 +971,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "3. Procedura materialelor video lunare (KPI 2)"
       }
     ]
+  },
+  "23": {
+    "commit": "9eee2d23929207b49c5d5af7091ee1aaa1a843d7",
+    "before": "2ab0862477f7b466e3c9283431dfd442b05ec412",
+    "sections": [
+      {
+        "id": "cap-2-arhiva",
+        "title": "7. Consimțămintele specifice și arhivarea"
+      }
+    ]
   }
 };
