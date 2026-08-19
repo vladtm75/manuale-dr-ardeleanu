@@ -388,6 +388,11 @@ a:hover{border-bottom-color:var(--brand-primary)}
   vertical-align:middle;margin-left:10px;font-weight:500;
   letter-spacing:0;
 }
+/* Rândul de metadate de sub titlul de capitol — eticheta de cod + butonul de cuprins,
+   pe rând propriu, ca titlul să nu se rupă în jurul lor */
+.article h2 .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px}
+.article h2 .chapter-meta .chapter-code{margin-left:0}
+.article h2 .chapter-meta .hatnote-toggle{margin-left:0}
 .article h3{
   font-family:'Poppins',sans-serif;font-weight:600;
   color:var(--brand-primary);font-size:21px;
@@ -1930,7 +1935,7 @@ html{scroll-behavior:smooth}
     <h3>Roluri transversale</h3>
     <p>În fluxul pacientului vei colabora frecvent cu două roluri-cheie ale rețelei. <strong>APT — Arhitectul Planului de Tratament</strong> — este un <strong>medic</strong>, de regulă medicul care coordonează cazul: el validează diagnosticul, integrează opiniile colegilor din alte specialități și construiește planul de tratament unitar pentru cazurile complexe, multidisciplinare. <strong>KPG — Key Patient Guide</strong> — este <strong>coordonatorul de pacienți, rol îndeplinit de Managerul de Clinică</strong>: ghidează pacientul pe tot parcursul, de la prezentarea planului de tratament și programări, până la menținerea legăturii pentru continuitate și retenție.</p>
 
-    <h2 id="cap-1"><span class="chapter-num">Capitolul I</span>Activitățile asistenței medicale și fluxul pacientului <span class="chapter-code">ASM</span></h2>
+    <h2 id="cap-1"><span class="chapter-num">Capitolul I</span>Activitățile asistenței medicale și fluxul pacientului <span class="chapter-meta"><span class="chapter-code">ASM</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Rolul asistentului medical, comunicarea cu pacientul și regulile generale de organizare a activității și a cabinetului — fundamentul pe care se construiesc toate protocoalele clinice.
@@ -2567,7 +2572,7 @@ html{scroll-behavior:smooth}
     <!-- =================================================================== -->
     <div class="chap-divider">Partea II · Protocoale Clinice</div>
 
-    <h2 id="cap-3"><span class="chapter-num">Capitolul III</span>Protocol medical de asistență în stomatologia generală <span class="chapter-code">ADC-STG-01</span></h2>
+    <h2 id="cap-3"><span class="chapter-num">Capitolul III</span>Protocol medical de asistență în stomatologia generală <span class="chapter-meta"><span class="chapter-code">ADC-STG-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Atribuțiile asistentului în stomatologia generală — definiții, protocolul din perspectiva medicului și protocolul propriu al asistentei medicale.
@@ -2683,7 +2688,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL IV  ============================= -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-4"><span class="chapter-num">Capitolul IV</span>Protocol medical de asistență în endodonție <span class="chapter-code">ADC-END-01</span></h2>
+    <h2 id="cap-4"><span class="chapter-num">Capitolul IV</span>Protocol medical de asistență în endodonție <span class="chapter-meta"><span class="chapter-code">ADC-END-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Asistența în tratamentul endodontic — de la pregătirea cabinetului și primirea pacientului, până la irigarea canalară și pregătirea pentru pacientul următor.
@@ -2849,7 +2854,7 @@ html{scroll-behavior:smooth}
       .article .appliance-table td:first-child strong{ color:var(--brand-primary); }
     </style>
 
-    <h2 id="cap-5"><span class="chapter-num">Capitolul V</span>Protocol medical de asistență în ortodonție <span class="chapter-code">ADC-ORT-01</span></h2>
+    <h2 id="cap-5"><span class="chapter-num">Capitolul V</span>Protocol medical de asistență în ortodonție <span class="chapter-meta"><span class="chapter-code">ADC-ORT-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Acest capitol descrie protocolul de asistență medicală pentru tratamentele ortodontice — de la pregătirea dosarului și a cabinetului, până la cele 9 manopere clinice grupate pe faze (aplicare aparat · finalizare tratament · control și demontare).
@@ -3135,7 +3140,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL VI  ============================= -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-6"><span class="chapter-num">Capitolul VI</span>Protocol medical de asistență în pedodonție <span class="chapter-code">ADC-PED-01</span></h2>
+    <h2 id="cap-6"><span class="chapter-num">Capitolul VI</span>Protocol medical de asistență în pedodonție <span class="chapter-meta"><span class="chapter-code">ADC-PED-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Particularitățile asistenței stomatologice la copii — comunicare adaptată, radiologie pediatrică și manoperele specifice, de la sigilări la tratamentul ICON.
@@ -3311,7 +3316,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL VII  ============================ -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-7"><span class="chapter-num">Capitolul VII</span>Protocol medical de asistență în chirurgie <span class="chapter-code">ADC-CHR-01</span></h2>
+    <h2 id="cap-7"><span class="chapter-num">Capitolul VII</span>Protocol medical de asistență în chirurgie <span class="chapter-meta"><span class="chapter-code">ADC-CHR-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Asistența în chirurgia orală — reguli generale de sterilitate și instrumentarul specific chirurgiei mici și al chirurgiei mari.
@@ -3453,7 +3458,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL VIII  =========================== -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-8"><span class="chapter-num">Capitolul VIII</span>Protocol medical de asistență în protetică <span class="chapter-code">ADC-PRO-01</span></h2>
+    <h2 id="cap-8"><span class="chapter-num">Capitolul VIII</span>Protocol medical de asistență în protetică <span class="chapter-meta"><span class="chapter-code">ADC-PRO-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Asistența în protetica dentară — amprentare pe implant, analiză ocluzală, scanare digitală și protocoalele de cimentare a coroanelor și fațetelor.
@@ -3547,7 +3552,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL IX  ============================== -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-9"><span class="chapter-num">Capitolul IX</span>Protocol medical de asistență în parodontologie <span class="chapter-code">ADC-PAR-01</span></h2>
+    <h2 id="cap-9"><span class="chapter-num">Capitolul IX</span>Protocol medical de asistență în parodontologie <span class="chapter-meta"><span class="chapter-code">ADC-PAR-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Asistența în parodontologie — definiții, protocoalele medicului și ale asistentei, instrumentarul parodontal și tratamentul cu laser.
@@ -3664,7 +3669,7 @@ html{scroll-behavior:smooth}
     <!-- =================================================================== -->
     <div class="chap-divider">Partea III · Proceduri Operaționale</div>
 
-    <h2 id="cap-10"><span class="chapter-num">Capitolul X</span>Procedura de utilizare a uniformei <span class="chapter-code">ADC-UNF-02</span></h2>
+    <h2 id="cap-10"><span class="chapter-num">Capitolul X</span>Procedura de utilizare a uniformei <span class="chapter-meta"><span class="chapter-code">ADC-UNF-02</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Reguli privind uniforma de lucru — tipurile de uniformă, modul de purtare și aspectul profesional, cu responsabilitățile aferente.
@@ -3770,7 +3775,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XI  =============================== -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-11"><span class="chapter-num">Capitolul XI</span>Procedura de sterilizare <span class="chapter-code">ADC-STE-01</span></h2>
+    <h2 id="cap-11"><span class="chapter-num">Capitolul XI</span>Procedura de sterilizare <span class="chapter-meta"><span class="chapter-code">ADC-STE-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Procedura completă de sterilizare — curățarea, autoclavarea cu trasabilitate SPSS și testele de verificare a autoclavului (Vacuum, Bowie-Dick, Helix, Biologic).
@@ -3984,7 +3989,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XII  ============================ -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-12"><span class="chapter-num">Capitolul XII</span>Procedura de gestiune deșeuri medicale <span class="chapter-code">ADC-DSM-01</span></h2>
+    <h2 id="cap-12"><span class="chapter-num">Capitolul XII</span>Procedura de gestiune deșeuri medicale <span class="chapter-meta"><span class="chapter-code">ADC-DSM-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Gestiunea deșeurilor medicale — clasificarea pe categorii și regulile de colectare, depozitare și predare pentru fiecare tip de deșeu.
@@ -4082,7 +4087,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XIII  =========================== -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-13"><span class="chapter-num">Capitolul XIII</span>Procedura de gestiune pentru materiale consumabile medicale <span class="chapter-code">ADC-MAC-01</span></h2>
+    <h2 id="cap-13"><span class="chapter-num">Capitolul XIII</span>Procedura de gestiune pentru materiale consumabile medicale <span class="chapter-meta"><span class="chapter-code">ADC-MAC-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Gestiunea materialelor consumabile — fluxul de comandă, aprobare, recepție și inventar, cu indicatorii de performanță aferenți.
@@ -4250,7 +4255,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XIV  =========================== -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-14"><span class="chapter-num">Capitolul XIV</span>Procedura de mentenanță a echipamentelor medicale <span class="chapter-code">ADC-ECH-01</span></h2>
+    <h2 id="cap-14"><span class="chapter-num">Capitolul XIV</span>Procedura de mentenanță a echipamentelor medicale <span class="chapter-meta"><span class="chapter-code">ADC-ECH-01</span></span></h2>
 
     <p>Mentenanța echipamentelor medicale asigură funcționarea optimă, prelungirea duratei de viață și siguranța în utilizare. <strong>Asistentul medical este responsabil de menținerea în bune condiții a tuturor bunurilor și echipamentelor încredințate de companie ca instrumente de lucru în clinică.</strong> Acesta răspunde de mentenanța preventivă zilnică, iar mentenanța programată anuală se realizează prin service de specialitate.</p>
 
@@ -4275,7 +4280,7 @@ html{scroll-behavior:smooth}
     <!-- =================================================================== -->
     <div class="chap-divider">Partea IV · Digital &amp; Imagistică</div>
 
-    <h2 id="cap-15"><span class="chapter-num">Capitolul XV</span>Procedura medicală operațională de radiologie și PACS <span class="chapter-code">ADC-RAD-01</span></h2>
+    <h2 id="cap-15"><span class="chapter-num">Capitolul XV</span>Procedura medicală operațională de radiologie și PACS <span class="chapter-meta"><span class="chapter-code">ADC-RAD-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Procedura de radiologie și sistemul PACS — accesare și utilitate, responsabilitățile registratorului și ale asistentului la RX/CBCT, dozimetrie și inspecții.
@@ -4489,7 +4494,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XVI  =========================== -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-16"><span class="chapter-num">Capitolul XVI — Capitol nou V3</span>Procedura de scanare intraorală digitală și încărcare în SmileCloud <span class="chapter-code">ADC-DSD-02</span></h2>
+    <h2 id="cap-16"><span class="chapter-num">Capitolul XVI — Capitol nou V3</span>Procedura de scanare intraorală digitală și încărcare în SmileCloud <span class="chapter-meta"><span class="chapter-code">ADC-DSD-02</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Procedura de scanare intraorală digitală cu sistemul Medit și încărcarea cazului în SmileCloud — de la pregătire la controlul calității și export.
@@ -4667,7 +4672,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XVII  =========================== -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-17"><span class="chapter-num">Capitolul XVII — Capitol nou V3</span>Realizarea fotografiilor intraorale și extraorale <span class="chapter-code">ADC-DSD-02</span></h2>
+    <h2 id="cap-17"><span class="chapter-num">Capitolul XVII — Capitol nou V3</span>Realizarea fotografiilor intraorale și extraorale <span class="chapter-meta"><span class="chapter-code">ADC-DSD-02</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Realizarea fotografiilor intra- și extraorale — echipamente, pregătirea pacientului, protocolul fotografic și criteriile de calitate.
@@ -4806,7 +4811,7 @@ html{scroll-behavior:smooth}
     <!-- =================================================================== -->
     <div class="chap-divider">Partea V · Siguranță &amp; Ordine</div>
 
-    <h2 id="cap-18"><span class="chapter-num">Capitolul XVIII</span>Procedura de acordare prim ajutor și trusa de urgență <span class="chapter-code">ADC-AJT-01</span></h2>
+    <h2 id="cap-18"><span class="chapter-num">Capitolul XVIII</span>Procedura de acordare prim ajutor și trusa de urgență <span class="chapter-meta"><span class="chapter-code">ADC-AJT-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Acordarea primului ajutor în cabinet și conținutul trusei de urgență, cu responsabilitățile și instruirea aferente.
@@ -4875,7 +4880,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XIX  ============================ -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-19"><span class="chapter-num">Capitolul XIX</span>Procedura ordine, igienă și securitate la locul de muncă <span class="chapter-code">ADC-OIM-02</span></h2>
+    <h2 id="cap-19"><span class="chapter-num">Capitolul XIX</span>Procedura ordine, igienă și securitate la locul de muncă <span class="chapter-meta"><span class="chapter-code">ADC-OIM-02</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Reguli de ordine, igienă personală și securitate la locul de muncă, plus procedura de deschidere/închidere a clinicii. Curățenia și dezinfecția spațiilor sunt guvernate integral de <a href="#cap-20">Capitolul XX — ADC-CUR-01</a>.
@@ -4983,7 +4988,7 @@ html{scroll-behavior:smooth}
     <!-- ====================  CAPITOLUL XX (NOU)  ========================= -->
     <!-- =================================================================== -->
 
-    <h2 id="cap-20"><span class="chapter-num">Capitolul XX</span>Procedura de curățenie, dezinfecție, ordine și siguranță <span class="chapter-code">ADC-CUR-01</span></h2>
+    <h2 id="cap-20"><span class="chapter-num">Capitolul XX</span>Procedura de curățenie, dezinfecție, ordine și siguranță <span class="chapter-meta"><span class="chapter-code">ADC-CUR-01</span></span></h2>
 
     <div class="hatnote">
       <strong>Cuprins.</strong> Procedura completă privind organizarea, executarea, verificarea și evaluarea activităților de curățenie, dezinfecție, ordine și siguranță în toate clinicile rețelei — responsabilități, standarde pe zone, codificarea mopurilor, neconformități și evaluarea lunară KPI 3. Versiunea 1.5 · august 2026.
@@ -5469,12 +5474,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 31</strong> · 19 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 32</strong> · 19 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>32</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Titlurile de capitol: eticheta de cod a procedurii (ex. ADC-CUR-01) și butonul de deschidere a cuprinsului de capitol coboară pe un rând propriu, sub titlu — până acum stăteau inline la capătul titlului și, la titlurile lungi, eticheta se rupea pe două rânduri. Doar prezentare — fără modificări de conținut.</td></tr>
             <tr><td>31</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Trei ajustări: FIG. V·1 (instrumentarul de demontare ortodontică, Cap. V 4.8) trecută de la formatul mic flotant la lățimea întreagă a coloanei; listele de definiții (casetele „Definiții" din capitolele de proceduri) așezate pe două coloane pe desktop — pe mobil rămân pe o coloană; secțiunea finală „Documente de referință și legislație aplicabilă" redenumită „Legislație aplicabilă" (după eliminarea Anexelor la rev. 30), cu actualizarea trimiterilor din Cuprins și din „Vezi și"; separatorul de secțiune „Anexe" și grupul corespunzător din Cuprinsul lateral redenumite „Referințe".</td></tr>
             <tr><td>30</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminat capitolul „Anexe" de la finalul manualului: A.1 și A.2 (fișele de evaluare lunară — Departament Medical/Operațional) scoase complet, iar A.3 (Fișa de trasabilitate sterilizare) și A.4 (Registrul de Sterilizare) mutate în Capitolul XI, subcapitolele 5.4 și 5.5 — care descriau deja integral cele două documente — sub forma unor carduri de descărcare PDF, marcate „PDF în pregătire" până la furnizarea modelelor. Caseta „Acces digital" (ERP) a plecat odată cu capitolul.</td></tr>
             <tr><td>29</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul II, secțiunea API: cardul de descărcare ADC-ONB-03 (Acordul Pacientului Informat) primește o variantă compactă și curge acum în coloana de text, pe același rând cu FIG. II·TEL, în loc să coboare sub fotografie — dispare golul vizual. Tabelul consimțămintelor speciale (olograf/digital) restrâns: rânduri mai dense, font ușor redus, coloanele de bifă mai înguste. Doar prezentare — fără modificări de conținut.</td></tr>
@@ -5741,7 +5747,13 @@ html{scroll-behavior:smooth}
       btn.setAttribute('aria-expanded', open?'false':'true');
       if(open){note.setAttribute('hidden','')} else {note.removeAttribute('hidden')}
     });
-    h2.appendChild(btn);
+    let meta = h2.querySelector('.chapter-meta');
+    if(!meta){
+      meta = document.createElement('span');
+      meta.className = 'chapter-meta';
+      h2.appendChild(meta);
+    }
+    meta.appendChild(btn);
   });
 })();
 </script>
