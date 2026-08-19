@@ -303,8 +303,8 @@ window.MEDICI_REVISION_MAP = {
     ]
   },
   "40": {
-    "commit": "6d014ef38b2748d3c25a47b5cf880df7379ca54c",
-    "before": "a593e30759b739dfab867b8790910fc38b057d2d",
+    "commit": "e980ef3d20763684b7f18ab12c29c429767f577c",
+    "before": "2ab0862477f7b466e3c9283431dfd442b05ec412",
     "sections": [
       {
         "id": "cap-1-10",
