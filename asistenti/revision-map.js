@@ -961,5 +961,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "3. Procedura materialelor video lunare (KPI 2)"
       }
     ]
+  },
+  "22": {
+    "commit": "101a04767739fac9e6901f94e2f33c753beb7dfe",
+    "before": "1c5cfead1a1b28e50a99b57e6d9e5d96b60df563",
+    "sections": [
+      {
+        "id": "cap-21-3",
+        "title": "3. Procedura materialelor video lunare (KPI 2)"
+      }
+    ]
   }
 };
