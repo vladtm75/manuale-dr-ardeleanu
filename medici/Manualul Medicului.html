@@ -298,7 +298,8 @@
 
 
   /* sections */
-  h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; color:var(--ink); margin:48px 0 8px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; display:flex; align-items:baseline; gap:12px; }
+  h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; color:var(--ink); margin:84px 0 8px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; display:flex; align-items:baseline; gap:12px; }
+  h2.ch:first-of-type{margin-top:32px}
   h2.ch .rn{ font-size:20px; color:var(--amber); }
   .ch-desc{ color:var(--muted); font-size:14px; margin:0 0 6px; }
   h3.sub{ font-family:"Poppins",sans-serif; font-weight:600; font-size:21px; color:var(--primary); margin:34px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line); scroll-margin-top:78px; display:flex; align-items:baseline; gap:10px; }
@@ -996,12 +997,13 @@
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 39</strong> · 16 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 40</strong> · 19 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr data-rev="40"><td>40</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole: spațiul de deasupra titlurilor de capitol (h2.ch) mărit de la 48px la 84px; primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr data-rev="39"><td>39</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>§1 „Despre acest manual": elimină paragraful introductiv narativ („Acest manual este harta după care lucrăm…"), acum redundant cu preambulul formal, și mută caseta „Document părinte" la finalul secțiunii „Statutul contractual al manualului", unde ierarhia Contract → Anexe → Manual e deja explicată în text.</td><td class="rev-na">—</td></tr>
               <tr data-rev="38"><td>38</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>Text hero: elimină numărul de clinici din subtitlu (se schimbă independent de conținutul manualului) și mută accentul pe calitatea actului medical. Cap. 1, descrierea capitolului: elimină formularea colocvială „Mersul în Dr. Ardeleanu".</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="38"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
               <tr class="rev-old" data-rev-old="38" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 38</span><button type="button" class="rev-old-close" data-rev-close="38">✕ Închide</button></div><div class="rev-old-content" data-rev-body="38"></div></div></td></tr>
