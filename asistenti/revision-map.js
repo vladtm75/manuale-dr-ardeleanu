@@ -1103,5 +1103,47 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Despre acest manual cod: ASM-03"
       }
     ]
+  },
+  "35": {
+    "commit": "3c62e57ffc71e2d1ed7648cf677d6f8f673bab0a",
+    "before": "f92e50e14bcddc865eea4b4c3a6292ba15532192",
+    "sections": [
+      {
+        "id": "cap-22",
+        "title": "Capitolul XXIIFișa de post — Asistent Medical Generalist"
+      },
+      {
+        "id": "cap-22-1",
+        "title": "1. Misiunea Clinicilor Dr. Ardeleanu"
+      },
+      {
+        "id": "cap-22-2",
+        "title": "2. Date de identificare a postului"
+      },
+      {
+        "id": "cap-22-3",
+        "title": "3. Nivel de certificare și autorizare"
+      },
+      {
+        "id": "cap-22-4",
+        "title": "4. Atribuții generale"
+      },
+      {
+        "id": "cap-22-5",
+        "title": "5. Atribuții specifice. Misiune"
+      },
+      {
+        "id": "cap-22-6",
+        "title": "6. Evaluarea performanței"
+      },
+      {
+        "id": "cap-22-7",
+        "title": "7. Dispoziții finale"
+      },
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
   }
 };
