@@ -13,6 +13,11 @@ ale altei sesiuni. Adaugă explicit căile pe care le-ai editat.
 Mesajul de commit, în română, trebuie să conțină `rev. N` pentru documentele cu revision-map
 (asistenți, medici, registratori) — generatorul identifică revizia din mesaj.
 
+Dacă hook-ul refuză commit-ul cu „coliziune de număr de revizie", numărul din primul rând al
+registrului e deja consumat (publicat în main, folosit pe altă ramură deschisă sau rezervat de altă
+sesiune). Treci rândul **și** „Revizia curentă" pe numărul propus în mesaj și comite din nou; nu
+ocoli verificarea.
+
 ## 2. Regenerează harta reviziilor (asistenți / medici / registratori)
 
 ```
