@@ -75,29 +75,35 @@ nu sunt sfaturi: o parte sunt impuse tehnic de hook-urile din `.claude/settings.
    `python3 scripts/adc.py new-session vlad <subiect>` — creează un `git worktree` izolat și ramura
    `edit/vlad-<subiect>` din `origin/main` la zi. Nu se editează în checkout-ul principal
    (`~/Desktop/Manaule Dr.Ardeleanu`) cât timp `status` arată alte worktree-uri active.
-2. **Numărul de revizie se rezervă înainte de a fi scris** în registrul documentului:
+2. **Un document per sesiune, la un moment dat.** Două sesiuni care editează același manual pe
+   ramuri diferite fie intră în conflict la al doilea PR, fie — mai rău — se auto-merge-uiesc curat
+   și lasă două rânduri de registru sau două intrări de cuprins pentru aceeași schimbare. Git nu
+   poate preveni asta și hook-urile nu o văd: e o regulă de împărțire a sarcinilor, aplicată de Vlad
+   când pornește sesiunile. Dacă o sarcină cere totuși două sesiuni pe același document, ele se
+   serializează — a doua pornește după merge-ul primei, din `origin/main` la zi.
+3. **Numărul de revizie se rezervă înainte de a fi scris** în registrul documentului:
    `python3 scripts/adc.py claim <asistenti|medici|registratori|roi|proc-ben|proc-reg>`. Rezervările
    stau în directorul git comun, deci sunt vizibile din toate worktree-urile; `status` arată și
    reviziile „în lucru" pe ramuri nemerge-uite. La abandon: `release <doc>`.
-3. **Se comit doar fișierele proprii, pe căi explicite.** `git add -A`, `git add .` și
+4. **Se comit doar fișierele proprii, pe căi explicite.** `git add -A`, `git add .` și
    `git commit -a` sunt blocate de hook — în worktree pot exista modificări ale altei sesiuni.
-4. **Nimic pe `main`.** Hook-ul blochează `commit`/`push` cu `HEAD` pe main, push-ul direct în main,
+5. **Nimic pe `main`.** Hook-ul blochează `commit`/`push` cu `HEAD` pe main, push-ul direct în main,
    `push --force` fără lease, schimbarea ramurii cu fișiere modificate necomise și
    `reset --hard` / `clean -f` / `restore .` când worktree-ul e murdar.
-5. **Coliziunile de revizie sunt imposibile, nu doar improbabile.** Orice `git commit` care aduce în
+6. **Coliziunile de revizie sunt imposibile, nu doar improbabile.** Orice `git commit` care aduce în
    index un document cu registru e verificat de hook: dacă numărul din primul rând al registrului e
    deja consumat — publicat în `origin/main`, folosit pe altă ramură nemerge-uită sau rezervat de
    altă ramură — commit-ul e refuzat, cu numărul liber propus în mesaj. Hook-ul nu face rețea, deci
    citește starea de la ultimul `git fetch`; dacă numărul propus pare greșit, rulează
    `git fetch origin` și `python3 scripts/adc.py status`.
-6. **Înainte de PR:** `python3 scripts/adc.py preflight` — verifică ramura, izolarea, sincronizarea
+7. **Înainte de PR:** `python3 scripts/adc.py preflight` — verifică ramura, izolarea, sincronizarea
    cu `origin/main`, unicitatea numărului de revizie față de main și de celelalte ramuri deschise,
    potrivirea dintre primul rând al registrului și „Revizia curentă", regenerarea
    `revision-map.js`, prezența lui `rev. N` în mesajul de commit, diacriticele și echilibrul
    tag-urilor HTML. Nu se deschide PR cu `✗` nerezolvat.
-7. **Merge serializat.** Vlad face merge la un PR pe rând; după fiecare merge, celelalte sesiuni fac
+8. **Merge serializat.** Vlad face merge la un PR pe rând; după fiecare merge, celelalte sesiuni fac
    `git fetch origin` și `git rebase origin/main` dacă ating aceleași fișiere.
-8. Protocolul e disponibil și ca skill-uri: `sesiune-noua` (la început) și `pr-manuale` (la final).
+9. Protocolul e disponibil și ca skill-uri: `sesiune-noua` (la început) și `pr-manuale` (la final).
 
 ## Stilul redacțional — manual-proză (OBLIGATORIU la orice conținut nou sau rescris)
 
