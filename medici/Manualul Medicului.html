@@ -1219,12 +1219,13 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 47</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 48</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>48</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Butonul de printare pe capitol nu mai apare la „Despre acest manual" — secțiunea introductivă nu este un capitol care se dă la citit sau la semnat separat, iar pentru documentul integral există butonul „PDF" din bara de sus. Restul capitolelor păstrează butonul (rev. 46). Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>47</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminat footerul compact de document, care rămăsese deasupra footerului de rețea adăugat la rev. 44 — manualul are acum un singur footer, ca toate celelalte documente. Informația din el se regăsește în altă parte: ediția și codul în coloana „Document" a footerului de rețea și în antet, contactul în coloana „Contact &amp; Acces", iar data, autoarea și aprobarea în rândul rev. 1 al acestui registru („1 martie 2026 · Loredana Manoiu · Prima versiune integrată V1.0, aprobare conducere"). Nu se mai regăsesc nicăieri mențiunea „Document intern confidențial" — pe care nu o are niciun alt manual — și nota „Numerotarea paginilor este provizorie". Eliminate și cele patru reguli CSS „.foot", devenite cod mort.</td><td class="rev-na">—</td></tr>
               <tr><td>46</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Facilitate nouă, comună tuturor manualelor și Regulamentului Intern: lângă butonul de deschidere a cuprinsului de capitol, pe rândul de metadate de sub fiecare titlu de capitol, apare un buton de printare care trimite la imprimantă — sau salvează ca PDF — numai capitolul respectiv. Pe durata printării, coperta, cuprinsul integral și restul documentului sunt ascunse, extrasul primește un cap de pagină cu sigla și denumirea documentului („Extras pe capitol din documentul integral"), iar numele implicit al fișierului PDF devine „&lt;titlul capitolului&gt; — &lt;denumirea documentului&gt;"; după printare pagina revine exact în starea de dinainte. Completează butonul „PDF" din bara de sus (rev. 45), care rămâne pentru printarea documentului integral. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>45</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-MED-01) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează manualul integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td><td class="rev-na">—</td></tr>
@@ -1775,6 +1776,10 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
 
   var SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>';
   groups.forEach(function(g){
+    /* Preambulul („Despre acest manual" / „Preambul") nu primește buton de printare —
+       nu e un capitol care se dă la citit separat. */
+    var gid=(g.h2.id||(g.els[0]&&g.els[0].id)||'').toLowerCase();
+    if(gid==='despre'||gid==='preambul') return;
     var btn=document.createElement('button');
     btn.type='button';
     btn.className='hatnote-toggle chap-print';
