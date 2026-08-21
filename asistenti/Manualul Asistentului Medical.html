@@ -1275,7 +1275,7 @@ html{scroll-behavior:smooth}
 }
 
 /* Fișele de post — printare ca formular de semnat */
-.fisa-print-btn{
+.fisa-print-btn,.fisa-doc-btn{
   display:inline-flex;align-items:center;gap:7px;
   margin:2px 0 16px;padding:7px 13px;
   background:var(--paper-pure);border:1px solid var(--rule);
@@ -1284,8 +1284,12 @@ html{scroll-behavior:smooth}
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
   cursor:pointer;transition:background .14s,color .14s,border-left-color .14s;
 }
-.fisa-print-btn:hover{background:var(--brand-cream-warm);color:var(--brand-primary);border-left-color:var(--brand-primary)}
-.fisa-print-btn svg{width:14px;height:14px;color:var(--brand-primary)}
+.fisa-print-btn:hover,.fisa-doc-btn:hover{background:var(--brand-cream-warm);color:var(--brand-primary);border-left-color:var(--brand-primary)}
+.fisa-print-btn svg,.fisa-doc-btn svg{width:14px;height:14px;color:var(--brand-primary)}
+.fisa-doc-btn{margin-left:8px}
+/* câmp de completat de mână în formular + indiciul afișat doar pe ecran */
+.article td.value-line{border-bottom:1px solid var(--ink-mute)}
+.article .ph{color:var(--ink-mute);font-style:italic}
 .fisa-sign{display:none}
 @media print{
   body.print-fisa .topbar,
@@ -1294,7 +1298,10 @@ html{scroll-behavior:smooth}
   body.print-fisa .toc-side,
   body.print-fisa footer,
   body.print-fisa #mobileNotice,
-  body.print-fisa .fisa-print-btn{display:none!important}
+  body.print-fisa .fisa-print-btn,
+  body.print-fisa .fisa-doc-btn{display:none!important}
+  /* indiciile de completare nu ajung pe exemplarul care se semnează */
+  body.print-fisa .print-target .ph{display:none!important}
   body.print-fisa .article > *:not(.print-target){display:none!important}
   body.print-fisa .print-target{display:block!important}
   body.print-fisa .fisa-sign{display:block!important;margin-top:28px;page-break-inside:avoid}
@@ -5481,13 +5488,13 @@ html{scroll-behavior:smooth}
     <div class="fisa-print" id="fisa-generalist">
 <h3 id="cap-22-1"><span class="num">1.</span>Fișa de post — Asistent Medical Generalist <span class="codetag">ADC-FP-ASM-02 · Ediția a II-a (2026)</span></h3>
 
-    <button type="button" class="fisa-print-btn" data-fisa="fisa-generalist"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button>
+    <button type="button" class="fisa-print-btn" data-fisa="fisa-generalist"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button><button type="button" class="fisa-doc-btn" data-fisa="fisa-generalist" data-name="Fisa-de-post-Asistent-Medical-Generalist-ADC-FP-ASM-02"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9.5 1.5H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5zM9.5 1.5V5H13"/><path d="M8 7.5v4m0 0L6.5 10M8 11.5 9.5 10"/></svg>Descarcă .doc — de completat</button>
 
 
     <h4><span class="secnum">1.1 </span>Identificarea postului</h4>
     <table>
       <tbody>
-        <tr><td><strong>Angajator</strong></td><td>Denumirea legală a societății angajatoare, cu datele de identificare din Anexa nr. 1 la Regulamentul intern ADC-RI-02 — fiecare societate care operează sub marca Dr. Ardeleanu completează propriile date</td></tr>
+        <tr><td><strong>Angajator</strong></td><td class="value-line"><span class="ph">denumirea, sediul, CUI și reprezentantul legal ale societății angajatoare</span></td></tr>
         <tr><td><strong>Denumirea postului</strong></td><td>Asistent Medical Generalist</td></tr>
         <tr><td><strong>Cod COR</strong></td><td>325901 — asistent medical generalist (studii postliceale) <em>sau</em> 222101 — asistent medical generalist (studii superioare); se bifează la angajare, potrivit studiilor titularului</td></tr>
         <tr><td><strong>Nivelul postului</strong></td><td>Execuție — rol operațional, încadrat potrivit matricei nivelurilor de performanță (Anexa nr. 3 la Regulamentul intern)</td></tr>
@@ -5509,7 +5516,7 @@ html{scroll-behavior:smooth}
     <p><strong>Aptitudini și conduită.</strong> Comunicare empatică și profesionistă cu pacientul, spirit de echipă, rigoare în aplicarea protocoalelor, capacitate de anticipare în asistarea medicului, disciplină operațională și confidențialitate.</p>
 
     <h4><span class="secnum">1.4 </span>Atribuțiile și responsabilitățile postului</h4>
-    <p>Atribuțiile de mai jos se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–J identifică domeniile de responsabilitate și fac legătura cu criteriile de evaluare profesională din secțiunea „Evaluarea performanței profesionale".</p>
+    <p>Atribuțiile de mai jos se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–J identifică domeniile de responsabilitate și fac legătura cu criteriile de evaluare profesională din secțiunea „Evaluarea profesională".</p>
     <p><strong>A. Asistența medicală la scaun și protocoalele clinice.</strong> Pregătește cabinetul înainte și după fiecare tratament, asigură asistența medicală la scaun indiferent de specialitate și răspunde prompt solicitărilor medicului, anticipând nevoile acestuia: pregătirea și manevrarea instrumentarului, aspirarea, aplicarea materialelor, monitorizarea confortului pacientului și documentarea intervențiilor. Activitatea respectă protocoalele clinice pe specialități — stomatologie generală (ADC-STG-01), endodonție (ADC-END-01), ortodonție (ADC-ORT-01), pedodonție (ADC-PED-01), chirurgie (ADC-CHR-01), protetică (ADC-PRO-01) și parodontologie (ADC-PAR-01).</p>
     <p><strong>B. Fluxul pacientului și documentarea medico-legală.</strong> Aplică fluxul medico-legal al pacientului (P0–P2) din Manualul ADC-ASM-03: înainte de orice manoperă verifică documentele vizitei, alertele, existența și acoperirea Acordului Pacientului Informat (API) și a consimțămintelor specifice cerute de matricea curentă; verifică corectitudinea datelor medicale și medico-legale ale pacientului în SPSS; când lipsește un document, există o alertă neclarificată sau planul nu corespunde API-ului, oprește pregătirea și cheamă medicul. După actul medical închide bucla documentară: documentele ajung în dosar, originalele pe hârtie la recepție, investigațiile sunt transmise, iar pacientul cunoaște pasul următor.</p>
     <p><strong>C. Experiența pacientului și comunicarea.</strong> Primește, însoțește și sprijină pacientul pe tot parcursul vizitei, comunicând respectuos, la persoana a treia, cu înțelegere, confidențialitate și empatie — căldură, ascultare activă și orientare către soluții. Nu deschide discuții despre patologiile pacientului în spațiile comune, acceptă pacientul indiferent de vârstă, gen, etnie sau situație financiară și contribuie activ la confortul, siguranța și fidelizarea acestuia.</p>
@@ -5521,29 +5528,13 @@ html{scroll-behavior:smooth}
     <p><strong>I. Disciplina operațională și dezvoltarea profesională.</strong> Respectă programul de lucru și pontajul zilnic în ERP, sarcinile de deschidere/închidere a clinicii și regulile de securitate; poartă uniforma potrivit procedurii ADC-UNF-02; participă la ședințele echipei și la testele lunare de perfecționare; cunoaște și aplică procedura de prim ajutor și utilizarea trusei de urgență (ADC-AJT-01); respectă normele SSM și PSI (Legea nr. 319/2006).</p>
     <p><strong>J. Obligații generale.</strong> Respectă Regulamentul intern (ADC-RI-02), statutul asistentului medical și Codul de etică și deontologie OAMGMAMR, reglementările privind prevenirea infecțiilor asociate asistenței medicale (IAAM), confidențialitatea și protecția datelor cu caracter personal (GDPR); raportează incidentele și riscurile constatate; îndeplinește alte sarcini dispuse de conducere, corespunzătoare competențelor sale și felului muncii.</p>
 
-    <h4><span class="secnum">1.5 </span>Evaluarea performanței profesionale [KPI-P]</h4>
-    <p>Performanța profesională a titularului se evaluează lunar prin <strong>fișa de evaluare calitativă „5+5"</strong> — instrument controlat, stabilit potrivit Anexei nr. 3 la Regulamentul intern și descris în <a href="#cap-21">Capitolul XXI</a> din Manualul ADC-ASM-03. Fiecare dintre cele zece criterii de mai jos este criteriu de evaluare a activității profesionale <strong>[KPI-P]</strong>, legat de atribuțiile corespunzătoare din prezenta fișă (literele A–J). Fiecare criteriu primește o notă de la 1 la 10 (o zecimală permisă); scorul final lunar = 60% media secțiunii Operațional + 40% media secțiunii Medical și se traduce în calificativul lunii: <em>Neconform</em> (1,0–7,5) · <em>Conform</em> (7,6–9,0) · <em>Excelent</em> (9,1–10). Evaluarea se înregistrează în ERP (<em>erp.clinicile-ardeleanu.ro</em>), care constituie evidența oficială.</p>
-    <table>
-      <thead><tr><th>Criteriu</th><th>Ce se evaluează</th><th>Evaluator</th><th>Atribuția</th></tr></thead>
-      <tbody>
-        <tr><td class="mono">A1</td><td>Curățenia, dezinfecția, ordinea și starea de igienă — contribuția individuală, pe zonele proprii de responsabilitate</td><td>Manager de Clinică</td><td class="mono">F</td></tr>
-        <tr><td class="mono">A2</td><td>Experiența pacientului în clinică — primire, însoțire, confort, fidelizare</td><td>Manager de Clinică</td><td class="mono">C</td></tr>
-        <tr><td class="mono">A3</td><td>Disciplina operațională și dezvoltarea — program, uniformă, igienă personală, SSM, ședințe, teste lunare</td><td>Manager de Clinică</td><td class="mono">I</td></tr>
-        <tr><td class="mono">A4</td><td>Mentenanța echipamentelor și procedurile de întreținere</td><td>Manager de Clinică</td><td class="mono">H</td></tr>
-        <tr><td class="mono">A5</td><td>Gestionarea materialelor consumabile</td><td>Manager de Clinică</td><td class="mono">G</td></tr>
-        <tr><td class="mono">B1</td><td>Curățenia, dezinfecția, ordinea și starea de igienă — contribuția individuală, constatată la vizita lunară</td><td>Departamentul Medical</td><td class="mono">F</td></tr>
-        <tr><td class="mono">B2</td><td>Sterilizarea și trasabilitatea între pacienți</td><td>Departamentul Medical</td><td class="mono">D</td></tr>
-        <tr><td class="mono">B3</td><td>Pregătirea instrumentarului și participarea activă, anticipativă în proceduri</td><td>Departamentul Medical</td><td class="mono">A</td></tr>
-        <tr><td class="mono">B4</td><td>Feedback-ul medicului — inclusiv comunicarea cu pacientul la scaun</td><td>Departamentul Medical</td><td class="mono">A, C</td></tr>
-        <tr><td class="mono">B5</td><td>Verificarea corectitudinii datelor medicale și medico-legale ale pacientului în SPSS</td><td>Departamentul Medical</td><td class="mono">B</td></tr>
-      </tbody>
-    </table>
-    <p><strong>Reguli de aplicare.</strong> Secțiunea Operațional (A1–A5, pondere 60%) este notată de Managerul de Clinică pe baza monitorizării continue; secțiunea Medical (B1–B5, pondere 40%) este notată de Departamentul Medical la vizita lunară inopinată. Dacă vizita Departamentului Medical nu are loc într-o lună, scorul final devine media secțiunii Operațional. Criteriile de curățenie A1 și B1 notează contribuția individuală a titularului, nu rezultatul întregii clinici. Media anuală a scorurilor finale lunare constituie nota de referință a evaluării profesionale anuale; mediile anuale pe criterii fundamentează discuția de dezvoltare profesională.</p>
+    <h4><span class="secnum">1.5 </span>Evaluarea profesională [KPI-P]</h4>
+    <p>Potrivit <strong>Art. 53 alin. (5) lit. a)</strong> din Regulamentul intern, fiecare dintre atribuțiile de la punctul anterior (literele A&ndash;J) constituie, prin ea însăși, <strong>criteriu de evaluare profesională [KPI-P]</strong>, standardul fiind îndeplinirea corespunzătoare a atribuției, apreciată în raport cu condițiile concrete de muncă. Regulile, standardele și indicatorii etichetați <strong>[KPI-P]</strong> în documentele controlate din Registrul online aplicabile rolului detaliază și concretizează aceste atribuții, potrivit lit. b) a aceluiași alineat.</p>
+    <p>Instrumentul de evaluare, evaluatorul, perioada, ținta ori standardul, ponderile și pragurile calificativelor se stabilesc și se comunică salariatului <strong>înainte de începerea perioadei evaluate</strong>, potrivit Capitolului VIII și Anexei nr. 3 la Regulamentul intern. Ele nu fac parte din prezenta fișă și pot fi actualizate pentru viitor, printr-o versiune datată și comunicată, fără modificarea acesteia (<strong>Art. 54 alin. (2)</strong> din Regulamentul intern). La data semnării prezentei fișe, instrumentul aplicabil postului este descris în <a href="#cap-21">Capitolul XXI</a> din Manualul ADC-ASM-03.</p>
     <div class="callout note">
       <div class="label">Garanții</div>
-      Fișa „5+5" este un instrument de monitorizare și dezvoltare profesională, fără componentă financiară de bonus. Rezultatele se interpretează potrivit Regulamentului intern (Cap. VIII): se ține seama de timpul efectiv lucrat, absențele protejate și cauzele neimputabile; un rezultat lunar nu produce, prin el însuși, sancțiuni disciplinare și nu echivalează cu necorespunderea profesională — orice asemenea măsură urmează exclusiv procedurile legale din Regulamentul intern. Criteriile se comunică înainte de perioada evaluată, iar salariatul are dreptul la observații asupra evaluării.
+      Rezultatele se interpretează potrivit Regulamentului intern (Cap. VIII): se ține seama de timpul efectiv lucrat, de absențele protejate și de cauzele neimputabile salariatului, iar exercitarea unui drept legal ori raportarea unui risc nu poate reduce scorul. Un rezultat dintr-o singură perioadă nu produce, prin el însuși, sancțiuni disciplinare și nu echivalează cu necorespunderea profesională — orice asemenea măsură urmează exclusiv procedurile legale din Regulamentul intern. Criteriile se comunică înainte de perioada evaluată, iar salariatul are dreptul la observații asupra evaluării, potrivit <strong>Art. 58</strong>. Participarea la testele periodice din ERP este obligație de serviciu; rezultatul lor produce numai efectele prevăzute în instrumentul aplicabil — îndrumare, reinstruire, plan de sprijin —, iar potrivit <strong>Art. 62 alin. (2)</strong> o medie sub 80% nu constituie, singură, necorespundere profesională.
     </div>
-    <p><strong>Testele lunare de perfecționare.</strong> Ținta de dezvoltare profesională este o medie trimestrială de minimum 80% la testele-grilă din ERP. Neatingerea țintei declanșează reinstruire și un plan de sprijin; potrivit <strong>Art. 62 alin. (2)</strong> din Regulamentul intern, o medie sub 80% nu constituie, singură, necorespundere profesională.</p>
 
     <h4><span class="secnum">1.6 </span>Limitele de competență</h4>
     <p>Titularul nu stabilește diagnostice și nu decide planul de tratament; efectuează actele de îngrijire la indicația și sub supravegherea medicului, în limitele competențelor profesionale stabilite de OAMGMAMR și de legislația aplicabilă. Situațiile care depășesc competențele postului se escaladează de îndată medicului, Asistentului Medical Șef sau Managerului de Clinică, potrivit fluxului de escaladare din Manualul ADC-ASM-03.</p>
@@ -5567,13 +5558,13 @@ html{scroll-behavior:smooth}
     <div class="fisa-print" id="fisa-sef">
 <h3 id="cap-22-2"><span class="num">2.</span>Fișa de post — Asistent Medical Șef <span class="codetag">ADC-FP-ASS-01 · Ediția I (2026)</span></h3>
 
-    <button type="button" class="fisa-print-btn" data-fisa="fisa-sef"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button>
+    <button type="button" class="fisa-print-btn" data-fisa="fisa-sef"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button><button type="button" class="fisa-doc-btn" data-fisa="fisa-sef" data-name="Fisa-de-post-Asistent-Medical-Sef-ADC-FP-ASS-01"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9.5 1.5H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5zM9.5 1.5V5H13"/><path d="M8 7.5v4m0 0L6.5 10M8 11.5 9.5 10"/></svg>Descarcă .doc — de completat</button>
 
 
     <h4><span class="secnum">2.1 </span>Identificarea postului</h4>
     <table>
       <tbody>
-        <tr><td><strong>Angajator</strong></td><td>Denumirea legală a societății angajatoare, cu datele de identificare din Anexa nr. 1 la Regulamentul intern ADC-RI-02</td></tr>
+        <tr><td><strong>Angajator</strong></td><td class="value-line"><span class="ph">denumirea, sediul, CUI și reprezentantul legal ale societății angajatoare</span></td></tr>
         <tr><td><strong>Denumirea postului</strong></td><td>Asistent Medical Șef (asistent-șef de clinică)</td></tr>
         <tr><td><strong>Cod COR</strong></td><td>325901 (studii postliceale) <em>sau</em> 222101 (studii superioare) — se bifează la angajare; funcția internă de coordonare nu modifică încadrarea COR a profesiei</td></tr>
         <tr><td><strong>Nivelul postului</strong></td><td>Coordonare operațională — nivel N-2, potrivit matricei nivelurilor de performanță (Anexa nr. 3 la Regulamentul intern): indicatori operaționali și schemă de bonus cu ciclu lunar, evaluare profesională anuală</td></tr>
@@ -5595,7 +5586,7 @@ html{scroll-behavior:smooth}
     <p><strong>Experiență și competențe de coordonare.</strong> Experiență relevantă de asistent medical în stomatologie; cunoașterea aprofundată a procedurilor interne (ADC-ASM-03 și documentele subordonate); capacitate de organizare, planificare și control; fermitate în aplicarea standardelor, echilibru în relația cu echipa; utilizarea ERP pentru comenzi, inventar, pontaj și evaluări.</p>
 
     <h4><span class="secnum">2.4 </span>Atribuțiile și responsabilitățile postului</h4>
-    <p>Atribuțiile se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–H identifică domeniile de responsabilitate și fac legătura cu evaluarea din secțiunea „Evaluarea performanței". Delegarea unei activități către echipa din subordine este permisă numai cu acordul Managerului de Clinică și nu transferă responsabilitatea.</p>
+    <p>Atribuțiile se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–H identifică domeniile de responsabilitate și fac legătura cu evaluarea din secțiunea „Evaluarea profesională și remunerația variabilă". Delegarea unei activități către echipa din subordine este permisă numai cu acordul Managerului de Clinică și nu transferă responsabilitatea.</p>
     <p><strong>A. Coordonarea echipei.</strong> Conduce, pe linie operațională și administrativă, asistenții medicali și personalul dedicat de curățenie: planifică activitatea și repartizează sarcinile, validează programul asistenților împreună cu Managerul de Clinică, organizează continuitatea în absențe, integrează colegii noi și instruiește echipa — zilnic, periodic sau la nevoie — asupra procedurilor de lucru. Oferă lunar fiecărui asistent, împreună cu Managerul de Clinică, feedback individual pe rezultatele fișei de evaluare „5+5".</p>
     <p><strong>B. Asistența medicală la scaun.</strong> Exercită integral atribuțiile profesionale ale Asistentului Medical Generalist, potrivit fișei de post ADC-FP-ASM-02 (domeniile A–J: asistența la scaun și protocoalele clinice, fluxul medico-legal al pacientului, experiența pacientului, sterilizarea, imagistica, curățenia, consumabilele, mentenanța, disciplina operațională și obligațiile generale), care se aplică corespunzător și prezentului post.</p>
     <p><strong>C. Curățenia, dezinfecția, ordinea și siguranța — proprietar de proces.</strong> Este proprietarul operațional al procesului de curățenie și dezinfecție al întregii clinici, potrivit procedurii ADC-CUR-01: efectuează verificarea de deschidere înainte de primul pacient, verificări prin sondaj pe parcursul programului (cu atenție sporită la grupurile sanitare, suprafețele cu atingere frecventă și zona de sterilizare) și confirmarea de închidere a zilei; controlează zilnic completitudinea înregistrărilor (grafice orare, documente de evidență); consemnează neconformitățile, stabilește executantul, măsurile, termenele și urmărește închiderea lor; stabilește seturile de curățenie pentru spațiile neîncadrate în codificarea pe culori; reorganizează activitatea și participă direct la intervenție când situația o impune. Standardul de curățenie este nenegociabil — răspunderea acoperă rezultatul final al procesului, indiferent de executant.</p>
@@ -5605,21 +5596,14 @@ html{scroll-behavior:smooth}
     <p><strong>G. Deșeurile medicale și condițiile de mediu.</strong> Coordonează activitățile de întreținere și eliminare a deșeurilor medicale potrivit procedurii ADC-DSM-01, întocmește programul de curățenie al clinicii și monitorizează condițiile de mediu.</p>
     <p><strong>H. Atribuții administrative și delegate.</strong> Îndeplinește atribuțiile administrative delegate de Managerul de Clinică — de exemplu gestiunea uniformelor (comenzi în ERP, procese-verbale de predare-primire, potrivit procedurii ADC-UNF-02) — și sarcinile dispuse de conducere, corespunzătoare competențelor sale; respectă Regulamentul intern (ADC-RI-02), Codul de etică și deontologie OAMGMAMR, normele IAAM, SSM/PSI și GDPR; raportează incidentele și riscurile constatate.</p>
 
-    <h4><span class="secnum">2.5 </span>Evaluarea performanței</h4>
-    <p>Potrivit Regulamentului intern (<strong>Art. 55</strong> și Anexa nr. 3), postul are două instrumente distincte, care nu se confundă: <strong>evaluarea profesională [KPI-P]</strong>, care se închide anual, și <strong>fișa de bonus lunar [KPI-B]</strong>, care determină exclusiv remunerația variabilă. Acordarea bonusului, chiar repetată, nu limitează calificativul evaluării profesionale; neeligibilitatea la bonus nu dovedește, singură, necorespunderea profesională.</p>
-    <h5><span class="secnum">2.5.1 </span>Evaluarea profesională anuală [KPI-P]</h5>
-    <p>Criteriile de evaluare profesională se stabilesc și se comunică înainte de fiecare perioadă evaluată, printr-un instrument controlat conform Anexei nr. 3 la Regulamentul intern, și sunt legate de domeniile de responsabilitate A–H din prezenta fișă: calitatea coordonării echipei (A), calitatea actului de asistență medicală (B), rezultatul proceselor aflate în proprietatea sa — curățenie și dezinfecție (C), sterilizare (D), gestiunea consumabilelor, a bugetului și a inventarului (E) — precum și conformitatea de radioprotecție (F), gestiunea deșeurilor (G) și disciplina administrativă (H). Evaluarea profesională se închide anual; înregistrările lunare din ERP (fișa de bonus, evaluările KPI 3, rapoartele de inventar, dovezile de instruire) constituie surse de dovadă, fără ca evaluarea anuală să se reducă automat la media lor. Salariatul primește evaluarea și are dreptul la observații, potrivit <strong>Art. 58</strong> din Regulamentul intern.</p>
-    <h5><span class="secnum">2.5.2 </span>Fișa de bonus lunar [KPI-B]</h5>
-    <p>Bonusul variabil lunar se calculează digital în ERP, potrivit fișei de bonus aprobate de HR și descrise în <a href="#cap-21">Capitolul XXI</a> din Manualul ADC-ASM-03. Mecanismul: poarta KPI 3 condiționează plata componentelor KPI 1 și KPI 2, la care se adaugă, când este cazul, suplimentul pentru calificativul Excelent.</p>
-    <table>
-      <thead><tr><th>Indicator</th><th>Ce măsoară</th><th>Cum se evaluează</th></tr></thead>
-      <tbody>
-        <tr><td><strong>KPI 1</strong> — Consumabile și inventar</td><td>Încadrarea în bugetul lunar de consumabile și acuratețea inventarului (diferență scriptic/faptic sub 3% la SKU implanturi)</td><td>Lunar, din datele ERP — curbă de performanță pe trei niveluri, plătită integral sau deloc, condiționată de inventar</td></tr>
-        <tr><td><strong>KPI 2</strong> — Materiale video / marketing</td><td>Realizarea de materiale video validate de Departamentul de Marketing — activitate suplimentară, în afara atribuțiilor din prezenta fișă</td><td>Lunar, tarif fix per material validat, în limita plafonului lunar; procedura de lucru: Cap. XXI secț. 3 din Manualul ADC-ASM-03</td></tr>
-        <tr><td><strong>KPI 3</strong> — Poarta calitativă</td><td>Rezultatul final al procesului aflat în focusul curent — calitatea curățeniei și dezinfecției în întreaga clinică (ADC-CUR-01); focus rotativ, revizuit semestrial</td><td>Lunar: 60% nota Departamentului Operațiuni + 40% nota Departamentului Medical; Neconform anulează întregul bonus al lunii, Conform deschide plata KPI 1–2, Excelent aduce supliment</td></tr>
-      </tbody>
-    </table>
-    <p><strong>Reguli de aplicare.</strong> Cuantumurile, pragurile valorice și regulile de plată se comunică individual și exclusiv titularului, prin documentele de bonusare aprobate și validate de HR și juridic — ele nu fac parte din prezenta fișă. Titularul are dreptul la contravizită la o notă Medical sub 8,0 (solicitată în 48 de ore, cel mult una pe lună) și beneficiază de regula auto-declarării protejate, potrivit ADC-CUR-01. Responsabilitatea pe luna evaluată este integrală, indiferent de absențe. Mecanismul de bonus nu reduce salariul fix, nu modifică prezenta fișă de post și nu constituie sancțiune disciplinară.</p>
+    <h4><span class="secnum">2.5 </span>Evaluarea profesională și remunerația variabilă</h4>
+    <p>Potrivit <strong>Art. 53 alin. (5) lit. a)</strong> din Regulamentul intern, fiecare dintre atribuțiile de la punctul anterior (literele A&ndash;H) constituie, prin ea însăși, <strong>criteriu de evaluare profesională [KPI-P]</strong>, standardul fiind îndeplinirea corespunzătoare a atribuției, apreciată în raport cu condițiile concrete de muncă; regulile, standardele și indicatorii etichetați <strong>[KPI-P]</strong> în documentele controlate aplicabile rolului le detaliază, potrivit lit. b).</p>
+    <p>Instrumentul de evaluare, evaluatorul, perioada, ponderile și pragurile se stabilesc și se comunică titularului <strong>înainte de începerea perioadei evaluate</strong>, potrivit Capitolului VIII și Anexei nr. 3 la Regulamentul intern; ele nu fac parte din prezenta fișă și pot fi actualizate pentru viitor, printr-o versiune datată și comunicată, fără modificarea acesteia (<strong>Art. 54 alin. (2)</strong>). La data semnării prezentei fișe, instrumentele aplicabile postului sunt descrise în <a href="#cap-21">Capitolul XXI</a> din Manualul ADC-ASM-03.</p>
+    <p><strong>Remunerația variabilă.</strong> Postul beneficiază de o schemă de remunerație variabilă, ai cărei indicatori <strong>[KPI-B]</strong> se stabilesc de superiorul ierarhic competent și se comunică titularului, de către acesta ori de către HR, înainte de începerea ciclului, prin scrisoarea de bonus sau altă modalitate. Indicatorii de bonus <strong>nu constituie criterii de evaluare profesională</strong> (Art. 53 alin. (5) teza finală), iar cuantumurile, pragurile valorice și regulile de plată se comunică individual și exclusiv titularului, prin documentele de bonusare aprobate de HR — ele nu fac parte din prezenta fișă.</p>
+    <div class="callout note">
+      <div class="label">Garanții</div>
+      Acordarea bonusului, chiar repetată, nu limitează calificativul evaluării profesionale; neeligibilitatea la bonus nu dovedește, singură, necorespunderea profesională. Mecanismul de remunerație variabilă nu reduce salariul fix, nu modifică prezenta fișă de post și nu constituie sancțiune disciplinară. Rezultatele se interpretează potrivit Capitolului VIII din Regulamentul intern, cu luarea în considerare a timpului efectiv lucrat, a absențelor protejate și a cauzelor neimputabile titularului; salariatul are dreptul la observații asupra evaluării, potrivit <strong>Art. 58</strong>.
+    </div>
 
     <h4><span class="secnum">2.6 </span>Limitele de competență</h4>
     <p>Titularul nu stabilește diagnostice și nu decide planul de tratament; actele de îngrijire se efectuează la indicația și sub supravegherea medicului, în limitele competențelor OAMGMAMR. Pe linie managerială, decide în limitele rolului: situațiile care depășesc autoritatea sa — resurse, personal, furnizori, incidente majore — se escaladează Managerului de Clinică; problemele clinice și de protocol, Departamentului Medical. Nu angajează cheltuieli în afara fluxului de aprobare din ERP și nu aplică sancțiuni disciplinare — acestea urmează exclusiv procedura din Regulamentul intern.</p>
@@ -5682,12 +5666,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 46</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 47</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+        <tr data-rev="47"><td>47</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Fișele de post se decuplează de metodologia de evaluare, la observația consultantului juridic. Fișa de post este anexă la Contractul Individual de Muncă și, odată semnată, nu se mai modifică unilateral — iar §1.5 și §2.5 descriau până acum însuși instrumentul de evaluare: fișa lunară „5+5" cu cele zece criterii, formula 60% Operațional + 40% Medical, pragurile calificativelor, respectiv tabelul KPI 1–KPI 3 al schemei de bonus. Scrise acolo, ele deveneau conținut contractual: ponderile nu s-ar mai fi putut schimba fără act adițional cu fiecare salariat, cadența nu s-ar mai fi putut modifica, iar o lună în care Departamentul Medical nu face vizita ar fi pus angajatorul în neconformitate cu propria anexă. Este exact opusul arhitecturii din Regulament, unde Art. 54 alin. (2) și Anexa nr. 3 lit. F prevăd că indicatorii, țintele și ponderile se actualizează pentru viitor, printr-o versiune datată și comunicată, fără modificarea Regulamentului. §1.5 devine „Evaluarea profesională [KPI-P]" și spune <em>ce</em> se evaluează: fiecare atribuție A–J este, prin ea însăși, criteriu de evaluare profesională, potrivit Art. 53 alin. (5) lit. a), iar documentele controlate etichetate [KPI-P] o detaliază, potrivit lit. b); instrumentul, evaluatorul, perioada, ponderile și pragurile se comunică înainte de perioada evaluată și nu fac parte din fișă, cu o trimitere informativă la Capitolul XXI ca instrument în vigoare la data semnării. §2.5 devine „Evaluarea profesională și remunerația variabilă", cu aceeași construcție pentru literele A–H; subsecțiunile 2.5.1 și 2.5.2 și tabelul KPI 1–3 dispar, iar schema variabilă rămâne descrisă doar ca mecanism — indicatori [KPI-B] stabiliți de superiorul ierarhic, comunicați înainte de ciclu, fără efect în evaluarea profesională. Garanțiile salariatului se păstrează integral în ambele fișe. La pct. 1.1 și 2.1, câmpul Angajator nu mai conține instrucțiunea de completare („datele de identificare din Anexa nr. 1 … fiecare societate completează propriile date") — într-o anexă la contract acolo trebuie societatea reală. Câmpul devine linie de completat, cu un indiciu afișat doar pe ecran, care nu ajunge pe exemplarul printat. Fișele primesc și butonul „Descarcă .doc — de completat", lângă cel de printare: exportă numai blocul fișei, fără butoane și fără numerotarea de capitol (secțiunile se renumerotează 1.–7., ca pe formularul printat), într-un fișier pe care Word îl deschide nativ, ca datele angajatorului să poată fi completate la calculator înainte de semnare; printarea PDF rămâne neschimbată. Conținutul evaluării nu se pierde — cele zece criterii ale fișei „5+5" și indicatorii KPI 1–3 rămân descriși integral în Capitolul XXI, care este instrumentul controlat.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="47"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
         <tr data-rev="46"><td>46</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Numerotarea de capitol dispare de pe formularul de semnat al fișelor de post. Butonul „Printează PDF — formular de semnat" trimite la imprimantă numai blocul fișei, ca anexă la Contractul Individual de Muncă — dar în acel exemplar numerele „1." din titlul fișei și „1.1 … 1.7" (respectiv „2.1 … 2.7" și „2.5.1–2.5.2") la secțiuni sunt artefacte ale poziției în Capitolul XXII: sugerează un document-părinte care nu se anexează la contract. La printarea unei fișe, titlul apare acum curat („Fișa de post — Asistent Medical Generalist", cu codul și ediția alături), iar secțiunile se renumerotează 1.–7., cu 5.1 și 5.2 sub secțiunea 5 la fișa Șefului. Mecanismul: numerele din text au fost împachetate în „span.secnum" (16 titluri), iar în blocul @media print existent, sub „body.print-fisa", ele se ascund și sunt înlocuite prin contoare CSS. Pe ecran și la printarea capitolului sau a documentului integral nu se schimbă nimic — acolo fișa e citită ca subcapitol și își păstrează numerotarea 1.1 … 2.7. Odată cu asta, cele două auto-trimiteri numerice din interiorul fișelor au fost rescrise ca trimiteri la titlul secțiunii, ca să fie corecte în ambele randări: „de la punctul 1.5" devine „din secțiunea «Evaluarea performanței profesionale»" (§1.4), iar „de la punctul 2.5" devine „din secțiunea «Evaluarea performanței»" (§2.4) — altfel, pe formularul printat ar fi trimis la un număr care nu mai există acolo. Zero modificări de conținut normativ.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="46"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
         <tr data-rev="45"><td>45</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Fișele de post din Capitolul XXII — Asistent Medical Generalist (ADC-FP-ASM-02) și Asistent Medical Șef (ADC-FP-ASS-01) — devin documente care se pot anexa direct Contractului Individual de Muncă. Butonul „Printează PDF — formular de semnat" trimite la imprimantă numai blocul fișei, deci exact acel text ajunge anexă la contract; acolo, cele nouă trimiteri de tip „prezentul manual" indicau documentul greșit, fiindcă în anexa la contract „prezentul" este contractul. Trimiterile numesc acum documentul: „prezentul manual (ADC-ASM-03)" devine „Manualul Activităților de Asistență Medicală (ADC-ASM-03)" (§1.4 și §2.4), „din prezentul manual" devine „din Manualul ADC-ASM-03" (§1.4 lit. B — fluxul medico-legal P0–P2 — și §1.6 — fluxul de escaladare), „ale prezentului manual" devine „ale Manualului Activităților de Asistență Medicală (ADC-ASM-03)" în dispozițiile finale ale ambelor fișe (§1.7 și §2.7), iar trimiterile la „Capitolul XXI" (§1.5, §2.5.2) și la „Cap. XXI secț. 3" (tabelul KPI 2) primesc precizarea „din Manualul ADC-ASM-03" — ancorele interne rămân, pentru citirea din manual. În plus, la §2.4 lit. B, trimiterea la „domeniile A–J" din fișa generalistului este însoțită acum de enumerarea lor — asistența la scaun și protocoalele clinice, fluxul medico-legal al pacientului, experiența pacientului, sterilizarea, imagistica, curățenia, consumabilele, mentenanța, disciplina operațională și obligațiile generale — pentru ca fișa șefului să se înțeleagă singură: cel care o semnează nu primește și fișa generalistului alături. Zero modificări de fond — atribuțiile, criteriile de evaluare, ponderile, pragurile și trimiterile la Regulamentul intern (ADC-RI-02) rămân neatinse. Paragraful introductiv al capitolului, care nu face parte din fișe și nu se printează cu ele, păstrează formularea „prezentului manual": acolo vorbește manualul, nu fișa.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="45"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
         <tr><td>44</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXII, Fișa de post — Asistent Medical Generalist, pct. 1.4: trimiterea la punctul 1.5 vorbește acum despre „criteriile de evaluare profesională", nu „criteriile de evaluare a performanței". Aliniere terminologică la Regulamentul intern rev. 15, care a rescris Art. 53 alin. (5) și folosește peste tot „criteriu de evaluare profesională" pentru eticheta [KPI-P] (Art. 5 alin. (9), Art. 53 alin. (4), Anexa nr. 3). Fondul rămâne identic: literele A–J ale fișei trimit la aceleași zece criterii de la pct. 1.5, care era deja formulat ca „criteriu de evaluare a activității profesionale [KPI-P]".</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="44"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
@@ -6214,6 +6199,53 @@ html{scroll-behavior:smooth}
       window.addEventListener('afterprint',cleanup);
       window.print();
       setTimeout(cleanup,1500);
+    });
+  });
+
+  /* Export .doc al unei fișe de post — Word deschide nativ un fișier HTML servit ca
+     application/msword. Se exportă doar blocul fișei, fără butoane și fără numerotarea
+     de capitol: secțiunile se renumerotează 1.–7. (și N.1, N.2 la subsecțiuni), exact
+     ca pe formularul printat, iar indiciile de completare de pe ecran nu se exportă.
+     Fișierul rezultat se completează la calculator și se semnează ca anexă la CIM. */
+  document.querySelectorAll('.fisa-doc-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var src=document.getElementById(btn.getAttribute('data-fisa'));
+      if(!src) return;
+      var nume=btn.getAttribute('data-name')||'fisa-de-post';
+      var c=src.cloneNode(true);
+      c.querySelectorAll('.fisa-print-btn,.fisa-doc-btn,.ph').forEach(function(el){ el.remove(); });
+      c.querySelectorAll('h3 .num,.secnum').forEach(function(el){ el.remove(); });
+      var sec=0,sub=0;
+      c.querySelectorAll('h4,h5').forEach(function(h){
+        if(h.tagName==='H4'){ sec++; sub=0; h.textContent=sec+'. '+h.textContent; }
+        else { sub++; h.textContent=sec+'.'+sub+' '+h.textContent; }
+      });
+      /* ancorele interne nu au sens în afara manualului — rămâne doar textul */
+      c.querySelectorAll('a[href^="#"]').forEach(function(a){
+        a.parentNode.replaceChild(document.createTextNode(a.textContent),a);
+      });
+      var css='body{font-family:Calibri,sans-serif;font-size:11pt;color:#222222;line-height:1.35}'
+        +'h3{font-size:15pt;color:#7B1C16;margin:0 0 12pt}'
+        +'h4{font-size:12pt;color:#7B1C16;margin:14pt 0 5pt}'
+        +'h5{font-size:11pt;color:#7B1C16;margin:10pt 0 4pt}'
+        +'p{margin:0 0 7pt}'
+        +'table{border-collapse:collapse;width:100%;margin:8pt 0}'
+        +'td,th{border:1px solid #999999;padding:5pt;vertical-align:top;font-size:10pt}'
+        +'th{background:#7B1C16;color:#ffffff;text-align:left}'
+        +'td.value-line{border-bottom:1px solid #666666}'
+        +'.callout{border:1px solid #C9A227;background:#FBF6EE;padding:8pt;margin:9pt 0;font-size:10pt}'
+        +'.label{font-weight:bold;color:#7B1C16;display:block;margin-bottom:3pt}'
+        +'.codetag{font-family:Consolas,monospace;font-size:9.5pt;color:#7B1C16}'
+        +'.fisa-sign{display:block;margin-top:20pt}';
+      var html='<html xmlns:o="urn:schemas-microsoft-com:office:office" '
+        +'xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
+        +'<head><meta charset="utf-8"><title>'+nume+'</title>'
+        +'<style>@page{size:A4;margin:2cm}'+css+'</style></head><body>'+c.innerHTML+'</body></html>';
+      var url=URL.createObjectURL(new Blob(['\ufeff'+html],{type:'application/msword'}));
+      var a=document.createElement('a');
+      a.href=url; a.download=nume+'.doc';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); },1500);
     });
   });
 })();
