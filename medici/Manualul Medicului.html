@@ -85,7 +85,7 @@
   /* ============ TOP HEADER ============ */
   .topbar{
     position:sticky; top:0; z-index:60; background:var(--surface);
-    border-bottom:2px solid var(--primary);
+    border-bottom:1px solid var(--rule); box-shadow:0 1px 0 rgba(123,28,22,.04);
     display:flex; align-items:center; gap:18px; padding:0 20px; height:64px;
   }
   .topbar .logo{ height:34px; width:auto; display:block; }
@@ -196,7 +196,7 @@
     -webkit-overflow-scrolling:touch;
     overscroll-behavior:contain;
     font-size:13px;
-    padding:22px 14px 60px 20px;
+    padding:30px 14px 60px 28px;
     border-right:1px solid var(--rule);
     scrollbar-width:thin;scrollbar-color:var(--line-2) transparent;
   }
@@ -329,12 +329,16 @@
   h3.sub .anchor{ opacity:0; font-size:14px; color:var(--faint); transition:opacity .15s; margin-left:8px; }
   h3.sub:hover .anchor{ opacity:1; }
 
-  .article h4{ font-size:15px; font-weight:600; color:var(--primary-deep); margin:18px 0 4px; }
-  .article p{ margin:0 0 11px; }
-  .article strong, .article b{ color:var(--ink); }
+  .article h4{ font-size:16px; font-weight:600; color:var(--ink); letter-spacing:.005em; margin:22px 0 8px; }
+  .article p{ margin:0 0 14px; }
+  .article strong, .article b{ color:var(--ink); font-weight:600; }
+  .article em{ color:var(--primary); font-style:italic; }
+  /* linkurile din textul curent sunt subliniate discret, ca în celelalte manuale;
+     linkurile de interfață (cuprins, carduri, bară de sus) rămân fără subliniere */
+  .article p a:not([class]), .article li a:not([class]){ border-bottom:1px solid rgba(123,28,22,.25); }
   .article p.byline{ font-size:12px; color:var(--faint); font-style:italic; margin:-2px 0 12px; }
-  .article ul, .article ol{ margin:0 0 12px; padding-left:22px; }
-  .article li{ margin:3px 0; }
+  .article ul, .article ol{ margin:8px 0 18px; padding-left:24px; }
+  .article ul li, .article ol li{ margin:0 0 6px; line-height:1.6; }
   .article ul li{ list-style:none; position:relative; }
   .article ul li::before{ content:""; position:absolute; left:-15px; top:9px; width:5px; height:5px; border-radius:50%; background:var(--terra); }
 
@@ -350,7 +354,7 @@
   /* Inline document reference (ex. „Document părinte") */
   .docref{
     display:flex;align-items:center;gap:14px;
-    padding:14px 16px;margin:8px 0 18px;
+    padding:14px 16px;margin:14px 0;
     background:var(--surface);
     border:1px solid var(--rule);
     border-left:3px solid var(--amber);
@@ -437,9 +441,11 @@
   .spss-doc .name.hl{ outline:2px solid #e23b2e; outline-offset:3px; border-radius:5px; }
   .spss-tabs{ position:relative; }
   .spss-arrow{ position:absolute; color:#e23b2e; font-size:26px; font-weight:700; line-height:1; }
-  .article table{ width:100%; border-collapse:collapse; margin:6px 0 18px; font-size:13.5px; border:1px solid var(--rule); }
-  .article th{ background:var(--primary); color:#fff; text-align:left; font-weight:600; padding:9px 12px; vertical-align:top; }
-  .article td{ padding:9px 12px; vertical-align:top; border-top:1px solid var(--rule-soft); }
+  .article table{ width:100%; border-collapse:collapse; margin:18px 0 24px; font-size:13.5px;
+    background:var(--surface); border:1px solid var(--rule); border-radius:4px; overflow:hidden; }
+  .article th{ background:var(--primary); color:#fff; text-align:left; font-weight:600;
+    padding:10px 12px; font-size:12px; letter-spacing:.06em; text-transform:uppercase; vertical-align:top; }
+  .article td{ padding:10px 12px; vertical-align:top; border-top:1px solid var(--rule-soft); }
   .article tbody tr:nth-child(even){ background:var(--cream-warm); }
   .article tbody tr:hover{ background:var(--cream); }
 
@@ -1238,12 +1244,13 @@
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 53</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 54</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>54</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate cu celelalte manuale — geometria componentelor, a doua tranșă după rev. 53. Tabelele primesc fundal alb, colțuri rotunjite de 4px și spațiul canonic deasupra și dedesubt (18px/24px, erau 6px/18px); capul de tabel trece la 12px cu majuscule spațiate (era 13,5px fără majuscule), iar celulele la 10px de padding. Ritmul vertical al textului: paragrafele 14px sub ele (erau 11px), listele 8px deasupra și 18px dedesubt cu indentare de 24px (erau 0/12px și 22px), elementele de listă 6px între ele cu interlinie 1,6, cardurile de referință 14px. Titlul h4 trece la 16px negru cu spațiere 0,005em și marginile 22px/8px (era 15px roșu-închis, 18px/4px). Detalii de text: aldinul la greutatea 600 (era 700), cursivul pe roșul de marcă (era negru), iar linkurile din textul curent primesc sublinierea discretă de 1px — linkurile de interfață (cuprins, carduri, bară de sus) rămân fără subliniere. Bara de sus primește linia canonică de 1px #E6DCCD în locul celei de 2px roșii, iar cuprinsul lateral padding-ul canonic. Măsurat pe elemente reale, la 1280px: toate valorile de mai sus sunt acum identice cu ale celorlalte trei documente. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>53</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate cu celelalte manuale — tipografia de bază și paleta. Corpul textului din articol trece la valorile canonice cerute de regula de paritate: 15,5px (era 15px), interlinie 1,7 (era 1,6) și culoarea #4A4541 (era #222222); textul aldin rămâne pe negru, ca în canonic. Paleta: liniile și bordurile trec de la „line” (#E7DED2) și „line-2” (#D8CCBB) la #E6DCCD, liniile fine dintre celulele de tabel și punctele din cuprinsul de capitol la #EFE7D7, textul secundar (hatnote, descrierile și acțiunile cardurilor de referință, etichetele din banda de date) de la #6B5F59 și #917F76 la #7A736D, textul din cuprinsul lateral și subtitlul din hero la #4A4541, iar fundalul casetelor, al butoanelor de cuprins și al rândurilor pare de tabel de la #F5EDE3 la #FBF6EE. Valorile canonice au fost introduse ca variabile proprii (--ink-soft, --rule-soft, --cream-warm), lângă --rule și --ink-mute din reviziile 51–52; variabilele vechi rămân pentru componentele nemăsurate. Măsurat înainte și după: diferențele față de celelalte trei documente scad de la 154 la 73 de linii, iar numărul elementelor identice în toate patru crește de la 8 la 21. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>52</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate completă a subtitlurilor (h3) cu celelalte manuale, după titlurile de capitol de la rev. 51: interlinia coboară de la 1,6 la 1,3, linia de sub subtitlu trece de la „line” (#e7ded2) la culoarea canonică #E6DCCD (--rule), iar numărul subcapitolului nu mai este scris cu 18px Poppins bold în roșu-burgundy, ci cu 14px JetBrains Mono, greutate 500, în gri (#7A736D, valoarea canonică --ink-mute) — exact ca numerele de subcapitol din Manualul Asistenților și ca numerele de articol din Regulamentul Intern. Aranjarea în linie trece de la flex la fluxul normal de text, cu 8px între număr și titlu, ca în celelalte documente; ancora „§” care apare la trecerea cu mouse-ul rămâne, cu aceeași distanță de 8px. Modificare exclusiv de foaie de stil — cele 46 de subtitluri nu au fost atinse în corpul documentului, iar textul, numerotarea, ancorele și Cuprinsul rămân neschimbate. Valorile rezolvate au fost verificate ca fiind identice cu ale subtitlurilor din celelalte trei documente, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>51</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate completă a titlurilor de capitol cu celelalte manuale. Tipografie: interlinia coboară de la 1,6 la 1,2, spațierea literelor devine −0,005em, spațiul dintre titlu și linie crește de la 8px la 10px, iar linia de subliniere trece de la „wheat” (#F2DAB7) la culoarea canonică #E6DCCD, introdusă ca variabilă --rule (echivalentul --rule din celelalte manuale și din Regulamentul Intern). Compoziție: numărul capitolului nu mai este o cifră romană mare în linie, ci supratitlul mic în majuscule (.chapter-num), ca în Manualul Asistenților și în Regulamentul Intern — „Capitolul 1 — Operațional” devine supratitlul „CAPITOLUL I” plus titlul „Operațional”, la fel la Comportamental și Partea medicală. Cuprinsul lateral, ancorele și trimiterile interne rămân neschimbate. Valorile rezolvate (corp, interlinie, spațiere, culoare, padding, linie, decalaj de ancorare) au fost verificate ca fiind identice cu ale titlurilor de capitol din Manualul Asistenților, al Registratorilor și din Regulamentul Intern, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
