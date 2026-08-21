@@ -712,6 +712,19 @@ footer{
   font-size:13px;line-height:1.6;
 }
 @media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+/* Footer lite pe telefon — rămân identitatea documentului și contactul.
+   Sloganul, descrierea de brand, cifrele de rețea și banda de jos se văd doar pe
+   desktop: pe un ecran de 375px footerul complet ocupa 689px (0,85 dintr-un ecran),
+   pentru că cele două coloane de 143px rupeau fiecare linie pe trei-patru rânduri. */
+@media(max-width:640px){
+  footer{padding:24px 0 22px;margin-top:32px}
+  .footer-inner{grid-template-columns:1fr;gap:15px}
+  footer h5{margin:0 0 8px}
+  footer p{margin:0 0 4px}
+  .f-brand .tagline,.f-brand p{display:none}
+  .f-net{display:none}
+  .din-2017{display:none}
+}
 footer h5{
   font-size:11px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
@@ -2608,7 +2621,7 @@ tr.rev-teh{ display:none; }
 
     <!-- ============ § Registru de modificări ============ -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 16</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 17</strong> · 21 august 2026.</p>
     <div class="reg-filtru">
       <label class="rev-toggle" title="Arată și reviziile tehnice"><input type="checkbox"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label>
       <span>Registrul afișează <strong>modificările de conținut</strong>. Reviziile tehnice — prezentare, tipografie și funcții ale platformei — sunt ascunse<span class="reg-teh-n"></span>; comută pentru a le vedea. Numerotarea rămâne continuă, iar descrierea completă a fiecărei modificări tehnice stă în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>.</span>
@@ -2618,6 +2631,7 @@ tr.rev-teh{ display:none; }
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr class="rev-teh"><td>17</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Footerul se subțiază pe telefon: rămân linia de identitate a documentului și contactul, iar sloganul, descrierea de brand, cifrele de rețea și banda de jos apar numai pe desktop. Banda „DIN 2017 · EXCELENȚĂ · ACCESIBILITATE · FAMILIE” nu avea unde să rupă rândul și ieșea 106px în afara unui ecran de 375px, cu „FAMILIE” complet invizibil. Pe desktop nu se schimbă nimic. Descrierea completă: intrarea <strong>T-20</strong> din <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>.</td></tr>
         <tr><td>16</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări afișează de acum numai <strong>reviziile de conținut</strong>. Reviziile de prezentare și de platformă — 8 la acest regulament — rămân în tabel, marcate „tehnic”, dar sunt ascunse până la comutarea din caseta de deasupra tabelului: cine deschide registrul caută ce s-a schimbat în text, nu cum arată textul. Nimic nu se șterge și nimic nu se renumerotează — numărul de revizie este ancorat în istoricul documentului (mesajele de commit, aducerea versiunii anterioare, verificările care împiedică două sesiuni de lucru să folosească același număr), așa că numerotarea rămâne continuă și verificabilă. Descrierea completă a unei modificări tehnice se scrie de acum <strong>o singură dată</strong>, în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>, în loc de câte un rând identic în fiecare document atins.</td></tr>
         <tr><td>15</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Trei modificări de fond dispuse de reprezentantul legal. <strong>(1) Art. 53 alin. (5) este înlocuit integral:</strong> criteriile de evaluare a activității profesionale sunt, pe de o parte, atribuțiile din fișa postului comunicată salariatului — fiecare atribuție fiind criteriu de evaluare profesională [KPI-P], cu standardul îndeplinirii corespunzătoare, apreciată în raport cu condițiile concrete de muncă — și, pe de altă parte, regulile, standardele și indicatorii etichetați [KPI-P] în documentele controlate din Registrul online aplicabile rolului, care detaliază și concretizează acele atribuții, în condițiile alin. (4). Comunicarea fișei postului și a documentelor aplicabile, la angajare ori la fiecare actualizare, valorează comunicarea criteriilor pentru perioadele ulterioare comunicării. Indicatorii remunerației variabile [KPI-B] se stabilesc de superiorul ierarhic competent și se comunică salariatului de către acesta ori de către HR, prin scrisoarea de bonus sau altă modalitate, înainte de începerea ciclului; [KPI-B] nu constituie criterii de evaluare profesională. <strong>(2) Terminologie unificată:</strong> atunci când se referă la [KPI-P], sintagma „criteriu de performanță" devine „criteriu de evaluare profesională" — în Preambul, în Art. 5 alin. (9) (semnificația etichetelor), în Art. 53 alin. (4) și în Anexa nr. 3 lit. B. <strong>(3) Ghidul anti-hărțuire nu mai este asumat prin Regulament:</strong> din Art. 100 se elimină obligația de a afișa ghidul prevăzut de metodologia aprobată prin HG nr. 970/2023 (proiectul ADC-HAR-01), care nu este condiție de legalitate a Regulamentului intern. Rămân neschimbate politica de toleranță zero, desemnarea și funcționarea persoanei responsabile ori a comisiei potrivit metodologiei (Art. 92), procedura de sesizare și investigație (Art. 93–99), instruirea personalului la angajare și periodic și analiza anuală a măsurilor de prevenție (Art. 100).</td></tr>
         <tr class="rev-teh"><td>14</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td></tr>
@@ -2643,26 +2657,26 @@ tr.rev-teh{ display:none; }
 
 <footer>
   <div class="footer-inner">
-    <div>
+    <div class="f-brand">
       <h5>Clinicile Dr. Ardeleanu</h5>
       <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
       <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
     </div>
-    <div>
+    <div class="f-doc">
       <h5>Document</h5>
       <p>Cod: ADC-RI-02</p>
       <p>Model-cadru V2.7</p>
       <p>18 august 2026</p>
       <p>18 capitole · 3 anexe</p>
     </div>
-    <div>
+    <div class="f-net">
       <h5>Rețea</h5>
       <p>8 clinici în 7 orașe</p>
       <p>80+ medici supraspecializați</p>
       <p>30.000+ pacienți unici</p>
       <p>4.9★ Google · 2.950 recenzii</p>
     </div>
-    <div>
+    <div class="f-contact">
       <h5>Contact &amp; Acces</h5>
       <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
       <p>031 99 63</p>

@@ -229,7 +229,8 @@ a:hover{border-bottom-color:var(--brand-primary)}
 .proc-tab.hub{margin-left:auto;color:var(--brand-primary);border-bottom-color:transparent}
 .proc-tab.hub:hover{color:var(--brand-primary);border-bottom-color:var(--brand-wheat)}
 @media(max-width:640px){
-  .proc-tabs{top:46px}
+  /* topbarul are 52px pe telefon; la top:46px bara de taburi îi intra 6px dedesubt la derulare */
+  .proc-tabs{top:52px}
   .proc-tabs-inner{padding:0 14px;gap:2px}
   .proc-tab{padding:9px 10px;font-size:12px}
 }
@@ -621,6 +622,9 @@ html{scroll-behavior:smooth}
   #mobileNotice strong{color:var(--brand-primary)}
   #mobileNotice button{flex:none; background:none; border:none; color:var(--ink-mute); font-size:16px; line-height:1; cursor:pointer; padding:0 2px}
   .article table{display:block; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  /* cromul lipit pe telefon e de 92px (52 topbar + 40 bara de taburi), nu 122 ca pe desktop:
+     ancorele aterizau cu 30px mai jos decât marginea barei */
+  .article h2,.article h3{scroll-margin-top:92px}
   .layout{padding:20px 16px 90px}
 }
 
@@ -652,6 +656,19 @@ footer{
   font-size:13px;line-height:1.6;
 }
 @media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+/* Footer lite pe telefon — rămân identitatea documentului și contactul.
+   Sloganul, descrierea de brand, cifrele de rețea și banda de jos se văd doar pe
+   desktop: pe un ecran de 375px footerul complet ocupa 689px (0,85 dintr-un ecran),
+   pentru că cele două coloane de 143px rupeau fiecare linie pe trei-patru rânduri. */
+@media(max-width:640px){
+  footer{padding:24px 0 22px;margin-top:32px}
+  .footer-inner{grid-template-columns:1fr;gap:15px}
+  footer h5{margin:0 0 8px}
+  footer p{margin:0 0 4px}
+  .f-brand .tagline,.f-brand p{display:none}
+  .f-net{display:none}
+  .din-2017{display:none}
+}
 footer h5{
   font-size:11px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
@@ -1181,7 +1198,7 @@ tr.rev-teh{ display:none; }
     <div class="callout note"><p><strong>Notă de implementare.</strong> Publicarea V3.0 trebuie să creeze un document nou în Registrul online, nu să suprascrie fișierul V2.0. Versiunea anterioară se arhivează cu statutul «Retras/Înlocuit», iar relațiile și confirmările rămân verificabile.</p></div>
 
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 6</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 7</strong> · 21 august 2026.</p>
     <div class="reg-filtru">
       <label class="rev-toggle" title="Arată și reviziile tehnice"><input type="checkbox"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label>
       <span>Registrul afișează <strong>modificările de conținut</strong>. Reviziile tehnice — prezentare, tipografie și funcții ale platformei — sunt ascunse<span class="reg-teh-n"></span>; comută pentru a le vedea. Numerotarea rămâne continuă, iar descrierea completă a fiecărei modificări tehnice stă în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>.</span>
@@ -1191,6 +1208,7 @@ tr.rev-teh{ display:none; }
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr class="rev-teh"><td>7</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Trei ajustări de prezentare pe telefon. Footerul se subțiază: rămân identitatea documentului și contactul, iar sloganul, descrierea de brand, cifrele de rețea și banda de jos apar numai pe desktop — banda „DIN 2017 · EXCELENȚĂ · ACCESIBILITATE · FAMILIE” ieșea 106px în afara unui ecran de 375px. Bara de taburi se lipește exact sub bara de sus, în loc să-i intre 6px dedesubt la derulare. Ancorele de capitol aterizează lipite de bara de taburi, nu cu 30px mai jos. Pe desktop nu se schimbă nimic. Descrierea completă: intrarea <strong>T-20</strong> din <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>.</td></tr>
         <tr><td>6</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări afișează de acum numai <strong>reviziile de conținut</strong>. Reviziile de prezentare și de platformă — 3 la acest procedură — rămân în tabel, marcate „tehnic”, dar sunt ascunse până la comutarea din caseta de deasupra tabelului: cine deschide registrul caută ce s-a schimbat în text, nu cum arată textul. Nimic nu se șterge și nimic nu se renumerotează — numărul de revizie este ancorat în istoricul documentului (mesajele de commit, aducerea versiunii anterioare, verificările care împiedică două sesiuni de lucru să folosească același număr), așa că numerotarea rămâne continuă și verificabilă. Descrierea completă a unei modificări tehnice se scrie de acum <strong>o singură dată</strong>, în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>, în loc de câte un rând identic în fiecare document atins.</td></tr>
         <tr class="rev-teh"><td>5</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td></tr>
         <tr class="rev-teh"><td>4</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-BEN-01) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează procedura integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td></tr>
@@ -1206,26 +1224,26 @@ tr.rev-teh{ display:none; }
 
 <footer>
   <div class="footer-inner">
-    <div>
+    <div class="f-brand">
       <h5>Clinicile Dr. Ardeleanu</h5>
       <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
       <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
     </div>
-    <div>
+    <div class="f-doc">
       <h5>Document</h5>
       <p>Cod: ADC-BEN-01</p>
       <p>V3.0 · proiect</p>
       <p>19 august 2026</p>
       <p>17 secțiuni · 2 anexe</p>
     </div>
-    <div>
+    <div class="f-net">
       <h5>Rețea</h5>
       <p>8 clinici în 7 orașe</p>
       <p>80+ medici supraspecializați</p>
       <p>30.000+ pacienți unici</p>
       <p>4.9★ Google · 2.950 recenzii</p>
     </div>
-    <div>
+    <div class="f-contact">
       <h5>Contact &amp; Acces</h5>
       <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
       <p>031 99 63</p>
