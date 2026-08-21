@@ -477,7 +477,11 @@
   /* footer */
   /* registru de modificări (secțiune statică, după conținutul randat) */
   .registru{ margin-top:64px; border-top:2px solid var(--line-2); padding-top:30px; }
-  .registru h2, #despre h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:26px; color:var(--ink); margin:0 0 8px; }
+  /* Titlurile fără număr de capitol („Despre acest manual”, „Registru de modificări”) au
+     aceeași formatare grafică ca titlurile de capitol (h2.ch) — ca în Manualul Asistenților
+     și în Manualul Registratorilor, unde toate titlurile de nivel h2 arată identic. */
+  .registru h2, #despre h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; color:var(--ink); margin:0 0 8px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; }
+  #despre{ scroll-margin-top:78px; }  /* linkul din Cuprins duce la secțiune, nu la titlu */
 
   /* toggle „versiune anterioară" din Registrul de modificări */
   .registru td.rev-na{ text-align:center; color:var(--faint); }
@@ -1220,12 +1224,13 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 49</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 50</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>50</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Titlurile „Despre acest manual” și „Registru de modificări” primesc aceeași formatare grafică ca titlurile de capitol: corp de 32px (erau 26px) și linia de subliniere de 2px de sub titlu, care lipsea. Aceasta este regula din Manualul Asistenților și din Manualul Registratorilor, unde toate titlurile de nivel h2 arată identic — Manualul Medicului era singurul în care primul titlu al documentului ieșea mai mic și fără linie. Cele două titluri primesc și decalajul de ancorare de 78px al titlurilor de capitol, ca linkul din Cuprins să nu le mai ascundă sub bara de sus. Valorile rezolvate (font, corp, greutate, culoare, interlinie, linie de subliniere) au fost verificate ca fiind identice cu ale titlurilor de capitol, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>49</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td><td class="rev-na">—</td></tr>
               <tr><td>48</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Butonul de printare pe capitol nu mai apare la „Despre acest manual" — secțiunea introductivă nu este un capitol care se dă la citit sau la semnat separat, iar pentru documentul integral există butonul „PDF" din bara de sus. Restul capitolelor păstrează butonul (rev. 46). Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>47</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminat footerul compact de document, care rămăsese deasupra footerului de rețea adăugat la rev. 44 — manualul are acum un singur footer, ca toate celelalte documente. Informația din el se regăsește în altă parte: ediția și codul în coloana „Document" a footerului de rețea și în antet, contactul în coloana „Contact &amp; Acces", iar data, autoarea și aprobarea în rândul rev. 1 al acestui registru („1 martie 2026 · Loredana Manoiu · Prima versiune integrată V1.0, aprobare conducere"). Nu se mai regăsesc nicăieri mențiunea „Document intern confidențial" — pe care nu o are niciun alt manual — și nota „Numerotarea paginilor este provizorie". Eliminate și cele patru reguli CSS „.foot", devenite cod mort.</td><td class="rev-na">—</td></tr>
