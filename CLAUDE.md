@@ -43,6 +43,8 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
 
 1. **Nu se lucrează niciodată direct pe `main`.** Orice modificare se face pe un branch nou
    (`edit/<nume>-<subiect-scurt>`, ex. `edit/bianca-sterilizare`) și se deschide un Pull Request către `main`.
+   Când lucrează mai multe sesiuni Claude simultan, ramura se creează într-un worktree izolat —
+   vezi „Sesiuni paralele pe același repo" mai jos.
 2. Mesajele de commit și descrierile de PR se scriu **în română**, descriind ce s-a schimbat și de ce.
 3. **Nu modifica designul, CSS-ul sau JavaScript-ul** decât dacă utilizatorul cere explicit asta.
    Editările normale sunt de conținut (text, tabele, liste, capitole, imagini — vezi „Imagini și fotografii").
@@ -59,6 +61,37 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
    - Medici: în `medici/Manualul Medicului.html`, secțiunea `id="registru"`.
    - Registratori: în `registratori/Manualul Registratorului Medical.html`, înainte de `</article>`.
    Numerotarea reviziilor e per-manual și crește mereu cu 1; nu se rescriu rândurile vechi.
+
+## Sesiuni paralele pe același repo (OBLIGATORIU)
+
+Vlad rulează frecvent **mai multe sesiuni Claude în paralel** pe acest repo, ca să câștige timp.
+Fără disciplină, ele se încurcă exact în trei puncte: ramura (o sesiune schimbă `HEAD` sub alta),
+numărul de revizie (două sesiuni consumă același `rev. N`) și publicarea (commit-uri direct pe
+`main`, muncă necomisă a unei sesiuni comisă de alta — incident real, PR #88). Regulile de mai jos
+nu sunt sfaturi: o parte sunt impuse tehnic de hook-urile din `.claude/settings.json`.
+
+1. **Un worktree per sesiune.** Prima comandă a oricărei sarcini de editare:
+   `python3 scripts/adc.py status` (vezi ce alte sesiuni lucrează acum), apoi
+   `python3 scripts/adc.py new-session vlad <subiect>` — creează un `git worktree` izolat și ramura
+   `edit/vlad-<subiect>` din `origin/main` la zi. Nu se editează în checkout-ul principal
+   (`~/Desktop/Manaule Dr.Ardeleanu`) cât timp `status` arată alte worktree-uri active.
+2. **Numărul de revizie se rezervă înainte de a fi scris** în registrul documentului:
+   `python3 scripts/adc.py claim <asistenti|medici|registratori|roi|proc-ben|proc-reg>`. Rezervările
+   stau în directorul git comun, deci sunt vizibile din toate worktree-urile; `status` arată și
+   reviziile „în lucru" pe ramuri nemerge-uite. La abandon: `release <doc>`.
+3. **Se comit doar fișierele proprii, pe căi explicite.** `git add -A`, `git add .` și
+   `git commit -a` sunt blocate de hook — în worktree pot exista modificări ale altei sesiuni.
+4. **Nimic pe `main`.** Hook-ul blochează `commit`/`push` cu `HEAD` pe main, push-ul direct în main,
+   `push --force` fără lease, schimbarea ramurii cu fișiere modificate necomise și
+   `reset --hard` / `clean -f` / `restore .` când worktree-ul e murdar.
+5. **Înainte de PR:** `python3 scripts/adc.py preflight` — verifică ramura, izolarea, sincronizarea
+   cu `origin/main`, unicitatea numărului de revizie față de main și de celelalte ramuri deschise,
+   potrivirea dintre primul rând al registrului și „Revizia curentă", regenerarea
+   `revision-map.js`, prezența lui `rev. N` în mesajul de commit, diacriticele și echilibrul
+   tag-urilor HTML. Nu se deschide PR cu `✗` nerezolvat.
+6. **Merge serializat.** Vlad face merge la un PR pe rând; după fiecare merge, celelalte sesiuni fac
+   `git fetch origin` și `git rebase origin/main` dacă ating aceleași fișiere.
+7. Protocolul e disponibil și ca skill-uri: `sesiune-noua` (la început) și `pr-manuale` (la final).
 
 ## Stilul redacțional — manual-proză (OBLIGATORIU la orice conținut nou sau rescris)
 
