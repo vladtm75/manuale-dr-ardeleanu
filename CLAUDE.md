@@ -85,6 +85,16 @@ nu sunt sfaturi: o parte sunt impuse tehnic de hook-urile din `.claude/settings.
    `python3 scripts/adc.py claim <asistenti|medici|registratori|roi|proc-ben|proc-reg>`. Rezervările
    stau în directorul git comun, deci sunt vizibile din toate worktree-urile; `status` arată și
    reviziile „în lucru" pe ramuri nemerge-uite. La abandon: `release <doc>`.
+   Rezervarea nu ține la infinit: dacă între scrierea rândului și merge intră un PR al altcuiva
+   pe același document, numărul devine consumat. Nu renumerota manual —
+   **`python3 scripts/adc.py renumber [doc] --fix`** mută rândurile ramurii pe primele numere
+   libere, ținând cont de `origin/main`, de celelalte ramuri nemerge-uite și de rezervări.
+   Renumerotează rândul, atributele toggle-ului de versiune și „Revizia curentă", actualizează
+   rezervarea, și îți spune ce mesaj de commit trebuie corectat — pe „rev. N" din mesaj îl
+   citește `gen-html-manual-revision-map.py`, deci acela se corectează manual
+   (`git commit --amend`). Fără argument, se ocupă de toate documentele atinse de ramură.
+   Rulează-l înainte de push, mai ales dacă ramura are câteva ore. Precedent: PR #89, #106, #107,
+   trei coliziuni în aceeași zi.
 4. **Se comit doar fișierele proprii, pe căi explicite.** `git add -A`, `git add .` și
    `git commit -a` sunt blocate de hook — în worktree pot exista modificări ale altei sesiuni.
 5. **Nimic pe `main`.** Hook-ul blochează `commit`/`push` cu `HEAD` pe main, push-ul direct în main,
