@@ -665,23 +665,6 @@ code,.code{
   padding:1px 6px;border-radius:3px;letter-spacing:0;
 }
 
-/* See also chip row */
-.seealso{
-  display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 30px;
-  padding:14px 16px;background:var(--brand-cream-warm);border-radius:4px;
-  font-size:13px;
-}
-.seealso .lbl{
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-mute);font-weight:600;margin-right:6px;
-  align-self:center;
-}
-.seealso a{
-  background:var(--paper-pure);border:1px solid var(--rule);
-  padding:4px 10px;border-radius:3px;font-size:12px;
-  color:var(--brand-primary);border-bottom:1px solid var(--rule);
-}
-.seealso a:hover{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
 
 /* Two-column compact lists */
 .cols{column-count:2;column-gap:28px;column-rule:1px solid var(--rule-soft);font-size:14px}
@@ -2185,12 +2168,13 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 8</strong> · 20 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 9</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+        <tr><td>9</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Igienă de markup: eliminat un „&lt;/div&gt;" în plus de la finalul documentului, rămas de la un wrapper care nu mai există — după &lt;/main&gt; se închidea de două ori containerul „.layout". Forma corectă, identică acum cu Manualul Medicului, este &lt;/article&gt;&lt;/main&gt;&lt;/div&gt;. Tag-ul era ignorat de browsere, deci fără efect vizual — dar rupea validarea structurii. Zero modificări de conținut sau de prezentare. Eliminat și CSS-ul „.seealso", rămas nefolosit în acest manual.</td><td class="rev-na">—</td></tr>
         <tr><td>8</td><td>20 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări devine pliabil și este închis implicit — titlul primește butonul-săgeată de sub titlu (ca la cuprinsurile de capitol); registrul se deschide automat când pagina e accesată cu ancora #registru. Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>7</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista subcapitolelor (generată din titlurile reale ale capitolului). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>6</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole/secțiuni: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px (unde există), iar primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td></tr>
@@ -2206,8 +2190,6 @@ td.rev-na{ text-align:center; color:var(--ink-mute); }
 
   </article>
   </main>
-</div>
-
 </div>
 
 <footer>
