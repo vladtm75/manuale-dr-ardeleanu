@@ -60,8 +60,10 @@
     --page:#F4F1EC;
     --surface:#FFFFFF;
     --line:#e7ded2;
-    --rule:#E6DCCD;      /* linia de sub titlurile de capitol — valoarea canonică,
-                            identică cu --rule din celelalte manuale și din RI */
+    --rule:#E6DCCD;      /* linia de sub titluri — valoarea canonică, identică cu --rule
+                            din celelalte manuale și din Regulamentul Intern */
+    --ink-mute:#7A736D;  /* numerele de subcapitol — valoarea canonică --ink-mute;
+                            --muted rămâne pentru textul curent al acestui manual */
     --line-2:#d8ccbb;
     --link:#7B1C16;
     --sidebar-w:280px;
@@ -315,9 +317,12 @@
   h2.ch:first-of-type{margin-top:32px}
   h2.ch .chapter-num{ display:block; font-family:"Poppins",sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:8px; }
   .ch-desc{ color:var(--muted); font-size:14px; margin:0 0 6px; }
-  h3.sub{ font-family:"Poppins",sans-serif; font-weight:600; font-size:21px; color:var(--primary); margin:34px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line); scroll-margin-top:78px; display:flex; align-items:baseline; gap:10px; }
-  h3.sub .sn{ color:var(--primary); font-weight:700; font-size:18px; font-variant-numeric:tabular-nums; }
-  h3.sub .anchor{ opacity:0; font-size:14px; color:var(--faint); transition:opacity .15s; }
+  /* Subtitlurile — aceleași valori rezolvate ca în Manualul Asistenților, în Manualul
+     Registratorilor și în Regulamentul Intern: interlinie 1,3, linie de 1px în culoarea
+     canonică, iar numărul subcapitolului în JetBrains Mono 14px, ca la celelalte. */
+  h3.sub{ font-family:"Poppins",sans-serif; font-weight:600; font-size:21px; line-height:1.3; color:var(--primary); margin:34px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--rule); scroll-margin-top:78px; }
+  h3.sub .sn{ font-family:"JetBrains Mono",monospace; font-size:14px; font-weight:500; color:var(--ink-mute); margin-right:8px; }
+  h3.sub .anchor{ opacity:0; font-size:14px; color:var(--faint); transition:opacity .15s; margin-left:8px; }
   h3.sub:hover .anchor{ opacity:1; }
 
   .article h4{ font-size:15px; font-weight:600; color:var(--primary-deep); margin:18px 0 4px; }
@@ -1228,12 +1233,13 @@
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 51</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 52</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>52</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate completă a subtitlurilor (h3) cu celelalte manuale, după titlurile de capitol de la rev. 51: interlinia coboară de la 1,6 la 1,3, linia de sub subtitlu trece de la „line” (#e7ded2) la culoarea canonică #E6DCCD (--rule), iar numărul subcapitolului nu mai este scris cu 18px Poppins bold în roșu-burgundy, ci cu 14px JetBrains Mono, greutate 500, în gri (#7A736D, valoarea canonică --ink-mute) — exact ca numerele de subcapitol din Manualul Asistenților și ca numerele de articol din Regulamentul Intern. Aranjarea în linie trece de la flex la fluxul normal de text, cu 8px între număr și titlu, ca în celelalte documente; ancora „§” care apare la trecerea cu mouse-ul rămâne, cu aceeași distanță de 8px. Modificare exclusiv de foaie de stil — cele 46 de subtitluri nu au fost atinse în corpul documentului, iar textul, numerotarea, ancorele și Cuprinsul rămân neschimbate. Valorile rezolvate au fost verificate ca fiind identice cu ale subtitlurilor din celelalte trei documente, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>51</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate completă a titlurilor de capitol cu celelalte manuale. Tipografie: interlinia coboară de la 1,6 la 1,2, spațierea literelor devine −0,005em, spațiul dintre titlu și linie crește de la 8px la 10px, iar linia de subliniere trece de la „wheat” (#F2DAB7) la culoarea canonică #E6DCCD, introdusă ca variabilă --rule (echivalentul --rule din celelalte manuale și din Regulamentul Intern). Compoziție: numărul capitolului nu mai este o cifră romană mare în linie, ci supratitlul mic în majuscule (.chapter-num), ca în Manualul Asistenților și în Regulamentul Intern — „Capitolul 1 — Operațional” devine supratitlul „CAPITOLUL I” plus titlul „Operațional”, la fel la Comportamental și Partea medicală. Cuprinsul lateral, ancorele și trimiterile interne rămân neschimbate. Valorile rezolvate (corp, interlinie, spațiere, culoare, padding, linie, decalaj de ancorare) au fost verificate ca fiind identice cu ale titlurilor de capitol din Manualul Asistenților, al Registratorilor și din Regulamentul Intern, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>50</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Titlurile „Despre acest manual” și „Registru de modificări” primesc aceeași formatare grafică ca titlurile de capitol: corp de 32px (erau 26px) și linia de subliniere de 2px de sub titlu, care lipsea. Aceasta este regula din Manualul Asistenților și din Manualul Registratorilor, unde toate titlurile de nivel h2 arată identic — Manualul Medicului era singurul în care primul titlu al documentului ieșea mai mic și fără linie. Cele două titluri primesc și decalajul de ancorare de 78px al titlurilor de capitol, ca linkul din Cuprins să nu le mai ascundă sub bara de sus. Valorile rezolvate (font, corp, greutate, culoare, interlinie, linie de subliniere) au fost verificate ca fiind identice cu ale titlurilor de capitol, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>49</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td><td class="rev-na">—</td></tr>
