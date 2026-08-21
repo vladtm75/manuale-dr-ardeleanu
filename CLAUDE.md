@@ -84,14 +84,20 @@ nu sunt sfaturi: o parte sunt impuse tehnic de hook-urile din `.claude/settings.
 4. **Nimic pe `main`.** Hook-ul blochează `commit`/`push` cu `HEAD` pe main, push-ul direct în main,
    `push --force` fără lease, schimbarea ramurii cu fișiere modificate necomise și
    `reset --hard` / `clean -f` / `restore .` când worktree-ul e murdar.
-5. **Înainte de PR:** `python3 scripts/adc.py preflight` — verifică ramura, izolarea, sincronizarea
+5. **Coliziunile de revizie sunt imposibile, nu doar improbabile.** Orice `git commit` care aduce în
+   index un document cu registru e verificat de hook: dacă numărul din primul rând al registrului e
+   deja consumat — publicat în `origin/main`, folosit pe altă ramură nemerge-uită sau rezervat de
+   altă ramură — commit-ul e refuzat, cu numărul liber propus în mesaj. Hook-ul nu face rețea, deci
+   citește starea de la ultimul `git fetch`; dacă numărul propus pare greșit, rulează
+   `git fetch origin` și `python3 scripts/adc.py status`.
+6. **Înainte de PR:** `python3 scripts/adc.py preflight` — verifică ramura, izolarea, sincronizarea
    cu `origin/main`, unicitatea numărului de revizie față de main și de celelalte ramuri deschise,
    potrivirea dintre primul rând al registrului și „Revizia curentă", regenerarea
    `revision-map.js`, prezența lui `rev. N` în mesajul de commit, diacriticele și echilibrul
    tag-urilor HTML. Nu se deschide PR cu `✗` nerezolvat.
-6. **Merge serializat.** Vlad face merge la un PR pe rând; după fiecare merge, celelalte sesiuni fac
+7. **Merge serializat.** Vlad face merge la un PR pe rând; după fiecare merge, celelalte sesiuni fac
    `git fetch origin` și `git rebase origin/main` dacă ating aceleași fișiere.
-7. Protocolul e disponibil și ca skill-uri: `sesiune-noua` (la început) și `pr-manuale` (la final).
+8. Protocolul e disponibil și ca skill-uri: `sesiune-noua` (la început) și `pr-manuale` (la final).
 
 ## Stilul redacțional — manual-proză (OBLIGATORIU la orice conținut nou sau rescris)
 

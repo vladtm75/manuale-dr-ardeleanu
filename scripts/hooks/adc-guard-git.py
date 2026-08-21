@@ -9,6 +9,7 @@ lăsate pe seama memoriei fiecărei sesiuni.
 
 Ieșire: cod 2 = blocat, mesajul de pe stderr ajunge la Claude. Orice altceva = permis.
 """
+import importlib.util
 import json
 import os
 import re
@@ -92,6 +93,9 @@ def check(tokens, cwd):
               "sesiuni paralele. Pune în index doar fișierele tale (`git add \"cale\"`) și apoi "
               "`git commit -m \"…\"`.")
 
+    if cmd in ("commit",):
+        check_registry(cwd, [a for a in pos if a not in ("--",)])
+
     if cmd in ("checkout", "switch") and "--" not in args:
         creates = any(f in ("-b", "-B", "-c", "-C") for f in flags)
         if not creates and pos and is_dirty():
@@ -112,6 +116,86 @@ def check(tokens, cwd):
                   f"({', '.join(is_dirty()[:5])}).\n"
                   "Pot fi modificări nesalvate ale altei sesiuni. Dacă e intenționat, rulează comanda "
                   "manual în terminal, după ce confirmi cu Vlad ce se pierde.")
+
+
+def repo_root(cwd):
+    return git_out(["rev-parse", "--show-toplevel"], cwd)
+
+
+def load_adc(root):
+    """Încarcă scripts/adc.py ca modul, ca să nu dublăm logica registrelor."""
+    path = os.path.join(root, "scripts", "adc.py")
+    if not os.path.exists(path):
+        return None
+    spec = importlib.util.spec_from_file_location("adc_lib", path)
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except Exception:
+        return None
+    return mod
+
+
+def staged_docs(cwd, positional, adc):
+    """Documentele cu registru care intră în acest commit (index + căi date explicit)."""
+    out = git_out(["diff", "--cached", "--name-only"], cwd).splitlines()
+    files = {l.strip() for l in out if l.strip()}
+    root = repo_root(cwd)
+    for a in positional:
+        cand = os.path.relpath(os.path.abspath(os.path.join(cwd, a)), root) if root else a
+        files.add(cand.replace(os.sep, "/"))
+    return [adc.PATH2KEY[f] for f in files if f in adc.PATH2KEY]
+
+
+def doc_text(root, path):
+    """Conținutul care va fi comis: versiunea din index, altfel din worktree."""
+    t = git_out(["show", f":{path}"], root)
+    if t:
+        return t
+    try:
+        return open(os.path.join(root, path), encoding="utf-8").read()
+    except Exception:
+        return ""
+
+
+def check_registry(cwd, positional):
+    """Blochează un commit care ar duplica un număr de revizie deja consumat altundeva."""
+    root = repo_root(cwd)
+    if not root:
+        return
+    adc = load_adc(root)
+    if adc is None:
+        return
+    try:
+        os.chdir(root)  # funcțiile din adc.py rulează în cwd-ul procesului
+    except OSError:
+        return
+    branch = branch_of(root)
+    for key in staged_docs(root, positional, adc):
+        path, label, _ = adc.DOCS[key]
+        text = doc_text(root, path)
+        top = adc.top_row_rev(text)
+        if not top:
+            continue
+        # fără fetch: hook-ul nu face rețea. Folosim starea de la ultimul fetch.
+        used = adc.used_revs(key, fetch=False)
+        others = []
+        for where in used.get(top, []):
+            if where == "origin/main":
+                if top <= adc.max_rev(adc.blob("origin/main", path)):
+                    others.append("origin/main (revizie deja publicată)")
+            elif branch and branch in where:
+                continue  # propria ramură / propria rezervare
+            else:
+                others.append(where)
+        if others:
+            libera = adc.next_free(key, fetch=False)[0]
+            block(f"BLOCAT: coliziune de număr de revizie în {label}.\n"
+                  f"Rândul de sus din registru e rev. {top}, dar rev. {top} e deja consumat de: "
+                  f"{', '.join(sorted(set(others)))}.\n"
+                  f"Treci rândul (și „Revizia curentă”) pe rev. {libera}, apoi comite din nou. "
+                  f"Dacă numărul liber pare greșit, rulează `python3 scripts/adc.py status` "
+                  f"(hook-ul nu face fetch — poate fi nevoie de `git fetch origin`).")
 
 
 def main():
