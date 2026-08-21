@@ -122,6 +122,18 @@
   .info-trigger:hover .info-tooltip, .info-trigger:focus-visible .info-tooltip, .info-trigger.open .info-tooltip{
     opacity:1; visibility:visible; transform:translateY(0);
   }
+  /* Pe telefon caseta se deschide ca bloc sub rând, pe toată lățimea cardului.
+     Ancorată la butonul de 16px și lată de 250px, era retezată de card
+     (overflow:hidden, necesar pentru colțurile rotunjite) pe 104px din 250 —
+     vreo 40% din fiecare rând de text. */
+  @media(max-width:640px){
+    .aud-row{ position:relative; }
+    .info-trigger{ position:static; }
+    .info-trigger .info-tooltip{
+      left:0; right:0; width:auto; max-width:none;
+      top:calc(100% + 8px); border-radius:8px;
+    }
+  }
   .meta{ display:grid; grid-template-columns:1fr 1fr 1fr; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:0 0 20px; }
   .meta .cell{ padding:11px 6px 12px 0; border-left:1px solid var(--line); padding-left:14px; }
   .meta .cell:first-child{ border-left:none; padding-left:0; }
@@ -175,6 +187,18 @@
   @media(min-width:1140px){ .foot-inner{ max-width:1400px; } }
   @media(max-width:780px){ .foot-inner{ grid-template-columns:1fr 1fr; } }
   @media(max-width:480px){ .foot-inner{ grid-template-columns:1fr; gap:24px; } }
+  /* Footer lite pe telefon — rămân navigarea către documente și contactul.
+     Sloganul, descrierea de brand, blocul „Acces” (nota de confidențialitate există
+     deja în caseta din hero) și banda de jos se văd doar pe desktop. */
+  @media(max-width:640px){
+    .foot{ padding:24px 0 22px; }
+    .foot-inner{ grid-template-columns:1fr; gap:15px; }
+    .foot h5{ margin:0 0 8px; }
+    .foot p{ margin:0 0 4px; }
+    .f-brand .tagline, .f-brand p{ display:none; }
+    .f-access{ display:none; }
+    .din-strip{ display:none; }
+  }
   .foot h5{
     font-size:11px; letter-spacing:.22em; text-transform:uppercase;
     color:var(--yellow); font-weight:600; margin:0 0 12px;
@@ -412,12 +436,12 @@
 
   <footer class="foot">
     <div class="foot-inner">
-      <div>
+      <div class="f-brand">
         <h5>Clinicile Dr. Ardeleanu</h5>
         <div class="tagline">"Excelența accesibilă.<br>Clinica familiei tale."</div>
         <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
       </div>
-      <div>
+      <div class="f-manuals">
         <h5>Manuale interne</h5>
         <p><a href="medici/Manualul%20Medicului.html">Manualul Medicului</a><span class="mcode">MED-01</span></p>
         <p><a href="asistenti/Manualul%20Asistentului%20Medical.html">Manualul Asistentului</a><span class="mcode">ASM-03</span></p>
@@ -426,13 +450,13 @@
         <p><a href="proceduri/index.html">Proceduri de lucru</a><span class="mcode">PROC</span></p>
         <p><a href="registru-tehnic.html">Registru tehnic al platformei</a><span class="mcode">TEHNIC</span></p>
       </div>
-      <div>
+      <div class="f-access">
         <h5>Acces</h5>
         <p>Documente interne confidențiale</p>
         <p>Acces pe bază de parolă</p>
         <p>Fiecare manual se poate partaja separat, din butonul „Partajează"</p>
       </div>
-      <div>
+      <div class="f-contact">
         <h5>Contact</h5>
         <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
         <p>031 99 63</p>

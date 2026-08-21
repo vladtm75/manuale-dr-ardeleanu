@@ -270,6 +270,19 @@ footer{
   font-size:13px;line-height:1.6;
 }
 @media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+/* Footer lite pe telefon — rămân identitatea documentului și contactul.
+   Sloganul, descrierea de brand, cifrele de rețea și banda de jos se văd doar pe
+   desktop: pe un ecran de 375px footerul complet ocupa 689px (0,85 dintr-un ecran),
+   pentru că cele două coloane de 143px rupeau fiecare linie pe trei-patru rânduri. */
+@media(max-width:640px){
+  footer{padding:24px 0 22px;margin-top:32px}
+  .footer-inner{grid-template-columns:1fr;gap:15px}
+  footer h5{margin:0 0 8px}
+  footer p{margin:0 0 4px}
+  .f-brand .tagline,.f-brand p{display:none}
+  .f-net{display:none}
+  .din-2017{display:none}
+}
 footer h5{
   font-size:11px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
@@ -388,26 +401,26 @@ html{scroll-behavior:smooth}
 
 <footer>
   <div class="footer-inner">
-    <div>
+    <div class="f-brand">
       <h5>Clinicile Dr. Ardeleanu</h5>
       <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
       <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
     </div>
-    <div>
+    <div class="f-doc">
       <h5>Document</h5>
       <p>ADC-REG-01 · Procedura Registrului online</p>
       <p>Publicare treptată</p>
       <p>16 august 2026</p>
       <p>1 procedură · 3 în pregătire</p>
     </div>
-    <div>
+    <div class="f-net">
       <h5>Rețea</h5>
       <p>8 clinici în 7 orașe</p>
       <p>80+ medici supraspecializați</p>
       <p>30.000+ pacienți unici</p>
       <p>4.9★ Google · 2.950 recenzii</p>
     </div>
-    <div>
+    <div class="f-contact">
       <h5>Contact &amp; Acces</h5>
       <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
       <p>031 99 63</p>

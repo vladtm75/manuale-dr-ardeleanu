@@ -239,6 +239,19 @@ footer{
   font-size:13px;line-height:1.6;
 }
 @media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+/* Footer lite pe telefon — rămân identitatea documentului și contactul.
+   Sloganul, descrierea de brand, cifrele de rețea și banda de jos se văd doar pe
+   desktop: pe un ecran de 375px footerul complet ocupa 689px (0,85 dintr-un ecran),
+   pentru că cele două coloane de 143px rupeau fiecare linie pe trei-patru rânduri. */
+@media(max-width:640px){
+  footer{padding:24px 0 22px;margin-top:32px}
+  .footer-inner{grid-template-columns:1fr;gap:15px}
+  footer h5{margin:0 0 8px}
+  footer p{margin:0 0 4px}
+  .f-brand .tagline,.f-brand p{display:none}
+  .f-net{display:none}
+  .din-2017{display:none}
+}
 footer h5{
   font-size:11px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
@@ -335,7 +348,7 @@ table.rt td.rt-doc .mono{ font-family:'JetBrains Mono',monospace; font-size:11.5
     <p class="subtitle">Modificările de prezentare și de funcționare ale platformei pe care sunt publicate manualele, Regulamentul Intern și procedurile — tipografie, geometrie, cuprinsuri pliabile, printare, igienă de cod. Sunt consemnate aici o singură dată, cu descriere completă, chiar dacă ating mai multe documente simultan. Registrele de modificări ale documentelor rămân dedicate <strong>substanței</strong>: ce s-a schimbat în text, nu cum arată textul.</p>
 
     <dl class="meta-row">
-      <div><dt>Intrări</dt><dd><span class="mono">19</span></dd></div>
+      <div><dt>Intrări</dt><dd><span class="mono">20</span></dd></div>
       <div><dt>Perioada</dt><dd>16 – 21 august 2026</dd></div>
       <div><dt>Documente acoperite</dt><dd>3 manuale · RI · 2 proceduri</dd></div>
       <div><dt>Administrare</dt><dd>Vlad Ardeleanu</dd></div>
@@ -357,6 +370,7 @@ table.rt td.rt-doc .mono{ font-family:'JetBrains Mono',monospace; font-size:11.5
       <tr><th style="width:64px">Nr.</th><th style="width:120px">Data</th><th>Modificarea</th><th style="width:220px">Documente și revizii consumate</th></tr>
     </thead>
     <tbody>
+      <tr><td>T-20</td><td>21 aug 2026</td><td>Prezentarea pe telefon, în trei ajustări. <strong>Footerul devine „lite” sub 640px:</strong> rămân linia de identitate a documentului și contactul, iar sloganul de marcă, descrierea „Din 2017, construim…”, cifrele de rețea (la homepage: blocul „Acces”) și banda de jos apar numai pe desktop. Banda <span class="mono">DIN 2017 · EXCELENȚĂ · ACCESIBILITATE · FAMILIE</span> era scrisă fără spații în jurul separatorilor „·”, deci browserul nu avea unde să rupă rândul: cu marginile de 22px pe fiecare cuvânt și letter-spacing de .32em, șirul ocupa 503px într-un ecran de 375px și ieșea 106px în afara lui, cu „FAMILIE” complet invizibil. Footerul unui document scade astfel de la 689px la 379px (de la 0,85 la 0,47 dintr-un ecran de telefon), pentru că grila de două coloane de 143px rupea fiecare linie pe trei-patru rânduri. Blocurile au primit clase proprii (<span class="mono">f-brand</span>, <span class="mono">f-doc</span>, <span class="mono">f-net</span>, <span class="mono">f-contact</span>; la homepage <span class="mono">f-manuals</span> și <span class="mono">f-access</span>), ca regula să nu depindă de poziția lor în grilă la o ediție viitoare. <strong>Caseta „i” de pe cardul Manualului Medicului</strong> (homepage) se deschide pe telefon ca bloc sub rândul „Pentru medicii rețelei”, pe toată lățimea cardului: ancorată la butonul de 16px și lată de 250px, era retezată de cardul cu <span class="mono">overflow:hidden</span> — necesar pentru colțurile rotunjite — pe 104px din 250, adică vreo 40% din fiecare rând de text. <strong>La cele două proceduri</strong>, bara de taburi se lipește la 52px, cât are bara de sus pe telefon, în loc de 46px, care o făcea să intre 6px dedesubtul ei la derulare; iar <span class="mono">scroll-margin-top</span> pe h2/h3 trece de la 122px (valoarea de desktop) la 92px, cât are cromul lipit pe telefon (52 bara de sus + 40 bara de taburi), ca ancorele să nu mai aterizeze cu 30px mai jos. Regula aceea a trebuit mutată după definiția de bază a titlurilor: la specificitate egală câștigă ultima din fișier, iar în blocul taburilor era înaintea ei și nu se aplica. <strong>Pe desktop nu se schimbă nimic</strong> — verificat pe valorile rezolvate, nu pe sursă: footer 312px, grilă de 451/226/226/226, gap 32px, padding 48/38px, blocul „Rețea” și banda vizibile, caseta „i” tot flotantă și ancorată la buton. Pe telefon, toate cele nouă pagini au acum zero derulare orizontală și zero elemente în afara ecranului, verificat la 375, 360 și 320px.</td><td class="rt-doc">Toate șase + homepage, hub proceduri, registru tehnic · <span class="mono">Asist. 50 · Med. 62 · Reg. 15 · RI 17 · BEN 7 · REG 7</span></td></tr>
       <tr><td>T-19</td><td>21 aug 2026</td><td>Registrele de modificări afișează implicit doar reviziile de conținut. Fiecare revizie de prezentare sau de platformă este marcată <span class="mono">rev-teh</span> și ascunsă în spatele unui comutator, împreună cu o etichetă „tehnic” care o identifică atunci când e afișată. Numerotarea reviziilor rămâne continuă și neatinsă — nimic nu se șterge și nimic nu se renumerotează — pentru că numărul de revizie este ancorat în istoricul git (mesajele de commit, harta versiunilor anterioare, verificările anti-coliziune dintre sesiuni). Descrierea completă a fiecărei modificări tehnice se mută în acest registru.</td><td class="rt-doc">Toate șase · <span class="mono">Asist. 49 · Med. 61 · Reg. 14 · RI 16 · BEN 6 · REG 6</span></td></tr>
       <tr><td>T-18</td><td>21 aug 2026</td><td>Manualul Medicului adus la paritate completă de design cu celelalte manuale, în opt tranșe: tipografia de bază și paleta, titlurile de capitol, subtitlurile, geometria tabelelor și a componentelor, markerul listelor cu buline în roșul de marcă, eticheta casetelor (corp, spațiere și pastila rotundă colorată), titlurile secțiunilor speciale și structura antetului. Valorile rezolvate au fost verificate una câte una față de echivalentul canonic, nu doar numele claselor.</td><td class="rt-doc">Medici · <span class="mono">50, 51, 52, 53, 54, 55, 58, 59</span></td></tr>
       <tr><td>T-17</td><td>21 aug 2026</td><td>Footerul de rețea standard, identic cu cel din celelalte documente (patru coloane), a fost adăugat în Manualul Medicului, iar footerul compact de document, care rămăsese deasupra lui, a fost eliminat — documentul are acum un singur footer.</td><td class="rt-doc">Medici · <span class="mono">44, 47</span></td></tr>
@@ -387,26 +401,26 @@ table.rt td.rt-doc .mono{ font-family:'JetBrains Mono',monospace; font-size:11.5
 
 <footer>
   <div class="footer-inner">
-    <div>
+    <div class="f-brand">
       <h5>Clinicile Dr. Ardeleanu</h5>
       <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
       <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
     </div>
-    <div>
+    <div class="f-doc">
       <h5>Document</h5>
       <p>Registru tehnic al platformei</p>
       <p>Uz intern · fără cheie de partajare</p>
       <p>21 august 2026</p>
-      <p>19 intrări · 6 documente acoperite</p>
+      <p>20 intrări · 6 documente acoperite</p>
     </div>
-    <div>
+    <div class="f-net">
       <h5>Rețea</h5>
       <p>8 clinici în 7 orașe</p>
       <p>80+ medici supraspecializați</p>
       <p>30.000+ pacienți unici</p>
       <p>4.9★ Google · 2.950 recenzii</p>
     </div>
-    <div>
+    <div class="f-contact">
       <h5>Contact &amp; Acces</h5>
       <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
       <p>031 99 63</p>
