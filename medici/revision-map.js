@@ -381,5 +381,15 @@ window.MEDICI_REVISION_MAP = {
         "title": "3. 7Ortodonție§"
       }
     ]
+  },
+  "60": {
+    "commit": "7a3a21cb3f3f41a771a49647d5337051ee56d833",
+    "before": "8d913f99c6b23794728f53374cdfdafe0ccbe18d",
+    "sections": [
+      {
+        "id": "cap-1-9",
+        "title": "1. 9Prima interacțiune — recepția și documentele§"
+      }
+    ]
   }
 };

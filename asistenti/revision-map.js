@@ -1303,5 +1303,57 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
       }
     ]
+  },
+  "48": {
+    "commit": "7a3a21cb3f3f41a771a49647d5337051ee56d833",
+    "before": "8d913f99c6b23794728f53374cdfdafe0ccbe18d",
+    "sections": [
+      {
+        "id": "cap-2",
+        "title": "Capitolul II — Actualizat integral la V18 · septembrie 2026Onboarding pacient. Fluxul medico-legal în clinică (P0–P2)"
+      },
+      {
+        "id": "cap-2-6",
+        "title": "11. Checklist rapid și concluzie"
+      },
+      {
+        "id": "cap-2-arhiva",
+        "title": "7. Consimțămintele specifice și arhivarea"
+      },
+      {
+        "id": "cap-2-minor",
+        "title": "6. Onboardingul pacientului minor"
+      },
+      {
+        "id": "cap-2-nu",
+        "title": "9. Gestionarea activă a răspunsurilor „Nu”"
+      }
+    ]
+  },
+  "60": {
+    "commit": "7a3a21cb3f3f41a771a49647d5337051ee56d833",
+    "before": "8d913f99c6b23794728f53374cdfdafe0ccbe18d",
+    "sections": [
+      {
+        "id": "cap-2",
+        "title": "Capitolul II — Actualizat integral la V18 · septembrie 2026Onboarding pacient. Fluxul medico-legal în clinică (P0–P2)"
+      },
+      {
+        "id": "cap-2-6",
+        "title": "11. Checklist rapid și concluzie"
+      },
+      {
+        "id": "cap-2-arhiva",
+        "title": "7. Consimțămintele specifice și arhivarea"
+      },
+      {
+        "id": "cap-2-minor",
+        "title": "6. Onboardingul pacientului minor"
+      },
+      {
+        "id": "cap-2-nu",
+        "title": "9. Gestionarea activă a răspunsurilor „Nu”"
+      }
+    ]
   }
 };
