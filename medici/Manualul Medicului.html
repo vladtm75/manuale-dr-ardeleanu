@@ -60,6 +60,8 @@
     --page:#F4F1EC;
     --surface:#FFFFFF;
     --line:#e7ded2;
+    --rule:#E6DCCD;      /* linia de sub titlurile de capitol — valoarea canonică,
+                            identică cu --rule din celelalte manuale și din RI */
     --line-2:#d8ccbb;
     --link:#7B1C16;
     --sidebar-w:280px;
@@ -305,9 +307,13 @@
 
 
   /* sections */
-  h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; color:var(--ink); margin:84px 0 8px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; display:flex; align-items:baseline; gap:12px; }
+  /* Titlurile de capitol — aceleași valori rezolvate ca în Manualul Asistenților, în
+     Manualul Registratorilor și în Regulamentul Intern: corp 32px, interlinie 1,2,
+     spațiere −0,005em, linie de 2px în culoarea canonică. Numărul capitolului este
+     supratitlul mic, în majuscule (.chapter-num), nu o cifră romană în linie. */
+  h2.ch{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; line-height:1.2; color:var(--ink); margin:84px 0 8px; padding-bottom:10px; border-bottom:2px solid var(--rule); letter-spacing:-.005em; scroll-margin-top:78px; }
   h2.ch:first-of-type{margin-top:32px}
-  h2.ch .rn{ font-size:20px; color:var(--amber); }
+  h2.ch .chapter-num{ display:block; font-family:"Poppins",sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:8px; }
   .ch-desc{ color:var(--muted); font-size:14px; margin:0 0 6px; }
   h3.sub{ font-family:"Poppins",sans-serif; font-weight:600; font-size:21px; color:var(--primary); margin:34px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line); scroll-margin-top:78px; display:flex; align-items:baseline; gap:10px; }
   h3.sub .sn{ color:var(--primary); font-weight:700; font-size:18px; font-variant-numeric:tabular-nums; }
@@ -480,7 +486,7 @@
   /* Titlurile fără număr de capitol („Despre acest manual”, „Registru de modificări”) au
      aceeași formatare grafică ca titlurile de capitol (h2.ch) — ca în Manualul Asistenților
      și în Manualul Registratorilor, unde toate titlurile de nivel h2 arată identic. */
-  .registru h2, #despre h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; color:var(--ink); margin:0 0 8px; padding-bottom:8px; border-bottom:2px solid var(--wheat); scroll-margin-top:78px; }
+  .registru h2, #despre h2{ font-family:"Playfair Display",serif; font-weight:800; font-size:32px; line-height:1.2; color:var(--ink); margin:0 0 8px; padding-bottom:10px; border-bottom:2px solid var(--rule); letter-spacing:-.005em; scroll-margin-top:78px; }
   #despre{ scroll-margin-top:78px; }  /* linkul din Cuprins duce la secțiune, nu la titlu */
 
   /* toggle „versiune anterioară" din Registrul de modificări */
@@ -723,8 +729,6 @@
 .chapter-toc a{border:0;color:var(--ink);display:flex;gap:10px;align-items:baseline;text-decoration:none}
 .chapter-toc a:hover{color:var(--primary)}
 .chapter-toc .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);font-weight:600;min-width:26px;flex:none}
-h2.ch{flex-wrap:wrap}
-h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;flex-basis:100%}
 @media(max-width:640px){.chapter-toc{grid-template-columns:1fr}}
 
 
@@ -984,7 +988,7 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
         </section>
 
         <!-- ============ Capitolul I (Operațional) ============ -->
-        <h2 class="ch" id="cap-1"><span class="rn">I</span><span>Capitolul 1 — Operațional</span></h2>
+        <h2 class="ch" id="cap-1"><span class="chapter-num">Capitolul I</span>Operațional</h2>
     <div class="hatnote">
       <strong>Cuprins.</strong>
       <ol class="chapter-toc">
@@ -1129,7 +1133,7 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
         <h3 class="sub" id="cap-1-25"><span class="sn">3.5</span><span>KPI-uri operaționale</span><a class="anchor" href="#cap-1-25">§</a></h3>
 <p>Fiecare etapă are un KPI operațional și un indicator de experiență. Ambele contează egal: un sistem eficient fără grijă nu produce excelență.</p><table><thead><tr><th>Etapă</th><th>KPI operațional</th><th>Țintă</th></tr></thead><tbody><tr><td>Contact</td><td>Conversie apel → programare</td><td>≥ 75%</td></tr><tr><td>Prezență</td><td>Rata no-show</td><td>≤ 15%</td></tr><tr><td>P1 — Documentare</td><td>Dosar complet în aceeași zi</td><td>≥ 98%</td></tr><tr><td>P2 — Plan</td><td>Rata acceptare plan de tratament</td><td>≥ 65%</td></tr><tr><td>Execuție</td><td>Proceduri conform planului</td><td>≥ 95%</td></tr><tr><td>Retenție</td><td>Pacienți activi la 12 luni</td><td>≥ 85%</td></tr></tbody></table><div class="callout"><span class="callout-label">Ce înseamnă excelență</span><p>Nu absența greșelilor, ci prezența constantă a grijii — în fiecare apel, în fiecare minut din cabinet, în fiecare follow-up. Standardul nostru: „cel mai bine tratat am fost la Dr. Ardeleanu — și asta povestesc oamenilor".</p></div>
         <!-- ============ Capitolul II (Comportamental) ============ -->
-        <h2 class="ch" id="cap-2"><span class="rn">II</span><span>Capitolul 2 — Comportamental</span></h2>
+        <h2 class="ch" id="cap-2"><span class="chapter-num">Capitolul II</span>Comportamental</h2>
     <div class="hatnote">
       <strong>Cuprins.</strong>
       <ol class="chapter-toc">
@@ -1171,7 +1175,7 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
         <h3 class="sub" id="cap-2-9"><span class="sn">2.9</span><span>Ce înseamnă comportament medical Dr. Ardeleanu</span><a class="anchor" href="#cap-2-9">§</a></h3>
 <p>Comportamentul medical nu este un strat adăugat peste actul clinic — este actul clinic în totalitatea lui. Un medic care știe ce observă, ce face și ce spune în fiecare moment al relației cu pacientul nu lucrează mai mult — lucrează mai bine: pacienții înțeleg, decid și rămân, planurile de tratament sunt respectate, recenziile apar de la sine.</p><p class="byline">Tot ce este scris în acest capitol este un punct de pornire, nu un script de memorat. Adaptează limbajul la vocea ta. Păstrează logica din spatele lui.</p><h4>Cum rămâne viu capitolul</h4><ul><li>Fiecare medic nou confirmă în scris că a citit și înțeles Capitolul V — în prima săptămână de activitate.</li><li>La ședința lunară de echipă, un scenariu din secțiunea 5.6 este ales și discutat 15 minute.</li><li>Capitolul se recitește integral o dată pe an, în prima săptămână din ianuarie.</li></ul><div class="callout"><span class="callout-label">Încheiere</span><p>Acest manual nu este o carte de regulament. Este o promisiune făcută fiecărui pacient care intră în rețeaua Dr. Ardeleanu și fiecărui medic care alege să fie parte din această familie profesională — o promisiune că ne ținem standardul când nu ne vede nimeni, că învățăm unii de la alții, că ne ridicăm reciproc când greșim (fără rușine, dar cu responsabilitate) și că tratăm fiecare pacient ca și cum ar fi cineva drag pentru noi.</p><p>Manualul se va schimba. Va deveni mai bun. Va corecta lucrurile pe care nu le-am gândit bine de prima dată. Va integra cazurile, lecțiile și succesele care vor veni. Ce nu se schimbă este principiul care îl ține împreună: <b>excelența la prețuri accesibile, clinica familiei tale.</b></p></div>
         <!-- ============ Capitolul III (Partea medicală) ============ -->
-        <h2 class="ch" id="cap-3"><span class="rn">III</span><span>Capitolul 3 — Partea medicală</span></h2>
+        <h2 class="ch" id="cap-3"><span class="chapter-num">Capitolul III</span>Partea medicală</h2>
     <div class="hatnote">
       <strong>Cuprins.</strong>
       <ol class="chapter-toc">
@@ -1224,12 +1228,13 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 50</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 51</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>51</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate completă a titlurilor de capitol cu celelalte manuale. Tipografie: interlinia coboară de la 1,6 la 1,2, spațierea literelor devine −0,005em, spațiul dintre titlu și linie crește de la 8px la 10px, iar linia de subliniere trece de la „wheat” (#F2DAB7) la culoarea canonică #E6DCCD, introdusă ca variabilă --rule (echivalentul --rule din celelalte manuale și din Regulamentul Intern). Compoziție: numărul capitolului nu mai este o cifră romană mare în linie, ci supratitlul mic în majuscule (.chapter-num), ca în Manualul Asistenților și în Regulamentul Intern — „Capitolul 1 — Operațional” devine supratitlul „CAPITOLUL I” plus titlul „Operațional”, la fel la Comportamental și Partea medicală. Cuprinsul lateral, ancorele și trimiterile interne rămân neschimbate. Valorile rezolvate (corp, interlinie, spațiere, culoare, padding, linie, decalaj de ancorare) au fost verificate ca fiind identice cu ale titlurilor de capitol din Manualul Asistenților, al Registratorilor și din Regulamentul Intern, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>50</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Titlurile „Despre acest manual” și „Registru de modificări” primesc aceeași formatare grafică ca titlurile de capitol: corp de 32px (erau 26px) și linia de subliniere de 2px de sub titlu, care lipsea. Aceasta este regula din Manualul Asistenților și din Manualul Registratorilor, unde toate titlurile de nivel h2 arată identic — Manualul Medicului era singurul în care primul titlu al documentului ieșea mai mic și fără linie. Cele două titluri primesc și decalajul de ancorare de 78px al titlurilor de capitol, ca linkul din Cuprins să nu le mai ascundă sub bara de sus. Valorile rezolvate (font, corp, greutate, culoare, interlinie, linie de subliniere) au fost verificate ca fiind identice cu ale titlurilor de capitol, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>49</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td><td class="rev-na">—</td></tr>
               <tr><td>48</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Butonul de printare pe capitol nu mai apare la „Despre acest manual" — secțiunea introductivă nu este un capitol care se dă la citit sau la semnat separat, iar pentru documentul integral există butonul „PDF" din bara de sus. Restul capitolelor păstrează butonul (rev. 46). Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
