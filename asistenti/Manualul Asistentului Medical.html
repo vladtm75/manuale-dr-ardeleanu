@@ -1301,6 +1301,46 @@ html{scroll-behavior:smooth}
   body.print-fisa .article{max-width:100%;padding:0}
 }
 
+
+/* ============ PRINT / PDF PE CAPITOL ============
+   Butonul de printare din rândul de metadate al fiecărui titlu de capitol (lângă butonul
+   de cuprins) trimite la imprimantă — sau salvează ca PDF — doar capitolul respectiv.
+   Pe durata printării, corpul primește clasa .print-chapter, iar elementele capitolului
+   ales primesc .print-chap; totul revine la normal după printare. */
+.chap-print svg{width:14px;height:14px;transform:none !important}
+.article h2 > .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px}
+#printChapHead{display:none}
+@media print{
+  /* modul „un singur capitol" — coperta, cuprinsul integral și celelalte capitole nu se printează */
+  body.print-chapter .hero,
+  body.print-chapter .toc-side,
+  body.print-chapter .print-cover-logo{display:none !important}
+  body.print-chapter .layout,
+  body.print-chapter .shell{display:block}
+  body.print-chapter .article{max-width:none;padding:0}
+  body.print-chapter .article > *:not(.print-chap){display:none !important}
+  /* capitolul printat începe pe prima pagină, fără saltul de pagină dintre capitole */
+  body.print-chapter .article > h2,
+  body.print-chapter .article > section,
+  body.print-chapter h2.ch,
+  body.print-chapter .registru{break-before:auto;margin-top:0}
+  /* capul de pagină al extrasului — arată din ce manual provine capitolul */
+  body.print-chapter #printChapHead{
+    display:flex;align-items:center;gap:10px;
+    margin:0 0 10pt;padding-bottom:5pt;
+    border-bottom:1px solid var(--rule,var(--line));
+  }
+  #printChapHead .pch-logo{height:9mm;width:auto;flex:none}
+  #printChapHead .pch-manual{
+    display:block;font-family:'Poppins',sans-serif;font-size:9.5pt;font-weight:600;
+    color:var(--brand-primary,var(--primary));line-height:1.25;
+  }
+  #printChapHead .pch-note{
+    display:block;font-size:7.6pt;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-mute,var(--muted));margin-top:2pt;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5629,12 +5669,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 39</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 40</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+            <tr><td>40</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Facilitate nouă, comună tuturor manualelor și Regulamentului Intern: lângă butonul de deschidere a cuprinsului de capitol, pe rândul de metadate de sub fiecare titlu de capitol, apare un buton de printare care trimite la imprimantă — sau salvează ca PDF — numai capitolul respectiv. Pe durata printării, coperta, cuprinsul integral și restul documentului sunt ascunse, extrasul primește un cap de pagină cu sigla și denumirea documentului („Extras pe capitol din documentul integral"), iar numele implicit al fișierului PDF devine „&lt;titlul capitolului&gt; — &lt;denumirea documentului&gt;"; după printare pagina revine exact în starea de dinainte. Completează butonul „PDF" din bara de sus (rev. 39), care rămâne pentru printarea documentului integral. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
         <tr><td>39</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-ASM-03) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează manualul integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td><td class="rev-na">—</td></tr>
             <tr><td>38</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Igienă de markup: eliminat un „&lt;/div&gt;" în plus de la finalul documentului, rămas de la un wrapper care nu mai există — după &lt;/main&gt; se închidea de două ori containerul „.layout". Forma corectă, identică acum cu Manualul Medicului, este &lt;/article&gt;&lt;/main&gt;&lt;/div&gt;. Tag-ul era ignorat de browsere, deci fără efect vizual — dar rupea validarea structurii. Zero modificări de conținut sau de prezentare.</td><td class="rev-na">—</td></tr>
         <tr><td>37</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminate toate barele și casetele de trimiteri „Vezi și" din manual (șase în total: Registrul de modificări, Cap. II — onboarding pacient, Cap. III — stomatologie generală, Cap. IV — endodonție, Cap. V — ortodonție, Cap. VII — chirurgie). Navigarea o asigură Cuprinsul lateral, iar peste jumătate din trimiteri duceau către pași universali (pregătirea cabinetului, sterilizarea, gestiunea deșeurilor), aplicabili după orice manoperă, deci fără valoare informativă la nivel de capitol; unde trimiterea era specifică, textul capitolului o spunea deja. Singura legătură care nu exista nicăieri în proză — chirurgie → urgențe medicale — a fost preluată în concluziile Cap. VII, ca trimitere la Capitolul XVIII (ADC-AJT-01). Eliminat și CSS-ul „.seealso", rămas nefolosit.</td><td class="rev-na">—</td></tr>
@@ -6195,6 +6236,92 @@ html{scroll-behavior:smooth}
       setTimeout(function(){ window.print(); setTimeout(restoreAll,1500); },60);
     });
   }
+})();
+</script>
+<script>
+/* ============ PRINT / PDF PE CAPITOL ============
+   Fiecare titlu de capitol primește, lângă butonul de cuprins, un buton de printare care
+   trimite la imprimantă (sau salvează ca PDF) numai capitolul respectiv: restul manualului,
+   coperta și cuprinsul integral sunt ascunse cât ține printarea, apoi totul revine la normal.
+   Rulează ultimul, ca butonul să apară în dreapta butonului de cuprins. */
+(function(){
+  var art=document.querySelector('.article'); if(!art) return;
+
+  var manual=((document.querySelector('.hero h1')||{}).textContent||document.title||'').replace(/\s+/g,' ').trim();
+  var logo=document.querySelector('.topbar img.logo, .topbar .brand-home img, .print-cover-logo');
+
+  /* capul de pagină al extrasului — vizibil doar la printarea unui singur capitol */
+  var head=document.createElement('div');
+  head.id='printChapHead';
+  if(logo && logo.getAttribute('src')){
+    var img=document.createElement('img');
+    img.className='pch-logo';
+    img.src=logo.getAttribute('src');
+    img.alt=logo.getAttribute('alt')||'Clinicile Dr. Ardeleanu';
+    head.appendChild(img);
+  }
+  var txt=document.createElement('div');
+  txt.innerHTML='<span class="pch-manual"></span><span class="pch-note">Extras pe capitol din documentul integral</span>';
+  txt.querySelector('.pch-manual').textContent=manual;
+  head.appendChild(txt);
+  art.insertBefore(head, art.firstChild);
+
+  /* grupează conținutul articolului pe capitole, după titlurile de nivel h2 */
+  var groups=[], cur=null;
+  Array.prototype.forEach.call(art.children, function(el){
+    if(el===head) return;
+    var h2=null;
+    if(el.tagName==='H2'){ h2=el; }
+    else if(el.tagName==='SECTION'){ h2=el.querySelector('h2'); }
+    if(h2){ cur={h2:h2, els:[el]}; groups.push(cur); }
+    else if(cur){ cur.els.push(el); }
+  });
+  if(!groups.length) return;
+
+  function titleOf(h2){
+    var c=h2.cloneNode(true);
+    Array.prototype.forEach.call(c.querySelectorAll('.chapter-meta,.h-edit,.rn,button,svg'),function(n){
+      n.parentNode.removeChild(n);
+    });
+    var num=c.querySelector('.chapter-num'), pre='';
+    if(num){ pre=(num.textContent||'').replace(/\s+/g,' ').trim(); num.parentNode.removeChild(num); }
+    var rest=(c.textContent||'').replace(/\s+/g,' ').trim();
+    return (pre && rest) ? pre+' \u2014 '+rest : (pre||rest);
+  }
+
+  var busy=false;
+  function printGroup(g){
+    if(busy) return; busy=true;
+    var docTitle=document.title, cap=titleOf(g.h2), done=false;
+    document.title=(cap?cap+' \u2014 ':'')+manual;   /* devine numele implicit al fișierului PDF */
+    document.body.classList.add('print-chapter');
+    head.classList.add('print-chap');
+    g.els.forEach(function(el){ el.classList.add('print-chap'); });
+    function cleanup(){
+      if(done) return; done=true; busy=false;
+      window.removeEventListener('afterprint',cleanup);
+      document.body.classList.remove('print-chapter');
+      head.classList.remove('print-chap');
+      g.els.forEach(function(el){ el.classList.remove('print-chap'); });
+      document.title=docTitle;
+    }
+    window.addEventListener('afterprint',cleanup);
+    setTimeout(function(){ window.print(); setTimeout(cleanup,1500); },60);
+  }
+
+  var SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>';
+  groups.forEach(function(g){
+    var btn=document.createElement('button');
+    btn.type='button';
+    btn.className='hatnote-toggle chap-print';
+    btn.title='Printează acest capitol / salvează-l ca PDF';
+    btn.setAttribute('aria-label','Printează capitolul \u201E'+titleOf(g.h2)+'\u201D ca PDF');
+    btn.innerHTML=SVG;
+    btn.addEventListener('click',function(){ printGroup(g); });
+    var meta=g.h2.querySelector('.chapter-meta');
+    if(!meta){ meta=document.createElement('span'); meta.className='chapter-meta'; g.h2.appendChild(meta); }
+    meta.appendChild(btn);
+  });
 })();
 </script>
 </body>
