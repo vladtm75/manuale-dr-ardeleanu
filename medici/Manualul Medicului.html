@@ -526,10 +526,6 @@
   }
   .rev-old-content .rev-old-sub{ font-size:13.5px; }
 
-  .foot{ border-top:2px solid var(--primary); margin-top:40px; padding:26px 0 10px; color:var(--muted); font-size:12.5px; }
-  .foot .din{ font-family:"Playfair Display",serif; font-weight:700; color:var(--primary); font-size:15px; }
-  .foot .row{ display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; align-items:center; }
-  .foot .dot{ width:4px; height:4px; border-radius:50%; background:var(--line-2); }
 
   /* Footer de rețea — identic cu Asistenți / Registratori / ROI */
   footer{ background:var(--primary); color:#fff; padding:48px 0 38px; margin-top:60px; }
@@ -1223,12 +1219,13 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 46</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 47</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>47</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminat footerul compact de document, care rămăsese deasupra footerului de rețea adăugat la rev. 44 — manualul are acum un singur footer, ca toate celelalte documente. Informația din el se regăsește în altă parte: ediția și codul în coloana „Document" a footerului de rețea și în antet, contactul în coloana „Contact &amp; Acces", iar data, autoarea și aprobarea în rândul rev. 1 al acestui registru („1 martie 2026 · Loredana Manoiu · Prima versiune integrată V1.0, aprobare conducere"). Nu se mai regăsesc nicăieri mențiunea „Document intern confidențial" — pe care nu o are niciun alt manual — și nota „Numerotarea paginilor este provizorie". Eliminate și cele patru reguli CSS „.foot", devenite cod mort.</td><td class="rev-na">—</td></tr>
               <tr><td>46</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Facilitate nouă, comună tuturor manualelor și Regulamentului Intern: lângă butonul de deschidere a cuprinsului de capitol, pe rândul de metadate de sub fiecare titlu de capitol, apare un buton de printare care trimite la imprimantă — sau salvează ca PDF — numai capitolul respectiv. Pe durata printării, coperta, cuprinsul integral și restul documentului sunt ascunse, extrasul primește un cap de pagină cu sigla și denumirea documentului („Extras pe capitol din documentul integral"), iar numele implicit al fișierului PDF devine „&lt;titlul capitolului&gt; — &lt;denumirea documentului&gt;"; după printare pagina revine exact în starea de dinainte. Completează butonul „PDF" din bara de sus (rev. 45), care rămâne pentru printarea documentului integral. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>45</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-MED-01) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează manualul integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td><td class="rev-na">—</td></tr>
                             <tr><td>44</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Adăugat footerul standard de rețea, identic cu cel din Manualul Asistenților, Manualul Registratorilor și Regulamentul Intern: patru coloane (Clinicile Dr. Ardeleanu · Document · Rețea · Contact &amp; Acces) pe toată lățimea paginii, cu banda „DIN 2017 · EXCELENȚĂ · ACCESIBILITATE · FAMILIE". Manualul Medicului era singurul fără el — avea doar footerul compact de document, limitat la lățimea coloanei de text, iar cele două linkuri către site și adresa de contact nu erau disponibile aici. Footerul de document se păstrează, deasupra celui de rețea. Aliniere impusă de regula de paritate de design între manuale; valorile rezolvate (culori, tipografie, grilă, spațiere) au fost verificate ca fiind identice cu ale Asistenților.</td><td class="rev-na">—</td></tr>
@@ -1285,15 +1282,6 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
           </table>
         </section>
 
-        <footer class="foot">
-          <span class="din">Din 2017</span>
-          <div class="row">
-            <span>Clinicile Dr. Ardeleanu — Manualul Medicului V1.0 (2025–2026)</span><span class="dot"></span>
-            <span>Document intern confidențial</span><span class="dot"></span>
-            <span>clinicileardeleanu.ro · 031 99 63</span>
-          </div>
-          <div class="row"><span>Prima versiune integrată — 01.03.2026, Loredana Manoiu (aprobare conducere). Numerotarea paginilor este provizorie.</span></div>
-        </footer>
       </article>
     </main>
   </div>
