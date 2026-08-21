@@ -62,8 +62,10 @@
     --line:#e7ded2;
     --rule:#E6DCCD;      /* linia de sub titluri — valoarea canonică, identică cu --rule
                             din celelalte manuale și din Regulamentul Intern */
-    --ink-mute:#7A736D;  /* numerele de subcapitol — valoarea canonică --ink-mute;
-                            --muted rămâne pentru textul curent al acestui manual */
+    --ink-mute:#7A736D;  /* textul secundar — valoarea canonică --ink-mute */
+    --ink-soft:#4A4541;  /* corpul textului din articol — valoarea canonică --ink-soft */
+    --rule-soft:#EFE7D7; /* liniile fine: celule de tabel, cuprins de capitol */
+    --cream-warm:#FBF6EE;/* fundalul casetelor și al butoanelor de cuprins */
     --line-2:#d8ccbb;
     --link:#7B1C16;
     --sidebar-w:280px;
@@ -115,9 +117,9 @@
   .mh-search input:focus{ outline:none; border-color:var(--primary); }
   .mh-search svg{ position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--faint); }
   .mh-ver{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#fff; background:var(--primary); padding:5px 10px; border-radius:999px; white-space:nowrap; }
-  .mh-share{ display:inline-flex; align-items:center; gap:7px; background:none; border:1.5px solid var(--line-2); border-radius:999px; padding:6px 13px; font-family:inherit; font-weight:600; font-size:12px; color:var(--primary); cursor:pointer; white-space:nowrap; transition:background .15s, border-color .15s; }
+  .mh-share{ display:inline-flex; align-items:center; gap:7px; background:none; border:1.5px solid var(--rule); border-radius:999px; padding:6px 13px; font-family:inherit; font-weight:600; font-size:12px; color:var(--primary); cursor:pointer; white-space:nowrap; transition:background .15s, border-color .15s; }
   .mh-share:hover{ background:var(--cream); border-color:var(--primary); }
-  .mh-print{ display:inline-flex; align-items:center; gap:7px; background:none; border:1.5px solid var(--line-2); border-radius:999px; padding:6px 12px; font-family:inherit; font-weight:600; font-size:12px; color:var(--primary); cursor:pointer; white-space:nowrap; transition:background .15s, border-color .15s; }
+  .mh-print{ display:inline-flex; align-items:center; gap:7px; background:none; border:1.5px solid var(--rule); border-radius:999px; padding:6px 12px; font-family:inherit; font-weight:600; font-size:12px; color:var(--primary); cursor:pointer; white-space:nowrap; transition:background .15s, border-color .15s; }
   .mh-print:hover{ background:var(--cream); border-color:var(--primary); }
   .mh-print svg{ flex:none; }
   .mh-print:disabled{ opacity:.55; cursor:progress; }
@@ -151,7 +153,7 @@
     letter-spacing:-.01em;
   }
   .hero h1 .t2{ display:block; font-style:italic; font-weight:800; color:var(--primary); }
-  .hero .subtitle{ font-size:19px; color:var(--muted); font-weight:300; margin:0 0 26px; line-height:1.5; }
+  .hero .subtitle{ font-size:19px; color:var(--ink-soft); font-weight:300; margin:0 0 26px; line-height:1.5; }
   .hero .meta-row{
     display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:0;
     border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2);
@@ -168,7 +170,7 @@
     .hero .meta-row > div:nth-child(4n){ border-right:1px solid var(--line-2); }
     .hero .meta-row > div:nth-child(2n){ border-right:none; }
   }
-  .hero .meta-row dt{ font-size:8.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); font-weight:600; margin-bottom:3px; }
+  .hero .meta-row dt{ font-size:8.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); font-weight:600; margin-bottom:3px; }
   .hero .meta-row dd{ margin:0; font-size:12px; color:var(--ink); font-weight:500; line-height:1.3; }
   .hero .meta-row dd .mono{ font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--primary); }
 
@@ -195,7 +197,7 @@
     overscroll-behavior:contain;
     font-size:13px;
     padding:22px 14px 60px 20px;
-    border-right:1px solid var(--line);
+    border-right:1px solid var(--rule);
     scrollbar-width:thin;scrollbar-color:var(--line-2) transparent;
   }
   .toc-side::-webkit-scrollbar{width:8px}
@@ -225,7 +227,7 @@
   .toc-side ol{list-style:none;margin:0;padding:0;counter-reset:none}
   .toc-side ol > li{padding:3px 0;line-height:1.35}
   .toc-side a{
-    color:var(--muted);border-bottom:none;
+    color:var(--ink-soft);border-bottom:none;
     display:flex;gap:8px;align-items:baseline;
     padding:3px 8px;border-radius:6px;border-left:2px solid transparent;
     transition:background .12s,color .12s,border-color .12s;
@@ -244,7 +246,7 @@
   .toc-side .toc-toggle{
     width:28px;height:26px;flex-shrink:0;
     display:flex;align-items:center;justify-content:center;
-    background:var(--cream);border:1px solid var(--line);
+    background:var(--cream-warm);border:1px solid var(--rule);
     cursor:pointer;color:var(--primary);border-radius:4px;
     transition:background .12s,color .12s,border-color .12s;
     padding:0;
@@ -276,7 +278,9 @@
 
   /* main */
   .main{ padding:30px 46px 120px; min-width:0; background:var(--surface); }
-  .article{ max-width:880px; }
+  /* Tipografia de bază a corpului textului — valorile canonice cerute de regula de
+     paritate: 15.5px / 1.7 / --ink-soft, la fel ca în celelalte trei documente. */
+  .article{ max-width:880px; font-size:15.5px; line-height:1.7; color:var(--ink-soft); }
 
   /* article header */
   .hatnote{ font-size:12.5px; font-style:italic; color:var(--muted); background:var(--cream); border-left:3px solid var(--amber); padding:7px 12px; border-radius:0 5px 5px 0; margin-bottom:18px; }
@@ -327,6 +331,7 @@
 
   .article h4{ font-size:15px; font-weight:600; color:var(--primary-deep); margin:18px 0 4px; }
   .article p{ margin:0 0 11px; }
+  .article strong, .article b{ color:var(--ink); }
   .article p.byline{ font-size:12px; color:var(--faint); font-style:italic; margin:-2px 0 12px; }
   .article ul, .article ol{ margin:0 0 12px; padding-left:22px; }
   .article li{ margin:3px 0; }
@@ -347,7 +352,7 @@
     display:flex;align-items:center;gap:14px;
     padding:14px 16px;margin:8px 0 18px;
     background:var(--surface);
-    border:1px solid var(--line);
+    border:1px solid var(--rule);
     border-left:3px solid var(--amber);
     border-radius:0 4px 4px 0;
     text-decoration:none;color:var(--ink);
@@ -370,13 +375,13 @@
     color:var(--ink);
   }
   .docref .docref-desc{
-    font-size:12px;line-height:1.45;color:var(--muted);
+    font-size:12px;line-height:1.45;color:var(--ink-mute);
     margin-top:3px;
   }
   .docref .docref-action{
     flex-shrink:0;
     font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--muted);font-weight:600;
+    color:var(--ink-mute);font-weight:600;
     display:flex;align-items:center;gap:5px;
   }
   .docref .docref-action svg{
@@ -432,10 +437,10 @@
   .spss-doc .name.hl{ outline:2px solid #e23b2e; outline-offset:3px; border-radius:5px; }
   .spss-tabs{ position:relative; }
   .spss-arrow{ position:absolute; color:#e23b2e; font-size:26px; font-weight:700; line-height:1; }
-  .article table{ width:100%; border-collapse:collapse; margin:6px 0 18px; font-size:13.5px; border:1px solid var(--line-2); }
+  .article table{ width:100%; border-collapse:collapse; margin:6px 0 18px; font-size:13.5px; border:1px solid var(--rule); }
   .article th{ background:var(--primary); color:#fff; text-align:left; font-weight:600; padding:9px 12px; vertical-align:top; }
-  .article td{ padding:9px 12px; vertical-align:top; border-top:1px solid var(--line); }
-  .article tbody tr:nth-child(even){ background:#fbf6ef; }
+  .article td{ padding:9px 12px; vertical-align:top; border-top:1px solid var(--rule-soft); }
+  .article tbody tr:nth-child(even){ background:var(--cream-warm); }
   .article tbody tr:hover{ background:var(--cream); }
 
   /* group dividers */
@@ -707,8 +712,8 @@
 
 /* Cuprinsul de capitol pliabil — buton pe rândul de sub titlu */
 .hatnote{
-  font-size:13px;color:var(--muted);font-style:italic;
-  padding:10px 14px;background:var(--cream);
+  font-size:13px;color:var(--ink-mute);font-style:italic;
+  padding:10px 14px;background:var(--cream-warm);
   border-left:3px solid var(--amber);
   margin:0 0 28px;border-radius:0 3px 3px 0;
 }
@@ -717,7 +722,7 @@
 .hatnote-toggle{
   display:inline-flex;align-items:center;justify-content:center;
   width:28px;height:26px;vertical-align:middle;
-  background:var(--cream);border:1px solid var(--line);
+  background:var(--cream-warm);border:1px solid var(--rule);
   cursor:pointer;color:var(--primary);border-radius:4px;
   transition:background .12s,color .12s,border-color .12s;padding:0;
 }
@@ -730,7 +735,7 @@
   gap:0 28px;margin:12px 0 0;padding:0;list-style:none;
   font-size:13px;line-height:1.55;font-style:normal;
 }
-.chapter-toc li{padding:5px 0;border-bottom:1px dotted var(--line);margin:0}
+.chapter-toc li{padding:5px 0;border-bottom:1px dotted var(--rule-soft);margin:0}
 .chapter-toc a{border:0;color:var(--ink);display:flex;gap:10px;align-items:baseline;text-decoration:none}
 .chapter-toc a:hover{color:var(--primary)}
 .chapter-toc .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);font-weight:600;min-width:26px;flex:none}
@@ -1233,12 +1238,13 @@
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 52</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 53</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>53</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate cu celelalte manuale — tipografia de bază și paleta. Corpul textului din articol trece la valorile canonice cerute de regula de paritate: 15,5px (era 15px), interlinie 1,7 (era 1,6) și culoarea #4A4541 (era #222222); textul aldin rămâne pe negru, ca în canonic. Paleta: liniile și bordurile trec de la „line” (#E7DED2) și „line-2” (#D8CCBB) la #E6DCCD, liniile fine dintre celulele de tabel și punctele din cuprinsul de capitol la #EFE7D7, textul secundar (hatnote, descrierile și acțiunile cardurilor de referință, etichetele din banda de date) de la #6B5F59 și #917F76 la #7A736D, textul din cuprinsul lateral și subtitlul din hero la #4A4541, iar fundalul casetelor, al butoanelor de cuprins și al rândurilor pare de tabel de la #F5EDE3 la #FBF6EE. Valorile canonice au fost introduse ca variabile proprii (--ink-soft, --rule-soft, --cream-warm), lângă --rule și --ink-mute din reviziile 51–52; variabilele vechi rămân pentru componentele nemăsurate. Măsurat înainte și după: diferențele față de celelalte trei documente scad de la 154 la 73 de linii, iar numărul elementelor identice în toate patru crește de la 8 la 21. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>52</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate completă a subtitlurilor (h3) cu celelalte manuale, după titlurile de capitol de la rev. 51: interlinia coboară de la 1,6 la 1,3, linia de sub subtitlu trece de la „line” (#e7ded2) la culoarea canonică #E6DCCD (--rule), iar numărul subcapitolului nu mai este scris cu 18px Poppins bold în roșu-burgundy, ci cu 14px JetBrains Mono, greutate 500, în gri (#7A736D, valoarea canonică --ink-mute) — exact ca numerele de subcapitol din Manualul Asistenților și ca numerele de articol din Regulamentul Intern. Aranjarea în linie trece de la flex la fluxul normal de text, cu 8px între număr și titlu, ca în celelalte documente; ancora „§” care apare la trecerea cu mouse-ul rămâne, cu aceeași distanță de 8px. Modificare exclusiv de foaie de stil — cele 46 de subtitluri nu au fost atinse în corpul documentului, iar textul, numerotarea, ancorele și Cuprinsul rămân neschimbate. Valorile rezolvate au fost verificate ca fiind identice cu ale subtitlurilor din celelalte trei documente, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>51</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Paritate completă a titlurilor de capitol cu celelalte manuale. Tipografie: interlinia coboară de la 1,6 la 1,2, spațierea literelor devine −0,005em, spațiul dintre titlu și linie crește de la 8px la 10px, iar linia de subliniere trece de la „wheat” (#F2DAB7) la culoarea canonică #E6DCCD, introdusă ca variabilă --rule (echivalentul --rule din celelalte manuale și din Regulamentul Intern). Compoziție: numărul capitolului nu mai este o cifră romană mare în linie, ci supratitlul mic în majuscule (.chapter-num), ca în Manualul Asistenților și în Regulamentul Intern — „Capitolul 1 — Operațional” devine supratitlul „CAPITOLUL I” plus titlul „Operațional”, la fel la Comportamental și Partea medicală. Cuprinsul lateral, ancorele și trimiterile interne rămân neschimbate. Valorile rezolvate (corp, interlinie, spațiere, culoare, padding, linie, decalaj de ancorare) au fost verificate ca fiind identice cu ale titlurilor de capitol din Manualul Asistenților, al Registratorilor și din Regulamentul Intern, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>50</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Titlurile „Despre acest manual” și „Registru de modificări” primesc aceeași formatare grafică ca titlurile de capitol: corp de 32px (erau 26px) și linia de subliniere de 2px de sub titlu, care lipsea. Aceasta este regula din Manualul Asistenților și din Manualul Registratorilor, unde toate titlurile de nivel h2 arată identic — Manualul Medicului era singurul în care primul titlu al documentului ieșea mai mic și fără linie. Cele două titluri primesc și decalajul de ancorare de 78px al titlurilor de capitol, ca linkul din Cuprins să nu le mai ascundă sub bara de sus. Valorile rezolvate (font, corp, greutate, culoare, interlinie, linie de subliniere) au fost verificate ca fiind identice cu ale titlurilor de capitol, pe desktop și pe mobil. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
