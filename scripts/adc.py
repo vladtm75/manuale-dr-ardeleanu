@@ -157,6 +157,158 @@ def next_free(doc_key, fetch=True):
     return (max(used) + 1 if used else 1), used
 
 
+
+# ------------------------------------------------- renumerotarea rândurilor de registru
+
+RE_ATTR = re.compile(r'(data-rev(?:-old|-toggle|-body|-close)?=")(\d+)(")')
+RE_REV_OLD = re.compile(r'<tr[^>]*data-rev-old="(\d+)"[^>]*>')
+
+
+def registru_span(text):
+    """Zona Registrului: de la paragraful «Revizia curentă» până la finalul tabelului."""
+    m = RE_CURENT.search(text or "")
+    if not m:
+        return None
+    end = text.find("</table>", m.end())
+    return None if end == -1 else (m.start(), end + len("</table>"))
+
+
+def registru_rows(text):
+    """Rândurile Registrului, ca {num, body, start, end}.
+
+    `body` e amprenta rândului — conținutul de după celula numărului, cu numerele din
+    atribute neutralizate — ca să recunoaștem același rând chiar dacă a fost renumerotat.
+    Exact asta lipsește dintr-o comparație pe numere: când două ramuri scriu amândouă
+    „rev. N", numărul nu spune nimic despre identitatea rândului.
+    `start`/`end` includ, dacă există, rândul-companion «versiune anterioară».
+    """
+    span = registru_span(text)
+    if not span:
+        return []
+    r0, r1 = span
+    region = text[r0:r1]
+    rows = []
+    for m in RE_ROW.finditer(region):
+        num = int(m.group(1))
+        row_end = region.find("</tr>", m.end())
+        row_end = len(region) if row_end == -1 else row_end + len("</tr>")
+        body = region[m.end():row_end]
+        end = row_end
+        nxt_at = region.find("<tr", row_end)
+        if nxt_at != -1:
+            nxt = RE_REV_OLD.match(region, nxt_at)
+            if nxt and int(nxt.group(1)) == num:
+                comp = region.find("</tr>", nxt.end())
+                if comp != -1:
+                    end = comp + len("</tr>")
+        rows.append({"num": num,
+                     "body": re.sub(r"\s+", " ", RE_ATTR.sub(
+                         lambda x: x.group(1) + "#" + x.group(3), body)).strip(),
+                     "start": r0 + m.start(), "end": r0 + end})
+    return rows
+
+
+def renumber_doc(text, targets):
+    """Renumerotează exact rândurile date: targets = [(rând, număr_nou)].
+
+    Se lucrează pe poziția rândului, nu pe numărul lui: în ramură pot coexista două
+    rânduri cu același număr — al ramurii și unul venit din main — și numai al ramurii
+    trebuie schimbat. Se merge de la sfârșit spre început, ca pozițiile să rămână valide.
+    """
+    for row, new in sorted(targets, key=lambda t: t[0]["start"], reverse=True):
+        chunk = text[row["start"]:row["end"]]
+        chunk = RE_ROW.sub(lambda m: m.group(0).replace(
+            ">" + m.group(1) + "<", ">" + str(new) + "<", 1), chunk, count=1)
+        chunk = RE_ATTR.sub(lambda m: m.group(1) + (
+            str(new) if int(m.group(2)) == row["num"] else m.group(2)) + m.group(3), chunk)
+        text = text[:row["start"]] + chunk + text[row["end"]:]
+    nums = [r["num"] for r in registru_rows(text)]
+    if nums:
+        text = RE_CURENT.sub(
+            "Revizia curentă: <strong>rev. %d</strong>" % max(nums), text, count=1)
+    return text
+
+
+def foreign_max(doc_key, branch, fetch):
+    """Cea mai mare revizie consumată de altcineva: main, alte ramuri nemerge-uite,
+    rezervările altor ramuri. Ce a scris ramura curentă nu se numără — pe acela îl mutăm."""
+    mine = {branch, "origin/" + branch, "rezervat de " + branch}
+    nums = [n for n, where in used_revs(doc_key, fetch=fetch).items()
+            if any(w not in mine for w in where)]
+    return max(nums) if nums else 0
+
+
+def cmd_renumber(args):
+    root, branch = repo_root(), current_branch()
+    if args.doc:
+        keys = [args.doc]
+    else:
+        rc, out, _ = git("diff", "--name-only", "origin/main")
+        keys = [PATH2KEY[p] for p in out.splitlines() if p in PATH2KEY]
+    if not keys:
+        print(f"{C_DIM}Nicio modificare într-un document cu registru.{C_OFF}")
+        return 0
+
+    if not args.no_fetch:
+        git("fetch", "origin", "--prune", "-q")
+
+    rc, msgs, _ = git("log", "--format=%h %s", "origin/main..HEAD")
+    changed, problems = [], []
+
+    for key in keys:
+        path, label, manual = DOCS[key]
+        full = os.path.join(root, path)
+        text = open(full, encoding="utf-8").read()
+        base_rows = registru_rows(blob("origin/main", path) or "")
+        rows = registru_rows(text)
+        base_bodies = {r["body"] for r in base_rows}
+        new_rows = sorted([r for r in rows if r["body"] not in base_bodies],
+                          key=lambda r: r["num"])
+        if not new_rows:
+            print(f"{C_DIM}{label}: ramura nu adaugă rânduri de registru.{C_OFF}")
+            continue
+
+        start = foreign_max(key, branch, fetch=False) + 1
+        want = list(range(start, start + len(new_rows)))
+        have = [r["num"] for r in new_rows]
+        print(f"{label}: rânduri noi {have} · consumate de alții până la rev. {start - 1}")
+        if have == want:
+            print(f"  {C_GRN}✓ numerotarea continuă corect{C_OFF}")
+            continue
+        print(f"  {C_YEL}✗ de renumerotat: " +
+              ", ".join(f"{o} → {n}" for o, n in zip(have, want)) + C_OFF)
+
+        if args.fix:
+            open(full, "w", encoding="utf-8").write(
+                renumber_doc(text, list(zip(new_rows, want))))
+            claims = load_claims()
+            if branch in claims and key in claims[branch]:
+                claims[branch][key]["rev"] = want[0]
+                save_claims(claims)
+            changed.append((label, manual, have, want))
+            print(f"  {C_GRN}→ scris{C_OFF}")
+        else:
+            problems.append(f"{label}: rulează `python3 scripts/adc.py renumber {key} --fix` ca să renumerotez")
+
+        for line in msgs.splitlines():
+            for old in re.findall(r"rev\.\s*(\d+)", line):
+                if int(old) in have:
+                    problems.append(
+                        f"mesajul de commit „{line}” spune rev. {old}, acum ar trebui "
+                        f"rev. {want[have.index(int(old))]} — corectează-l "
+                        f"(git commit --amend), gen-html-manual-revision-map.py îl citește")
+
+    for p in problems:
+        print(f"{C_YEL}ATENȚIE — {p}{C_OFF}")
+
+    if changed:
+        manuals = [m for _, m, _, _ in changed if m]
+        if manuals:
+            print("Regenerează harta de revizii: " + "; ".join(
+                f"python3 scripts/gen-html-manual-revision-map.py {m}" for m in manuals))
+        return 0
+    return 1 if problems else 0
+
 # ---------------------------------------------------------------- subcomenzi
 
 def cmd_status(args):
@@ -315,7 +467,8 @@ def cmd_preflight(args):
                 others = [w for w in where if branch not in w and w != "origin/main"]
                 if others:
                     problems.append(f"{label}: rev. {k} e folosit și de {', '.join(others)} — "
-                                    f"treci pe rev. {next_free(key, fetch=False)[0]} ca să nu se dubleze.")
+                                    f"treci pe rev. {next_free(key, fetch=False)[0]} ca să nu se dubleze — "
+                                    f"`python3 scripts/adc.py renumber --fix` o face automat.")
         if str(date.today().day) not in text[max(0, text.find(f"<td>{top}</td>")):][:400]:
             notes.append(f"{label}: verifică data din rândul rev. {top} (astăzi e {date.today().strftime('%d.%m.%Y')}).")
         if manual:
@@ -382,6 +535,7 @@ def main():
     p = sub.add_parser("claim"); p.add_argument("doc", choices=DOCS); p.add_argument("--nota"); p.set_defaults(fn=cmd_claim)
     p = sub.add_parser("release"); p.add_argument("doc", nargs="?", choices=list(DOCS)); p.set_defaults(fn=cmd_release)
     sub.add_parser("preflight").set_defaults(fn=cmd_preflight)
+    p = sub.add_parser("renumber"); p.add_argument("doc", nargs="?", choices=list(DOCS)); p.add_argument("--fix", action="store_true"); p.add_argument("--no-fetch", action="store_true"); p.set_defaults(fn=cmd_renumber)
     p = sub.add_parser("new-session"); p.add_argument("nume"); p.add_argument("subiect"); p.add_argument("--dir"); p.set_defaults(fn=cmd_new_session)
     args = ap.parse_args()
     sys.exit(args.fn(args))
