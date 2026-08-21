@@ -43,6 +43,30 @@ def block(msg):
     sys.exit(2)
 
 
+def worktree_branches(cwd):
+    """{ramură: cale} pentru ramurile scoase acum în worktree-uri — adică sesiunile active."""
+    out, cur = {}, None
+    for line in git_out(["worktree", "list", "--porcelain"], cwd).splitlines():
+        if line.startswith("worktree "):
+            cur = line[len("worktree "):]
+        elif line.startswith("branch refs/heads/"):
+            out[line[len("branch refs/heads/"):]] = cur
+    return out
+
+
+def delete_only_push(flags, pos):
+    """True dacă `git push` doar șterge referințe (`--delete ramura` sau `origin :ramura`).
+
+    Un push de ștergere nu publică nimic și nu atinge ramura pe care stă HEAD, deci nu are de ce
+    să fie oprit de regula „nimic direct pe main”. Ștergerea lui main/master rămâne blocată mai
+    jos, de verificarea țintelor.
+    """
+    if any(f in ("-d", "--delete") for f in flags):
+        return True
+    refspecs = pos[1:]  # pos[0] = remote-ul
+    return bool(refspecs) and all(r.startswith(":") for r in refspecs)
+
+
 def check(tokens, cwd):
     # git -C <cale> ...
     i = 1
@@ -65,7 +89,10 @@ def check(tokens, cwd):
             dirty = tracked_dirty(cwd)
         return dirty
 
-    if cmd in ("commit", "push") and br in ("main", "master"):
+    # ștergerea unei ramuri nu publică nimic: nu intră sub regula „nimic direct pe main”
+    delete_push = cmd == "push" and delete_only_push(flags, pos)
+
+    if cmd in ("commit", "push") and br in ("main", "master") and not delete_push:
         block(f"BLOCAT: `git {cmd}` cu HEAD pe „{br}”.\n"
               "Regula repo-ului: nimic direct pe main — mută-te pe o ramură edit/<nume>-<subiect> "
               "(ideal într-un worktree propriu: `python3 scripts/adc.py new-session vlad <subiect>`) "
@@ -79,6 +106,18 @@ def check(tokens, cwd):
         if any(f in ("-f", "--force") or f.startswith("--force") for f in flags) and "--force-with-lease" not in flags:
             block("BLOCAT: `git push --force`. Pe un repo deschis de mai multe sesiuni forțarea poate "
                   "șterge commit-uri ale altei sesiuni. Folosește `--force-with-lease` și doar pe ramura ta.")
+        if delete_push:
+            live = worktree_branches(cwd)
+            for ref in pos[1:]:
+                name = ref.lstrip(":")
+                if name.startswith("refs/heads/"):
+                    name = name[len("refs/heads/"):]
+                if name in live:
+                    block(f"BLOCAT: ștergerea ramurii „{name}”, care e scoasă chiar acum într-un "
+                          f"worktree activ:\n  {live[name]}\n"
+                          "Foarte probabil o altă sesiune lucrează pe ea, iar ștergerea referinței de "
+                          "pe origin i-ar lăsa munca doar local. Închide worktree-ul întâi "
+                          "(`git worktree remove <cale>`) sau confirmă cu Vlad.")
 
     if cmd == "add" and any(a in ("-A", "--all", "-u", "--update", ".", ":/", "*") for a in args):
         d = is_dirty()
