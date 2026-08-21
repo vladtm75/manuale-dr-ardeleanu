@@ -43,6 +43,19 @@ def block(msg):
     sys.exit(2)
 
 
+def delete_only_push(flags, pos):
+    """True dacă `git push` doar șterge referințe (`--delete ramura` sau `origin :ramura`).
+
+    Un push de ștergere nu publică nimic și nu atinge ramura pe care stă HEAD, deci nu are de ce
+    să fie oprit de regula „nimic direct pe main”. Ștergerea lui main/master rămâne blocată mai
+    jos, de verificarea țintelor.
+    """
+    if any(f in ("-d", "--delete") for f in flags):
+        return True
+    refspecs = pos[1:]  # pos[0] = remote-ul
+    return bool(refspecs) and all(r.startswith(":") for r in refspecs)
+
+
 def check(tokens, cwd):
     # git -C <cale> ...
     i = 1
@@ -65,7 +78,10 @@ def check(tokens, cwd):
             dirty = tracked_dirty(cwd)
         return dirty
 
-    if cmd in ("commit", "push") and br in ("main", "master"):
+    # ștergerea unei ramuri nu publică nimic: nu intră sub regula „nimic direct pe main”
+    delete_push = cmd == "push" and delete_only_push(flags, pos)
+
+    if cmd in ("commit", "push") and br in ("main", "master") and not delete_push:
         block(f"BLOCAT: `git {cmd}` cu HEAD pe „{br}”.\n"
               "Regula repo-ului: nimic direct pe main — mută-te pe o ramură edit/<nume>-<subiect> "
               "(ideal într-un worktree propriu: `python3 scripts/adc.py new-session vlad <subiect>`) "
