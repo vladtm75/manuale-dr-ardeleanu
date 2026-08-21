@@ -83,10 +83,16 @@
   a:hover{ text-decoration:underline; }
 
   /* ============ TOP HEADER ============ */
+  /* Structura antetului, ca în celelalte manuale: .topbar e doar învelișul sticky,
+     iar layoutul stă pe .topbar-inner — containerul care centrează conținutul și îi
+     dă lățimea maximă. Fără el, bara se întindea de la margine la margine. */
   .topbar{
     position:sticky; top:0; z-index:60; background:var(--surface);
     border-bottom:1px solid var(--rule); box-shadow:0 1px 0 rgba(123,28,22,.04);
-    display:flex; align-items:center; gap:18px; padding:0 20px; height:64px;
+  }
+  .topbar-inner{
+    max-width:1380px; margin:0 auto; padding:10px 28px;
+    display:flex; align-items:center; gap:18px;
   }
   .topbar .logo{ height:34px; width:auto; display:block; }
   .back-home{
@@ -189,9 +195,12 @@
 
   /* sidebar / TOC — sistem comun cu asistenți/registratori/ROI (.toc-side) */
   .toc-side{
-    position:sticky;top:64px;
+    /* Cuprinsul stă la 10px sub bară, ca în celelalte manuale. Acolo cifra e 78px,
+       fiindcă bara lor iese 68px (pastila de versiune se rupe pe două rânduri);
+       aici bara e mai joasă, așa că folosim înălțimea reală, pusă de syncTopbarHeight(). */
+    position:sticky;top:calc(var(--topbar-h, 68px) + 10px);
     align-self:start;
-    max-height:calc(100vh - 82px);
+    max-height:calc(100vh - var(--topbar-h, 68px) - 28px);
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     overscroll-behavior:contain;
@@ -547,7 +556,7 @@
     margin:2px 0 12px;
   }
   .rev-old-sticky{
-    position:sticky; top:64px; z-index:40; background:var(--surface);
+    position:sticky; top:var(--topbar-h, 68px); z-index:40; background:var(--surface);
     border-bottom:1px solid var(--line-2); border-radius:8px 8px 0 0;
     padding:10px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px;
   }
@@ -610,7 +619,9 @@
          să se dimensioneze după conținut, nu între top/bottom — și atunci nu mai
          are ce derula intern. stretch îl întinde pe înălțimea ecranului. */
       align-self:stretch;
-      position:fixed; left:0; top:64px; bottom:0; height:auto; width:300px; background:var(--surface);
+        /* sertarul pornește exact de sub bară, la orice lățime: bara își schimbă
+         înălțimea pe praguri diferite de acesta (padding-ul scade abia sub 640px). */
+      position:fixed; left:0; top:var(--topbar-h, 56px); bottom:0; height:auto; width:300px; background:var(--surface);
       z-index:55; box-shadow:6px 0 24px -10px rgba(0,0,0,.25);
       transform:translateX(-105%) translateZ(0); transition:transform .25s;
       -webkit-overflow-scrolling:touch; overflow-y:scroll; overscroll-behavior:contain;
@@ -645,7 +656,7 @@
   #mobileNotice{ display:none; }
   @media(max-width:640px){
     /* header compact: doar meniu + back + logo — fara cautare, prea complicata pe telefon */
-    .topbar{ padding:0 14px; gap:12px; }
+    .topbar-inner{ padding:10px 14px; gap:12px; }
     .topbar .logo{ height:26px; }
     .topbar .brand-home{ margin-left:auto; }
     .topbar .mh-sep{ display:none; }
@@ -815,26 +826,28 @@
 <body>
 
   <header class="topbar">
-    <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
-    <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
-    <a href="../index.html" title="Înapoi la Manuale Interne" class="brand-home"><img class="logo" src="assets/letterhead_logo.png" alt="Dr. Ardeleanu Dental Clinics" /></a>
-    <div class="mh-sep"></div>
-    <nav class="mh-crumb" aria-label="Locație document">
-      <a class="cr-home" href="../index.html">Manuale interne</a>
-      <span class="cr-arrow">›</span><span class="cr">Activitate medicală</span>
-      <span class="cr-arrow">›</span><span class="cr">Ediția V1.0</span>
-      <span class="cr-title">Manualul Activităților Medicului — Ghidul Medicului</span>
-    </nav>
-    <span class="spacer"></span>
-    <div class="mh-search">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-      <input id="search" type="text" placeholder="Caută în manual…" autocomplete="off" />
-      <kbd>/</kbd>
-    </div>
-    <div class="mh-pills">
-      <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest manual"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
-      <button class="mh-print" id="printBtn" type="button" title="Printează manualul sau salvează-l ca PDF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg><span class="mhp-txt">PDF</span></button>
-      <span class="mh-ver">V1.0 · 2026</span>
+    <div class="topbar-inner">
+      <button class="menu-btn" id="menuBtn" aria-label="Meniu">☰</button>
+      <a class="back-home" href="../index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
+      <a href="../index.html" title="Înapoi la Manuale Interne" class="brand-home"><img class="logo" src="assets/letterhead_logo.png" alt="Dr. Ardeleanu Dental Clinics" /></a>
+      <div class="mh-sep"></div>
+      <nav class="mh-crumb" aria-label="Locație document">
+        <a class="cr-home" href="../index.html">Manuale interne</a>
+        <span class="cr-arrow">›</span><span class="cr">Activitate medicală</span>
+        <span class="cr-arrow">›</span><span class="cr">Ediția V1.0</span>
+        <span class="cr-title">Manualul Activităților Medicului — Ghidul Medicului</span>
+      </nav>
+      <span class="spacer"></span>
+      <div class="mh-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input id="search" type="text" placeholder="Caută în manual…" autocomplete="off" />
+        <kbd>/</kbd>
+      </div>
+      <div class="mh-pills">
+        <button class="mh-share" id="shareBtn" type="button" hidden title="Copiază un link de acces doar la acest manual"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Partajează</button>
+        <button class="mh-print" id="printBtn" type="button" title="Printează manualul sau salvează-l ca PDF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg><span class="mhp-txt">PDF</span></button>
+        <span class="mh-ver">V1.0 · 2026</span>
+      </div>
     </div>
   </header>
 
@@ -1264,12 +1277,13 @@
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 58</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 59</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>59</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Structura antetului adusă la forma din celelalte manuale. Bara de sus era un singur element care ținea și poziționarea sticky și așezarea conținutului, întins de la o margine a ecranului la cealaltă; acum bara rămâne doar învelișul sticky, iar conținutul stă într-un container interior (.topbar-inner) centrat, cu lățime maximă de 1380px și padding de 10px/28px — exact ca la Asistenți, Registratori și în Regulamentul Intern. Au dispărut și înălțimea fixă de 64px a barei: bara își ia acum înălțimea din conținut, deci se poate rupe pe două rânduri fără să taie nimic. Ca urmare, tot ce atârna de vechea înălțime fixă se calculează din înălțimea reală, măsurată de scriptul care exista deja în pagină: cuprinsul lateral se lipește la 10px sub bară (relația din celelalte manuale), sertarul de cuprins de pe ecrane mici pornește exact de sub bară la orice lățime, iar bara „versiune anterioară” din Registru folosește aceeași referință ca în Manualul Asistenților. Efecte vizibile: bara scade de la 64px la 59px, iar spațiul dintre bară și titlul la care duce un link din cuprins crește de la 14px la 17px. Conținutul antetului — butoanele, căutarea, firul de navigare, pastila de versiune — rămâne neschimbat. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr><td>58</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Eticheta casetelor trece la forma folosită în celelalte manuale: corp 10px (era 11px), spațiere între litere .22em (era .12em), 6px sub etichetă (erau 5px) și, mai important, o pastilă rotundă de 14px înaintea textului, pe care acest manual nu o avea. Pastila preia culoarea barei din stânga a casetei — aceeași regulă ca în Manualul Asistenților: chihlimbar la casetele obișnuite, verde la „secretul medicului”, oliv la casetele de păstrat, terracotta la cele de evitat. Rostul pastilei este să dea gravitatea casetei dintr-o privire, fără citit — la scanarea unui capitol ochiul sare pe casete, iar culoarea spune imediat dacă e avertisment sau informație. Se vede la toate cele 154 de casete ale manualului. Textul etichetelor și culorile lor rămân neschimbate; numele clasei rămâne „callout-label” (regula de paritate permite nume diferite de clase, cât timp valorile rezolvate corespund). Valorile au fost verificate ca fiind identice cu ale etichetei din Manualul Asistenților. Doar prezentare — fără modificări de conținut.</td><td class="rev-na">—</td></tr>
               <tr data-rev="57"><td>57</td><td>21 august 2026</td><td>Loredana Manoiu</td><td>Cap. 3.6 (Ortodonție), protocoalele Dr. Alexandru Grigore — completări din documentul revizuit de medic, în urma discuției. <b>1 Prima vizită:</b> radiografia panoramică se face în clinică, pacientul primind indicația la prima vizită; laboratoarele de ortodonție cu care lucrăm (OrthoArt și Ortho Premium) și alegerea tipului de lucrare din secțiunea „Lucrări de laborator" a SPS Stoma; programarea următoarei vizite de către medic, în momentul deciziei de dispensarizare. <b>2 Dosarul ortodontic:</b> centrele radiologice pe orașe (Digi Rx la Slobozia și Călărași; YTS, Visiodent, Medident în București; Giurgiu și Oltenița către București), materialele folosite la montarea aparatului (Atlas Mini de la DynaFlex, prescripție MBT sau Roth, compozit LightBond și bonding Assure de la Reliance, brackeți autoligaturanți pasivi — sistemul Norris) și acordul semnat prin cod QR din Anamneză → Acord pacient, cu acord nou la modificarea planului. <b>3 Alignere:</b> cine poate face scanarea și obligația rescanării după orice intervenție ulterioară, încărcarea documentației în platformă cu integrarea CT-ului, materialele pentru attachment-uri (Brilliant Flow de la Coltene sau Gradia, bonding Assure), predarea gutierelor la achitarea integrală și contul Spark comun al clinicii — cursul anual Ormco prin rotație, verificarea adreselor de livrare și facturare, numele medicului la „Office notes". <b>4 Mini-implanturi:</b> mărcile folosite (OrthAnchor de la Osstem, sistemul Benefit pentru dispozitivele ancorate) și conduita la fractură — lambou limitat, degajare și prindere cu cleștele Weingart —, plus situațiile în care îndepărtarea cere anestezie. <b>5 Preluarea din altă clinică:</b> îndemnul de a continua cu medicul curant, comunicarea directă cu ortodontul anterior și profilul pacienților care cer transfer fără motiv pertinent. <b>6 Recall:</b> programarea pacientului pentru intervențiile identificate la control.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="57"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
               <tr class="rev-old" data-rev-old="57" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 57</span><button type="button" class="rev-old-close" data-rev-close="57">✕ Închide</button></div><div class="rev-old-content" data-rev-body="57"></div></div></td></tr>
