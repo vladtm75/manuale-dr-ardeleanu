@@ -678,7 +678,7 @@
     .article table{ break-inside:auto; }
     .article thead{ display:table-header-group; }
 
-    /* Registrul de modificări: coloana „Versiune" ține doar de toggle-ul interactiv,
+    /* Registrul de modificări: coloana „Versiune” ține doar de toggle-ul interactiv,
        iar lățimile fixe ale coloanelor sufocă textul pe lățimea de A4 */
     #registru-body th:nth-child(5), #registru-body td:nth-child(5){ display:none; }
     #registru-body th, #registru-body td{ width:auto !important; }
@@ -1223,12 +1223,13 @@ h2.ch .chapter-meta{display:flex;align-items:center;gap:10px;margin-top:12px;fle
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 44</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 45</strong> · 21 august 2026.</p>
           <table>
             <thead>
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr><td>45</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-MED-01) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează manualul integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td><td class="rev-na">—</td></tr>
                             <tr><td>44</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Adăugat footerul standard de rețea, identic cu cel din Manualul Asistenților, Manualul Registratorilor și Regulamentul Intern: patru coloane (Clinicile Dr. Ardeleanu · Document · Rețea · Contact &amp; Acces) pe toată lățimea paginii, cu banda „DIN 2017 · EXCELENȚĂ · ACCESIBILITATE · FAMILIE". Manualul Medicului era singurul fără el — avea doar footerul compact de document, limitat la lățimea coloanei de text, iar cele două linkuri către site și adresa de contact nu erau disponibile aici. Footerul de document se păstrează, deasupra celui de rețea. Aliniere impusă de regula de paritate de design între manuale; valorile rezolvate (culori, tipografie, grilă, spațiere) au fost verificate ca fiind identice cu ale Asistenților.</td><td class="rev-na">—</td></tr>
               <tr><td>43</td><td>20 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări devine pliabil și este închis implicit — titlul primește butonul-săgeată de sub titlu (ca la cuprinsurile de capitol); registrul se deschide automat când pagina e accesată cu ancora #registru. Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>42</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista subcapitolelor (generată din titlurile reale ale capitolului). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
