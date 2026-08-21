@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<script>
+/* Gate: pagină internă tehnică — doar parola generală a Manualelor Interne.
+   Nu are cheie proprie de partajare: nu se trimite în afara echipei. */
+(function(){
+  var M='57bff967c6f60f15d0474125d2b24c6c4e8a425a1b0154f476e07145f8aa292b';
+  try{ if(sessionStorage.getItem('adcManualeAuth')===M) return; }catch(e){}
+  location.replace('index.html');
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Registru tehnic al platformei — Clinicile Dr. Ardeleanu</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-primary:#7B1C16;
+  --brand-primary-deep:#5d140f;
+  --brand-primary-soft:#a14841;
+  --brand-wheat:#F2DAB7;
+  --brand-cream:#F5EDE3;
+  --brand-cream-warm:#FBF6EE;
+  --brand-olive:#B5BD5C;
+  --brand-amber:#C9A227;
+  --brand-yellow:#FBE483;
+  --brand-terracotta:#dd7e6b;
+  --brand-alert:#FF0300;
+  --ink:#222222;
+  --ink-soft:#4a4541;
+  --ink-mute:#7a736d;
+  --rule:#e6dccd;
+  --rule-soft:#efe7d7;
+  --paper:#fbf7f1;
+  --paper-pure:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Poppins',system-ui,sans-serif;
+  font-weight:400;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--brand-primary);text-decoration:none;border-bottom:1px solid rgba(123,28,22,.25)}
+a:hover{border-bottom-color:var(--brand-primary)}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper-pure);
+  border-bottom:1px solid var(--rule);
+  box-shadow:0 1px 0 rgba(123,28,22,.04);
+}
+.topbar-inner{
+  max-width:1380px;margin:0 auto;padding:10px 28px;
+  display:flex;align-items:center;gap:18px;
+}
+.topbar img.logo{height:34px;width:auto;display:block}
+.back-home{
+  display:inline-flex;align-items:center;gap:7px;flex:none;
+  font-size:12.5px;font-weight:600;color:var(--brand-primary);white-space:nowrap;
+  border:1.5px solid var(--rule);border-radius:999px;padding:6px 15px;
+  transition:background .15s,border-color .15s;border-bottom:1.5px solid var(--rule);
+}
+.back-home:hover{background:var(--brand-cream);border-color:var(--brand-primary);}
+.back-home .bh-arrow{font-size:15px;line-height:1}
+@media(max-width:840px){ .back-home .bh-txt{display:none} .back-home{padding:6px 11px} }
+.topbar .crumbs{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:12px;letter-spacing:.04em;color:var(--ink-mute);
+  border-left:1px solid var(--rule);padding-left:14px;
+}
+.topbar .crumbs strong{color:var(--brand-primary);font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+.topbar .spacer{flex:1}
+.topbar .pill{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;
+  background:var(--brand-cream);color:var(--brand-primary);
+  font-weight:600;border:1px solid var(--brand-wheat);
+}
+.topbar .mh-share{
+  display:inline-flex;align-items:center;gap:7px;
+  background:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 13px;
+  font-family:inherit;font-weight:600;font-size:12px;color:var(--brand-primary);
+  cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
+}
+.topbar .mh-share:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
+
+/* ============ HERO / TITLE ============ */
+.hero{
+  background:linear-gradient(180deg,var(--paper-pure) 0%, var(--paper) 100%);
+  border-bottom:1px solid var(--rule);
+  padding:42px 0 28px;
+}
+.hero-inner{max-width:1380px;margin:0 auto;padding:0 28px}
+.hero .kicker{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-amber);font-weight:600;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero .kicker:before{content:"";display:inline-block;width:28px;height:1px;background:var(--brand-amber)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  color:var(--ink);
+  font-size:clamp(38px,5.6vw,58px);line-height:1.04;
+  margin:0 0 14px;letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:italic;color:#75604A;font-weight:500}
+.hero .subtitle{
+  font-size:19px;color:var(--ink-soft);font-weight:300;
+  margin:0 0 26px;line-height:1.5;
+  max-width:76ch;
+}
+.hero .meta-row{
+  display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  margin-top:22px;
+}
+.hero .meta-row > div{
+  padding:11px 8px;
+  border-right:1px solid var(--rule);
+  text-align:center;
+}
+.hero .meta-row > div:last-child{border-right:none}
+@media(max-width:900px){
+  .hero .meta-row{grid-auto-flow:row;grid-template-columns:repeat(4,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:none}
+}
+@media(max-width:560px){
+  .hero .meta-row{grid-template-columns:repeat(2,1fr)}
+  .hero .meta-row > div:nth-child(4n){border-right:1px solid var(--rule)}
+  .hero .meta-row > div:nth-child(2n){border-right:none}
+}
+.hero .meta-row dt{
+  font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:600;margin-bottom:3px;
+}
+.hero .meta-row dd{
+  margin:0;font-size:12px;color:var(--ink);font-weight:500;line-height:1.3;
+}
+.hero .meta-row dd .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:#75604A}
+
+/* ============ HUB CONTENT ============ */
+.hub-wrap{max-width:1100px;margin:0 auto;padding:38px 28px 90px}
+
+/* Protocol index — clickable card grid (reused ca hub de proceduri) */
+.proto-index{
+  margin:0 0 32px;
+  background:linear-gradient(180deg,#C9AD8C 0%,#8A6F52 100%);
+  border-radius:8px;
+  padding:24px 24px 8px;
+  color:#fff;
+}
+.proto-index .pi-head{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  margin-bottom:18px;padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+.proto-index .pi-eyebrow{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:#F2E4CE;font-weight:700;
+}
+.proto-index h2{
+  margin:0;font-family:'Playfair Display',serif;font-weight:700;
+  font-size:24px;color:#fff;line-height:1.2;
+}
+.proto-index .pi-sub{
+  font-size:13px;color:rgba(255,255,255,.85);margin-left:auto;
+}
+.proto-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:10px;margin-bottom:16px;
+}
+.proto-card{
+  display:flex;flex-direction:column;gap:5px;
+  padding:15px 16px;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:6px;
+  color:#fff;
+  text-decoration:none;
+  transition:background .15s,border-color .15s,transform .12s;
+}
+.proto-card:hover{
+  background:rgba(255,255,255,.24);
+  border-color:#fff;
+  transform:translateY(-2px);
+  color:#fff;
+}
+.proto-card .pc-code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.04em;
+  color:#F2E4CE;font-weight:700;
+}
+.proto-card .pc-name{
+  font-size:15px;font-weight:600;line-height:1.3;color:#fff;
+  font-family:'Playfair Display',serif;
+}
+.proto-card .pc-desc{
+  font-size:12px;line-height:1.4;color:rgba(255,255,255,.85);margin-top:2px;
+}
+.proto-card .pc-status{
+  margin-top:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#fff;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.proto-card .pc-status:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.proto-card.soon{
+  background:rgba(0,0,0,.08);border-style:dashed;cursor:default;color:rgba(255,255,255,.65);
+}
+.proto-card.soon:hover{transform:none;background:rgba(0,0,0,.08);border-color:rgba(255,255,255,.28)}
+.proto-card.soon .pc-name{color:rgba(255,255,255,.75)}
+.proto-card.soon .pc-code{color:rgba(255,255,255,.55)}
+
+.hub-note{
+  font-size:13.5px;line-height:1.6;color:var(--ink-soft);
+  background:var(--paper-pure);border:1px solid var(--rule);border-left:3px solid var(--brand-amber);
+  border-radius:0 6px 6px 0;padding:16px 20px;margin:0 0 24px;
+}
+.hub-note strong{color:var(--brand-primary)}
+
+/* Footer */
+footer{
+  background:var(--brand-primary);color:#fff;
+  padding:48px 0 38px;margin-top:20px;
+}
+.footer-inner{
+  max-width:1380px;margin:0 auto;padding:0 28px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;
+  font-size:13px;line-height:1.6;
+}
+@media(max-width:780px){.footer-inner{grid-template-columns:1fr 1fr}}
+footer h5{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;margin:0 0 12px;
+}
+footer .tagline{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;line-height:1.3;margin:8px 0 14px;color:#fff;
+}
+footer a{color:#fff;border-bottom:1px solid rgba(255,255,255,.3)}
+footer a:hover{border-bottom-color:var(--brand-yellow);color:var(--brand-yellow)}
+footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
+.din-2017{
+  margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brand-yellow);font-weight:600;text-align:center;
+}
+.din-2017 span{margin:0 22px}
+
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--brand-amber);outline-offset:2px;border-radius:4px}
+.menu-btn{display:none}
+@media(max-width:640px){
+  .topbar-inner{padding:10px 14px; gap:12px}
+  .topbar img.logo{height:26px}
+  .topbar-inner .brand-home{margin-left:auto}
+  .topbar-inner .crumbs{display:none}
+  .topbar-inner .spacer{display:none}
+  .topbar-inner .pill{display:none}
+  .topbar-inner .mh-share{display:none}
+  .hub-wrap{padding:24px 16px 70px}
+}
+</style>
+<style>
+/* Registru tehnic — corpul paginii și tabelul reviziilor */
+.rt-wrap{ max-width:1100px; margin:0 auto; padding:26px 22px 60px; }
+.rt-note{
+  background:var(--brand-cream); border:1px solid var(--rule); border-radius:6px;
+  padding:14px 16px; font-size:14px; line-height:1.7; color:var(--ink-soft); margin:0 0 24px;
+}
+.rt-note strong{ color:var(--ink); }
+.rt-wrap h2{
+  font-family:'Playfair Display',serif; font-size:26px; line-height:1.25; letter-spacing:-.005em;
+  color:var(--brand-primary); margin:30px 0 6px; border-bottom:1px solid var(--rule); padding-bottom:8px;
+}
+.rt-wrap h2:first-of-type{ margin-top:0; }
+.rt-sub{ font-size:13.5px; color:var(--ink-mute); margin:0 0 14px; line-height:1.65; }
+table.rt{
+  width:100%; border-collapse:collapse; margin:16px 0 26px;
+  font-size:13.5px; background:var(--paper-pure);
+  border:1px solid var(--rule); border-radius:4px; overflow:hidden;
+}
+table.rt th{
+  background:var(--brand-primary); color:#fff; padding:10px 12px; text-align:left;
+  font-weight:600; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  overflow-wrap:anywhere; word-break:break-word;
+}
+table.rt td{
+  padding:11px 12px; border-top:1px solid var(--rule-soft);
+  vertical-align:top; line-height:1.65; overflow-wrap:anywhere; word-break:break-word;
+}
+table.rt tr:nth-child(even) td{ background:var(--brand-cream-warm); }
+table.rt td:first-child{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--brand-primary); font-weight:500; white-space:nowrap; }
+table.rt td.rt-doc{ font-size:12px; color:var(--ink-mute); }
+table.rt td.rt-doc .mono{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--brand-primary); }
+.rt-scroll{ overflow-x:auto; }
+@media (max-width:820px){
+  table.rt{ font-size:12.5px; }
+  table.rt td,table.rt th{ padding:8px 9px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar" data-screen-label="topbar">
+  <div class="topbar-inner">
+    <a class="back-home" href="index.html" title="Înapoi la pagina principală"><span class="bh-arrow">←</span><span class="bh-txt">Manuale</span></a>
+    <a href="index.html" style="border-bottom:none" title="Înapoi la Manuale Interne" class="brand-home"><img src="logo.png" alt="Clinicile Dr. Ardeleanu" class="logo"></a>
+    <div class="crumbs">
+      <span class="crumb-path">
+        <a href="index.html" style="border-bottom:none"><strong>Manuale Interne</strong></a>
+        <span>›</span>
+        <span>Registru tehnic al platformei</span>
+      </span>
+    </div>
+    <div class="spacer"></div>
+    <span class="pill">Uz intern · Documentație tehnică</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Platformă · Documentație tehnică</div>
+    <h1>Registru tehnic <em>al platformei</em></h1>
+    <p class="subtitle">Modificările de prezentare și de funcționare ale platformei pe care sunt publicate manualele, Regulamentul Intern și procedurile — tipografie, geometrie, cuprinsuri pliabile, printare, igienă de cod. Sunt consemnate aici o singură dată, cu descriere completă, chiar dacă ating mai multe documente simultan. Registrele de modificări ale documentelor rămân dedicate <strong>substanței</strong>: ce s-a schimbat în text, nu cum arată textul.</p>
+
+    <dl class="meta-row">
+      <div><dt>Intrări</dt><dd><span class="mono">19</span></dd></div>
+      <div><dt>Perioada</dt><dd>16 – 21 august 2026</dd></div>
+      <div><dt>Documente acoperite</dt><dd>3 manuale · RI · 2 proceduri</dd></div>
+      <div><dt>Administrare</dt><dd>Vlad Ardeleanu</dd></div>
+      <div><dt>Acces</dt><dd>Doar parola generală</dd></div>
+    </dl>
+  </div>
+</section>
+
+<div class="rt-wrap">
+
+  <div class="rt-note"><strong>De ce există această pagină.</strong> Registrul de modificări al unui document răspunde la o singură întrebare: <em>ce s-a schimbat în ceea ce trebuie să știu și să aplic</em>. O modificare de prezentare sau o funcție nouă a platformei nu răspunde la ea — dar, pentru că atinge simultan toate documentele, până acum se consemna de șase ori, cu același text, ocupând câte un număr de revizie în fiecare registru. Rezultatul: registrele documentelor ajunseseră să vorbească mai mult despre platformă decât despre conținut. Din 21 august 2026, descrierea completă a unei modificări tehnice se scrie <strong>o singură dată, aici</strong>; în registrul fiecărui document atins rămâne rândul lui, marcat „tehnic” și ascuns implicit, ca numerotarea și trasabilitatea să rămână intacte.</div>
+
+  <h2>Modificări tehnice ale platformei</h2>
+  <p class="rt-sub">Cele mai recente primele. Coloana „Revizii consumate” arată numărul de revizie pe care modificarea l-a ocupat în registrul fiecărui document atins — puntea dintre această pagină și registrele documentelor.</p>
+
+  <div class="rt-scroll">
+  <table class="rt">
+    <thead>
+      <tr><th style="width:64px">Nr.</th><th style="width:120px">Data</th><th>Modificarea</th><th style="width:220px">Documente și revizii consumate</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>T-19</td><td>21 aug 2026</td><td>Registrele de modificări afișează implicit doar reviziile de conținut. Fiecare revizie de prezentare sau de platformă este marcată <span class="mono">rev-teh</span> și ascunsă în spatele unui comutator, împreună cu o etichetă „tehnic” care o identifică atunci când e afișată. Numerotarea reviziilor rămâne continuă și neatinsă — nimic nu se șterge și nimic nu se renumerotează — pentru că numărul de revizie este ancorat în istoricul git (mesajele de commit, harta versiunilor anterioare, verificările anti-coliziune dintre sesiuni). Descrierea completă a fiecărei modificări tehnice se mută în acest registru.</td><td class="rt-doc">Toate șase · <span class="mono">Asist. 49 · Med. 61 · Reg. 14 · RI 16 · BEN 6 · REG 6</span></td></tr>
+      <tr><td>T-18</td><td>21 aug 2026</td><td>Manualul Medicului adus la paritate completă de design cu celelalte manuale, în opt tranșe: tipografia de bază și paleta, titlurile de capitol, subtitlurile, geometria tabelelor și a componentelor, markerul listelor cu buline în roșul de marcă, eticheta casetelor (corp, spațiere și pastila rotundă colorată), titlurile secțiunilor speciale și structura antetului. Valorile rezolvate au fost verificate una câte una față de echivalentul canonic, nu doar numele claselor.</td><td class="rt-doc">Medici · <span class="mono">50, 51, 52, 53, 54, 55, 58, 59</span></td></tr>
+      <tr><td>T-17</td><td>21 aug 2026</td><td>Footerul de rețea standard, identic cu cel din celelalte documente (patru coloane), a fost adăugat în Manualul Medicului, iar footerul compact de document, care rămăsese deasupra lui, a fost eliminat — documentul are acum un singur footer.</td><td class="rt-doc">Medici · <span class="mono">44, 47</span></td></tr>
+      <tr><td>T-16</td><td>21 aug 2026</td><td>Formularul de semnat al fișelor de post se printează fără numerotarea de capitol: fișa pleacă la imprimantă ca anexă autonomă la Contractul Individual de Muncă, nu ca fragment dintr-un manual.</td><td class="rt-doc">Asistenți · <span class="mono">46</span></td></tr>
+      <tr><td>T-15</td><td>21 aug 2026</td><td>Igienă de cod: eliminat un <span class="mono">&lt;/div&gt;</span> în plus de la finalul documentului (rămas de la un wrapper care nu mai există) și CSS-ul clasei <span class="mono">.seealso</span>, rămas nefolosit după eliminarea barelor de trimiteri. Fără efect vizibil în pagină.</td><td class="rt-doc">Asistenți <span class="mono">38</span> · Registratori <span class="mono">9</span> · RI <span class="mono">10</span></td></tr>
+      <tr><td>T-14</td><td>21 aug 2026</td><td>Printarea documentului integral încarcă toate fotografiile înainte de a deschide dialogul de printare. Imaginile se încarcă „lazy” la derulare, așa că, până acum, un PDF generat fără a fi parcurs întreg documentul putea ieși cu figuri lipsă.</td><td class="rt-doc">Toate șase · <span class="mono">Asist. 42 · Med. 49 · Reg. 13 · RI 14 · BEN 5 · REG 4</span></td></tr>
+      <tr><td>T-13</td><td>21 aug 2026</td><td>Butonul de printare pe capitol nu mai apare la secțiunea introductivă („Despre acest manual”, respectiv „Preambul”): aceasta nu este un capitol care se dă separat la citit sau la semnat, iar pentru documentul integral există butonul „PDF” din antet.</td><td class="rt-doc">Asistenți <span class="mono">41</span> · Medici <span class="mono">48</span> · Registratori <span class="mono">12</span> · RI <span class="mono">13</span></td></tr>
+      <tr><td>T-12</td><td>21 aug 2026</td><td>Facilitate nouă, comună tuturor documentelor: pe rândul de metadate de sub fiecare titlu de capitol, lângă butonul care deschide cuprinsul capitolului, apare un buton de printare care trimite la imprimantă numai capitolul respectiv.</td><td class="rt-doc">Asistenți <span class="mono">40</span> · Medici <span class="mono">46</span> · Registratori <span class="mono">11</span> · RI <span class="mono">12</span></td></tr>
+      <tr><td>T-11</td><td>21 aug 2026</td><td>Antetul documentelor: pastila cu codul documentului (ADC-ASM-03, ADC-MED-01, ADC-REC-01, ADC-RI-02, ADC-BEN-01, ADC-REG-01) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează documentul integral.</td><td class="rt-doc">Toate șase · <span class="mono">Asist. 39 · Med. 45 · Reg. 10 · RI 11 · BEN 4 · REG 3</span></td></tr>
+      <tr><td>T-10</td><td>21 aug 2026</td><td>Eliminate toate barele și casetele de trimiteri „Vezi și” din Manualul Asistenților (șase în total): dublau navigarea deja asigurată de Cuprinsul lateral și de cuprinsurile de capitol. Textul propriu-zis nu a fost atins.</td><td class="rt-doc">Asistenți · <span class="mono">37</span></td></tr>
+      <tr><td>T-09</td><td>20 aug 2026</td><td>Registrul de modificări devine pliabil și este închis implicit, cu deschidere automată la ancora <span class="mono">#registru</span> — la fel în toate documentele. Titlul primește butonul-săgeată folosit deja la cuprinsurile de capitol.</td><td class="rt-doc">Asistenți <span class="mono">36</span> · Medici <span class="mono">43</span> · Registratori <span class="mono">8</span> · RI <span class="mono">9</span></td></tr>
+      <tr><td>T-08</td><td>19 aug 2026</td><td>Titlurile de capitol: eticheta cu codul procedurii și butonul care deschide cuprinsul capitolului coboară pe un rând propriu, sub titlu — până atunci stăteau inline la capătul titlului și, la titlurile lungi, se rupeau urât.</td><td class="rt-doc">Asistenți · <span class="mono">32</span></td></tr>
+      <tr><td>T-07</td><td>19 aug 2026</td><td>Aerisirea trecerii între capitole și secțiuni: spațiul de deasupra titlurilor de capitol mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px; primul titlu din document rămâne fără spațiul suplimentar.</td><td class="rt-doc">Toate șase · <span class="mono">Asist. 24 · Med. 40 · Reg. 6 · RI 6 · BEN 3 · REG 2</span></td></tr>
+      <tr><td>T-06</td><td>19 aug 2026</td><td>Cuprinsul de capitol (caseta „Cuprins” de sub fiecare titlu de capitol) devine pliabil și este implicit închis — lista subcapitolelor dubla Cuprinsul lateral. Se deschide dintr-un buton-săgeată aflat pe rândul titlului.</td><td class="rt-doc">Asistenți <span class="mono">27</span> · Medici <span class="mono">42</span> · Registratori <span class="mono">7</span> · RI <span class="mono">7</span></td></tr>
+      <tr><td>T-05</td><td>19 aug 2026</td><td>Eliminate barele de navigare „Cuprins:” din interiorul capitolelor III și IV ale Manualului Asistenților — dublau cuprinsul de capitol și Cuprinsul lateral.</td><td class="rt-doc">Asistenți · <span class="mono">28</span></td></tr>
+      <tr><td>T-04</td><td>19 aug 2026</td><td>Biblioteca „Formulare oficiale de consimțământ” (17 formulare, Cap. II) devine panou pliabil, implicit închis: în pagină rămâne doar antetul cu titlul și indicația de deschidere. Conținutul bibliotecii nu s-a modificat.</td><td class="rt-doc">Asistenți · <span class="mono">23</span></td></tr>
+      <tr><td>T-03</td><td>18 – 19 aug 2026</td><td>Seria de ajustări ale figurilor din Manualul Asistenților: capturile de ecran de telefon (SMS-uri de confirmare, API-ul pe telefonul pacientului) și nouă figuri mari au fost decupate la conținutul relevant, micșorate și integrate în fluxul textului, cu aliniere la dreapta și text-wrap; capturile formularului de Înregistrare Medicală au fost rearanjate în grilă pe trei coloane; FIG. V·1 a trecut la lățimea întreagă a coloanei; cardul de descărcare ADC-ONB-03 a primit o variantă compactă. Fără modificări de conținut.</td><td class="rt-doc">Asistenți · <span class="mono">11, 13, 16, 19, 20, 29, 31</span></td></tr>
+      <tr><td>T-02</td><td>16 aug 2026</td><td>Reparat un tag <span class="mono">&lt;div&gt;</span> orfan în cap. 1.9 al Manualului Medicului, care se închidea imediat înainte de un subtitlu.</td><td class="rt-doc">Medici · <span class="mono">31</span></td></tr>
+      <tr><td>T-01</td><td>16 aug 2026</td><td>Rescrierea integrală a codului Manualului Medicului: conținutul (JSON în <span class="mono">manual-data.js</span>) a fost migrat în HTML static, iar Cuprinsul și structura au trecut pe sistemul comun de TOC al celorlalte manuale. Conținutul redacțional a rămas identic.</td><td class="rt-doc">Medici · <span class="mono">30</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Ce NU intră aici</h2>
+  <p class="rt-sub">Orice modificare a textului rămâne în registrul documentului ei: capitole noi sau eliminate, proceduri integrate, valori, doze, termene, denumiri, responsabilități, alinieri terminologice la Regulamentul Intern, rescrieri redacționale (inclusiv trecerea la stilul narativ) și fotografiile care documentează un flux de lucru. Regula de departajare este simplă: dacă un salariat ar putea lucra altfel după modificare, e conținut și se consemnează în document; dacă doar vede altfel același lucru, e tehnic și se consemnează aici.</p>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h5>Clinicile Dr. Ardeleanu</h5>
+      <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
+      <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
+    </div>
+    <div>
+      <h5>Document</h5>
+      <p>Registru tehnic al platformei</p>
+      <p>Uz intern · fără cheie de partajare</p>
+      <p>21 august 2026</p>
+      <p>19 intrări · 6 documente acoperite</p>
+    </div>
+    <div>
+      <h5>Rețea</h5>
+      <p>8 clinici în 7 orașe</p>
+      <p>80+ medici supraspecializați</p>
+      <p>30.000+ pacienți unici</p>
+      <p>4.9★ Google · 2.950 recenzii</p>
+    </div>
+    <div>
+      <h5>Contact &amp; Acces</h5>
+      <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
+      <p>031 99 63</p>
+      <p><a href="mailto:clinici@ardeleanu.ro">clinici@ardeleanu.ro</a></p>
+      <p>ERP intern: erp.clinicile-ardeleanu.ro</p>
+    </div>
+  </div>
+  <div class="din-2017">
+    <span>DIN 2017</span>·<span>EXCELENȚĂ</span>·<span>ACCESIBILITATE</span>·<span>FAMILIE</span>
+  </div>
+</footer>
+
+</body>
+</html>

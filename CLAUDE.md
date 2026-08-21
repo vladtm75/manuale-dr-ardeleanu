@@ -62,6 +62,25 @@ modificarea trebuie cerută de aceasta sau aprobată explicit de Vlad.
    - Registratori: în `registratori/Manualul Registratorului Medical.html`, înainte de `</article>`.
    Numerotarea reviziilor e per-manual și crește mereu cu 1; nu se rescriu rândurile vechi.
 
+7. **Substanță vs tehnic în registre (OBLIGATORIU, de la 21 august 2026).** Registrul de modificări al
+   unui document este dedicat **substanței**: ce s-a schimbat în text. Criteriul de departajare: dacă un
+   salariat ar putea lucra altfel după modificare, e **conținut**; dacă doar vede altfel același lucru, e
+   **tehnic** (prezentare, tipografie, geometrie, cuprinsuri pliabile, printare, igienă de cod, paritate
+   de design). La o modificare tehnică:
+   - scrie descrierea completă **o singură dată**, ca intrare nouă (`T-NN`, cea mai recentă prima) în
+     `registru-tehnic.html` din rădăcină, completând coloana „Documente și revizii consumate";
+   - în registrul **fiecărui** document atins adaugă rândul lui obișnuit, dar cu `class="rev-teh"` pe
+     `<tr>` (și pe eventualul `<tr class="rev-old">` asociat) — marcat astfel, rândul e ascuns implicit
+     și apare doar la comutarea din caseta `.reg-filtru` de deasupra tabelului. Rândul per document
+     rămâne obligatoriu: hook-ul `scripts/hooks/adc-guard-git.py` refuză orice commit care atinge un
+     document cu registru fără să urce numărul de revizie, iar garda aceea nu se slăbește.
+   - descrierea din rândul per document poate fi scurtă (o frază + trimitere la intrarea `T-NN`);
+     descrierea lungă stă în registrul tehnic, nu de șase ori în documente.
+   **Nu se șterg și nu se renumerotează rânduri vechi** din niciun registru — numărul de revizie e
+   ancorat în istoricul git (mesaje de commit „rev. N", `revision-map.js`, detecția de coliziuni între
+   sesiuni). Curățarea registrului se face prin marcare și filtrare, niciodată prin ștergere. Numărul
+   afișat în caseta de filtrare („sunt ascunse (N)") e calculat din DOM — nu se scrie de mână.
+
 ## Sesiuni paralele pe același repo (OBLIGATORIU)
 
 Vlad rulează frecvent **mai multe sesiuni Claude în paralel** pe acest repo, ca să câștige timp.
@@ -203,6 +222,8 @@ prin PR — la fel ca orice modificare de conținut. Nu refuza cererile de adău
 
 ```
 index.html                                  ← homepage (cardurile manualelor + statistici)
+registru-tehnic.html                        ← Registru tehnic al platformei (modificările de prezentare/platformă,
+                                              consemnate o singură dată; gate doar cu parola generală)
 asistenti/Manualul Asistentului Medical.html ← TOT manualul asistenților, un singur fișier (~10k linii)
 asistenti/assets/                            ← imagini, consimțăminte, documente onboarding
 medici/Manualul Medicului.html               ← TOT manualul medicilor, un singur fișier
