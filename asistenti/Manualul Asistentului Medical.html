@@ -1300,6 +1300,18 @@ html{scroll-behavior:smooth}
   body.print-fisa .fisa-sign{display:block!important;margin-top:28px;page-break-inside:avoid}
   body.print-fisa .layout{display:block}
   body.print-fisa .article{max-width:100%;padding:0}
+  /* Numerotarea de capitol nu are sens pe formularul care se semnează: „1." din titlul
+     fișei dispare, iar secțiunile 1.1–1.7 / 2.1–2.7 (și 2.5.1–2.5.2) se renumerotează
+     1.–7. (respectiv 5.1–5.2) prin contoare CSS. Pe ecran și la printarea capitolului
+     sau a documentului integral, numerele din text rămân neatinse — acolo fișa e citită
+     ca subcapitol al Capitolului XXII. */
+  body.print-fisa .print-target > h3 .num,
+  body.print-fisa .print-target .secnum{display:none!important}
+  body.print-fisa .print-target{counter-reset:fisa-sec}
+  body.print-fisa .print-target h4{counter-increment:fisa-sec;counter-reset:fisa-sub}
+  body.print-fisa .print-target h4::before{content:counter(fisa-sec) ". "}
+  body.print-fisa .print-target h5{counter-increment:fisa-sub}
+  body.print-fisa .print-target h5::before{content:counter(fisa-sec) "." counter(fisa-sub) " "}
 }
 
 
@@ -5472,7 +5484,7 @@ html{scroll-behavior:smooth}
     <button type="button" class="fisa-print-btn" data-fisa="fisa-generalist"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button>
 
 
-    <h4>1.1 Identificarea postului</h4>
+    <h4><span class="secnum">1.1 </span>Identificarea postului</h4>
     <table>
       <tbody>
         <tr><td><strong>Angajator</strong></td><td>Denumirea legală a societății angajatoare, cu datele de identificare din Anexa nr. 1 la Regulamentul intern ADC-RI-02 — fiecare societate care operează sub marca Dr. Ardeleanu completează propriile date</td></tr>
@@ -5488,16 +5500,16 @@ html{scroll-behavior:smooth}
       </tbody>
     </table>
 
-    <h4>1.2 Scopul postului</h4>
+    <h4><span class="secnum">1.2 </span>Scopul postului</h4>
     <p>Asistentul Medical Generalist realizează activitatea de asistență medicală din clinică pentru a oferi pacientului o îngrijire de excelență și pentru a-l sprijini fizic și emoțional pe tot parcursul tratamentului. Este veriga indispensabilă dintre pacient și medic: pregătește și asistă actul medical, veghează la siguranța pacientului, la conformitatea medico-legală a fiecărei vizite și la experiența acestuia în clinică, în spiritul misiunii Clinicilor Dr. Ardeleanu — servicii stomatologice excelente, la prețuri accesibile, pentru întreaga familie.</p>
 
-    <h4>1.3 Cerințele postului</h4>
+    <h4><span class="secnum">1.3 </span>Cerințele postului</h4>
     <p><strong>Studii și autorizare.</strong> Diplomă de asistent medical generalist eliberată de o instituție acreditată din România (nivel postliceal sau universitar); certificat de membru OAMGMAMR și aviz anual de liberă practică, în termen de valabilitate pe toată durata raportului de muncă; asigurare de răspundere civilă profesională (malpraxis) în termen; numărul de credite EMC prevăzut de legislația în vigoare.</p>
     <p><strong>Formare continuă internă.</strong> Parcurgerea programului de instruire internă și participarea la testele lunare de perfecționare pe platforma <em>erp.clinicile-ardeleanu.ro</em>, precum și la instruirile periodice (proceduri, SSM/PSI, prim ajutor).</p>
     <p><strong>Aptitudini și conduită.</strong> Comunicare empatică și profesionistă cu pacientul, spirit de echipă, rigoare în aplicarea protocoalelor, capacitate de anticipare în asistarea medicului, disciplină operațională și confidențialitate.</p>
 
-    <h4>1.4 Atribuțiile și responsabilitățile postului</h4>
-    <p>Atribuțiile de mai jos se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–J identifică domeniile de responsabilitate și fac legătura cu criteriile de evaluare profesională de la punctul 1.5.</p>
+    <h4><span class="secnum">1.4 </span>Atribuțiile și responsabilitățile postului</h4>
+    <p>Atribuțiile de mai jos se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–J identifică domeniile de responsabilitate și fac legătura cu criteriile de evaluare profesională din secțiunea „Evaluarea performanței profesionale".</p>
     <p><strong>A. Asistența medicală la scaun și protocoalele clinice.</strong> Pregătește cabinetul înainte și după fiecare tratament, asigură asistența medicală la scaun indiferent de specialitate și răspunde prompt solicitărilor medicului, anticipând nevoile acestuia: pregătirea și manevrarea instrumentarului, aspirarea, aplicarea materialelor, monitorizarea confortului pacientului și documentarea intervențiilor. Activitatea respectă protocoalele clinice pe specialități — stomatologie generală (ADC-STG-01), endodonție (ADC-END-01), ortodonție (ADC-ORT-01), pedodonție (ADC-PED-01), chirurgie (ADC-CHR-01), protetică (ADC-PRO-01) și parodontologie (ADC-PAR-01).</p>
     <p><strong>B. Fluxul pacientului și documentarea medico-legală.</strong> Aplică fluxul medico-legal al pacientului (P0–P2) din Manualul ADC-ASM-03: înainte de orice manoperă verifică documentele vizitei, alertele, existența și acoperirea Acordului Pacientului Informat (API) și a consimțămintelor specifice cerute de matricea curentă; verifică corectitudinea datelor medicale și medico-legale ale pacientului în SPSS; când lipsește un document, există o alertă neclarificată sau planul nu corespunde API-ului, oprește pregătirea și cheamă medicul. După actul medical închide bucla documentară: documentele ajung în dosar, originalele pe hârtie la recepție, investigațiile sunt transmise, iar pacientul cunoaște pasul următor.</p>
     <p><strong>C. Experiența pacientului și comunicarea.</strong> Primește, însoțește și sprijină pacientul pe tot parcursul vizitei, comunicând respectuos, la persoana a treia, cu înțelegere, confidențialitate și empatie — căldură, ascultare activă și orientare către soluții. Nu deschide discuții despre patologiile pacientului în spațiile comune, acceptă pacientul indiferent de vârstă, gen, etnie sau situație financiară și contribuie activ la confortul, siguranța și fidelizarea acestuia.</p>
@@ -5509,7 +5521,7 @@ html{scroll-behavior:smooth}
     <p><strong>I. Disciplina operațională și dezvoltarea profesională.</strong> Respectă programul de lucru și pontajul zilnic în ERP, sarcinile de deschidere/închidere a clinicii și regulile de securitate; poartă uniforma potrivit procedurii ADC-UNF-02; participă la ședințele echipei și la testele lunare de perfecționare; cunoaște și aplică procedura de prim ajutor și utilizarea trusei de urgență (ADC-AJT-01); respectă normele SSM și PSI (Legea nr. 319/2006).</p>
     <p><strong>J. Obligații generale.</strong> Respectă Regulamentul intern (ADC-RI-02), statutul asistentului medical și Codul de etică și deontologie OAMGMAMR, reglementările privind prevenirea infecțiilor asociate asistenței medicale (IAAM), confidențialitatea și protecția datelor cu caracter personal (GDPR); raportează incidentele și riscurile constatate; îndeplinește alte sarcini dispuse de conducere, corespunzătoare competențelor sale și felului muncii.</p>
 
-    <h4>1.5 Evaluarea performanței profesionale [KPI-P]</h4>
+    <h4><span class="secnum">1.5 </span>Evaluarea performanței profesionale [KPI-P]</h4>
     <p>Performanța profesională a titularului se evaluează lunar prin <strong>fișa de evaluare calitativă „5+5"</strong> — instrument controlat, stabilit potrivit Anexei nr. 3 la Regulamentul intern și descris în <a href="#cap-21">Capitolul XXI</a> din Manualul ADC-ASM-03. Fiecare dintre cele zece criterii de mai jos este criteriu de evaluare a activității profesionale <strong>[KPI-P]</strong>, legat de atribuțiile corespunzătoare din prezenta fișă (literele A–J). Fiecare criteriu primește o notă de la 1 la 10 (o zecimală permisă); scorul final lunar = 60% media secțiunii Operațional + 40% media secțiunii Medical și se traduce în calificativul lunii: <em>Neconform</em> (1,0–7,5) · <em>Conform</em> (7,6–9,0) · <em>Excelent</em> (9,1–10). Evaluarea se înregistrează în ERP (<em>erp.clinicile-ardeleanu.ro</em>), care constituie evidența oficială.</p>
     <table>
       <thead><tr><th>Criteriu</th><th>Ce se evaluează</th><th>Evaluator</th><th>Atribuția</th></tr></thead>
@@ -5533,10 +5545,10 @@ html{scroll-behavior:smooth}
     </div>
     <p><strong>Testele lunare de perfecționare.</strong> Ținta de dezvoltare profesională este o medie trimestrială de minimum 80% la testele-grilă din ERP. Neatingerea țintei declanșează reinstruire și un plan de sprijin; potrivit <strong>Art. 62 alin. (2)</strong> din Regulamentul intern, o medie sub 80% nu constituie, singură, necorespundere profesională.</p>
 
-    <h4>1.6 Limitele de competență</h4>
+    <h4><span class="secnum">1.6 </span>Limitele de competență</h4>
     <p>Titularul nu stabilește diagnostice și nu decide planul de tratament; efectuează actele de îngrijire la indicația și sub supravegherea medicului, în limitele competențelor profesionale stabilite de OAMGMAMR și de legislația aplicabilă. Situațiile care depășesc competențele postului se escaladează de îndată medicului, Asistentului Medical Șef sau Managerului de Clinică, potrivit fluxului de escaladare din Manualul ADC-ASM-03.</p>
 
-    <h4>1.7 Dispoziții finale</h4>
+    <h4><span class="secnum">1.7 </span>Dispoziții finale</h4>
     <p>Prezenta fișă de post este anexă la Contractul Individual de Muncă (art. 17 din Codul Muncii) și se completează cu prevederile CIM, ale Regulamentului intern (ADC-RI-02), ale Manualului Activităților de Asistență Medicală (ADC-ASM-03) și ale documentelor controlate subordonate, în versiunile în vigoare. Actualizările atribuțiilor și ale criteriilor de evaluare se comunică salariatului potrivit Art. 19 din Regulamentul intern și se aplică numai pentru viitor. Neîndeplinirea culpabilă a atribuțiilor poate atrage răspunderea disciplinară, potrivit art. 247–252 din Codul Muncii și procedurii din Regulamentul intern — de la avertisment scris până la desfacerea disciplinară a contractului individual de muncă —, precum și, după caz, răspunderea patrimonială, civilă sau penală.</p>
 
     <div class="fisa-sign">
@@ -5558,7 +5570,7 @@ html{scroll-behavior:smooth}
     <button type="button" class="fisa-print-btn" data-fisa="fisa-sef"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 6V2.5h8V6M4 12h8v2.5H4zM3 6h10a1.5 1.5 0 0 1 1.5 1.5v3a1 1 0 0 1-1 1H12M4 11.5H2.5a1 1 0 0 1-1-1v-3A1.5 1.5 0 0 1 3 6"/></svg>Printează PDF — formular de semnat</button>
 
 
-    <h4>2.1 Identificarea postului</h4>
+    <h4><span class="secnum">2.1 </span>Identificarea postului</h4>
     <table>
       <tbody>
         <tr><td><strong>Angajator</strong></td><td>Denumirea legală a societății angajatoare, cu datele de identificare din Anexa nr. 1 la Regulamentul intern ADC-RI-02</td></tr>
@@ -5575,15 +5587,15 @@ html{scroll-behavior:smooth}
       </tbody>
     </table>
 
-    <h4>2.2 Scopul postului</h4>
+    <h4><span class="secnum">2.2 </span>Scopul postului</h4>
     <p>Asistentul Medical Șef conduce echipa de asistenți medicali și personalul de curățenie al clinicii și răspunde de rezultatul final al proceselor operaționale aflate în grija sa: calitatea curățeniei și dezinfecției în întreaga clinică, sterilizarea și trasabilitatea, gestiunea materialelor consumabile și încadrarea în buget, conformitatea de radioprotecție. Este proprietarul operațional al acestor procese — planifică, repartizează, verifică, documentează și intervine — asigurând zilnic un mediu clinic sigur pentru pacienți și condiții bune de lucru pentru echipă, în spiritul misiunii Clinicilor Dr. Ardeleanu.</p>
 
-    <h4>2.3 Cerințele postului</h4>
+    <h4><span class="secnum">2.3 </span>Cerințele postului</h4>
     <p><strong>Studii și autorizare.</strong> Aceleași cerințe de calificare ca pentru postul de Asistent Medical Generalist: diplomă de asistent medical generalist (instituție acreditată), certificat de membru OAMGMAMR și aviz anual de liberă practică în termen, asigurare de malpraxis în termen, credite EMC conform legislației.</p>
     <p><strong>Experiență și competențe de coordonare.</strong> Experiență relevantă de asistent medical în stomatologie; cunoașterea aprofundată a procedurilor interne (ADC-ASM-03 și documentele subordonate); capacitate de organizare, planificare și control; fermitate în aplicarea standardelor, echilibru în relația cu echipa; utilizarea ERP pentru comenzi, inventar, pontaj și evaluări.</p>
 
-    <h4>2.4 Atribuțiile și responsabilitățile postului</h4>
-    <p>Atribuțiile se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–H identifică domeniile de responsabilitate și fac legătura cu evaluarea de la punctul 2.5. Delegarea unei activități către echipa din subordine este permisă numai cu acordul Managerului de Clinică și nu transferă responsabilitatea.</p>
+    <h4><span class="secnum">2.4 </span>Atribuțiile și responsabilitățile postului</h4>
+    <p>Atribuțiile se exercită la standardul stabilit prin Manualul Activităților de Asistență Medicală (ADC-ASM-03) și documentele controlate subordonate, în versiunile în vigoare comunicate salariatului. Literele A–H identifică domeniile de responsabilitate și fac legătura cu evaluarea din secțiunea „Evaluarea performanței". Delegarea unei activități către echipa din subordine este permisă numai cu acordul Managerului de Clinică și nu transferă responsabilitatea.</p>
     <p><strong>A. Coordonarea echipei.</strong> Conduce, pe linie operațională și administrativă, asistenții medicali și personalul dedicat de curățenie: planifică activitatea și repartizează sarcinile, validează programul asistenților împreună cu Managerul de Clinică, organizează continuitatea în absențe, integrează colegii noi și instruiește echipa — zilnic, periodic sau la nevoie — asupra procedurilor de lucru. Oferă lunar fiecărui asistent, împreună cu Managerul de Clinică, feedback individual pe rezultatele fișei de evaluare „5+5".</p>
     <p><strong>B. Asistența medicală la scaun.</strong> Exercită integral atribuțiile profesionale ale Asistentului Medical Generalist, potrivit fișei de post ADC-FP-ASM-02 (domeniile A–J: asistența la scaun și protocoalele clinice, fluxul medico-legal al pacientului, experiența pacientului, sterilizarea, imagistica, curățenia, consumabilele, mentenanța, disciplina operațională și obligațiile generale), care se aplică corespunzător și prezentului post.</p>
     <p><strong>C. Curățenia, dezinfecția, ordinea și siguranța — proprietar de proces.</strong> Este proprietarul operațional al procesului de curățenie și dezinfecție al întregii clinici, potrivit procedurii ADC-CUR-01: efectuează verificarea de deschidere înainte de primul pacient, verificări prin sondaj pe parcursul programului (cu atenție sporită la grupurile sanitare, suprafețele cu atingere frecventă și zona de sterilizare) și confirmarea de închidere a zilei; controlează zilnic completitudinea înregistrărilor (grafice orare, documente de evidență); consemnează neconformitățile, stabilește executantul, măsurile, termenele și urmărește închiderea lor; stabilește seturile de curățenie pentru spațiile neîncadrate în codificarea pe culori; reorganizează activitatea și participă direct la intervenție când situația o impune. Standardul de curățenie este nenegociabil — răspunderea acoperă rezultatul final al procesului, indiferent de executant.</p>
@@ -5593,11 +5605,11 @@ html{scroll-behavior:smooth}
     <p><strong>G. Deșeurile medicale și condițiile de mediu.</strong> Coordonează activitățile de întreținere și eliminare a deșeurilor medicale potrivit procedurii ADC-DSM-01, întocmește programul de curățenie al clinicii și monitorizează condițiile de mediu.</p>
     <p><strong>H. Atribuții administrative și delegate.</strong> Îndeplinește atribuțiile administrative delegate de Managerul de Clinică — de exemplu gestiunea uniformelor (comenzi în ERP, procese-verbale de predare-primire, potrivit procedurii ADC-UNF-02) — și sarcinile dispuse de conducere, corespunzătoare competențelor sale; respectă Regulamentul intern (ADC-RI-02), Codul de etică și deontologie OAMGMAMR, normele IAAM, SSM/PSI și GDPR; raportează incidentele și riscurile constatate.</p>
 
-    <h4>2.5 Evaluarea performanței</h4>
+    <h4><span class="secnum">2.5 </span>Evaluarea performanței</h4>
     <p>Potrivit Regulamentului intern (<strong>Art. 55</strong> și Anexa nr. 3), postul are două instrumente distincte, care nu se confundă: <strong>evaluarea profesională [KPI-P]</strong>, care se închide anual, și <strong>fișa de bonus lunar [KPI-B]</strong>, care determină exclusiv remunerația variabilă. Acordarea bonusului, chiar repetată, nu limitează calificativul evaluării profesionale; neeligibilitatea la bonus nu dovedește, singură, necorespunderea profesională.</p>
-    <h5>2.5.1 Evaluarea profesională anuală [KPI-P]</h5>
+    <h5><span class="secnum">2.5.1 </span>Evaluarea profesională anuală [KPI-P]</h5>
     <p>Criteriile de evaluare profesională se stabilesc și se comunică înainte de fiecare perioadă evaluată, printr-un instrument controlat conform Anexei nr. 3 la Regulamentul intern, și sunt legate de domeniile de responsabilitate A–H din prezenta fișă: calitatea coordonării echipei (A), calitatea actului de asistență medicală (B), rezultatul proceselor aflate în proprietatea sa — curățenie și dezinfecție (C), sterilizare (D), gestiunea consumabilelor, a bugetului și a inventarului (E) — precum și conformitatea de radioprotecție (F), gestiunea deșeurilor (G) și disciplina administrativă (H). Evaluarea profesională se închide anual; înregistrările lunare din ERP (fișa de bonus, evaluările KPI 3, rapoartele de inventar, dovezile de instruire) constituie surse de dovadă, fără ca evaluarea anuală să se reducă automat la media lor. Salariatul primește evaluarea și are dreptul la observații, potrivit <strong>Art. 58</strong> din Regulamentul intern.</p>
-    <h5>2.5.2 Fișa de bonus lunar [KPI-B]</h5>
+    <h5><span class="secnum">2.5.2 </span>Fișa de bonus lunar [KPI-B]</h5>
     <p>Bonusul variabil lunar se calculează digital în ERP, potrivit fișei de bonus aprobate de HR și descrise în <a href="#cap-21">Capitolul XXI</a> din Manualul ADC-ASM-03. Mecanismul: poarta KPI 3 condiționează plata componentelor KPI 1 și KPI 2, la care se adaugă, când este cazul, suplimentul pentru calificativul Excelent.</p>
     <table>
       <thead><tr><th>Indicator</th><th>Ce măsoară</th><th>Cum se evaluează</th></tr></thead>
@@ -5609,10 +5621,10 @@ html{scroll-behavior:smooth}
     </table>
     <p><strong>Reguli de aplicare.</strong> Cuantumurile, pragurile valorice și regulile de plată se comunică individual și exclusiv titularului, prin documentele de bonusare aprobate și validate de HR și juridic — ele nu fac parte din prezenta fișă. Titularul are dreptul la contravizită la o notă Medical sub 8,0 (solicitată în 48 de ore, cel mult una pe lună) și beneficiază de regula auto-declarării protejate, potrivit ADC-CUR-01. Responsabilitatea pe luna evaluată este integrală, indiferent de absențe. Mecanismul de bonus nu reduce salariul fix, nu modifică prezenta fișă de post și nu constituie sancțiune disciplinară.</p>
 
-    <h4>2.6 Limitele de competență</h4>
+    <h4><span class="secnum">2.6 </span>Limitele de competență</h4>
     <p>Titularul nu stabilește diagnostice și nu decide planul de tratament; actele de îngrijire se efectuează la indicația și sub supravegherea medicului, în limitele competențelor OAMGMAMR. Pe linie managerială, decide în limitele rolului: situațiile care depășesc autoritatea sa — resurse, personal, furnizori, incidente majore — se escaladează Managerului de Clinică; problemele clinice și de protocol, Departamentului Medical. Nu angajează cheltuieli în afara fluxului de aprobare din ERP și nu aplică sancțiuni disciplinare — acestea urmează exclusiv procedura din Regulamentul intern.</p>
 
-    <h4>2.7 Dispoziții finale</h4>
+    <h4><span class="secnum">2.7 </span>Dispoziții finale</h4>
     <p>Prezenta fișă de post este anexă la Contractul Individual de Muncă (art. 17 din Codul Muncii) și se completează cu prevederile CIM, ale Regulamentului intern (ADC-RI-02), ale Manualului Activităților de Asistență Medicală (ADC-ASM-03) și ale documentelor controlate subordonate, în versiunile în vigoare. Actualizările atribuțiilor și ale criteriilor de evaluare se comunică salariatului potrivit Art. 19 din Regulamentul intern și se aplică numai pentru viitor. Neîndeplinirea culpabilă a atribuțiilor poate atrage răspunderea disciplinară, potrivit art. 247–252 din Codul Muncii și procedurii din Regulamentul intern, precum și, după caz, răspunderea patrimonială, civilă sau penală.</p>
 
     <div class="fisa-sign">
@@ -5670,12 +5682,13 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 45</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 46</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
+        <tr data-rev="46"><td>46</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Numerotarea de capitol dispare de pe formularul de semnat al fișelor de post. Butonul „Printează PDF — formular de semnat" trimite la imprimantă numai blocul fișei, ca anexă la Contractul Individual de Muncă — dar în acel exemplar numerele „1." din titlul fișei și „1.1 … 1.7" (respectiv „2.1 … 2.7" și „2.5.1–2.5.2") la secțiuni sunt artefacte ale poziției în Capitolul XXII: sugerează un document-părinte care nu se anexează la contract. La printarea unei fișe, titlul apare acum curat („Fișa de post — Asistent Medical Generalist", cu codul și ediția alături), iar secțiunile se renumerotează 1.–7., cu 5.1 și 5.2 sub secțiunea 5 la fișa Șefului. Mecanismul: numerele din text au fost împachetate în „span.secnum" (16 titluri), iar în blocul @media print existent, sub „body.print-fisa", ele se ascund și sunt înlocuite prin contoare CSS. Pe ecran și la printarea capitolului sau a documentului integral nu se schimbă nimic — acolo fișa e citită ca subcapitol și își păstrează numerotarea 1.1 … 2.7. Odată cu asta, cele două auto-trimiteri numerice din interiorul fișelor au fost rescrise ca trimiteri la titlul secțiunii, ca să fie corecte în ambele randări: „de la punctul 1.5" devine „din secțiunea «Evaluarea performanței profesionale»" (§1.4), iar „de la punctul 2.5" devine „din secțiunea «Evaluarea performanței»" (§2.4) — altfel, pe formularul printat ar fi trimis la un număr care nu mai există acolo. Zero modificări de conținut normativ.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="46"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
         <tr data-rev="45"><td>45</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Fișele de post din Capitolul XXII — Asistent Medical Generalist (ADC-FP-ASM-02) și Asistent Medical Șef (ADC-FP-ASS-01) — devin documente care se pot anexa direct Contractului Individual de Muncă. Butonul „Printează PDF — formular de semnat" trimite la imprimantă numai blocul fișei, deci exact acel text ajunge anexă la contract; acolo, cele nouă trimiteri de tip „prezentul manual" indicau documentul greșit, fiindcă în anexa la contract „prezentul" este contractul. Trimiterile numesc acum documentul: „prezentul manual (ADC-ASM-03)" devine „Manualul Activităților de Asistență Medicală (ADC-ASM-03)" (§1.4 și §2.4), „din prezentul manual" devine „din Manualul ADC-ASM-03" (§1.4 lit. B — fluxul medico-legal P0–P2 — și §1.6 — fluxul de escaladare), „ale prezentului manual" devine „ale Manualului Activităților de Asistență Medicală (ADC-ASM-03)" în dispozițiile finale ale ambelor fișe (§1.7 și §2.7), iar trimiterile la „Capitolul XXI" (§1.5, §2.5.2) și la „Cap. XXI secț. 3" (tabelul KPI 2) primesc precizarea „din Manualul ADC-ASM-03" — ancorele interne rămân, pentru citirea din manual. În plus, la §2.4 lit. B, trimiterea la „domeniile A–J" din fișa generalistului este însoțită acum de enumerarea lor — asistența la scaun și protocoalele clinice, fluxul medico-legal al pacientului, experiența pacientului, sterilizarea, imagistica, curățenia, consumabilele, mentenanța, disciplina operațională și obligațiile generale — pentru ca fișa șefului să se înțeleagă singură: cel care o semnează nu primește și fișa generalistului alături. Zero modificări de fond — atribuțiile, criteriile de evaluare, ponderile, pragurile și trimiterile la Regulamentul intern (ADC-RI-02) rămân neatinse. Paragraful introductiv al capitolului, care nu face parte din fișe și nu se printează cu ele, păstrează formularea „prezentului manual": acolo vorbește manualul, nu fișa.</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="45"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
         <tr><td>44</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXII, Fișa de post — Asistent Medical Generalist, pct. 1.4: trimiterea la punctul 1.5 vorbește acum despre „criteriile de evaluare profesională", nu „criteriile de evaluare a performanței". Aliniere terminologică la Regulamentul intern rev. 15, care a rescris Art. 53 alin. (5) și folosește peste tot „criteriu de evaluare profesională" pentru eticheta [KPI-P] (Art. 5 alin. (9), Art. 53 alin. (4), Anexa nr. 3). Fondul rămâne identic: literele A–J ale fișei trimit la aceleași zece criterii de la pct. 1.5, care era deja formulat ca „criteriu de evaluare a activității profesionale [KPI-P]".</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="44"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
         <tr class="rev-old" data-rev-old="44" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 44</span><button type="button" class="rev-old-close" data-rev-close="44">✕ Închide</button></div><div class="rev-old-content" data-rev-body="44"></div></div></td></tr>
