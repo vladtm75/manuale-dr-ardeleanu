@@ -349,5 +349,37 @@ window.MEDICI_REVISION_MAP = {
         "title": "IIICapitolul 3 — Partea medicală"
       }
     ]
+  },
+  "56": {
+    "commit": "7618a3f32f6224e320c1dc07312ba8e71ee3532d",
+    "before": "25f4043f9a30c16418aa95037ce3e66f3d1b6384",
+    "sections": [
+      {
+        "id": "cap-1-11",
+        "title": "2. 1Acordul pacientului§"
+      },
+      {
+        "id": "cap-1-15",
+        "title": "2. 5Imagistică și documentare foto§"
+      },
+      {
+        "id": "cap-1-7",
+        "title": "1. 7Uniformă și echipament§"
+      },
+      {
+        "id": "cap-1-9",
+        "title": "1. 9Prima interacțiune — recepția și documentele§"
+      }
+    ]
+  },
+  "57": {
+    "commit": "e9200f117101675fa88212eeb48c601c8acb0353",
+    "before": "7618a3f32f6224e320c1dc07312ba8e71ee3532d",
+    "sections": [
+      {
+        "id": "cap-3-7",
+        "title": "3. 7Ortodonție§"
+      }
+    ]
   }
 };
