@@ -2579,12 +2579,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ § Registru de modificări ============ -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 12</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 13</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr><td>13</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Butonul de printare pe capitol nu mai apare la „Preambul" — secțiunea introductivă nu este un capitol care se dă la citit sau la semnat separat, iar pentru documentul integral există butonul „PDF" din bara de sus. Restul capitolelor păstrează butonul (rev. 12). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>12</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Facilitate nouă, comună tuturor manualelor și Regulamentului Intern: lângă butonul de deschidere a cuprinsului de capitol, pe rândul de metadate de sub fiecare titlu de capitol și de fiecare anexă, apare un buton de printare care trimite la imprimantă — sau salvează ca PDF — numai capitolul sau anexa respectivă. Pe durata printării, coperta, cuprinsul integral și restul documentului sunt ascunse, extrasul primește un cap de pagină cu sigla și denumirea documentului („Extras pe capitol din documentul integral"), iar numele implicit al fișierului PDF devine „&lt;titlul capitolului&gt; — &lt;denumirea documentului&gt;"; după printare pagina revine exact în starea de dinainte. Completează butonul „PDF" din bara de sus (rev. 11), care rămâne pentru printarea documentului integral. Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>11</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-RI-02) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează regulamentul integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td></tr>
         <tr><td>10</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Igienă de cod: eliminat CSS-ul „.seealso" (bară de trimiteri «Vezi și»), rămas nefolosit în acest document — nu exista niciun bloc care să-l aplice. Componenta a fost eliminată din întreaga rețea de manuale. Zero modificări de conținut sau de prezentare.</td></tr>
@@ -3057,6 +3058,10 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
   var SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>';
   groups.forEach(function(g){
+    /* Preambulul („Despre acest manual" / „Preambul") nu primește buton de printare —
+       nu e un capitol care se dă la citit separat. */
+    var gid=(g.h2.id||(g.els[0]&&g.els[0].id)||'').toLowerCase();
+    if(gid==='despre'||gid==='preambul') return;
     var btn=document.createElement('button');
     btn.type='button';
     btn.className='hatnote-toggle chap-print';
