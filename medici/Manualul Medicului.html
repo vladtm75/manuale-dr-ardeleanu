@@ -608,6 +608,19 @@
   }
   .din-2017 span{ margin:0 22px; }
   @media(max-width:780px){ .footer-inner{ grid-template-columns:1fr 1fr; } }
+/* Footer lite pe telefon — rămân identitatea documentului și contactul.
+   Sloganul, descrierea de brand, cifrele de rețea și banda de jos se văd doar pe
+   desktop: pe un ecran de 375px footerul complet ocupa 689px (0,85 dintr-un ecran),
+   pentru că cele două coloane de 143px rupeau fiecare linie pe trei-patru rânduri. */
+@media(max-width:640px){
+  footer{padding:24px 0 22px;margin-top:32px}
+  .footer-inner{grid-template-columns:1fr;gap:15px}
+  footer h5{margin:0 0 8px}
+  footer p{margin:0 0 4px}
+  .f-brand .tagline,.f-brand p{display:none}
+  .f-net{display:none}
+  .din-2017{display:none}
+}
 
   /* hamburger for mobile */
   .menu-btn{ display:none; background:none; border:1px solid var(--line-2); border-radius:6px; padding:6px 9px; cursor:pointer; color:var(--primary); }
@@ -1292,7 +1305,7 @@ tr.rev-teh{ display:none; }
              actualizează „Revizia curentă" de mai jos. -->
         <section class="registru">
           <h2 id="registru">Registru de modificări</h2>
-          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 61</strong> · 21 august 2026.</p>
+          <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 62</strong> · 21 august 2026.</p>
           <div class="reg-filtru">
             <label class="rev-toggle" title="Arată și reviziile tehnice"><input type="checkbox"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label>
             <span>Registrul afișează <strong>modificările de conținut</strong>. Reviziile tehnice — prezentare, tipografie și funcții ale platformei — sunt ascunse<span class="reg-teh-n"></span>; comută pentru a le vedea. Numerotarea rămâne continuă, iar descrierea completă a fiecărei modificări tehnice stă în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>.</span>
@@ -1302,6 +1315,7 @@ tr.rev-teh{ display:none; }
               <tr><th style="width:60px">Rev.</th><th style="width:140px">Data</th><th style="width:180px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
             </thead>
             <tbody>
+              <tr class="rev-teh"><td>62</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Footerul se subțiază pe telefon: rămân linia de identitate a documentului și contactul, iar sloganul, descrierea de brand, cifrele de rețea și banda de jos apar numai pe desktop. Banda „DIN 2017 · EXCELENȚĂ · ACCESIBILITATE · FAMILIE” nu avea unde să rupă rândul și ieșea 106px în afara unui ecran de 375px, cu „FAMILIE” complet invizibil. Pe desktop nu se schimbă nimic. Descrierea completă: intrarea <strong>T-20</strong> din <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>.</td><td class="rev-na">—</td></tr>
               <tr><td>61</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări afișează de acum numai <strong>reviziile de conținut</strong>. Reviziile de prezentare și de platformă — 19 la acest manual — rămân în tabel, marcate „tehnic”, dar sunt ascunse până la comutarea din caseta de deasupra tabelului: cine deschide registrul caută ce s-a schimbat în text, nu cum arată textul. Nimic nu se șterge și nimic nu se renumerotează — numărul de revizie este ancorat în istoricul documentului (mesajele de commit, aducerea versiunii anterioare, verificările care împiedică două sesiuni de lucru să folosească același număr), așa că numerotarea rămâne continuă și verificabilă. Descrierea completă a unei modificări tehnice se scrie de acum <strong>o singură dată</strong>, în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>, în loc de câte un rând identic în fiecare document atins.</td><td class="rev-na">—</td></tr>
               <tr data-rev="60"><td>60</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Subcapitolul 1.9 primește o secțiune proprie pentru <b>onboardingul pacientului minor</b> (noua secțiune 5, între „Etapa P2” și „Gestionarea refuzurilor «Nu»”), la propunerea Biancăi Toma, discutată și cu Loredana Manoiu și aprobată de Vlad. Manualul avea până acum despre minori o singură casetă, la 2.3, despre anamneza semnată pe tabletă de reprezentantul legal; nu spunea însă ce se schimbă în restul fluxului. Secțiunea nouă parcurge etapele: la <b>P0</b>, programarea se creează pe numele minorului, cu datele lui, iar persoana care programează este informată că la prezentare copilul trebuie însoțit de reprezentantul legal; la <b>P1A</b>, se verifică identitatea minorului <em>și</em> a reprezentantului legal, iar la introducerea CNP-ului formularul afișează rubricile „Nume Reprezentant” și „Prenume Reprezentant” și trece întrebările în anamneza pediatrică; la <b>P1B</b>, asistenta verifică Înregistrarea Medicală, anamneza pediatrică și alertele ca la adult și transmite medicului ce e relevant, iar <b>API-ul manoperei programate este completat de medic și semnat de reprezentantul legal</b> înainte de începerea tratamentului; la <b>P2</b>, verificările continuă — valabilitatea Înregistrării Medicale (același termen intern maxim de nouă luni), modificările stării de sănătate și existența API-ului pentru manoperele vizitei curente. Pe consimțăminte, regula este scrisă explicit: consimțământul specific cerut de matricea din subcapitolul 2.2 se semnează de reprezentantul legal, în forma prevăzută — digital și, unde matricea o impune, și olograf; pentru tratamentele uzuale ale dinților temporari <b>nu</b> se semnează olograf suplimentar doar pentru că pacientul e minor, ci numai dacă manopera intră într-o categorie cu document dedicat (ortodonție, endodonție, chirurgie, sedare). Dacă minorul vine însoțit de altcineva decât reprezentantul legal, sau nu e clar cine poate semna, <b>recepția nu presupune și nu decide cine consimte în numele copilului</b>: situația se clarifică înainte de predarea către cabinet și, la nevoie, ajunge la Clinic Manager. Secțiunea se închide cu caseta „Regula de siguranță”: la orice neclaritate privind identitatea, reprezentantul legal, documentele sau acordul necesar, pregătirea pentru tratament se oprește până la clarificare — asistenta verifică și semnalează, medicul și, după caz, Clinic Managerul decid continuarea. Caseta de la 2.3 rămâne, cu o trimitere la explicația completă; fostele secțiuni 5 și 6 devin 6 și 7, iar mini-cuprinsul subcapitolului a fost actualizat. Aceeași secțiune intră, în varianta pentru asistente, în Manualul Asistentului Medical (rev. 48).</td><td><label class="rev-toggle" title="Vezi cum era înainte de această revizie"><input type="checkbox" data-rev-toggle="60"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label></td></tr>
               <tr class="rev-old" data-rev-old="60" hidden><td colspan="5"><div class="rev-old-body"><div class="rev-old-sticky"><span class="rev-old-sticky-title">Versiune dinainte de rev. 60</span><button type="button" class="rev-old-close" data-rev-close="60">✕ Închide</button></div><div class="rev-old-content" data-rev-body="60"></div></div></td></tr>
@@ -1382,26 +1396,26 @@ tr.rev-teh{ display:none; }
 
 <footer>
   <div class="footer-inner">
-    <div>
+    <div class="f-brand">
       <h5>Clinicile Dr. Ardeleanu</h5>
       <div class="tagline">"Excelența accesibilă. Clinica familiei tale."</div>
       <p>Din 2017, construim o rețea de clinici stomatologice pentru întreaga familie — cu grijă, profesionalism și prețuri corecte.</p>
     </div>
-    <div>
+    <div class="f-doc">
       <h5>Document</h5>
       <p>Cod: ADC-MED-01</p>
       <p>Ediția V1.0</p>
       <p>1 martie 2026</p>
       <p>3 capitole · 46 subcapitole</p>
     </div>
-    <div>
+    <div class="f-net">
       <h5>Rețea</h5>
       <p>8 clinici în 7 orașe</p>
       <p>80+ medici supraspecializați</p>
       <p>30.000+ pacienți unici</p>
       <p>4.9★ Google · 2.950 recenzii</p>
     </div>
-    <div>
+    <div class="f-contact">
       <h5>Contact &amp; Acces</h5>
       <p><a href="https://clinicileardeleanu.ro">clinicileardeleanu.ro</a></p>
       <p>031 99 63</p>
