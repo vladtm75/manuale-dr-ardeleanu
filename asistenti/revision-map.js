@@ -1217,5 +1217,15 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
       }
     ]
+  },
+  "40": {
+    "commit": "74ad82617b06ab83c5f949c0eff3b30d95efb934",
+    "before": "0266732ef2c1b1bc9f33ca488e60d5b9a750129c",
+    "sections": [
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
   }
 };
