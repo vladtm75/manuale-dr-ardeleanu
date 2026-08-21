@@ -672,6 +672,34 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
 
 /* antet minimal, vizibil doar la printare */
 .print-header{ display:none; }
+.rev-toggle{ display:inline-flex; align-items:center; cursor:pointer; }
+.rev-toggle input{ position:absolute; opacity:0; width:1px; height:1px; }
+.rev-toggle-track{
+  position:relative; display:inline-block; width:38px; height:22px; border-radius:999px;
+  background:var(--rule); transition:background .15s; flex:none;
+}
+.rev-toggle-thumb{
+  position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+  background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3); transition:transform .15s;
+}
+.rev-toggle input:checked + .rev-toggle-track{ background:var(--brand-primary); }
+.rev-toggle input:checked + .rev-toggle-track .rev-toggle-thumb{ transform:translateX(16px); }
+.rev-toggle input:focus-visible + .rev-toggle-track{ outline:2px solid var(--brand-amber); outline-offset:2px; }
+/* Registrul de modificări — filtru: se afișează doar reviziile de conținut.
+   Reviziile tehnice (prezentare, tipografie, funcții ale platformei) sunt marcate
+   .rev-teh și ascunse până la comutare; descrierea lor stă în Registrul tehnic. */
+.reg-filtru{
+  display:flex; align-items:flex-start; gap:11px; margin:0 0 14px; padding:10px 13px;
+  border:1px solid var(--rule); border-radius:6px; background:var(--brand-cream);
+  font-size:13px; line-height:1.6; color:var(--ink-mute);
+}
+.reg-filtru .rev-toggle{ flex:0 0 auto; margin-top:1px; }
+tr.rev-teh{ display:none; }
+.reg-filtru:has(input:checked) ~ table tr.rev-teh:not([hidden]){ display:table-row; }
+.reg-filtru:has(input:checked) ~ table tr.rev-teh > td:first-child::after{
+  content:"tehnic"; display:block; margin-top:4px;
+  font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute);
+}
 @media print{
   .print-header{
     display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -1153,15 +1181,20 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
     <div class="callout note"><p><strong>Notă de implementare.</strong> Publicarea V3.0 trebuie să creeze un document nou în Registrul online, nu să suprascrie fișierul V2.0. Versiunea anterioară se arhivează cu statutul «Retras/Înlocuit», iar relațiile și confirmările rămân verificabile.</p></div>
 
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 5</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 6</strong> · 21 august 2026.</p>
+    <div class="reg-filtru">
+      <label class="rev-toggle" title="Arată și reviziile tehnice"><input type="checkbox"><span class="rev-toggle-track"><span class="rev-toggle-thumb"></span></span></label>
+      <span>Registrul afișează <strong>modificările de conținut</strong>. Reviziile tehnice — prezentare, tipografie și funcții ale platformei — sunt ascunse<span class="reg-teh-n"></span>; comută pentru a le vedea. Numerotarea rămâne continuă, iar descrierea completă a fiecărei modificări tehnice stă în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>.</span>
+    </div>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
-        <tr><td>5</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td></tr>
-        <tr><td>4</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-BEN-01) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează procedura integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td></tr>
-        <tr><td>3</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole/secțiuni: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px (unde există), iar primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td></tr>
+        <tr><td>6</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări afișează de acum numai <strong>reviziile de conținut</strong>. Reviziile de prezentare și de platformă — 3 la acest procedură — rămân în tabel, marcate „tehnic”, dar sunt ascunse până la comutarea din caseta de deasupra tabelului: cine deschide registrul caută ce s-a schimbat în text, nu cum arată textul. Nimic nu se șterge și nimic nu se renumerotează — numărul de revizie este ancorat în istoricul documentului (mesajele de commit, aducerea versiunii anterioare, verificările care împiedică două sesiuni de lucru să folosească același număr), așa că numerotarea rămâne continuă și verificabilă. Descrierea completă a unei modificări tehnice se scrie de acum <strong>o singură dată</strong>, în <a href="../registru-tehnic.html">Registrul tehnic al platformei</a>, în loc de câte un rând identic în fiecare document atins.</td></tr>
+        <tr class="rev-teh"><td>5</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td></tr>
+        <tr class="rev-teh"><td>4</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-BEN-01) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează procedura integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td></tr>
+        <tr class="rev-teh"><td>3</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Aerisirea trecerii între capitole/secțiuni: spațiul de deasupra titlurilor de capitol (h2) mărit de la 48px la 84px, separatorul de Parte de la 50px la 90px (unde există), iar primul titlu din document păstrează spațierea compactă (32px). Aliniere de design cu Manualul Asistenților (rev. 24). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>2</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Realinierea proiectului la Regulamentul Intern V2.7 (18 august 2026) și simplificarea textului: pasajele care dublau RI (natura discreționară și principiile — art. 51 alin. (3)–(5); comunicarea și Anexa nr. 2 — art. 19; reținerile — art. 50 alin. (2)) au fost înlocuite cu trimiteri; etichetele preiau semnificația din art. 5 alin. (9); administrarea Registrului online și legăturile obligatorii trimit la Procedura ADC-REG-01; toate referințele „RI V2.6" actualizate la V2.7.</td></tr>
         <tr><td>1</td><td>16 august 2026</td><td>Vlad Ardeleanu</td><td>Publicarea proiectului ADC-BEN-01 V3.0 pentru validare și adoptare — primul document integrat în secțiunea Proceduri de lucru a Registrului online, cu cele 17 secțiuni și 2 anexe convertite integral, subordonat Regulamentului Intern V2.6 (art. 4, 5, 19, 50 și 137).</td></tr>
       </tbody>
@@ -1514,6 +1547,14 @@ footer p{margin:0 0 6px;color:rgba(255,255,255,.86)}
 
   /* pus la dispoziția printării pe capitol, ca și extrasul de capitol să aibă pozele încărcate */
   window.ADCPrint={ loadImages:loadImages, expandAll:expandAll, restoreAll:restoreAll };
+})();
+</script>
+<script>
+/* Registru: câte revizii tehnice sunt ascunse de filtru (numărul nu se scrie de mână) */
+(function(){
+  var n=document.querySelectorAll('tr.rev-teh:not(.rev-old)').length;
+  if(!n) return;
+  document.querySelectorAll('.reg-teh-n').forEach(function(el){ el.textContent=' ('+n+')'; });
 })();
 </script>
 </body>
