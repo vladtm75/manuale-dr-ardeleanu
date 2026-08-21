@@ -1167,5 +1167,45 @@ window.ASISTENTI_REVISION_MAP = {
         "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
       }
     ]
+  },
+  "37": {
+    "commit": "8a000f64dd9c93d48a13a2659382372a9e22b05f",
+    "before": "9fca156a2500c46685c0f7b7a99027cda6be0a02",
+    "sections": [
+      {
+        "id": "cap-2-6",
+        "title": "11. Checklist rapid și concluzie"
+      },
+      {
+        "id": "cap-3-3",
+        "title": "3. Protocolul pentru asistenta medicală"
+      },
+      {
+        "id": "cap-4-7",
+        "title": "7. Pregătirea pentru următorul pacient. Concluzii"
+      },
+      {
+        "id": "cap-5-6",
+        "title": "6. Concluzii"
+      },
+      {
+        "id": "cap-7-5",
+        "title": "5. Concluzii"
+      },
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
+  },
+  "38": {
+    "commit": "872ed9186f149338317636893f471221440e4dbe",
+    "before": "8a000f64dd9c93d48a13a2659382372a9e22b05f",
+    "sections": [
+      {
+        "id": "noutati",
+        "title": "Noutăți în Ediția 2026 (V3) vs. V2 / 2025"
+      }
+    ]
   }
 };
