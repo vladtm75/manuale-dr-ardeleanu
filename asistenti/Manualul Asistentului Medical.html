@@ -5555,13 +5555,14 @@ html{scroll-behavior:smooth}
     <!-- La fiecare PR de conținut: adaugă un rând NOU în capul tabelului (rev. următor,
          data, editoarea, descrierea) și actualizează „Revizia curentă" de mai jos. -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 37</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 38</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th><th style="width:110px">Versiune</th></tr>
       </thead>
       <tbody>
-            <tr><td>37</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminate toate barele și casetele de trimiteri „Vezi și" din manual (șase în total: Registrul de modificări, Cap. II — onboarding pacient, Cap. III — stomatologie generală, Cap. IV — endodonție, Cap. V — ortodonție, Cap. VII — chirurgie). Navigarea o asigură Cuprinsul lateral, iar peste jumătate din trimiteri duceau către pași universali (pregătirea cabinetului, sterilizarea, gestiunea deșeurilor), aplicabili după orice manoperă, deci fără valoare informativă la nivel de capitol; unde trimiterea era specifică, textul capitolului o spunea deja. Singura legătură care nu exista nicăieri în proză — chirurgie → urgențe medicale — a fost preluată în concluziile Cap. VII, ca trimitere la Capitolul XVIII (ADC-AJT-01). Eliminat și CSS-ul „.seealso", rămas nefolosit.</td><td class="rev-na">—</td></tr>
+            <tr><td>38</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Igienă de markup: eliminat un „&lt;/div&gt;" în plus de la finalul documentului, rămas de la un wrapper care nu mai există — după &lt;/main&gt; se închidea de două ori containerul „.layout". Forma corectă, identică acum cu Manualul Medicului, este &lt;/article&gt;&lt;/main&gt;&lt;/div&gt;. Tag-ul era ignorat de browsere, deci fără efect vizual — dar rupea validarea structurii. Zero modificări de conținut sau de prezentare.</td><td class="rev-na">—</td></tr>
+        <tr><td>37</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Eliminate toate barele și casetele de trimiteri „Vezi și" din manual (șase în total: Registrul de modificări, Cap. II — onboarding pacient, Cap. III — stomatologie generală, Cap. IV — endodonție, Cap. V — ortodonție, Cap. VII — chirurgie). Navigarea o asigură Cuprinsul lateral, iar peste jumătate din trimiteri duceau către pași universali (pregătirea cabinetului, sterilizarea, gestiunea deșeurilor), aplicabili după orice manoperă, deci fără valoare informativă la nivel de capitol; unde trimiterea era specifică, textul capitolului o spunea deja. Singura legătură care nu exista nicăieri în proză — chirurgie → urgențe medicale — a fost preluată în concluziile Cap. VII, ca trimitere la Capitolul XVIII (ADC-AJT-01). Eliminat și CSS-ul „.seealso", rămas nefolosit.</td><td class="rev-na">—</td></tr>
         <tr><td>36</td><td>20 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări devine pliabil și este închis implicit (cu deschidere automată la ancora #registru) — la fel în toate manualele și procedurile. În plus, fișele de post din Capitolul XXII primesc butonul „Printează PDF — formular de semnat": printează doar fișa respectivă, cu blocul de semnături ANGAJATOR/SALARIAT, pentru semnarea cu angajații.</td></tr>
         <tr><td>35</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul XXII rescris integral: „Fișele de post", cu două subcapitole — Asistent Medical Generalist (ADC-FP-ASM-02, Ediția a II-a 2026) și Asistent Medical Șef (ADC-FP-ASS-01, Ediția I 2026). Fișele noi sunt aliniate la Regulamentul Intern ADC-RI-02 V2.7: etichetele [KPI-P]/[KPI-B], separarea evaluare profesională–bonus, atribuțiile pe domenii (A–J, respectiv A–H) legate de criteriile de evaluare, garanțiile din Cap. VIII al RI, trimiterile la articole aduse la numerotarea continuă rev. 6 (Art. 62 alin. (2), Art. 55, Art. 58). Înlocuiește fișa unică veche a generalistului (care cita „Regulamentul de Ordine Interioară" și regula depășită a mediei de 80% ca esențială pentru continuarea relației de muncă).</td></tr>
             <tr><td>34</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Capitolul 0 „Cadrul general al rețelei" există acum și în corpul manualului, nu doar în Cuprins: titlu de capitol în stilul celorlalte (cu cuprins de capitol pliabil), iar cele trei secțiuni („De unde am pornit", „Misiune, valori și responsabilități", „Structura organizațională") coboară la rang de subcapitol, numerotate 1–3, cu ancorele neschimbate. Linkul capitolului din Cuprinsul lateral indică acum titlul de capitol.</td></tr>
@@ -5694,8 +5695,6 @@ html{scroll-behavior:smooth}
 
   </article>
   </main>
-</div>
-
 </div>
 
 <footer>
