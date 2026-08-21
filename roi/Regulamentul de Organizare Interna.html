@@ -685,23 +685,6 @@ code,.code{
   padding:1px 6px;border-radius:3px;letter-spacing:0;
 }
 
-/* See also chip row */
-.seealso{
-  display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 30px;
-  padding:14px 16px;background:var(--brand-cream-warm);border-radius:4px;
-  font-size:13px;
-}
-.seealso .lbl{
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-mute);font-weight:600;margin-right:6px;
-  align-self:center;
-}
-.seealso a{
-  background:var(--paper-pure);border:1px solid var(--rule);
-  padding:4px 10px;border-radius:3px;font-size:12px;
-  color:var(--brand-primary);border-bottom:1px solid var(--rule);
-}
-.seealso a:hover{background:var(--brand-primary);color:#fff;border-color:var(--brand-primary)}
 
 /* Two-column compact lists */
 .cols{column-count:2;column-gap:28px;column-rule:1px solid var(--rule-soft);font-size:14px}
@@ -2486,12 +2469,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ § Registru de modificări ============ -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 9</strong> · 20 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 10</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr><td>10</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Igienă de cod: eliminat CSS-ul „.seealso" (bară de trimiteri «Vezi și»), rămas nefolosit în acest document — nu exista niciun bloc care să-l aplice. Componenta a fost eliminată din întreaga rețea de manuale. Zero modificări de conținut sau de prezentare.</td></tr>
         <tr><td>9</td><td>20 august 2026</td><td>Vlad Ardeleanu</td><td>Registrul de modificări devine pliabil și este închis implicit — titlul primește butonul-săgeată de sub titlu (ca la cuprinsurile de capitol); registrul se deschide automat când pagina e accesată cu ancora #registru. Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>8</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Corecții de închidere ale Ediției V2.7 (execuția instrucțiunilor consemnate ca „rev. 6" a ediției; rândurile 6–7 ale prezentului Registru fuseseră deja consumate de revizii de prezentare): renumerotarea continuă a articolelor — fostul Art. 43^1 devine Art. 44, articolele 44–139 devin 45–140, cu actualizarea tuturor trimiterilor interne; restructurarea Art. 75 lit. j) cu teza fermă de sancționare a hărțuirii ca teză distinctă după enumerare; înlocuirea substantivului liber „KPI" (Art. 53, 62); sursele indicatorilor — [KPI-B] stabiliți de superiorul ierarhic competent, [KPI-P] întemeiate pe documentele din Registrul online (Art. 53 alin. (5) nou); localizarea Registrului online și confirmarea individuală a accesului (Art. 20, Anexele nr. 1–2); comasarea tezelor redundante din Art. 49 și Art. 36 alin. (2); corectarea câmpului „Aprobat de" de pe copertă. <a href="Corespondenta-numerotare-rev5-rev6.html">Tabela de corespondență a numerotării</a> este publicată în Registrul online ca document-punte.</td></tr>
         <tr><td>7</td><td>19 august 2026</td><td>Vlad Ardeleanu</td><td>Cuprinsul de capitol pliabil, închis implicit: sub titlul fiecărui capitol apare un rând cu butonul-săgeată care deschide lista articolelor capitolului (generată din titlurile reale). Aliniere de design cu Manualul Asistenților (rev. 27 și 32). Doar prezentare — fără modificări de conținut.</td></tr>
