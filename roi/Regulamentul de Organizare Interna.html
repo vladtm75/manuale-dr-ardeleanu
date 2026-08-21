@@ -133,6 +133,7 @@ a:hover{border-bottom-color:var(--brand-primary)}
 }
 .topbar .mh-print:hover{background:var(--brand-cream);border-color:var(--brand-primary)}
 .topbar .mh-print svg{flex:none}
+.topbar .mh-print:disabled{opacity:.55;cursor:progress}
 @media(max-width:900px){.topbar .mh-print .mhp-txt{display:none}.topbar .mh-print{padding:7px 9px}}
 .topbar .actions{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-mute)}
 .topbar .actions span{padding:0 8px}
@@ -2579,12 +2580,13 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 
     <!-- ============ § Registru de modificări ============ -->
     <h2 id="registru">Registru de modificări <span class="h-edit">— istoricul reviziilor</span></h2>
-    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 13</strong> · 21 august 2026.</p>
+    <p>Orice modificare de conținut aprobată și publicată se consemnează aici, cu cea mai recentă revizie prima. Revizia curentă: <strong>rev. 14</strong> · 21 august 2026.</p>
     <table>
       <thead>
         <tr><th style="width:60px">Rev.</th><th style="width:130px">Data</th><th style="width:170px">Editor</th><th>Modificări</th></tr>
       </thead>
       <tbody>
+        <tr><td>14</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Printarea documentului integral încarcă acum toate pozele înainte de a deschide dialogul de printare. Fotografiile și capturile de ecran se încarcă „lazy” pe ecran (doar când ajungi cu derularea la ele), așa că un PDF cerut imediat după deschiderea paginii putea ieși cu locuri goale în locul figurilor. Butonul „PDF” — și Ctrl/Cmd+P, care trece acum prin același flux — afișează „Se pregătește…”, cere toate imaginile și abia apoi printează. Aceeași pregătire se aplică și butonului de printare pe capitol, pentru imaginile capitolului cerut.</td></tr>
         <tr><td>13</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Butonul de printare pe capitol nu mai apare la „Preambul" — secțiunea introductivă nu este un capitol care se dă la citit sau la semnat separat, iar pentru documentul integral există butonul „PDF" din bara de sus. Restul capitolelor păstrează butonul (rev. 12). Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>12</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Facilitate nouă, comună tuturor manualelor și Regulamentului Intern: lângă butonul de deschidere a cuprinsului de capitol, pe rândul de metadate de sub fiecare titlu de capitol și de fiecare anexă, apare un buton de printare care trimite la imprimantă — sau salvează ca PDF — numai capitolul sau anexa respectivă. Pe durata printării, coperta, cuprinsul integral și restul documentului sunt ascunse, extrasul primește un cap de pagină cu sigla și denumirea documentului („Extras pe capitol din documentul integral"), iar numele implicit al fișierului PDF devine „&lt;titlul capitolului&gt; — &lt;denumirea documentului&gt;"; după printare pagina revine exact în starea de dinainte. Completează butonul „PDF" din bara de sus (rev. 11), care rămâne pentru printarea documentului integral. Doar prezentare — fără modificări de conținut.</td></tr>
         <tr><td>11</td><td>21 august 2026</td><td>Vlad Ardeleanu</td><td>Headerul documentului: pastila cu codul documentului (ADC-RI-02) a fost eliminată — codul rămâne pe pagina de titlu, în datele documentului — iar în locul ei a apărut butonul „PDF”, care printează sau salvează regulamentul integral. Printarea a fost recalibrată pentru A4: pagină de titlu, cuprins complet pe pagină separată, fiecare capitol începe pe pagină nouă, cuprinsurile de capitol și Registrul de modificări (pliate pe ecran) se printează desfășurate, tabelele lungi se rup între pagini cu capul de tabel repetat, iar figurile, casetele și rândurile de tabel nu se mai taie. Zero modificări de conținut.</td></tr>
@@ -2947,13 +2949,17 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
 })();
 </script>
 <script>
-/* Printare / export PDF al documentului integral.
-   Pe ecran, cuprinsurile de capitol, indexurile și Registrul de modificări sunt pliate;
-   înainte de printare se deschid toate, ca pe hârtie să ajungă documentul complet,
-   iar după printare se readuc exact în starea de dinainte. */
+/* Printare / export PDF al documentului integral. Înainte de printare:
+   1) se deschide tot ce e pliat pe ecran (cuprinsuri de capitol, indexuri, Registrul);
+   2) se încarcă toate pozele — în pagină sunt „lazy”, deci pe hârtie ar putea lipsi;
+   3) după printare, totul revine exact în starea de dinainte. */
 (function(){
   var btn=document.getElementById('printBtn');
+  var label=btn?btn.querySelector('.mhp-txt'):null;
+  var labelText=label?label.textContent:'';
   var restore=[];
+  var busy=false;
+
   function expandAll(){
     if(restore.length) return;
     document.querySelectorAll('details:not([open])').forEach(function(d){
@@ -2969,6 +2975,47 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     });
     restore=[];
   }
+  /* pozele se încarcă „lazy” pe ecran; la printare le cerem pe toate, altfel
+     paginile pot ieși cu locuri goale acolo unde ar trebui să fie figuri */
+  function loadImages(roots){
+    var pending=[];
+    var imgs=[];
+    (roots && roots.length ? roots : [document]).forEach(function(root){
+      if(root.tagName==='IMG'){ imgs.push(root); }
+      if(root.querySelectorAll){ imgs=imgs.concat([].slice.call(root.querySelectorAll('img'))); }
+    });
+    imgs.forEach(function(img){
+      if(img.getAttribute('loading')==='lazy'){ img.setAttribute('loading','eager'); }
+      if(!img.complete){
+        pending.push(new Promise(function(done){
+          img.addEventListener('load',done,{once:true});
+          img.addEventListener('error',done,{once:true});
+        }));
+      }
+    });
+    if(!pending.length) return Promise.resolve();
+    return Promise.race([
+      Promise.all(pending),
+      new Promise(function(done){ setTimeout(done,25000); })
+    ]);
+  }
+  function startPrint(){
+    if(busy) return;
+    busy=true;
+    if(btn){ btn.disabled=true; }
+    if(label){ label.textContent='Se pregătește…'; }
+    expandAll();
+    loadImages().then(function(){
+      if(btn){ btn.disabled=false; }
+      if(label){ label.textContent=labelText; }
+      setTimeout(function(){
+        window.print();
+        setTimeout(function(){ restoreAll(); busy=false; },1500);
+      },80);
+    });
+  }
+  /* printarea pornită din meniul browserului: nu putem întârzia dialogul, dar
+     măcar desfășurăm conținutul pliat */
   window.addEventListener('beforeprint',expandAll);
   window.addEventListener('afterprint',restoreAll);
   if(window.matchMedia){
@@ -2977,12 +3024,16 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     if(mq.addEventListener){ mq.addEventListener('change',onmq); }
     else if(mq.addListener){ mq.addListener(onmq); }
   }
-  if(btn){
-    btn.addEventListener('click',function(){
-      expandAll();
-      setTimeout(function(){ window.print(); setTimeout(restoreAll,1500); },60);
-    });
-  }
+  /* Ctrl/Cmd+P trece prin același flux, ca pozele să fie încărcate și atunci */
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey) && !e.altKey && (e.key==='p'||e.key==='P')){
+      e.preventDefault(); startPrint();
+    }
+  });
+  if(btn){ btn.addEventListener('click',startPrint); }
+
+  /* pus la dispoziția printării pe capitol, ca și extrasul de capitol să aibă pozele încărcate */
+  window.ADCPrint={ loadImages:loadImages, expandAll:expandAll, restoreAll:restoreAll };
 })();
 </script>
 <script>
@@ -3037,8 +3088,9 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
   }
 
   var busy=false;
-  function printGroup(g){
+  function printGroup(g,srcBtn){
     if(busy) return; busy=true;
+    if(srcBtn){ srcBtn.disabled=true; }
     var docTitle=document.title, cap=titleOf(g.h2), done=false;
     document.title=(cap?cap+' \u2014 ':'')+manual;   /* devine numele implicit al fișierului PDF */
     document.body.classList.add('print-chapter');
@@ -3053,7 +3105,11 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
       document.title=docTitle;
     }
     window.addEventListener('afterprint',cleanup);
-    setTimeout(function(){ window.print(); setTimeout(cleanup,1500); },60);
+    var ready=(window.ADCPrint&&window.ADCPrint.loadImages)?window.ADCPrint.loadImages(g.els):Promise.resolve();
+    ready.then(function(){
+      if(srcBtn){ srcBtn.disabled=false; }
+      setTimeout(function(){ window.print(); setTimeout(cleanup,1500); },60);
+    });
   }
 
   var SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>';
@@ -3068,7 +3124,7 @@ h2 .print-form-btn,h4 .print-form-btn{float:right}
     btn.title='Printează acest capitol / salvează-l ca PDF';
     btn.setAttribute('aria-label','Printează capitolul \u201E'+titleOf(g.h2)+'\u201D ca PDF');
     btn.innerHTML=SVG;
-    btn.addEventListener('click',function(){ printGroup(g); });
+    btn.addEventListener('click',function(){ printGroup(g,btn); });
     var meta=g.h2.querySelector('.chapter-meta');
     if(!meta){ meta=document.createElement('span'); meta.className='chapter-meta'; g.h2.appendChild(meta); }
     meta.appendChild(btn);
